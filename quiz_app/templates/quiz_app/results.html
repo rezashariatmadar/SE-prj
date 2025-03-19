@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Quiz Results | Quiz Game{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h1 class="display-4 mb-3">Quiz Results</h1>
+            <p class="lead">You've completed the {{ quiz_attempt.category.name }} quiz!</p>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-8 offset-md-2">
+            <!-- Score summary card -->
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Your Score</h3>
+                </div>
+                <div class="card-body text-center py-4">
+                    <div class="display-1 mb-3 {% if quiz_attempt.score_percentage >= 70 %}text-success{% elif quiz_attempt.score_percentage >= 40 %}text-warning{% else %}text-danger{% endif %}">
+                        {{ quiz_attempt.score }} / {{ quiz_attempt.total_questions }}
+                    </div>
+                    <div class="progress mb-3" style="height: 20px;">
+                        <div class="progress-bar {% if quiz_attempt.score_percentage >= 70 %}bg-success{% elif quiz_attempt.score_percentage >= 40 %}bg-warning{% else %}bg-danger{% endif %}" 
+                             role="progressbar" 
+                             style="width: {{ quiz_attempt.score_percentage }}%;" 
+                             aria-valuenow="{{ quiz_attempt.score_percentage }}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            {{ quiz_attempt.score_percentage|floatformat:1 }}%
+                        </div>
+                    </div>
+                    <p class="lead mb-0">
+                        {% if quiz_attempt.score_percentage >= 80 %}
+                            Excellent! You did a great job!
+                        {% elif quiz_attempt.score_percentage >= 60 %}
+                            Good work! You've got a solid understanding.
+                        {% elif quiz_attempt.score_percentage >= 40 %}
+                            Not bad! There's room for improvement.
+                        {% else %}
+                            Keep studying! You'll do better next time.
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar me-1"></i> {{ quiz_attempt.completed_at|date:"F j, Y, g:i a" }}
+                        </small>
+                        <small class="text-muted">
+                            <i class="fas fa-folder me-1"></i> {{ quiz_attempt.category.name }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Performance Chart -->
+            {% if performance_chart %}
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Performance by Difficulty</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <img src="data:image/png;base64,{{ performance_chart }}" class="img-fluid" alt="Performance Chart">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Answer Review -->
+            {% if responses %}
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Question Review</h3>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        {% for response in responses %}
+                        <div class="list-group-item p-3 {% if response.is_correct %}correct-answer{% else %}incorrect-answer{% endif %}">
+                            <h5 class="mb-3">{{ forloop.counter }}. {{ response.question.text }}</h5>
+                            
+                            <div class="mb-3">
+                                <strong>Your answer:</strong> 
+                                <span>{{ response.selected_choice.text }}</span>
+                                {% if response.is_correct %}
+                                <i class="fas fa-check-circle text-success ms-2"></i>
+                                {% else %}
+                                <i class="fas fa-times-circle text-danger ms-2"></i>
+                                {% endif %}
+                            </div>
+                            
+                            {% if not response.is_correct %}
+                            <div class="mb-3">
+                                <strong>Correct answer:</strong> 
+                                <span>{{ response.question.correct_choice.text }}</span>
+                            </div>
+                            {% endif %}
+                            
+                            {% if response.question.explanation %}
+                            <div class="mt-3 explanation-box p-2 border-start border-info border-3 bg-light">
+                                <strong>Explanation:</strong>
+                                <p class="mb-0">{{ response.question.explanation }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                <a href="{% url 'quiz:index' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-home me-2"></i>Back to Home
+                </a>
+                <a href="{% url 'quiz:start' %}" class="btn btn-outline-primary btn-lg" onclick="event.preventDefault(); document.getElementById('restart-form').submit();">
+                    <i class="fas fa-redo me-2"></i>Try Again
+                </a>
+                
+                <!-- Hidden form for retry with same category -->
+                <form id="restart-form" method="post" action="{% url 'quiz:start' %}" class="d-none">
+                    {% csrf_token %}
+                    <input type="hidden" name="category" value="{{ quiz_attempt.category.id }}">
+                    <input type="hidden" name="num_questions" value="{{ quiz_attempt.total_questions }}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Logged Out - Quiz Game{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 text-center">
+            <div class="card shadow">
+                <div class="card-body py-5">
+                    <i class="fas fa-check-circle text-success fa-5x mb-3"></i>
+                    <h2 class="mb-4">Successfully Logged Out</h2>
+                    <p class="lead">Thank you for using Quiz Game!</p>
+                    <a href="{% url 'login' %}" class="btn btn-primary mt-3">
+                        <i class="fas fa-sign-in-alt me-2"></i>Log In Again
+                    </a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-primary mt-3 ms-2">
+                        <i class="fas fa-home me-2"></i>Return to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

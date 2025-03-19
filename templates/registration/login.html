@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Log In - Quiz Game{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Log In</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        
+                        {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            Your username and password didn't match. Please try again.
+                        </div>
+                        {% endif %}
+                        
+                        {% if next %}
+                            {% if user.is_authenticated %}
+                            <div class="alert alert-info" role="alert">
+                                Your account doesn't have access to this page. To proceed,
+                                please login with an account that has access.
+                            </div>
+                            {% else %}
+                            <div class="alert alert-info" role="alert">
+                                Please login to see this page.
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Username</label>
+                            <input type="text" name="username" id="id_username" class="form-control" autocomplete="username" required autofocus>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label">Password</label>
+                            <input type="password" name="password" id="id_password" class="form-control" autocomplete="current-password" required>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" name="remember" id="id_remember" class="form-check-input">
+                            <label class="form-check-label" for="id_remember">Remember me</label>
+                        </div>
+                        
+                        <input type="hidden" name="next" value="{{ next }}">
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt me-2"></i>Log In
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-3 text-center">
+                        <p>
+                            <a href="{% url 'password_reset' %}">Forgot your password?</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
