@@ -176,16 +176,22 @@ To include code comments in documentation, use these formats:
 Triple-quoted docstrings are automatically extracted.
 
 ### JavaScript
+Use the `@doc` annotation in your JavaScript comments when you want content to be included in the documentation. The documentation system will find these special comments and extract them.
+
 ```javascript
 // @doc This will be included in documentation
 ```
 
 ### CSS
+Block comments starting with `/**` in CSS files will be recognized as documentation comments and included in the generated documentation.
+
 ```css
 /** This will be included in documentation */
 ```
 
 ### HTML
+For HTML files, use HTML comments with the `@doc` annotation to mark content for documentation extraction.
+
 ```html
 <!-- @doc This will be included in documentation -->
 ``` 
