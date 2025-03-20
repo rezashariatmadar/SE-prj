@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Guide &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="System Architecture" href="architecture.html" />
+    <link rel="prev" title="Installation Guide" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-the-application">Accessing the Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#navigation">Navigation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#taking-a-quiz">Taking a Quiz</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#starting-a-quiz">Starting a Quiz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#answering-questions">Answering Questions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#progress-tracking">Progress Tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#viewing-results">Viewing Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#score-summary">Score Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-analysis">Performance Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actions-from-results-page">Actions from Results Page</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#user-statistics">User Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-statistics">Accessing Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-statistics">Available Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#account-management">Account Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#registration">Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#login">Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logout">Logout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#password-reset">Password Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tips-for-success">Tips for Success</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quiz-strategies">Quiz Strategies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learning-from-results">Learning from Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mobile-usage">Mobile Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/user_guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
+<p>This guide provides detailed instructions on how to use the Quiz Game application,
+from taking quizzes to viewing statistics and managing your account.</p>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="accessing-the-application">
+<h3>Accessing the Application<a class="headerlink" href="#accessing-the-application" title="Link to this heading"></a></h3>
+<p>Open your web browser and navigate to the Quiz Game URL:</p>
+<ul class="simple">
+<li><p>If running locally: <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a></p></li>
+<li><p>If deployed: <a class="reference external" href="https://your-quiz-game-domain.com/">https://your-quiz-game-domain.com/</a></p></li>
+</ul>
+<p>The homepage displays a welcome message and available quiz categories.</p>
+<a class="reference internal image-reference" href="_static/homepage_screenshot.png"><img alt="Homepage Screenshot" class="align-center" src="_static/homepage_screenshot.png" style="width: 600px;" /></a>
+</section>
+<section id="navigation">
+<h3>Navigation<a class="headerlink" href="#navigation" title="Link to this heading"></a></h3>
+<p>The main navigation menu provides access to these key areas:</p>
+<ul class="simple">
+<li><p><strong>Home</strong>: Return to the welcome page</p></li>
+<li><p><strong>Categories</strong>: Browse all quiz categories</p></li>
+<li><p><strong>My Stats</strong>: View your quiz statistics (authenticated users only)</p></li>
+<li><p><strong>Login/Logout</strong>: Manage your session</p></li>
+</ul>
+</section>
+</section>
+<section id="taking-a-quiz">
+<h2>Taking a Quiz<a class="headerlink" href="#taking-a-quiz" title="Link to this heading"></a></h2>
+<section id="starting-a-quiz">
+<h3>Starting a Quiz<a class="headerlink" href="#starting-a-quiz" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>On the homepage, you’ll see a “Start a New Quiz” card</p></li>
+<li><p>Select a category from the dropdown menu</p></li>
+<li><p>Choose the number of questions (5-20)</p></li>
+<li><p>Click the “Start Quiz” button</p></li>
+</ol>
+<a class="reference internal image-reference" href="_static/start_quiz_screenshot.png"><img alt="Start Quiz Form" class="align-center" src="_static/start_quiz_screenshot.png" style="width: 500px;" /></a>
+</section>
+<section id="answering-questions">
+<h3>Answering Questions<a class="headerlink" href="#answering-questions" title="Link to this heading"></a></h3>
+<p>For each question:</p>
+<ol class="arabic simple">
+<li><p>Read the question carefully</p></li>
+<li><p>Select your answer by clicking one of the options</p></li>
+<li><p>Click “Next Question” to proceed</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You cannot go back to previous questions once submitted.</p>
+</div>
+<a class="reference internal image-reference" href="_static/question_screenshot.png"><img alt="Question Screenshot" class="align-center" src="_static/question_screenshot.png" style="width: 600px;" /></a>
+<p><strong>Navigation Keys</strong>:</p>
+<ul class="simple">
+<li><p>You can use number keys (1-4) to select answers</p></li>
+<li><p>Press Enter to submit and go to the next question</p></li>
+</ul>
+</section>
+<section id="progress-tracking">
+<h3>Progress Tracking<a class="headerlink" href="#progress-tracking" title="Link to this heading"></a></h3>
+<p>While taking a quiz:</p>
+<ul class="simple">
+<li><p>The progress bar at the top shows your advancement</p></li>
+<li><p>The question number indicator shows your current position (e.g., “Question 3 of 10”)</p></li>
+<li><p>The category name is displayed for reference</p></li>
+</ul>
+</section>
+</section>
+<section id="viewing-results">
+<h2>Viewing Results<a class="headerlink" href="#viewing-results" title="Link to this heading"></a></h2>
+<section id="score-summary">
+<h3>Score Summary<a class="headerlink" href="#score-summary" title="Link to this heading"></a></h3>
+<p>After completing a quiz, you’ll see your results:</p>
+<ol class="arabic simple">
+<li><p><strong>Score</strong>: Number of correct answers and percentage</p></li>
+<li><p><strong>Progress Bar</strong>: Visual representation of your score</p></li>
+<li><p><strong>Feedback Message</strong>: Encouragement based on your performance</p></li>
+</ol>
+<a class="reference internal image-reference" href="_static/results_screenshot.png"><img alt="Results Screenshot" class="align-center" src="_static/results_screenshot.png" style="width: 600px;" /></a>
+</section>
+<section id="performance-analysis">
+<h3>Performance Analysis<a class="headerlink" href="#performance-analysis" title="Link to this heading"></a></h3>
+<p>The results page includes:</p>
+<ul class="simple">
+<li><p><strong>Performance by Difficulty Chart</strong>: Bar chart showing how well you did on easy, medium, and hard questions</p></li>
+<li><p><strong>Question Review</strong>: List of all questions with your answers, correct answers, and explanations</p></li>
+</ul>
+</section>
+<section id="actions-from-results-page">
+<h3>Actions from Results Page<a class="headerlink" href="#actions-from-results-page" title="Link to this heading"></a></h3>
+<p>From the results page, you can:</p>
+<ul class="simple">
+<li><p><strong>Try Again</strong>: Take another quiz in the same category</p></li>
+<li><p><strong>Back to Home</strong>: Return to the homepage to select a different category</p></li>
+</ul>
+</section>
+</section>
+<section id="user-statistics">
+<h2>User Statistics<a class="headerlink" href="#user-statistics" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The statistics features are only available to registered and authenticated users.</p>
+</div>
+<section id="accessing-statistics">
+<h3>Accessing Statistics<a class="headerlink" href="#accessing-statistics" title="Link to this heading"></a></h3>
+<p>Click “My Stats” in the navigation menu to view your quiz history and performance analytics.</p>
+</section>
+<section id="available-statistics">
+<h3>Available Statistics<a class="headerlink" href="#available-statistics" title="Link to this heading"></a></h3>
+<p>The statistics dashboard includes:</p>
+<ol class="arabic simple">
+<li><p><strong>Performance Over Time</strong>:</p>
+<ul class="simple">
+<li><p>Line chart showing scores across multiple quiz attempts</p></li>
+<li><p>Color-coded by category</p></li>
+<li><p>Tracks your learning progress</p></li>
+</ul>
+</li>
+<li><p><strong>Performance by Category</strong>:</p>
+<ul class="simple">
+<li><p>Bar chart comparing your average scores across different categories</p></li>
+<li><p>Helps identify your strengths and areas for improvement</p></li>
+</ul>
+</li>
+<li><p><strong>Summary Statistics</strong>:</p>
+<ul class="simple">
+<li><p>Total quizzes completed</p></li>
+<li><p>Average score percentage</p></li>
+<li><p>Number of categories attempted</p></li>
+<li><p>Your best-performing category</p></li>
+</ul>
+</li>
+</ol>
+<a class="reference internal image-reference" href="_static/stats_screenshot.png"><img alt="Statistics Screenshot" class="align-center" src="_static/stats_screenshot.png" style="width: 600px;" /></a>
+</section>
+</section>
+<section id="account-management">
+<h2>Account Management<a class="headerlink" href="#account-management" title="Link to this heading"></a></h2>
+<section id="registration">
+<h3>Registration<a class="headerlink" href="#registration" title="Link to this heading"></a></h3>
+<p>To create an account:</p>
+<ol class="arabic simple">
+<li><p>Click “Login” in the navigation menu</p></li>
+<li><p>Click “Register” on the login page</p></li>
+<li><p>Fill in the required information:
+* Username
+* Email address
+* Password (entered twice for confirmation)</p></li>
+<li><p>Click “Register” to create your account</p></li>
+</ol>
+</section>
+<section id="login">
+<h3>Login<a class="headerlink" href="#login" title="Link to this heading"></a></h3>
+<p>To log into your account:</p>
+<ol class="arabic simple">
+<li><p>Click “Login” in the navigation menu</p></li>
+<li><p>Enter your username and password</p></li>
+<li><p>Click “Login”</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Check “Remember me” to stay logged in on your device.</p>
+</div>
+</section>
+<section id="logout">
+<h3>Logout<a class="headerlink" href="#logout" title="Link to this heading"></a></h3>
+<p>To log out:</p>
+<ol class="arabic simple">
+<li><p>Click “Logout” in the navigation menu</p></li>
+<li><p>You will be redirected to the homepage</p></li>
+</ol>
+</section>
+<section id="password-reset">
+<h3>Password Reset<a class="headerlink" href="#password-reset" title="Link to this heading"></a></h3>
+<p>If you forget your password:</p>
+<ol class="arabic simple">
+<li><p>Click “Login” in the navigation menu</p></li>
+<li><p>Click “Forgot Password?”</p></li>
+<li><p>Enter your email address</p></li>
+<li><p>Check your email for a password reset link</p></li>
+<li><p>Follow the link to set a new password</p></li>
+</ol>
+</section>
+</section>
+<section id="tips-for-success">
+<h2>Tips for Success<a class="headerlink" href="#tips-for-success" title="Link to this heading"></a></h2>
+<section id="quiz-strategies">
+<h3>Quiz Strategies<a class="headerlink" href="#quiz-strategies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Read carefully</strong>: Take your time to understand each question</p></li>
+<li><p><strong>Process of elimination</strong>: If unsure, try to eliminate obviously wrong answers</p></li>
+<li><p><strong>Look for clues</strong>: Sometimes parts of the question hint at the answer</p></li>
+<li><p><strong>Don’t overthink</strong>: Often your first instinct is correct</p></li>
+</ul>
+</section>
+<section id="learning-from-results">
+<h3>Learning from Results<a class="headerlink" href="#learning-from-results" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Review explanations</strong>: Read the explanations for both correct and incorrect answers</p></li>
+<li><p><strong>Focus on weak areas</strong>: Pay attention to categories or difficulty levels where you scored lower</p></li>
+<li><p><strong>Retake quizzes</strong>: Try the same category again to reinforce learning</p></li>
+<li><p><strong>Track progress</strong>: Watch your performance improve over time in the statistics</p></li>
+</ul>
+</section>
+</section>
+<section id="mobile-usage">
+<h2>Mobile Usage<a class="headerlink" href="#mobile-usage" title="Link to this heading"></a></h2>
+<p>The Quiz Game application is fully responsive and can be used on:</p>
+<ul class="simple">
+<li><p>Desktop computers</p></li>
+<li><p>Tablets</p></li>
+<li><p>Smartphones</p></li>
+</ul>
+<p>The interface automatically adapts to your screen size for optimal experience.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading"></a></h3>
+<p><strong>Problem</strong>: Quiz doesn’t start after selecting a category
+<strong>Solution</strong>: Make sure the category has questions available. Try a different category.</p>
+<p><strong>Problem</strong>: Session expired during a quiz
+<strong>Solution</strong>: Log in again and start a new quiz.</p>
+<p><strong>Problem</strong>: Charts not displaying in statistics
+<strong>Solution</strong>: Make sure your browser supports HTML5 and has JavaScript enabled.</p>
+</section>
+<section id="getting-help">
+<h3>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h3>
+<p>If you encounter any issues:</p>
+<ul class="simple">
+<li><p>Check the FAQ section</p></li>
+<li><p>Contact support via email: <a class="reference external" href="mailto:support&#37;&#52;&#48;quizgame&#46;example">support<span>&#64;</span>quizgame<span>&#46;</span>example</a></p></li>
+<li><p>Visit the help forum</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="architecture.html" class="btn btn-neutral float-right" title="System Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

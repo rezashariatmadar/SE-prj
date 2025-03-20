@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Comments Documentation &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Code Comments Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/code_comments.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="code-comments-documentation">
+<h1>Code Comments Documentation<a class="headerlink" href="#code-comments-documentation" title="Link to this heading"></a></h1>
+<p>Last updated: 2025-03-20</p>
+<p>This document contains documentation extracted from comments in the source code.</p>
+<section id="quiz-appadmin-py">
+<h2>quiz_appadmin.py<a class="headerlink" href="#quiz-appadmin-py" title="Link to this heading"></a></h2>
+<p>Admin configuration for the Quiz application.</p>
+<p>This module registers the quiz application models with Django’s admin site
+and customizes their admin interfaces for better usability.</p>
+<p>Inline admin interface for choices.</p>
+<blockquote>
+<div><p>Allows editing choices directly within the question admin page.</p>
+</div></blockquote>
+<p>Admin interface for the Question model.</p>
+<blockquote>
+<div><p>Includes filters, search fields, and inline choices editing.</p>
+</div></blockquote>
+<p>Return a shortened version of the question text for list display.</p>
+<p>Admin interface for the Category model.</p>
+<p>Inline admin interface for quiz responses.</p>
+<blockquote>
+<div><p>Shows responses within the quiz attempt admin page.</p>
+</div></blockquote>
+<p>Admin interface for the QuizAttempt model.</p>
+<p>Return the username or ‘Anonymous’ if no user.</p>
+<p>Return the score as a percentage.</p>
+<p>Return whether the quiz attempt is complete.</p>
+<p>Admin interface for the QuizResponse model.</p>
+<p>Return a shortened version of the question text.</p>
+<p>Return a shortened version of the selected choice text.</p>
+</section>
+<section id="quiz-appforms-py">
+<h2>quiz_appforms.py<a class="headerlink" href="#quiz-appforms-py" title="Link to this heading"></a></h2>
+<p>Forms for the Quiz application.</p>
+<p>This module defines the forms used in the quiz application for user input,
+including quiz selection and customization.</p>
+<p>Form for selecting a quiz category and number of questions.</p>
+<blockquote>
+<div><p>This form allows users to choose which category of questions they want
+to be quizzed on and how many questions they want in their quiz.</p>
+</div></blockquote>
+<p>Initialize the form with only categories that have questions.</p>
+<p>Validate the form data.</p>
+<p>Validate that the number of questions doesn’t exceed available questions.</p>
+</section>
+<section id="quiz-appmodels-py">
+<h2>quiz_appmodels.py<a class="headerlink" href="#quiz-appmodels-py" title="Link to this heading"></a></h2>
+<p>Models for the Quiz application.</p>
+<p>This module defines the database models used in the quiz application:
+- Category: Quiz categories/topics
+- Question: Individual quiz questions
+- Choice: Possible answers for a question
+- QuizAttempt: Record of a user’s quiz attempt
+- QuizResponse: Individual answers within a quiz attempt</p>
+<p>Represents a quiz category or topic.</p>
+<blockquote>
+<div><p>Categories are used to organize questions into logical groups,
+allowing users to select quizzes by topic of interest.</p>
+</div></blockquote>
+<p>String representation of the category.</p>
+<p>Returns the number of questions in this category.</p>
+<p>Represents a quiz question.</p>
+<blockquote>
+<div><p>Each question belongs to a category and has multiple choice answers.
+One of the choices must be marked as correct.</p>
+</div></blockquote>
+<p>String representation of the question.</p>
+<p>Returns the correct choice for this question.</p>
+<p>Represents a possible answer for a quiz question.</p>
+<blockquote>
+<div><p>Each Choice is linked to a Question, and one Choice per Question
+should be marked as correct (is_correct=True).</p>
+</div></blockquote>
+<p>String representation of the choice.</p>
+<p>Override save method to ensure only one choice per question is marked correct.</p>
+<p>Represents a user’s attempt at a quiz.</p>
+<blockquote>
+<div><p>Records metadata about the quiz attempt, including when it was started,
+completed, which category was selected, and the overall score.</p>
+</div></blockquote>
+<p>String representation of the quiz attempt.</p>
+<p>Returns whether the quiz attempt has been completed.</p>
+<p>Calculates and updates the score based on correct responses.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><p>int: The calculated score</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns the score as a percentage.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><p>float: Percentage score (0-100)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Represents a user’s response to a single question within a quiz attempt.</p>
+<blockquote>
+<div><p>Tracks which question was asked, which choice was selected, and whether
+the answer was correct.</p>
+</div></blockquote>
+<p>String representation of the quiz response.</p>
+<p>Override save method to automatically set is_correct based on the selected choice.</p>
+</section>
+<section id="quiz-apptests-py">
+<h2>quiz_apptests.py<a class="headerlink" href="#quiz-apptests-py" title="Link to this heading"></a></h2>
+<p>Tests for the Quiz application.</p>
+<p>This module contains tests for the models, views, and forms of the quiz application.
+Tests are organized into test classes for each component of the application.</p>
+<p>Tests for the Category model.</p>
+<p>Set up test data.</p>
+<p>Test that a category can be created and retrieved.</p>
+<p>Test that question_count returns 0 when there are no questions.</p>
+<p>Test that question_count returns the correct count when there are questions.</p>
+<p>Tests for the Question model.</p>
+<p>Set up test data.</p>
+<p>Test that a question can be created and retrieved.</p>
+<p>Test that correct_choice returns the right choice.</p>
+<p>Test the string representation of a question.</p>
+<p>Tests for the Choice model.</p>
+<p>Set up test data.</p>
+<p>Test that a choice can be created and retrieved.</p>
+<p>Test that only one choice can be marked as correct for a question.</p>
+<p>Tests for the QuizAttempt model.</p>
+<p>Set up test data.</p>
+<p>Test that a quiz attempt can be created and retrieved.</p>
+<p>Test is_complete method.</p>
+<p>Test calculate_score method.</p>
+<p>Test score_percentage method.</p>
+<p>Tests for the QuizResponse model.</p>
+<p>Set up test data.</p>
+<p>Test creating a correct response.</p>
+<p>Test creating an incorrect response.</p>
+<p>Tests for the IndexView.</p>
+<p>Set up test data.</p>
+<p>Test that the index view returns a successful response.</p>
+<p>Tests for the CategoryListView.</p>
+<p>Set up test data.</p>
+<p>Test that the category list view returns a successful response.</p>
+<p>Tests for the QuizStartView.</p>
+<p>Set up test data.</p>
+<p>Test starting a quiz.</p>
+<p>Tests for the QuestionView.</p>
+<p>Set up test data.</p>
+<p>Test retrieving a question.</p>
+<p>Test submitting an answer.</p>
+<p>Test completing all questions in a quiz.</p>
+<p>Tests for the ResultsView.</p>
+<p>Set up test data.</p>
+<p>Test viewing quiz results.</p>
+<p>Tests for the UserStatsView.</p>
+<p>Set up test data.</p>
+<p>Test that authenticated users can view their stats.</p>
+<p>Test that unauthenticated users are redirected to login.</p>
+</section>
+<section id="quiz-appurls-py">
+<h2>quiz_appurls.py<a class="headerlink" href="#quiz-appurls-py" title="Link to this heading"></a></h2>
+<p>URL Configuration for quiz_app.</p>
+<p>This module defines the URL patterns specific to the quiz application.
+Each URL pattern is associated with a view that handles the corresponding request.</p>
+</section>
+<section id="quiz-appviews-py">
+<h2>quiz_appviews.py<a class="headerlink" href="#quiz-appviews-py" title="Link to this heading"></a></h2>
+<p>Views for the Quiz application.</p>
+<p>This module defines the view functions and classes that handle HTTP requests
+and return appropriate responses for the quiz application.</p>
+<p>View for the home page of the quiz application.</p>
+<blockquote>
+<div><p>Displays a welcome message and available quiz categories.</p>
+</div></blockquote>
+<p>Add categories to the context.</p>
+<p>View to display all available quiz categories.</p>
+<p>Return only categories that have questions.</p>
+<p>View to handle the start of a new quiz.</p>
+<blockquote>
+<div><p>Creates a new QuizAttempt and redirects to the first question.</p>
+</div></blockquote>
+<p>Handle POST request with category selection.</p>
+<p>View to display a quiz question and process the answer.</p>
+<p>Handle GET request to display a question.</p>
+<p>Handle POST request with answer submission.</p>
+<p>View to display the results of a completed quiz.</p>
+<p>Add extra context data including visualizations.</p>
+<p>View to display statistics and analytics for a user’s quiz history.</p>
+<blockquote>
+<div><p>Requires authentication. Shows visualizations of the user’s performance
+across different categories and over time.</p>
+</div></blockquote>
+<p>Add user statistics to the context.</p>
+</section>
+<section id="quiz-app-init-py">
+<h2>quiz_app__init__.py<a class="headerlink" href="#quiz-app-init-py" title="Link to this heading"></a></h2>
+<p>Quiz App Package initialization.</p>
+<p>This file marks the directory as a Python package for the quiz application.</p>
+</section>
+<section id="quiz-appmanagementcommandsautodoc-py">
+<h2>quiz_appmanagementcommandsautodoc.py<a class="headerlink" href="#quiz-appmanagementcommandsautodoc-py" title="Link to this heading"></a></h2>
+<p>Complete Documentation Automation Workflow</p>
+<p>This script automates the entire documentation workflow:
+1. Generating documentation from multiple sources
+2. Validating documentation
+3. Building documentation in various formats
+4. Deploying documentation (optional)</p>
+<p>Converts Markdown to reStructuredText.</p>
+<p>Convert Markdown content to RST.</p>
+<p>Extracts documentation from HTML, JavaScript, CSS, and Python comments.</p>
+<p>Extract documentation from HTML comments.</p>
+</section>
+</section>
+<section id="html-documentation">
+<h1>HTML Documentation<a class="headerlink" href="#html-documentation" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>Extract documentation from JavaScript comments.</p>
+</section>
+<section id="javascript-documentation">
+<h1>JavaScript Documentation<a class="headerlink" href="#javascript-documentation" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>Extract documentation from CSS comments.</p>
+</section>
+<section id="css-documentation">
+<h1>CSS Documentation<a class="headerlink" href="#css-documentation" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>Extract documentation from Python comments (beyond docstrings).</p>
+</section>
+<section id="python-comment-documentation">
+<h1>Python Comment Documentation<a class="headerlink" href="#python-comment-documentation" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>Extract documentation from Markdown files.</p>
+<p>Complete documentation workflow automation.</p>
+<p>Initialize with project root.</p>
+<p>Ensure all necessary directories exist.</p>
+<p>Find files matching a pattern.</p>
+<p>Generate documentation from Python docstrings.</p>
+<p>Generate documentation from various file comments.</p>
+</section>
+<section id="html-templates">
+<h1>HTML Templates<a class="headerlink" href="#html-templates" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>This document contains documentation extracted from HTML template comments.</p>
+<p>{html_content}</p>
+</section>
+<section id="javascript">
+<h1>JavaScript<a class="headerlink" href="#javascript" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>This document contains documentation extracted from JavaScript files.</p>
+<p>{js_content}</p>
+</section>
+<section id="css-styles">
+<h1>CSS Styles<a class="headerlink" href="#css-styles" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>This document contains documentation extracted from CSS files.</p>
+<p>{css_content}</p>
+</section>
+<section id="python-comments">
+<h1>Python Comments<a class="headerlink" href="#python-comments" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>This document contains documentation extracted from Python comments.</p>
+<p>{py_content}</p>
+<p>Generate documentation from Markdown files.</p>
+<p>Write documentation to RST files.</p>
+<p>Update index.rst with new files.</p>
+</section>
+<section id="welcome-to-django-quiz-documentation">
+<h1>Welcome to Django Quiz Documentation<a class="headerlink" href="#welcome-to-django-quiz-documentation" title="Link to this heading"></a></h1>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<div class="toctree-wrapper compound">
+</div>
+<p>Validate all documentation files.</p>
+<p>Build documentation in various formats.</p>
+<p>Run the complete documentation workflow.</p>
+<section id="quiz-appmanagementcommandsdoc-generator-py">
+<h2>quiz_appmanagementcommandsdoc_generator.py<a class="headerlink" href="#quiz-appmanagementcommandsdoc-generator-py" title="Link to this heading"></a></h2>
+<p>Automatic documentation generator from docstrings.</p>
+<p>Generates documentation from Python docstrings.</p>
+<p>Generate documentation for models in an app.</p>
+<p>Models
+{‘=’ * 6}</p>
+<p>Last updated: {current_date}</p>
+<p>This document describes all models in the {app_name} application.</p>
+<p>Generate documentation for views in an app.</p>
+<p>Views
+{‘=’ * 5}</p>
+<p>Last updated: {current_date}</p>
+<p>This document describes all views in the {app_name} application.</p>
+<p>Generate documentation for forms in an app.</p>
+<p>Forms
+{‘=’ * 5}</p>
+<p>Last updated: {current_date}</p>
+<p>This document describes all forms in the {app_name} application.</p>
+<p>Generate documentation for a single model.</p>
+<p>{model.__name__}
+{‘-’ * len(model.__name__)}</p>
+<p>{self._format_docstring(docstring)}</p>
+<section id="fields">
+<h3>Fields<a class="headerlink" href="#fields" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>{field.name}</dt><dd><p>Type: {field.get_internal_type()}
+Description: {field.help_text or ‘No description available’}</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>{name}</dt><dd><p>{self._format_docstring(method_doc)}</p>
+</dd>
+</dl>
+<p>Generate documentation for a single view.</p>
+<p>{view.__name__}
+{‘-’ * len(view.__name__)}</p>
+<p>{self._format_docstring(docstring)}</p>
+</section>
+<section id="url-pattern">
+<h3>URL Pattern<a class="headerlink" href="#url-pattern" title="Link to this heading"></a></h3>
+<p>{view.url_pattern}</p>
+</section>
+<section id="template">
+<h3>Template<a class="headerlink" href="#template" title="Link to this heading"></a></h3>
+<p>{view.template_name}</p>
+<p>Generate documentation for a single form.</p>
+<p>{form.__name__}
+{‘-’ * len(form.__name__)}</p>
+<p>{self._format_docstring(docstring)}</p>
+</section>
+<section id="id1">
+<h3>Fields<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>{name}</dt><dd><p>Type: {field.__class__.__name__}
+Required: {field.required}
+Description: {field.help_text or ‘No description available’}</p>
+</dd>
+</dl>
+<p>Format docstring for RST output.</p>
+<p>Generate all documentation for an app.</p>
+</section>
+</section>
+<section id="quiz-appmanagementcommandsdoc-templates-py">
+<h2>quiz_appmanagementcommandsdoc_templates.py<a class="headerlink" href="#quiz-appmanagementcommandsdoc-templates-py" title="Link to this heading"></a></h2>
+<p>Template definitions for documentation files.</p>
+<p>{title}
+{‘=’ * len(title)}</p>
+<p>Last updated: {date}</p>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>{overview}</p>
+</section>
+<section id="endpoints">
+<h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading"></a></h2>
+<p>{endpoints}</p>
+</section>
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading"></a></h2>
+<p>{authentication}</p>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
+<p>{error_handling}</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>{examples}</p>
+<p>{title}
+{‘=’ * len(title)}</p>
+<p>Last updated: {date}</p>
+</section>
+<section id="model-overview">
+<h2>Model Overview<a class="headerlink" href="#model-overview" title="Link to this heading"></a></h2>
+<p>{overview}</p>
+</section>
+<section id="id2">
+<h2>Fields<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>{fields}</p>
+</section>
+<section id="id3">
+<h2>Methods<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>{methods}</p>
+</section>
+<section id="relationships">
+<h2>Relationships<a class="headerlink" href="#relationships" title="Link to this heading"></a></h2>
+<p>{relationships}</p>
+</section>
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h2>
+<p>{examples}</p>
+<p>{title}
+{‘=’ * len(title)}</p>
+<p>Last updated: {date}</p>
+</section>
+<section id="view-overview">
+<h2>View Overview<a class="headerlink" href="#view-overview" title="Link to this heading"></a></h2>
+<p>{overview}</p>
+</section>
+<section id="id4">
+<h2>URL Pattern<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>{url_pattern}</p>
+</section>
+<section id="context-data">
+<h2>Context Data<a class="headerlink" href="#context-data" title="Link to this heading"></a></h2>
+<p>{context_data}</p>
+</section>
+<section id="id5">
+<h2>Template<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>{template}</p>
+</section>
+<section id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h2>
+<p>{examples}</p>
+<p>{title}
+{‘=’ * len(title)}</p>
+<p>Last updated: {date}</p>
+</section>
+<section id="form-overview">
+<h2>Form Overview<a class="headerlink" href="#form-overview" title="Link to this heading"></a></h2>
+<p>{overview}</p>
+</section>
+<section id="id6">
+<h2>Fields<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>{fields}</p>
+</section>
+<section id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading"></a></h2>
+<p>{validation}</p>
+</section>
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
+<p>{examples}</p>
+</section>
+<section id="quiz-appmanagementcommandsdoc-validator-py">
+<h2>quiz_appmanagementcommandsdoc_validator.py<a class="headerlink" href="#quiz-appmanagementcommandsdoc-validator-py" title="Link to this heading"></a></h2>
+<p>Documentation validation utilities.</p>
+<p>Validates RST documentation files for common issues.</p>
+<p>Validate RST file content and return list of issues.</p>
+<p>Validate Python docstring content.</p>
+</section>
+<section id="quiz-appmanagementcommandsload-sample-data-py">
+<h2>quiz_appmanagementcommandsload_sample_data.py<a class="headerlink" href="#quiz-appmanagementcommandsload-sample-data-py" title="Link to this heading"></a></h2>
+<p>Management command to load sample quiz data.</p>
+<p>This command creates sample categories and questions to populate the database
+for testing and demonstration purposes.</p>
+<p>Command to load sample quiz data into the database.</p>
+<p>Execute the command to load sample data.</p>
+</section>
+<section id="quiz-appmanagementcommandsmanage-docs-py">
+<h2>quiz_appmanagementcommandsmanage_docs.py<a class="headerlink" href="#quiz-appmanagementcommandsmanage-docs-py" title="Link to this heading"></a></h2>
+<p>Create a new documentation file.</p>
+<p>{options[‘title’]}
+{‘=’ * len(options[‘title’])}</p>
+<p>Last updated: {datetime.now().strftime(‘%Y-%m-%d’)}</p>
+<p>{options.get(‘content’, ‘’)}</p>
+<p>Update an existing documentation file.</p>
+<p>Delete a documentation file.</p>
+<p>Generate documentation from docstrings.</p>
+<p>Validate all documentation files.</p>
+<p>Validate a single documentation file.</p>
+<p>Update index.rst to include or remove a file.</p>
+</section>
+<section id="quiz-appteststest-forms-py">
+<h2>quiz_appteststest_forms.py<a class="headerlink" href="#quiz-appteststest-forms-py" title="Link to this heading"></a></h2>
+<p>Tests for Quiz App forms.</p>
+<p>This module contains tests for the forms used in the quiz application:
+- QuizSelectionForm</p>
+<p>Tests for the QuizSelectionForm.</p>
+<p>Set up test data.</p>
+<p>Test the form with valid data across the allowed range (5-20 questions).</p>
+<p>Test the form with blank data.</p>
+<p>Test the form with an invalid category.</p>
+<p>Test the form with an invalid number of questions.</p>
+<p>Test that the form only includes categories with questions.</p>
+</section>
+<section id="quiz-appteststest-integration-py">
+<h2>quiz_appteststest_integration.py<a class="headerlink" href="#quiz-appteststest-integration-py" title="Link to this heading"></a></h2>
+<p>Integration tests for the Quiz App.</p>
+<p>This module contains tests that verify the end-to-end functionality
+of the quiz application by simulating user interactions through the
+entire quiz flow.</p>
+<p>Integration tests for the quiz flow.</p>
+<p>Set up test data.</p>
+<p>Test the complete quiz flow for an anonymous user.</p>
+<p>Test the complete quiz flow for an authenticated user.</p>
+<p>Test multiple quiz attempts for the same user.</p>
+</section>
+<section id="quiz-appteststest-models-py">
+<h2>quiz_appteststest_models.py<a class="headerlink" href="#quiz-appteststest-models-py" title="Link to this heading"></a></h2>
+<p>Tests for Quiz App models.</p>
+<p>This module contains tests for the models used in the quiz application:
+- Category
+- Question
+- Choice
+- QuizAttempt
+- QuizResponse</p>
+<p>Tests for the Category model.</p>
+<p>Set up test data.</p>
+<p>Test that a category can be created.</p>
+<p>Test the string representation of a category.</p>
+<p>Test the question_count method.</p>
+<p>Tests for the Question model.</p>
+<p>Set up test data.</p>
+<p>Test that a question can be created.</p>
+<p>Test the string representation of a question.</p>
+<p>Test the correct_choice method.</p>
+<p>Tests for the Choice model.</p>
+<p>Set up test data.</p>
+<p>Test that a choice can be created.</p>
+<p>Test the string representation of a choice.</p>
+<p>Test that only one choice per question can be marked as correct.</p>
+<p>Tests for the QuizAttempt model.</p>
+<p>Set up test data.</p>
+<p>Test that a quiz attempt can be created.</p>
+<p>Test the is_complete method.</p>
+<p>Test the calculate_score method.</p>
+<p>Test the score_percentage method.</p>
+<p>Tests for the QuizResponse model.</p>
+<p>Set up test data.</p>
+<p>Test creating a correct response.</p>
+<p>Test creating an incorrect response.</p>
+<p>Test the string representation of a response.</p>
+</section>
+<section id="quiz-appteststest-views-py">
+<h2>quiz_appteststest_views.py<a class="headerlink" href="#quiz-appteststest-views-py" title="Link to this heading"></a></h2>
+<p>Tests for Quiz App views.</p>
+<p>This module contains tests for the views used in the quiz application:
+- IndexView
+- CategoryListView
+- QuizStartView
+- QuestionView
+- ResultsView
+- UserStatsView</p>
+<p>Tests for the IndexView.</p>
+<p>Set up test data.</p>
+<p>Test the index view when there are no categories with questions.</p>
+<p>Test the index view when there are categories with questions.</p>
+<p>Tests for the CategoryListView.</p>
+<p>Set up test data.</p>
+<p>Test the category list view.</p>
+<p>Test the category list view when a category has no questions.</p>
+<p>Tests for the QuizStartView.</p>
+<p>Set up test data.</p>
+<p>Test starting a quiz as an authenticated user.</p>
+<p>Test starting a quiz as an anonymous user.</p>
+<p>Test starting a quiz with an invalid form.</p>
+<p>Tests for the QuestionView.</p>
+<p>Set up test data.</p>
+<p>Test viewing a question.</p>
+<p>Test answering a question.</p>
+<p>Test answering the last question.</p>
+<p>Test viewing a question with no active quiz.</p>
+<p>Tests for the ResultsView.</p>
+<p>Set up test data.</p>
+<p>Test viewing quiz results.</p>
+<p>Tests for the UserStatsView.</p>
+<p>Set up test data.</p>
+<p>Test viewing user stats as an authenticated user.</p>
+<p>Test viewing user stats as an unauthenticated user.</p>
+<p>‘’</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

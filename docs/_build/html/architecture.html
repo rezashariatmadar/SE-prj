@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Architecture &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Models" href="models.html" />
+    <link rel="prev" title="User Guide" href="user_guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">System Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architectural-overview">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#component-structure">Component Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-patterns">Design Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technologies-and-libraries">Technologies and Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extensibility">Extensibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">System Architecture</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/architecture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="system-architecture">
+<h1>System Architecture<a class="headerlink" href="#system-architecture" title="Link to this heading"></a></h1>
+<p>This document provides an overview of the Quiz Game application’s architecture,
+including the design patterns, component organization, and data flow.</p>
+<section id="architectural-overview">
+<h2>Architectural Overview<a class="headerlink" href="#architectural-overview" title="Link to this heading"></a></h2>
+<p>Quiz Game follows the Model-View-Template (MVT) architectural pattern, which is Django’s interpretation
+of the Model-View-Controller (MVC) pattern:</p>
+<ul class="simple">
+<li><p><strong>Models</strong> define the data structure</p></li>
+<li><p><strong>Views</strong> handle business logic and user requests</p></li>
+<li><p><strong>Templates</strong> render the data for presentation</p></li>
+</ul>
+<a class="reference internal image-reference" href="_static/architecture_diagram.png"><img alt="Architecture Diagram" class="align-center" src="_static/architecture_diagram.png" style="width: 600px;" /></a>
+</section>
+<section id="component-structure">
+<h2>Component Structure<a class="headerlink" href="#component-structure" title="Link to this heading"></a></h2>
+<p>The application is organized into the following main components:</p>
+<ol class="arabic simple">
+<li><p><strong>Core Framework</strong> (Django)</p>
+<ul class="simple">
+<li><p>URL routing</p></li>
+<li><p>Request/response handling</p></li>
+<li><p>ORM (Object-Relational Mapping)</p></li>
+<li><p>Authentication and security</p></li>
+</ul>
+</li>
+<li><p><strong>Quiz Application</strong></p>
+<ul class="simple">
+<li><p>Models (Category, Question, Choice, QuizAttempt, QuizResponse)</p></li>
+<li><p>Views (IndexView, QuizStartView, QuestionView, ResultsView, UserStatsView)</p></li>
+<li><p>Forms (QuizSelectionForm)</p></li>
+<li><p>Templates (HTML rendering)</p></li>
+</ul>
+</li>
+<li><p><strong>Data Layer</strong></p>
+<ul class="simple">
+<li><p>SQLite database (default)</p></li>
+<li><p>Django ORM for database interactions</p></li>
+<li><p>Data validation and integrity enforcement</p></li>
+</ul>
+</li>
+<li><p><strong>Analytics Component</strong></p>
+<ul class="simple">
+<li><p>Data processing with pandas</p></li>
+<li><p>Visualization generation with matplotlib/seaborn</p></li>
+<li><p>Statistics calculations</p></li>
+</ul>
+</li>
+<li><p><strong>Presentation Layer</strong></p>
+<ul class="simple">
+<li><p>HTML templates with Django template language</p></li>
+<li><p>CSS styling (Bootstrap framework)</p></li>
+<li><p>JavaScript for interactivity</p></li>
+<li><p>Chart rendering</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Link to this heading"></a></h2>
+<p>The project follows Django’s recommended directory structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>quiz_project/
+├── docs/                  # Documentation files
+├── quiz_project/          # Main project settings
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py        # Project configuration
+│   ├── urls.py            # Main URL routing
+│   └── wsgi.py
+├── quiz_app/              # Quiz application
+│   ├── migrations/        # Database migrations
+│   ├── static/            # Static files (CSS, JS)
+│   ├── templates/         # HTML templates
+│   ├── __init__.py
+│   ├── admin.py           # Admin interface configuration
+│   ├── apps.py            # App configuration
+│   ├── forms.py           # Form definitions
+│   ├── models.py          # Data models
+│   ├── tests.py           # Test cases
+│   ├── urls.py            # App-specific URLs
+│   └── views.py           # View functions and classes
+├── templates/             # Project-wide templates
+├── static/                # Project-wide static files
+├── media/                 # User-uploaded content
+├── manage.py              # Django command-line utility
+└── requirements.txt       # Python dependencies
+</pre></div>
+</div>
+</section>
+<section id="data-flow">
+<h2>Data Flow<a class="headerlink" href="#data-flow" title="Link to this heading"></a></h2>
+<p>The typical data flow through the application:</p>
+<ol class="arabic simple">
+<li><p><strong>Request Phase</strong></p>
+<ul class="simple">
+<li><p>User makes a request (e.g., starts a quiz)</p></li>
+<li><p>Django routes the request to the appropriate view</p></li>
+<li><p>View processes the request and interacts with models</p></li>
+</ul>
+</li>
+<li><p><strong>Processing Phase</strong></p>
+<ul class="simple">
+<li><p>Models retrieve or store data in the database</p></li>
+<li><p>Business logic is applied (e.g., quiz question selection)</p></li>
+<li><p>Data is prepared for presentation</p></li>
+</ul>
+</li>
+<li><p><strong>Response Phase</strong></p>
+<ul class="simple">
+<li><p>View selects the appropriate template</p></li>
+<li><p>Template renders the data as HTML</p></li>
+<li><p>Response is sent back to the user’s browser</p></li>
+</ul>
+</li>
+</ol>
+<p>For quiz results and statistics, an additional analytics phase occurs:</p>
+<ol class="arabic simple" start="4">
+<li><p><strong>Analytics Phase</strong></p>
+<ul class="simple">
+<li><p>Quiz responses are aggregated</p></li>
+<li><p>Pandas processes the data</p></li>
+<li><p>Matplotlib/Seaborn generates visualizations</p></li>
+<li><p>Results are encoded and passed to templates</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="design-patterns">
+<h2>Design Patterns<a class="headerlink" href="#design-patterns" title="Link to this heading"></a></h2>
+<p>The application implements several design patterns:</p>
+<ul class="simple">
+<li><p><strong>Repository Pattern</strong>: Models encapsulate data access logic</p></li>
+<li><p><strong>Factory Method</strong>: Creating quiz attempts and questions</p></li>
+<li><p><strong>Template Method</strong>: View inheritance hierarchy</p></li>
+<li><p><strong>Observer Pattern</strong>: Signal handling for model events</p></li>
+<li><p><strong>Strategy Pattern</strong>: Different visualization approaches</p></li>
+</ul>
+</section>
+<section id="technologies-and-libraries">
+<h2>Technologies and Libraries<a class="headerlink" href="#technologies-and-libraries" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Django</strong>: Web framework</p></li>
+<li><p><strong>SQLite</strong>: Database (default)</p></li>
+<li><p><strong>Pandas</strong>: Data manipulation and analysis</p></li>
+<li><p><strong>Matplotlib/Seaborn</strong>: Data visualization</p></li>
+<li><p><strong>Bootstrap</strong>: Frontend framework</p></li>
+<li><p><strong>jQuery</strong>: JavaScript library for DOM manipulation</p></li>
+<li><p><strong>Font Awesome</strong>: Icon library</p></li>
+</ul>
+</section>
+<section id="extensibility">
+<h2>Extensibility<a class="headerlink" href="#extensibility" title="Link to this heading"></a></h2>
+<p>The architecture is designed to be extensible in several ways:</p>
+<ol class="arabic simple">
+<li><p><strong>New Quiz Categories</strong>: Simply add new Category records</p></li>
+<li><p><strong>Question Types</strong>: The model can be extended for different question formats</p></li>
+<li><p><strong>Authentication Methods</strong>: Django’s auth system can be customized</p></li>
+<li><p><strong>Database Backends</strong>: Can switch to PostgreSQL, MySQL, etc.</p></li>
+<li><p><strong>Visualization Options</strong>: Additional chart types can be added</p></li>
+</ol>
+</section>
+<section id="security-considerations">
+<h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Django’s built-in protection against:
+* CSRF (Cross-Site Request Forgery)
+* XSS (Cross-Site Scripting)
+* SQL Injection
+* Clickjacking</p></li>
+<li><p>Additional measures:
+* Form validation
+* Secure session handling
+* Proper authentication checks
+* Input sanitization</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_guide.html" class="btn btn-neutral float-left" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="models.html" class="btn btn-neutral float-right" title="Data Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

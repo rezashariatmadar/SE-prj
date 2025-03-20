@@ -10,6 +10,7 @@ A web-based quiz application built with Django that allows users to take quizzes
 - Admin interface for quiz management
 - Automated question generation
 - Responsive design with Bootstrap 4
+- Comprehensive documentation automation
 
 ## Installation
 
@@ -71,6 +72,37 @@ Use the management command to populate the database with sample questions:
 python manage.py populate_questions --questions_per_category 10 --choices_per_question 4
 ```
 
+## Documentation
+
+This project includes a comprehensive documentation system with automation tools:
+
+### Building Documentation
+
+Generate documentation in various formats:
+```bash
+# Generate Word document
+python docs/docs_workflow.py --output-format word
+
+# Generate all formats (HTML, Word, LaTeX, PDF)
+python docs/docs_workflow.py
+```
+
+### Documentation Management
+
+Create and manage documentation files:
+```bash
+# Create a new documentation file
+python manage.py manage_docs create --file new_doc --title "New Document"
+
+# Generate documentation from docstrings
+python manage.py manage_docs generate --app quiz_app
+
+# Validate documentation
+python manage.py manage_docs validate
+```
+
+For more details, see the [Documentation Tools](docs/documentation_tools.rst) and [Documentation Workflow](docs/documentation_workflow.rst) guides.
+
 ## Technology Stack
 
 - Django
@@ -78,6 +110,8 @@ python manage.py populate_questions --questions_per_category 10 --choices_per_qu
 - Bootstrap 4
 - django-crispy-forms
 - JavaScript
+- Sphinx (documentation generation)
+- pandas & matplotlib (data analysis)
 
 ## Contributing
 

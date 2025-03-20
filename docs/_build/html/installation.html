@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation Guide &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Guide" href="user_guide.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-requirements">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-by-step-installation">Step-by-Step Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clone-the-repository">1. Clone the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-and-activate-virtual-environment">2. Create and Activate Virtual Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-dependencies">3. Install Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-setup">4. Database Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-superuser-optional">5. Create Superuser (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-sample-data-optional">6. Load Sample Data (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-development-server">7. Run Development Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#access-the-application">8. Access the Application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-options">Configuration Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-settings">Custom Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation-tools">Documentation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-guide">
+<h1>Installation Guide<a class="headerlink" href="#installation-guide" title="Link to this heading"></a></h1>
+<p>This guide provides step-by-step instructions for setting up the Quiz Game application
+in your local environment.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Before installing the Quiz Game application, ensure you have the following installed:</p>
+<ul class="simple">
+<li><p>Python 3.8 or higher</p></li>
+<li><p>pip (Python package manager)</p></li>
+<li><p>Git (for cloning the repository)</p></li>
+<li><p>Virtual environment (recommended)</p></li>
+</ul>
+</section>
+<section id="system-requirements">
+<h2>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Operating System</strong>: Windows, macOS, or Linux</p></li>
+<li><p><strong>RAM</strong>: 2GB minimum, 4GB recommended</p></li>
+<li><p><strong>Disk Space</strong>: 100MB for application and dependencies</p></li>
+</ul>
+</section>
+<section id="step-by-step-installation">
+<h2>Step-by-Step Installation<a class="headerlink" href="#step-by-step-installation" title="Link to this heading"></a></h2>
+<section id="clone-the-repository">
+<h3>1. Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yourusername/quiz-game.git
+<span class="nb">cd</span><span class="w"> </span>quiz-game
+</pre></div>
+</div>
+</section>
+<section id="create-and-activate-virtual-environment">
+<h3>2. Create and Activate Virtual Environment<a class="headerlink" href="#create-and-activate-virtual-environment" title="Link to this heading"></a></h3>
+<p>Windows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</pre></div>
+</div>
+<p>macOS/Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</pre></div>
+</div>
+</section>
+<section id="install-dependencies">
+<h3>3. Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="database-setup">
+<h3>4. Database Setup<a class="headerlink" href="#database-setup" title="Link to this heading"></a></h3>
+<p>Run migrations to create the database schema:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>migrate
+</pre></div>
+</div>
+</section>
+<section id="create-superuser-optional">
+<h3>5. Create Superuser (Optional)<a class="headerlink" href="#create-superuser-optional" title="Link to this heading"></a></h3>
+<p>Create an admin user to manage the application:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>createsuperuser
+</pre></div>
+</div>
+<p>Follow the prompts to set username, email, and password.</p>
+</section>
+<section id="load-sample-data-optional">
+<h3>6. Load Sample Data (Optional)<a class="headerlink" href="#load-sample-data-optional" title="Link to this heading"></a></h3>
+<p>Load sample quizzes and questions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>loaddata<span class="w"> </span>sample_quizzes
+</pre></div>
+</div>
+</section>
+<section id="run-development-server">
+<h3>7. Run Development Server<a class="headerlink" href="#run-development-server" title="Link to this heading"></a></h3>
+<p>Start the Django development server:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>runserver
+</pre></div>
+</div>
+</section>
+<section id="access-the-application">
+<h3>8. Access the Application<a class="headerlink" href="#access-the-application" title="Link to this heading"></a></h3>
+<p>Open your web browser and navigate to:</p>
+<ul class="simple">
+<li><p>Main application: <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a></p></li>
+<li><p>Admin interface: <a class="reference external" href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a></p></li>
+</ul>
+</section>
+</section>
+<section id="configuration-options">
+<h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading"></a></h2>
+<section id="environment-variables">
+<h3>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h3>
+<p>The following environment variables can be set to customize the application:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>: Set to <code class="docutils literal notranslate"><span class="pre">False</span></code> in production (default: <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span></code>: Django secret key for cryptographic signing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code>: Database connection string (default: SQLite)</p></li>
+</ul>
+</section>
+<section id="custom-settings">
+<h3>Custom Settings<a class="headerlink" href="#custom-settings" title="Link to this heading"></a></h3>
+<p>To override default settings, create a <code class="docutils literal notranslate"><span class="pre">local_settings.py</span></code> file in the <code class="docutils literal notranslate"><span class="pre">quiz_project</span></code> directory.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># quiz_project/local_settings.py</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;quizgame.example.com&#39;</span><span class="p">]</span>
+
+<span class="c1"># Database configuration</span>
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;quiz_db&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;quiz_user&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;secure_password&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;5432&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="documentation-tools">
+<h2>Documentation Tools<a class="headerlink" href="#documentation-tools" title="Link to this heading"></a></h2>
+<p>The project includes a comprehensive documentation automation system. To use these tools, install the following additional dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>docxbuilder<span class="w"> </span>pypandoc
+</pre></div>
+</div>
+<p>For PDF generation, you’ll also need LaTeX:</p>
+<ul class="simple">
+<li><p>Windows: Install MiKTeX (<a class="reference external" href="https://miktex.org/">https://miktex.org/</a>)</p></li>
+<li><p>Linux: <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">texlive-full</span></code></p></li>
+<li><p>macOS: Install MacTeX (<a class="reference external" href="https://www.tug.org/mactex/">https://www.tug.org/mactex/</a>)</p></li>
+</ul>
+<p>The documentation tools can be used through Django management commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>manage_docs<span class="w"> </span>create<span class="w"> </span>--file<span class="w"> </span>new_doc<span class="w"> </span>--title<span class="w"> </span><span class="s2">&quot;New Document&quot;</span>
+python<span class="w"> </span>manage.py<span class="w"> </span>manage_docs<span class="w"> </span>validate
+python<span class="w"> </span>manage.py<span class="w"> </span>manage_docs<span class="w"> </span>generate<span class="w"> </span>--app<span class="w"> </span>quiz_app
+</pre></div>
+</div>
+<p>Additionally, a workflow automation script is available:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>docs/docs_workflow.py
+</pre></div>
+</div>
+<p>For more details on the documentation tools, see the <a class="reference internal" href="documentation_tools.html"><span class="doc">Documentation Automation Tools</span></a> section.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Migration Errors</strong></p>
+<p>If you encounter migration errors:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>migrate<span class="w"> </span>--fake-initial
+</pre></div>
+</div>
+</li>
+<li><p><strong>Static Files Not Loading</strong></p>
+<p>Collect static files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>manage.py<span class="w"> </span>collectstatic
+</pre></div>
+</div>
+</li>
+<li><p><strong>Package Dependencies</strong></p>
+<p>If you encounter missing dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w"> </span>--upgrade
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="getting-help">
+<h3>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h3>
+<p>If you encounter any issues during installation:</p>
+<ul class="simple">
+<li><p>Check the project’s GitHub issues</p></li>
+<li><p>Consult the Django documentation</p></li>
+<li><p>Reach out to the maintainers</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_guide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

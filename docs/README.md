@@ -8,10 +8,30 @@ This directory contains the comprehensive documentation for the Quiz Game applic
 
 - Python 3.8+
 - Sphinx and required extensions (installed via `requirements.txt`)
+- For automated documentation workflow: `docxbuilder` and `pypandoc`
+- For PDF output: LaTeX (MiKTeX on Windows, MacTeX on macOS, texlive on Linux)
 
 ### Build Instructions
 
-#### For Unix/Linux/macOS:
+#### Using the Automated Documentation Workflow
+
+The easiest way to build documentation is using our automated workflow script:
+
+```bash
+# Generate all documentation formats
+python docs/docs_workflow.py
+
+# Generate only Word documentation
+python docs/docs_workflow.py --output-format word
+
+# Generate only HTML documentation
+python docs/docs_workflow.py --output-format html
+
+# Skip specific steps
+python docs/docs_workflow.py --skip-validation --skip-md-conversion
+```
+
+#### Manual Build (For Unix/Linux/macOS):
 
 ```bash
 # Navigate to the docs directory
@@ -28,9 +48,12 @@ make clean
 
 # Build PDF documentation (requires LaTeX)
 make pdf
+
+# Build Word documentation
+make docx
 ```
 
-#### For Windows:
+#### Manual Build (For Windows):
 
 ```bash
 # Navigate to the docs directory
@@ -47,6 +70,33 @@ make.bat clean
 
 # Build PDF documentation (requires LaTeX)
 make.bat latexpdf
+
+# Build Word documentation
+make.bat docx
+```
+
+## Documentation Management
+
+The project includes a Django management command for managing documentation:
+
+```bash
+# Create a new documentation file
+python manage.py manage_docs create --file new_doc --title "New Document"
+
+# Create a new documentation file with template
+python manage.py manage_docs create --file api_docs --title "API Documentation" --template api
+
+# Update existing documentation
+python manage.py manage_docs update --file existing_file --section "New Section" --content "Content here"
+
+# Delete documentation
+python manage.py manage_docs delete --file outdated_doc
+
+# Generate documentation from source code
+python manage.py manage_docs generate --app quiz_app
+
+# Validate documentation
+python manage.py manage_docs validate
 ```
 
 ## Documentation Structure
@@ -59,6 +109,8 @@ make.bat latexpdf
 - **models.rst**: Data model documentation
 - **views.rst**: View functions documentation
 - **analytics.rst**: Data analysis and visualization documentation
+- **documentation_tools.rst**: Documentation about the documentation tools
+- **documentation_workflow.rst**: Guide for using the documentation workflow
 - **_static/**: Directory for images, diagrams and static files
 
 ## Generating Diagrams
@@ -114,4 +166,26 @@ See the :ref:`specific-section` for details.
 
 ## Theme Customization
 
-To customize the Sphinx theme, edit `conf.py` and modify the HTML theme options. 
+To customize the Sphinx theme, edit `conf.py` and modify the HTML theme options.
+
+## Custom Documentation Comments
+
+To include code comments in documentation, use these formats:
+
+### Python
+Triple-quoted docstrings are automatically extracted.
+
+### JavaScript
+```javascript
+// @doc This will be included in documentation
+```
+
+### CSS
+```css
+/** This will be included in documentation */
+```
+
+### HTML
+```html
+<!-- @doc This will be included in documentation -->
+``` 

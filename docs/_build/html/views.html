@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Views &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Forms" href="forms.html" />
+    <link rel="prev" title="Data Models" href="models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#view-flow-diagram">View Flow Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#index-view">Index View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#IndexView"><code class="docutils literal notranslate"><span class="pre">IndexView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#IndexView.template_name"><code class="docutils literal notranslate"><span class="pre">IndexView.template_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#category-list-view">Category List View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#CategoryListView"><code class="docutils literal notranslate"><span class="pre">CategoryListView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#CategoryListView.model"><code class="docutils literal notranslate"><span class="pre">CategoryListView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#CategoryListView.template_name"><code class="docutils literal notranslate"><span class="pre">CategoryListView.template_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#CategoryListView.context_object_name"><code class="docutils literal notranslate"><span class="pre">CategoryListView.context_object_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quiz-start-view">Quiz Start View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#QuizStartView"><code class="docutils literal notranslate"><span class="pre">QuizStartView</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#question-view">Question View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#QuestionView"><code class="docutils literal notranslate"><span class="pre">QuestionView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#QuestionView.template_name"><code class="docutils literal notranslate"><span class="pre">QuestionView.template_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#results-view">Results View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ResultsView"><code class="docutils literal notranslate"><span class="pre">ResultsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ResultsView.model"><code class="docutils literal notranslate"><span class="pre">ResultsView.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ResultsView.template_name"><code class="docutils literal notranslate"><span class="pre">ResultsView.template_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ResultsView.context_object_name"><code class="docutils literal notranslate"><span class="pre">ResultsView.context_object_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ResultsView.pk_url_kwarg"><code class="docutils literal notranslate"><span class="pre">ResultsView.pk_url_kwarg</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#user-stats-view">User Stats View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#UserStatsView"><code class="docutils literal notranslate"><span class="pre">UserStatsView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#UserStatsView.template_name"><code class="docutils literal notranslate"><span class="pre">UserStatsView.template_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#url-patterns">URL Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#session-management">Session Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-visualization">Data Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Views</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/views.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="views">
+<h1>Views<a class="headerlink" href="#views" title="Link to this heading"></a></h1>
+<p>This section documents the view functions and classes in the Quiz Game application.
+Views handle the HTTP requests, perform business logic, and return appropriate responses.</p>
+<section id="view-flow-diagram">
+<h2>View Flow Diagram<a class="headerlink" href="#view-flow-diagram" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="_static/view_flow_diagram.png"><img alt="View Flow Diagram" class="align-center" src="_static/view_flow_diagram.png" style="width: 600px;" /></a>
+<p>The diagram above illustrates the flow between different views in the application.</p>
+</section>
+<section id="index-view">
+<h2>Index View<a class="headerlink" href="#index-view" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="IndexView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IndexView</span></span><a class="headerlink" href="#IndexView" title="Link to this definition"></a></dt>
+<dd><p>View for the home page of the quiz application.</p>
+<p>This class-based view displays a welcome message and available quiz categories.
+It inherits from Django’s TemplateView.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="IndexView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#IndexView.template_name" title="Link to this definition"></a></dt>
+<dd><p>Path to the template used for rendering: ‘quiz_app/index.html’</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="category-list-view">
+<h2>Category List View<a class="headerlink" href="#category-list-view" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="CategoryListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CategoryListView</span></span><a class="headerlink" href="#CategoryListView" title="Link to this definition"></a></dt>
+<dd><p>View to display all available quiz categories.</p>
+<p>This class-based view inherits from Django’s ListView and displays
+a list of all categories that have at least one question.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="CategoryListView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Model</span></em><a class="headerlink" href="#CategoryListView.model" title="Link to this definition"></a></dt>
+<dd><p>The model to list: Category</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="CategoryListView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#CategoryListView.template_name" title="Link to this definition"></a></dt>
+<dd><p>Path to the template: ‘quiz_app/category_list.html’</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="CategoryListView.context_object_name">
+<span class="sig-name descname"><span class="pre">context_object_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#CategoryListView.context_object_name" title="Link to this definition"></a></dt>
+<dd><p>Name of the context variable: ‘categories’</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="quiz-start-view">
+<h2>Quiz Start View<a class="headerlink" href="#quiz-start-view" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="QuizStartView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuizStartView</span></span><a class="headerlink" href="#QuizStartView" title="Link to this definition"></a></dt>
+<dd><p>View to handle the start of a new quiz.</p>
+<p>This class-based view creates a new QuizAttempt and redirects to the first question.
+It handles the form submission from the quiz selection page.</p>
+</dd></dl>
+
+</section>
+<section id="question-view">
+<h2>Question View<a class="headerlink" href="#question-view" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="QuestionView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuestionView</span></span><a class="headerlink" href="#QuestionView" title="Link to this definition"></a></dt>
+<dd><p>View to display a quiz question and process the answer.</p>
+<p>This class-based view handles both displaying questions and processing answers.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuestionView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#QuestionView.template_name" title="Link to this definition"></a></dt>
+<dd><p>Path to the template: ‘quiz_app/question.html’</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="results-view">
+<h2>Results View<a class="headerlink" href="#results-view" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ResultsView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResultsView</span></span><a class="headerlink" href="#ResultsView" title="Link to this definition"></a></dt>
+<dd><p>View to display the results of a completed quiz.</p>
+<p>This class-based view inherits from Django’s DetailView and shows
+the score, performance charts, and answer review for a completed quiz.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ResultsView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Model</span></em><a class="headerlink" href="#ResultsView.model" title="Link to this definition"></a></dt>
+<dd><p>The model to display: QuizAttempt</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ResultsView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ResultsView.template_name" title="Link to this definition"></a></dt>
+<dd><p>Path to the template: ‘quiz_app/results.html’</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ResultsView.context_object_name">
+<span class="sig-name descname"><span class="pre">context_object_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ResultsView.context_object_name" title="Link to this definition"></a></dt>
+<dd><p>Name of the context variable: ‘quiz_attempt’</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ResultsView.pk_url_kwarg">
+<span class="sig-name descname"><span class="pre">pk_url_kwarg</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ResultsView.pk_url_kwarg" title="Link to this definition"></a></dt>
+<dd><p>Name of the URL keyword argument: ‘quiz_id’</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="user-stats-view">
+<h2>User Stats View<a class="headerlink" href="#user-stats-view" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="UserStatsView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UserStatsView</span></span><a class="headerlink" href="#UserStatsView" title="Link to this definition"></a></dt>
+<dd><p>View to display statistics and analytics for a user’s quiz history.</p>
+<p>This class-based view requires authentication and shows visualizations
+of the user’s performance across different categories and over time.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="UserStatsView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#UserStatsView.template_name" title="Link to this definition"></a></dt>
+<dd><p>Path to the template: ‘quiz_app/user_stats.html’</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="url-patterns">
+<h2>URL Patterns<a class="headerlink" href="#url-patterns" title="Link to this heading"></a></h2>
+<p>The application defines the following URL patterns:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app_name</span> <span class="o">=</span> <span class="s1">&#39;quiz&#39;</span>  <span class="c1"># Application namespace</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Home page / index view</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">IndexView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">),</span>
+
+    <span class="c1"># List of quiz categories</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;categories/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">CategoryListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;categories&#39;</span><span class="p">),</span>
+
+    <span class="c1"># Start a new quiz</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;start/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">QuizStartView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">),</span>
+
+    <span class="c1"># Answer quiz questions</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;question/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">QuestionView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;question&#39;</span><span class="p">),</span>
+
+    <span class="c1"># View quiz results</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;results/&lt;int:quiz_id&gt;/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">ResultsView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;results&#39;</span><span class="p">),</span>
+
+    <span class="c1"># User statistics dashboard</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;stats/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">UserStatsView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;user_stats&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="session-management">
+<h2>Session Management<a class="headerlink" href="#session-management" title="Link to this heading"></a></h2>
+<p>The application uses Django’s session framework to maintain quiz state:</p>
+<ul class="simple">
+<li><p><strong>quiz_questions</strong>: List of question IDs for the current quiz</p></li>
+<li><p><strong>current_question_index</strong>: Index of the current question (0-based)</p></li>
+<li><p><strong>quiz_attempt_id</strong>: ID of the current QuizAttempt</p></li>
+</ul>
+<p>These session keys are set when a quiz starts and cleared when it completes.</p>
+</section>
+<section id="data-visualization">
+<h2>Data Visualization<a class="headerlink" href="#data-visualization" title="Link to this heading"></a></h2>
+<p>The views utilize pandas, matplotlib, and seaborn for data analysis and visualization:</p>
+<ol class="arabic simple">
+<li><p>Data is retrieved from the database and converted to pandas DataFrames</p></li>
+<li><p>Analysis is performed (grouping, aggregation, statistics)</p></li>
+<li><p>Visualizations are created with matplotlib/seaborn</p></li>
+<li><p>Images are converted to base64-encoded strings for embedding in HTML</p></li>
+</ol>
+<p>This approach allows for rich data visualization without requiring JavaScript
+charting libraries on the frontend.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="models.html" class="btn btn-neutral float-left" title="Data Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="forms.html" class="btn btn-neutral float-right" title="Forms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

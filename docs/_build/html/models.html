@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Models &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Views" href="views.html" />
+    <link rel="prev" title="System Architecture" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#category-model">Category Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Category"><code class="docutils literal notranslate"><span class="pre">Category</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Category.name"><code class="docutils literal notranslate"><span class="pre">Category.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Category.description"><code class="docutils literal notranslate"><span class="pre">Category.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Category.icon"><code class="docutils literal notranslate"><span class="pre">Category.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Category.created_at"><code class="docutils literal notranslate"><span class="pre">Category.created_at</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#question-model">Question Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Question"><code class="docutils literal notranslate"><span class="pre">Question</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Question.category"><code class="docutils literal notranslate"><span class="pre">Question.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Question.text"><code class="docutils literal notranslate"><span class="pre">Question.text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Question.explanation"><code class="docutils literal notranslate"><span class="pre">Question.explanation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Question.difficulty"><code class="docutils literal notranslate"><span class="pre">Question.difficulty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Question.created_at"><code class="docutils literal notranslate"><span class="pre">Question.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Question.updated_at"><code class="docutils literal notranslate"><span class="pre">Question.updated_at</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#choice-model">Choice Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Choice"><code class="docutils literal notranslate"><span class="pre">Choice</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Choice.question"><code class="docutils literal notranslate"><span class="pre">Choice.question</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Choice.text"><code class="docutils literal notranslate"><span class="pre">Choice.text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Choice.is_correct"><code class="docutils literal notranslate"><span class="pre">Choice.is_correct</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Choice.save"><code class="docutils literal notranslate"><span class="pre">Choice.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quizattempt-model">QuizAttempt Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#QuizAttempt"><code class="docutils literal notranslate"><span class="pre">QuizAttempt</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#QuizAttempt.user"><code class="docutils literal notranslate"><span class="pre">QuizAttempt.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizAttempt.category"><code class="docutils literal notranslate"><span class="pre">QuizAttempt.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizAttempt.started_at"><code class="docutils literal notranslate"><span class="pre">QuizAttempt.started_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizAttempt.completed_at"><code class="docutils literal notranslate"><span class="pre">QuizAttempt.completed_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizAttempt.score"><code class="docutils literal notranslate"><span class="pre">QuizAttempt.score</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizAttempt.total_questions"><code class="docutils literal notranslate"><span class="pre">QuizAttempt.total_questions</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quizresponse-model">QuizResponse Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#QuizResponse"><code class="docutils literal notranslate"><span class="pre">QuizResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#QuizResponse.quiz_attempt"><code class="docutils literal notranslate"><span class="pre">QuizResponse.quiz_attempt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizResponse.question"><code class="docutils literal notranslate"><span class="pre">QuizResponse.question</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizResponse.selected_choice"><code class="docutils literal notranslate"><span class="pre">QuizResponse.selected_choice</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizResponse.is_correct"><code class="docutils literal notranslate"><span class="pre">QuizResponse.is_correct</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizResponse.response_time"><code class="docutils literal notranslate"><span class="pre">QuizResponse.response_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QuizResponse.save"><code class="docutils literal notranslate"><span class="pre">QuizResponse.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#database-schema">Database Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-relationships">Model Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-integrity-constraints">Data Integrity Constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-models">
+<h1>Data Models<a class="headerlink" href="#data-models" title="Link to this heading"></a></h1>
+<p>This section documents the database models used in the Quiz Game application.
+These models define the structure of the data stored in the database and the
+relationships between different entities.</p>
+<section id="entity-relationship-diagram">
+<h2>Entity Relationship Diagram<a class="headerlink" href="#entity-relationship-diagram" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="_static/erd_diagram.png"><img alt="Entity Relationship Diagram" class="align-center" src="_static/erd_diagram.png" style="width: 600px;" /></a>
+<p>The diagram above illustrates the relationships between the primary entities in the system.</p>
+</section>
+<section id="category-model">
+<h2>Category Model<a class="headerlink" href="#category-model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Category">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Category</span></span><a class="headerlink" href="#Category" title="Link to this definition"></a></dt>
+<dd><p>Represents a topic or subject area for quizzes.</p>
+<p>Categories organize questions into logical groups, allowing users to select
+quizzes by topics that interest them.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Category.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CharField</span></em><a class="headerlink" href="#Category.name" title="Link to this definition"></a></dt>
+<dd><p>The name of the category (e.g., “Science”, “History”, “Sports”).
+Must be unique.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Category.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">TextField</span></em><a class="headerlink" href="#Category.description" title="Link to this definition"></a></dt>
+<dd><p>A detailed description of the category.
+Optional field.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Category.icon">
+<span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CharField</span></em><a class="headerlink" href="#Category.icon" title="Link to this definition"></a></dt>
+<dd><p>CSS class for the category icon (e.g., ‘fa-science’, ‘fa-history’).
+Used for visual representation in the UI.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Category.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeField</span></em><a class="headerlink" href="#Category.created_at" title="Link to this definition"></a></dt>
+<dd><p>When the category was created.
+Automatically set when a new category is created.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="question-model">
+<h2>Question Model<a class="headerlink" href="#question-model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Question">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Question</span></span><a class="headerlink" href="#Question" title="Link to this definition"></a></dt>
+<dd><p>Represents a quiz question.</p>
+<p>Each question belongs to a category and has multiple choice answers,
+with one choice marked as correct.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Question.category">
+<span class="sig-name descname"><span class="pre">category</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ForeignKey</span> <span class="pre">to</span> <span class="pre">Category</span></em><a class="headerlink" href="#Question.category" title="Link to this definition"></a></dt>
+<dd><p>The category this question belongs to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Question.text">
+<span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">TextField</span></em><a class="headerlink" href="#Question.text" title="Link to this definition"></a></dt>
+<dd><p>The actual question text.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Question.explanation">
+<span class="sig-name descname"><span class="pre">explanation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">TextField</span></em><a class="headerlink" href="#Question.explanation" title="Link to this definition"></a></dt>
+<dd><p>Explanation of the correct answer, shown after answering.
+Optional field.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Question.difficulty">
+<span class="sig-name descname"><span class="pre">difficulty</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CharField</span></em><a class="headerlink" href="#Question.difficulty" title="Link to this definition"></a></dt>
+<dd><p>The difficulty level of the question.
+Choices: ‘easy’, ‘medium’, ‘hard’.
+Default: ‘medium’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Question.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeField</span></em><a class="headerlink" href="#Question.created_at" title="Link to this definition"></a></dt>
+<dd><p>When the question was created.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Question.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeField</span></em><a class="headerlink" href="#Question.updated_at" title="Link to this definition"></a></dt>
+<dd><p>When the question was last updated.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="choice-model">
+<h2>Choice Model<a class="headerlink" href="#choice-model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Choice">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Choice</span></span><a class="headerlink" href="#Choice" title="Link to this definition"></a></dt>
+<dd><p>Represents a possible answer for a quiz question.</p>
+<p>Each Choice is linked to a Question, and one Choice per Question
+should be marked as correct.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Choice.question">
+<span class="sig-name descname"><span class="pre">question</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ForeignKey</span> <span class="pre">to</span> <span class="pre">Question</span></em><a class="headerlink" href="#Choice.question" title="Link to this definition"></a></dt>
+<dd><p>The question this choice belongs to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Choice.text">
+<span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">CharField</span></em><a class="headerlink" href="#Choice.text" title="Link to this definition"></a></dt>
+<dd><p>The text of this answer choice.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Choice.is_correct">
+<span class="sig-name descname"><span class="pre">is_correct</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BooleanField</span></em><a class="headerlink" href="#Choice.is_correct" title="Link to this definition"></a></dt>
+<dd><p>Whether this choice is the correct answer.
+Default: False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Choice.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Choice.save" title="Link to this definition"></a></dt>
+<dd><p>Override of the save method to ensure only one choice
+per question is marked as correct.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="quizattempt-model">
+<h2>QuizAttempt Model<a class="headerlink" href="#quizattempt-model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="QuizAttempt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuizAttempt</span></span><a class="headerlink" href="#QuizAttempt" title="Link to this definition"></a></dt>
+<dd><p>Represents a user’s attempt at a quiz.</p>
+<p>Records metadata about the quiz attempt, including when it was started,
+completed, which category was selected, and the overall score.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizAttempt.user">
+<span class="sig-name descname"><span class="pre">user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ForeignKey</span> <span class="pre">to</span> <span class="pre">User</span></em><a class="headerlink" href="#QuizAttempt.user" title="Link to this definition"></a></dt>
+<dd><p>The user who took the quiz.
+Can be null for anonymous users.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizAttempt.category">
+<span class="sig-name descname"><span class="pre">category</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ForeignKey</span> <span class="pre">to</span> <span class="pre">Category</span></em><a class="headerlink" href="#QuizAttempt.category" title="Link to this definition"></a></dt>
+<dd><p>The category of questions in this quiz.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizAttempt.started_at">
+<span class="sig-name descname"><span class="pre">started_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeField</span></em><a class="headerlink" href="#QuizAttempt.started_at" title="Link to this definition"></a></dt>
+<dd><p>When the quiz attempt was started.
+Default: current time.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizAttempt.completed_at">
+<span class="sig-name descname"><span class="pre">completed_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeField</span></em><a class="headerlink" href="#QuizAttempt.completed_at" title="Link to this definition"></a></dt>
+<dd><p>When the quiz attempt was completed.
+Null if the quiz is not yet complete.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizAttempt.score">
+<span class="sig-name descname"><span class="pre">score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">IntegerField</span></em><a class="headerlink" href="#QuizAttempt.score" title="Link to this definition"></a></dt>
+<dd><p>The total score achieved.
+Default: 0.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizAttempt.total_questions">
+<span class="sig-name descname"><span class="pre">total_questions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">IntegerField</span></em><a class="headerlink" href="#QuizAttempt.total_questions" title="Link to this definition"></a></dt>
+<dd><p>The total number of questions in the quiz.
+Default: 0.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="quizresponse-model">
+<h2>QuizResponse Model<a class="headerlink" href="#quizresponse-model" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="QuizResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuizResponse</span></span><a class="headerlink" href="#QuizResponse" title="Link to this definition"></a></dt>
+<dd><p>Represents a user’s response to a single question within a quiz attempt.</p>
+<p>Tracks which question was asked, which choice was selected, and whether
+the answer was correct.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizResponse.quiz_attempt">
+<span class="sig-name descname"><span class="pre">quiz_attempt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ForeignKey</span> <span class="pre">to</span> <span class="pre">QuizAttempt</span></em><a class="headerlink" href="#QuizResponse.quiz_attempt" title="Link to this definition"></a></dt>
+<dd><p>The quiz attempt this response belongs to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizResponse.question">
+<span class="sig-name descname"><span class="pre">question</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ForeignKey</span> <span class="pre">to</span> <span class="pre">Question</span></em><a class="headerlink" href="#QuizResponse.question" title="Link to this definition"></a></dt>
+<dd><p>The question that was answered.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizResponse.selected_choice">
+<span class="sig-name descname"><span class="pre">selected_choice</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ForeignKey</span> <span class="pre">to</span> <span class="pre">Choice</span></em><a class="headerlink" href="#QuizResponse.selected_choice" title="Link to this definition"></a></dt>
+<dd><p>The choice that was selected by the user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizResponse.is_correct">
+<span class="sig-name descname"><span class="pre">is_correct</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BooleanField</span></em><a class="headerlink" href="#QuizResponse.is_correct" title="Link to this definition"></a></dt>
+<dd><p>Whether this response was correct.
+Default: False.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="QuizResponse.response_time">
+<span class="sig-name descname"><span class="pre">response_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DateTimeField</span></em><a class="headerlink" href="#QuizResponse.response_time" title="Link to this definition"></a></dt>
+<dd><p>When this question was answered.
+Auto-set when the response is created.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="QuizResponse.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#QuizResponse.save" title="Link to this definition"></a></dt>
+<dd><p>Override of the save method to automatically set is_correct
+based on whether the selected choice is correct.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="database-schema">
+<h2>Database Schema<a class="headerlink" href="#database-schema" title="Link to this heading"></a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Category Table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="ss">&quot;quiz_app_category&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;name&quot;</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;description&quot;</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;icon&quot;</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;created_at&quot;</span><span class="w"> </span><span class="n">datetime</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="c1">-- Question Table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="ss">&quot;quiz_app_question&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;text&quot;</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;explanation&quot;</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;difficulty&quot;</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;created_at&quot;</span><span class="w"> </span><span class="n">datetime</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;updated_at&quot;</span><span class="w"> </span><span class="n">datetime</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;category_id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="ss">&quot;quiz_app_category&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">DEFERRABLE</span><span class="w"> </span><span class="k">INITIALLY</span><span class="w"> </span><span class="k">DEFERRED</span>
+<span class="p">);</span>
+
+<span class="c1">-- Choice Table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="ss">&quot;quiz_app_choice&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;text&quot;</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;is_correct&quot;</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;question_id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="ss">&quot;quiz_app_question&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">DEFERRABLE</span><span class="w"> </span><span class="k">INITIALLY</span><span class="w"> </span><span class="k">DEFERRED</span>
+<span class="p">);</span>
+
+<span class="c1">-- QuizAttempt Table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="ss">&quot;quiz_app_quizattempt&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;started_at&quot;</span><span class="w"> </span><span class="n">datetime</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;completed_at&quot;</span><span class="w"> </span><span class="n">datetime</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;score&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;total_questions&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;category_id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="ss">&quot;quiz_app_category&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">DEFERRABLE</span><span class="w"> </span><span class="k">INITIALLY</span><span class="w"> </span><span class="k">DEFERRED</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;user_id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="ss">&quot;auth_user&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">DEFERRABLE</span><span class="w"> </span><span class="k">INITIALLY</span><span class="w"> </span><span class="k">DEFERRED</span>
+<span class="p">);</span>
+
+<span class="c1">-- QuizResponse Table</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="ss">&quot;quiz_app_quizresponse&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;is_correct&quot;</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;response_time&quot;</span><span class="w"> </span><span class="n">datetime</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;question_id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="ss">&quot;quiz_app_question&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">DEFERRABLE</span><span class="w"> </span><span class="k">INITIALLY</span><span class="w"> </span><span class="k">DEFERRED</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;quiz_attempt_id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="ss">&quot;quiz_app_quizattempt&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">DEFERRABLE</span><span class="w"> </span><span class="k">INITIALLY</span><span class="w"> </span><span class="k">DEFERRED</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;selected_choice_id&quot;</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="ss">&quot;quiz_app_choice&quot;</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">DEFERRABLE</span><span class="w"> </span><span class="k">INITIALLY</span><span class="w"> </span><span class="k">DEFERRED</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="model-relationships">
+<h2>Model Relationships<a class="headerlink" href="#model-relationships" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>One-to-Many</strong>:</p>
+<ul>
+<li><p>Category → Questions (one category has many questions)</p></li>
+<li><p>Question → Choices (one question has multiple choices)</p></li>
+<li><p>QuizAttempt → QuizResponses (one attempt has multiple responses)</p></li>
+<li><p>User → QuizAttempts (one user can have multiple quiz attempts)</p></li>
+</ul>
+</li>
+<li><p><strong>Many-to-One</strong>:</p>
+<ul>
+<li><p>Question → Category (many questions belong to one category)</p></li>
+<li><p>Choice → Question (many choices belong to one question)</p></li>
+<li><p>QuizResponse → QuizAttempt (many responses belong to one attempt)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="data-integrity-constraints">
+<h2>Data Integrity Constraints<a class="headerlink" href="#data-integrity-constraints" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Each Choice must belong to exactly one Question</p></li>
+<li><p>Each Question must belong to exactly one Category</p></li>
+<li><p>Only one Choice per Question can be marked as correct</p></li>
+<li><p>Each QuizResponse must have exactly one selected Choice</p></li>
+<li><p>Each QuizAttempt-Question pair can have at most one QuizResponse</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="System Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="views.html" class="btn btn-neutral float-right" title="Views" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

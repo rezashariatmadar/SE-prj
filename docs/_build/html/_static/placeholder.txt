@@ -1,0 +1,22 @@
+This directory contains static files for the documentation, including:
+
+- Images
+- Diagrams
+- Icons
+- Custom CSS
+
+To add images for the documentation:
+1. Create PNG, JPEG, or SVG files
+2. Place them in this _static directory
+3. Reference them in RST files using the relative path: _static/image_name.png
+
+Example diagrams to create:
+- architecture_diagram.png
+- erd_diagram.png
+- view_flow_diagram.png
+- quiz_game_logo.png
+- homepage_screenshot.png
+- start_quiz_screenshot.png
+- question_screenshot.png
+- results_screenshot.png
+- stats_screenshot.png 

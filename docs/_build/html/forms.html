@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forms &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analytics and Data Visualization" href="analytics.html" />
+    <link rel="prev" title="Views" href="views.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Forms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quizselectionform">QuizSelectionForm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#field-specifications">Field Specifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation-logic">Validation Logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-in-templates">Usage in Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-validation">JavaScript Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-with-views">Integration with Views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Forms</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/forms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="forms">
+<h1>Forms<a class="headerlink" href="#forms" title="Link to this heading"></a></h1>
+<p>This document details the form classes used in the Quiz Application, explaining their structure, validation logic, and usage.</p>
+<section id="quizselectionform">
+<h2>QuizSelectionForm<a class="headerlink" href="#quizselectionform" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">QuizSelectionForm</span></code> is used to start a new quiz. It allows users to select a category and specify how many questions they want to answer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">QuizSelectionForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Form for selecting a quiz category and number of questions.</span>
+
+<span class="sd">    This form allows users to choose which category of questions they want</span>
+<span class="sd">    to be quizzed on and how many questions they want in their quiz.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelChoiceField</span><span class="p">(</span>
+        <span class="n">queryset</span><span class="o">=</span><span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+        <span class="n">empty_label</span><span class="o">=</span><span class="s2">&quot;Select a category&quot;</span><span class="p">,</span>
+        <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;form-control&#39;</span><span class="p">}),</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Choose the topic you want to be quizzed on&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">num_questions</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span>
+        <span class="n">min_value</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">max_value</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">initial</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="o">.</span><span class="n">NumberInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;form-control&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="s1">&#39;20&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span>
+        <span class="p">}),</span>
+        <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Choose how many questions you want (5-20)&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<section id="field-specifications">
+<h3>Field Specifications<a class="headerlink" href="#field-specifications" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><strong>category</strong></dt><dd><p>A dropdown field that allows users to select a quiz category.</p>
+<ul class="simple">
+<li><p><strong>Type</strong>: <code class="docutils literal notranslate"><span class="pre">ModelChoiceField</span></code></p></li>
+<li><p><strong>Queryset</strong>: All <code class="docutils literal notranslate"><span class="pre">Category</span></code> objects</p></li>
+<li><p><strong>Widget</strong>: Select with Bootstrap styling</p></li>
+<li><p><strong>Help Text</strong>: “Choose the topic you want to be quizzed on”</p></li>
+</ul>
+</dd>
+<dt><strong>num_questions</strong></dt><dd><p>A number input field that allows users to specify how many questions they want in their quiz.</p>
+<ul class="simple">
+<li><p><strong>Type</strong>: <code class="docutils literal notranslate"><span class="pre">IntegerField</span></code></p></li>
+<li><p><strong>Constraints</strong>: Minimum 5, Maximum 20</p></li>
+<li><p><strong>Default Value</strong>: 10</p></li>
+<li><p><strong>Widget</strong>: NumberInput with Bootstrap styling and HTML5 attributes</p></li>
+<li><p><strong>Help Text</strong>: “Choose how many questions you want (5-20)”</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h3>
+<p>The form’s <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method customizes the category queryset to only include categories that have questions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize the form with only categories that have questions.&quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># Get categories that have at least one question</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+        <span class="n">question__isnull</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This ensures that users can only select categories that have at least one question, preventing them from starting quizzes with empty categories.</p>
+</section>
+<section id="validation-logic">
+<h3>Validation Logic<a class="headerlink" href="#validation-logic" title="Link to this heading"></a></h3>
+<p>The form implements comprehensive validation logic to ensure that user input is valid:</p>
+<ol class="arabic">
+<li><p><strong>Basic Form Validation</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">clean</span></code> method validates the overall form data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate the form data.&quot;&quot;&quot;</span>
+    <span class="n">cleaned_data</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+    <span class="n">num_questions</span> <span class="o">=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;num_questions&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">category</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="s1">&#39;Please select a category&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">num_questions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;num_questions&#39;</span><span class="p">,</span> <span class="s1">&#39;Please specify the number of questions&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">num_questions</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;num_questions&#39;</span><span class="p">,</span> <span class="s1">&#39;Number of questions must be at least 5&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">num_questions</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;num_questions&#39;</span><span class="p">,</span> <span class="s1">&#39;Number of questions must not exceed 20&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cleaned_data</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Field-Specific Validation</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">clean_num_questions</span></code> method implements additional validation for the number of questions field:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">clean_num_questions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate that the number of questions doesn&#39;t exceed available questions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+    <span class="n">num_questions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;num_questions&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">category</span> <span class="ow">and</span> <span class="n">num_questions</span><span class="p">:</span>
+        <span class="n">available_questions</span> <span class="o">=</span> <span class="n">Question</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">num_questions</span> <span class="o">&gt;</span> <span class="n">available_questions</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Only </span><span class="si">{</span><span class="n">available_questions</span><span class="si">}</span><span class="s2"> questions available in this category. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Please select a lower number.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">num_questions</span>
+</pre></div>
+</div>
+<p>This method ensures that users cannot select more questions than are available in the chosen category.</p>
+</li>
+</ol>
+</section>
+<section id="usage-in-templates">
+<h3>Usage in Templates<a class="headerlink" href="#usage-in-templates" title="Link to this heading"></a></h3>
+<p>The form is typically used in the <code class="docutils literal notranslate"><span class="pre">index.html</span></code> template:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{% url &#39;quiz:start&#39; %}&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;quiz-form&quot;</span><span class="p">&gt;</span>
+    {% csrf_token %}
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group mb-3&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;{{ form.category.id_for_label }}&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fas fa-folder me-2&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>{{ form.category.label|default:&quot;Category&quot; }}
+        <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        {{ form.category }}
+        {% if form.category.errors %}
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-danger mt-1&quot;</span><span class="p">&gt;</span>
+                {{ form.category.errors }}
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        {% endif %}
+        <span class="p">&lt;</span><span class="nt">small</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-text text-muted&quot;</span><span class="p">&gt;</span>{{ form.category.help_text }}<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group mb-3&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;{{ form.num_questions.id_for_label }}&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fas fa-question-circle me-2&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>{{ form.num_questions.label|default:&quot;Number of Questions&quot; }}
+        <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        {{ form.num_questions }}
+        {% if form.num_questions.errors %}
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-danger mt-1&quot;</span><span class="p">&gt;</span>
+                {{ form.num_questions.errors }}
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        {% endif %}
+        <span class="p">&lt;</span><span class="nt">small</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-text text-muted&quot;</span><span class="p">&gt;</span>{{ form.num_questions.help_text }}<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;d-grid&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary btn-lg&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fas fa-play me-2&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>Start Quiz
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    {% if form.non_field_errors %}
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger mt-3&quot;</span><span class="p">&gt;</span>
+            {{ form.non_field_errors }}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    {% endif %}
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="javascript-validation">
+<h3>JavaScript Validation<a class="headerlink" href="#javascript-validation" title="Link to this heading"></a></h3>
+<p>In addition to server-side validation, client-side validation is implemented using JavaScript:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#quiz-form&quot;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#{{ form.category.id_for_label }}&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">numQuestions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#{{ form.num_questions.id_for_label }}&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">isValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Reset error messages</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.text-danger&quot;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Validate category</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">category</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#{{ form.category.id_for_label }}&quot;</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;&lt;div class=&quot;text-danger mt-1&quot;&gt;Please select a category&lt;/div&gt;&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">isValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Validate number of questions</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">numQuestions</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#{{ form.num_questions.id_for_label }}&quot;</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;&lt;div class=&quot;text-danger mt-1&quot;&gt;Please enter the number of questions&lt;/div&gt;&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">isValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">numQuestions</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">5</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">20</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#{{ form.num_questions.id_for_label }}&quot;</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;&lt;div class=&quot;text-danger mt-1&quot;&gt;Number must be between 5 and 20&lt;/div&gt;&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">isValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">isValid</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This JavaScript validation provides immediate feedback to users, enhancing the overall user experience.</p>
+</section>
+<section id="integration-with-views">
+<h3>Integration with Views<a class="headerlink" href="#integration-with-views" title="Link to this heading"></a></h3>
+<p>The form is processed in the <code class="docutils literal notranslate"><span class="pre">QuizStartView</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">QuizStartView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View to handle the start of a new quiz.</span>
+
+<span class="sd">    Creates a new QuizAttempt and redirects to the first question.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle POST request with category selection.&quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">QuizSelectionForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
+            <span class="n">num_questions</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;num_questions&#39;</span><span class="p">]</span>
+
+            <span class="c1"># Create a new quiz attempt</span>
+            <span class="n">quiz_attempt</span> <span class="o">=</span> <span class="n">QuizAttempt</span><span class="p">(</span>
+                <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">,</span>
+                <span class="n">total_questions</span><span class="o">=</span><span class="n">num_questions</span>
+            <span class="p">)</span>
+            <span class="n">quiz_attempt</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+            <span class="c1"># Select random questions from the category</span>
+            <span class="n">questions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Question</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_questions</span><span class="p">:</span>
+                <span class="n">questions</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">num_questions</span><span class="p">)</span>
+
+            <span class="c1"># Store the question IDs in the session</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;quiz_questions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions</span><span class="p">]</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;current_question_index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;quiz_attempt_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">quiz_attempt</span><span class="o">.</span><span class="n">id</span>
+
+            <span class="c1"># Redirect to the first question</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;quiz:question&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If form is invalid, add error messages and render index page with the form errors</span>
+            <span class="n">categories</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+                <span class="n">num_questions</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s1">&#39;question&#39;</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">num_questions__gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;quiz_app/index.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span>
+                <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="n">categories</span><span class="p">,</span>
+                <span class="s1">&#39;form_errors&#39;</span><span class="p">:</span> <span class="kc">True</span>
+            <span class="p">})</span>
+</pre></div>
+</div>
+<p>When the form is valid, the view creates a new quiz attempt, selects random questions, and redirects to the question page. When the form is invalid, it renders the index page with error messages.</p>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h3>
+<p>The form’s validation logic is thoroughly tested in the test suite:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_quiz_selection_form_valid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test the form with valid data across the allowed range (5-20 questions).&quot;&quot;&quot;</span>
+    <span class="c1"># Test minimum number of questions (5)</span>
+    <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="s1">&#39;num_questions&#39;</span><span class="p">:</span> <span class="mi">5</span>
+    <span class="p">}</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">QuizSelectionForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Form errors for 5 questions: </span><span class="si">{</span><span class="n">form</span><span class="o">.</span><span class="n">errors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test middle range (10 questions)</span>
+    <span class="n">form_data</span><span class="p">[</span><span class="s1">&#39;num_questions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">QuizSelectionForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Form errors for 10 questions: </span><span class="si">{</span><span class="n">form</span><span class="o">.</span><span class="n">errors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test maximum number of questions (20)</span>
+    <span class="n">form_data</span><span class="p">[</span><span class="s1">&#39;num_questions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">QuizSelectionForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Form errors for 20 questions: </span><span class="si">{</span><span class="n">form</span><span class="o">.</span><span class="n">errors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Tests are implemented for valid inputs, invalid inputs, edge cases, and error handling.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">QuizSelectionForm</span></code> plays a vital role in the Quiz Application, providing a user-friendly interface for starting new quizzes. Its comprehensive validation logic ensures that users can only select valid options, enhancing the overall user experience and preventing errors during quiz creation.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="views.html" class="btn btn-neutral float-left" title="Views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="analytics.html" class="btn btn-neutral float-right" title="Analytics and Data Visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

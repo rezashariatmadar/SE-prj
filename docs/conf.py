@@ -32,6 +32,7 @@ extensions = [
     'sphinx.ext.coverage',         # Check documentation coverage
     'sphinx.ext.mathjax',          # Render math via MathJax
     'sphinx_rtd_theme',            # Read the Docs theme
+    'docxbuilder',                 # Docx builder
 ]
 
 templates_path = ['_templates']
