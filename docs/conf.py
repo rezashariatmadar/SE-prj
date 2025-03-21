@@ -33,6 +33,7 @@ extensions = [
     'sphinx.ext.mathjax',          # Render math via MathJax
     'sphinx_rtd_theme',            # Read the Docs theme
     'docxbuilder',                 # Docx builder
+    'rst2pdf.pdfbuilder',          # PDF builder
 ]
 
 templates_path = ['_templates']
@@ -72,4 +73,19 @@ napoleon_use_keyword = True
 napoleon_custom_sections = None
 
 # Options for todo extension
-todo_include_todos = True 
+todo_include_todos = True
+
+# Options for PDF output
+pdf_documents = [(
+    'index',
+    'quiz_game_documentation',
+    'Quiz Game Documentation',
+    'Your Name'
+)]
+pdf_stylesheets = ['sphinx', 'a4']
+pdf_language = 'en_US'
+pdf_fit_mode = "shrink"
+pdf_break_level = 0
+pdf_verbosity = 0
+pdf_use_index = True
+pdf_use_modindex = True 

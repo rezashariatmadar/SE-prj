@@ -1,7 +1,7 @@
 Code Comments Documentation
 ========================
 
-Last updated: 2025-03-20
+Last updated: 2025-03-21
 
 This document contains documentation extracted from comments in the source code.
 
@@ -44,6 +44,8 @@ Return a shortened version of the question text.
 
 Return a shortened version of the selected choice text.
 
+Admin interface for the UserProfile model.
+
 
 quiz_app\forms.py
 -----------------
@@ -76,6 +78,7 @@ This module defines the database models used in the quiz application:
 - Choice: Possible answers for a question
 - QuizAttempt: Record of a user's quiz attempt
 - QuizResponse: Individual answers within a quiz attempt
+- UserProfile: Extended user information
 
 Represents a quiz category or topic.
     
@@ -131,6 +134,21 @@ Represents a user's response to a single question within a quiz attempt.
 String representation of the quiz response.
 
 Override save method to automatically set is_correct based on the selected choice.
+
+Extends the built-in User model with additional profile information.
+    
+    This model is connected to the User model with a one-to-one relationship
+    and is automatically created/updated when the User model is saved.
+
+String representation of the user profile.
+
+Return the total number of quizzes completed by the user.
+
+Return the user's average score across all quizzes.
+
+Create a UserProfile instance when a User is created.
+
+Update the UserProfile when the User is updated.
 
 
 quiz_app\tests.py
@@ -281,6 +299,15 @@ View to display statistics and analytics for a user's quiz history.
     across different categories and over time.
 
 Add user statistics to the context.
+
+View to display and update user profile information.
+    
+    This view handles both displaying the user's profile and updating it
+    when the form is submitted. Requires the user to be logged in.
+
+Return the current user's profile.
+
+Add additional context data for the profile template.
 
 
 quiz_app\__init__.py
@@ -647,6 +674,29 @@ Validate all documentation files.
 Validate a single documentation file.
 
 Update index.rst to include or remove a file.
+
+
+quiz_app\management\commands\populate_questions.py
+--------------------------------------------------
+
+Management command to populate the database with quiz questions.
+
+This command generates a specified number of quiz questions for each category in the database.
+It creates varied question content and randomizes the correct answers to avoid predictable patterns.
+
+Command to populate quiz questions.
+
+Add command arguments.
+
+Execute the command.
+
+Generate questions for a specific category.
+
+Generate question text from a template.
+
+Generate choices for a question, with randomized correct answer position.
+
+Get question templates for a specific category.
 
 
 quiz_app\tests\test_forms.py

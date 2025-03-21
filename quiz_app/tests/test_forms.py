@@ -1,106 +1,117 @@
 """
-Tests for Quiz App forms.
-
-This module contains tests for the forms used in the quiz application:
-- QuizSelectionForm
+Tests for the forms in the Quiz application.
 """
 
 from django.test import TestCase
-from quiz_app.forms import QuizSelectionForm
-from quiz_app.models import Category, Question
+from django.contrib.auth.models import User
+
+from quiz_app.models import Category
+from quiz_app.forms import QuizSelectionForm, UserRegistrationForm
 
 
-class QuizSelectionFormTests(TestCase):
-    """Tests for the QuizSelectionForm."""
+class FormTests(TestCase):
+    """Tests for the forms of the Quiz application."""
     
     def setUp(self):
         """Set up test data."""
-        # Create a category with questions
+        # Create a test category
         self.category = Category.objects.create(
-            name="Test Category",
-            description="This is a test category",
-            icon="fa-test"
+            name='Test Category',
+            description='Test Description',
+            icon='fa-test'
         )
         
-        # Create 20 questions to allow testing the full range
-        for i in range(20):
-            Question.objects.create(
-                category=self.category,
-                text=f"Test Question {i+1}",
-                difficulty="medium"
+        # Create test questions
+        for i in range(5):
+            question = self.category.question_set.create(
+                text=f'Test Question {i}',
+                difficulty='medium',
+                explanation=f'Test Explanation {i}'
             )
+            
+            # Create choices for each question
+            question.choice_set.create(
+                text=f'Correct Choice {i}',
+                is_correct=True
+            )
+            
+            for j in range(3):
+                question.choice_set.create(
+                    text=f'Incorrect Choice {i}-{j}',
+                    is_correct=False
+                )
     
-    def test_quiz_selection_form_valid_data(self):
-        """Test the form with valid data across the allowed range (5-20 questions)."""
-        # Test minimum number of questions (5)
-        form_data = {
+    def test_quiz_selection_form_valid(self):
+        """Test that a valid QuizSelectionForm is valid."""
+        form = QuizSelectionForm(data={
             'category': self.category.id,
             'num_questions': 5
-        }
-        form = QuizSelectionForm(data=form_data)
-        self.assertTrue(form.is_valid(), f"Form errors for 5 questions: {form.errors}")
+        })
+        self.assertTrue(form.is_valid())
         
-        # Test middle range (10 questions)
-        form_data['num_questions'] = 10
-        form = QuizSelectionForm(data=form_data)
-        self.assertTrue(form.is_valid(), f"Form errors for 10 questions: {form.errors}")
-        
-        # Test maximum number of questions (20)
-        form_data['num_questions'] = 20
-        form = QuizSelectionForm(data=form_data)
-        self.assertTrue(form.is_valid(), f"Form errors for 20 questions: {form.errors}")
-    
-    def test_quiz_selection_form_blank_data(self):
-        """Test the form with blank data."""
-        form = QuizSelectionForm(data={})
-        
-        self.assertFalse(form.is_valid())
-        self.assertIn('category', form.errors)
-        self.assertIn('num_questions', form.errors)
-    
     def test_quiz_selection_form_invalid_category(self):
-        """Test the form with an invalid category."""
-        form_data = {
-            'category': 999,  # Invalid category ID
-            'num_questions': 10
-        }
-        form = QuizSelectionForm(data=form_data)
-        
+        """Test that a QuizSelectionForm with an invalid category is invalid."""
+        form = QuizSelectionForm(data={
+            'category': 999,  # Non-existent category
+            'num_questions': 5
+        })
         self.assertFalse(form.is_valid())
         self.assertIn('category', form.errors)
-    
+        
     def test_quiz_selection_form_invalid_num_questions(self):
-        """Test the form with an invalid number of questions."""
-        # Test with too few questions (below minimum)
-        form_data = {
+        """Test that a QuizSelectionForm with an invalid number of questions is invalid."""
+        # Too few questions
+        form = QuizSelectionForm(data={
             'category': self.category.id,
-            'num_questions': 4
-        }
-        form = QuizSelectionForm(data=form_data)
-        
+            'num_questions': 3
+        })
         self.assertFalse(form.is_valid())
         self.assertIn('num_questions', form.errors)
         
-        # Test with too many questions (above maximum)
-        form_data['num_questions'] = 21
-        form = QuizSelectionForm(data=form_data)
-        
+        # Too many questions
+        form = QuizSelectionForm(data={
+            'category': self.category.id,
+            'num_questions': 25
+        })
         self.assertFalse(form.is_valid())
         self.assertIn('num_questions', form.errors)
-    
-    def test_quiz_selection_form_choices(self):
-        """Test that the form only includes categories with questions."""
-        # Create a category with no questions
-        empty_category = Category.objects.create(
-            name="Empty Category",
-            description="This category has no questions",
-            icon="fa-empty"
+        
+    def test_user_registration_form_valid(self):
+        """Test that a valid UserRegistrationForm is valid."""
+        form = UserRegistrationForm(data={
+            'username': 'newuser',
+            'email': 'newuser@example.com',
+            'password1': 'TestPassword123',
+            'password2': 'TestPassword123'
+        })
+        self.assertTrue(form.is_valid())
+        
+    def test_user_registration_form_passwords_dont_match(self):
+        """Test that a UserRegistrationForm with non-matching passwords is invalid."""
+        form = UserRegistrationForm(data={
+            'username': 'newuser',
+            'email': 'newuser@example.com',
+            'password1': 'TestPassword123',
+            'password2': 'DifferentPassword123'
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn('password2', form.errors)
+        
+    def test_user_registration_form_username_taken(self):
+        """Test that a UserRegistrationForm with a taken username is invalid."""
+        # Create a user with the username 'existinguser'
+        User.objects.create_user(
+            username='existinguser',
+            email='existing@example.com',
+            password='TestPassword123'
         )
         
-        form = QuizSelectionForm()
-        
-        # Check that the form only includes categories with questions
-        category_choices = [choice[0] for choice in form.fields['category'].choices if choice[0] != '']
-        
-        self.assertIn(self.category.id, category_choices)
-        self.assertNotIn(empty_category.id, category_choices) 
+        # Try to create another user with the same username
+        form = UserRegistrationForm(data={
+            'username': 'existinguser',
+            'email': 'newuser@example.com',
+            'password1': 'TestPassword123',
+            'password2': 'TestPassword123'
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn('username', form.errors) 

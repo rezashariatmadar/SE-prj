@@ -6,7 +6,54 @@ including quiz selection and customization.
 """
 
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Category, Question
+
+
+class UserRegistrationForm(UserCreationForm):
+    """
+    Form for user registration with extended fields.
+    
+    This form extends Django's UserCreationForm to include additional fields
+    like email, first name, and last name for a more complete user profile.
+    """
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={'class': 'form-control'}),
+        help_text="Required. Enter a valid email address."
+    )
+    first_name = forms.CharField(
+        max_length=30, 
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        help_text="Optional. Enter your first name."
+    )
+    last_name = forms.CharField(
+        max_length=30, 
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        help_text="Optional. Enter your last name."
+    )
+    
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        
+    def __init__(self, *args, **kwargs):
+        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+        # Add Bootstrap classes to all fields
+        for field_name in self.fields:
+            self.fields[field_name].widget.attrs.update({'class': 'form-control'})
+            
+    def save(self, commit=True):
+        user = super(UserRegistrationForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        if commit:
+            user.save()
+        return user
 
 
 class QuizSelectionForm(forms.Form):

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Code Comments Documentation &mdash; Quiz Game Documentation</title>
@@ -81,7 +81,7 @@
              
   <section id="code-comments-documentation">
 <h1>Code Comments Documentation<a class="headerlink" href="#code-comments-documentation" title="Link to this heading"></a></h1>
-<p>Last updated: 2025-03-20</p>
+<p>Last updated: 2025-03-21</p>
 <p>This document contains documentation extracted from comments in the source code.</p>
 <section id="quiz-appadmin-py">
 <h2>quiz_appadmin.py<a class="headerlink" href="#quiz-appadmin-py" title="Link to this heading"></a></h2>
@@ -109,6 +109,7 @@ and customizes their admin interfaces for better usability.</p>
 <p>Admin interface for the QuizResponse model.</p>
 <p>Return a shortened version of the question text.</p>
 <p>Return a shortened version of the selected choice text.</p>
+<p>Admin interface for the UserProfile model.</p>
 </section>
 <section id="quiz-appforms-py">
 <h2>quiz_appforms.py<a class="headerlink" href="#quiz-appforms-py" title="Link to this heading"></a></h2>
@@ -132,7 +133,8 @@ to be quizzed on and how many questions they want in their quiz.</p>
 - Question: Individual quiz questions
 - Choice: Possible answers for a question
 - QuizAttempt: Record of a user’s quiz attempt
-- QuizResponse: Individual answers within a quiz attempt</p>
+- QuizResponse: Individual answers within a quiz attempt
+- UserProfile: Extended user information</p>
 <p>Represents a quiz category or topic.</p>
 <blockquote>
 <div><p>Categories are used to organize questions into logical groups,
@@ -182,6 +184,16 @@ the answer was correct.</p>
 </div></blockquote>
 <p>String representation of the quiz response.</p>
 <p>Override save method to automatically set is_correct based on the selected choice.</p>
+<p>Extends the built-in User model with additional profile information.</p>
+<blockquote>
+<div><p>This model is connected to the User model with a one-to-one relationship
+and is automatically created/updated when the User model is saved.</p>
+</div></blockquote>
+<p>String representation of the user profile.</p>
+<p>Return the total number of quizzes completed by the user.</p>
+<p>Return the user’s average score across all quizzes.</p>
+<p>Create a UserProfile instance when a User is created.</p>
+<p>Update the UserProfile when the User is updated.</p>
 </section>
 <section id="quiz-apptests-py">
 <h2>quiz_apptests.py<a class="headerlink" href="#quiz-apptests-py" title="Link to this heading"></a></h2>
@@ -268,6 +280,13 @@ and return appropriate responses for the quiz application.</p>
 across different categories and over time.</p>
 </div></blockquote>
 <p>Add user statistics to the context.</p>
+<p>View to display and update user profile information.</p>
+<blockquote>
+<div><p>This view handles both displaying the user’s profile and updating it
+when the form is submitted. Requires the user to be logged in.</p>
+</div></blockquote>
+<p>Return the current user’s profile.</p>
+<p>Add additional context data for the profile template.</p>
 </section>
 <section id="quiz-app-init-py">
 <h2>quiz_app__init__.py<a class="headerlink" href="#quiz-app-init-py" title="Link to this heading"></a></h2>
@@ -535,6 +554,19 @@ for testing and demonstration purposes.</p>
 <p>Validate all documentation files.</p>
 <p>Validate a single documentation file.</p>
 <p>Update index.rst to include or remove a file.</p>
+</section>
+<section id="quiz-appmanagementcommandspopulate-questions-py">
+<h2>quiz_appmanagementcommandspopulate_questions.py<a class="headerlink" href="#quiz-appmanagementcommandspopulate-questions-py" title="Link to this heading"></a></h2>
+<p>Management command to populate the database with quiz questions.</p>
+<p>This command generates a specified number of quiz questions for each category in the database.
+It creates varied question content and randomizes the correct answers to avoid predictable patterns.</p>
+<p>Command to populate quiz questions.</p>
+<p>Add command arguments.</p>
+<p>Execute the command.</p>
+<p>Generate questions for a specific category.</p>
+<p>Generate question text from a template.</p>
+<p>Generate choices for a question, with randomized correct answer position.</p>
+<p>Get question templates for a specific category.</p>
 </section>
 <section id="quiz-appteststest-forms-py">
 <h2>quiz_appteststest_forms.py<a class="headerlink" href="#quiz-appteststest-forms-py" title="Link to this heading"></a></h2>

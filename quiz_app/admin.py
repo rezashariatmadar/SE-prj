@@ -6,7 +6,7 @@ and customizes their admin interfaces for better usability.
 """
 
 from django.contrib import admin
-from .models import Category, Question, Choice, QuizAttempt, QuizResponse
+from .models import Category, Question, Choice, QuizAttempt, QuizResponse, UserProfile
 
 
 class ChoiceInline(admin.TabularInline):
@@ -112,4 +112,16 @@ class QuizResponseAdmin(admin.ModelAdmin):
         """Return a shortened version of the selected choice text."""
         max_length = 30
         return (obj.selected_choice.text[:max_length] + '...') if len(obj.selected_choice.text) > max_length else obj.selected_choice.text
-    selected_choice_short.short_description = 'Selected Choice' 
+    selected_choice_short.short_description = 'Selected Choice'
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the UserProfile model.
+    """
+    list_display = ['user', 'favorite_category', 'date_of_birth', 'created_at', 'updated_at']
+    list_filter = ['favorite_category', 'created_at']
+    search_fields = ['user__username', 'user__email', 'bio']
+    raw_id_fields = ['user', 'favorite_category']
+    date_hierarchy = 'created_at' 

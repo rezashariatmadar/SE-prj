@@ -8,232 +8,37 @@ relationships between different entities.
 Entity Relationship Diagram
 --------------------------
 
-.. image:: _static/erd_diagram.png
+The following diagram illustrates the relationships between the different models in the Quiz Game application:
+
+.. image:: _static/erd_diagram_matplotlib.png
    :alt: Entity Relationship Diagram
    :align: center
-   :width: 600px
+   :width: 100%
 
-The diagram above illustrates the relationships between the primary entities in the system.
+Updated Entity Relationship Diagram
+----------------------------------
 
-Category Model
--------------
+Below is an improved version of the Entity Relationship Diagram showing all models and their relationships:
 
-.. py:class:: Category
+.. image:: _static/updated_erd_diagram.png
+   :alt: Updated Entity Relationship Diagram
+   :align: center
+   :width: 100%
 
-   Represents a topic or subject area for quizzes.
-   
-   Categories organize questions into logical groups, allowing users to select
-   quizzes by topics that interest them.
+Entity Relationship Description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   .. py:attribute:: name
-      :type: CharField
-      
-      The name of the category (e.g., "Science", "History", "Sports").
-      Must be unique.
+* **User to UserProfile**: One-to-one relationship. Each User has exactly one UserProfile.
+* **User to QuizAttempt**: One-to-many relationship. A User can have multiple QuizAttempts.
+* **Category to Question**: One-to-many relationship. A Category contains multiple Questions.
+* **Category to QuizAttempt**: One-to-many relationship. A Category can have multiple QuizAttempts.
+* **Category to UserProfile**: One-to-many relationship. A Category can be the favorite of multiple UserProfiles.
+* **Question to Choice**: One-to-many relationship. A Question has multiple Choices.
+* **Question to QuizResponse**: One-to-many relationship. A Question can have multiple QuizResponses.
+* **QuizAttempt to QuizResponse**: One-to-many relationship. A QuizAttempt contains multiple QuizResponses.
+* **Choice to QuizResponse**: One-to-many relationship. A Choice can be selected in multiple QuizResponses.
 
-   .. py:attribute:: description
-      :type: TextField
-      
-      A detailed description of the category.
-      Optional field.
-
-   .. py:attribute:: icon
-      :type: CharField
-      
-      CSS class for the category icon (e.g., 'fa-science', 'fa-history').
-      Used for visual representation in the UI.
-
-   .. py:attribute:: created_at
-      :type: DateTimeField
-      
-      When the category was created.
-      Automatically set when a new category is created.
-
-   .. py:method:: question_count()
-      :return: int
-      
-      Returns the number of questions in this category.
-
-Question Model
--------------
-
-.. py:class:: Question
-
-   Represents a quiz question.
-   
-   Each question belongs to a category and has multiple choice answers,
-   with one choice marked as correct.
-
-   .. py:attribute:: category
-      :type: ForeignKey to Category
-      
-      The category this question belongs to.
-
-   .. py:attribute:: text
-      :type: TextField
-      
-      The actual question text.
-
-   .. py:attribute:: explanation
-      :type: TextField
-      
-      Explanation of the correct answer, shown after answering.
-      Optional field.
-
-   .. py:attribute:: difficulty
-      :type: CharField
-      
-      The difficulty level of the question.
-      Choices: 'easy', 'medium', 'hard'.
-      Default: 'medium'.
-
-   .. py:attribute:: created_at
-      :type: DateTimeField
-      
-      When the question was created.
-
-   .. py:attribute:: updated_at
-      :type: DateTimeField
-      
-      When the question was last updated.
-
-   .. py:method:: correct_choice()
-      :return: Choice or None
-      
-      Returns the correct choice for this question.
-
-Choice Model
------------
-
-.. py:class:: Choice
-
-   Represents a possible answer for a quiz question.
-   
-   Each Choice is linked to a Question, and one Choice per Question
-   should be marked as correct.
-
-   .. py:attribute:: question
-      :type: ForeignKey to Question
-      
-      The question this choice belongs to.
-
-   .. py:attribute:: text
-      :type: CharField
-      
-      The text of this answer choice.
-
-   .. py:attribute:: is_correct
-      :type: BooleanField
-      
-      Whether this choice is the correct answer.
-      Default: False.
-
-   .. py:method:: save(*args, **kwargs)
-      
-      Override of the save method to ensure only one choice
-      per question is marked as correct.
-
-QuizAttempt Model
----------------
-
-.. py:class:: QuizAttempt
-
-   Represents a user's attempt at a quiz.
-   
-   Records metadata about the quiz attempt, including when it was started,
-   completed, which category was selected, and the overall score.
-
-   .. py:attribute:: user
-      :type: ForeignKey to User
-      
-      The user who took the quiz.
-      Can be null for anonymous users.
-
-   .. py:attribute:: category
-      :type: ForeignKey to Category
-      
-      The category of questions in this quiz.
-
-   .. py:attribute:: started_at
-      :type: DateTimeField
-      
-      When the quiz attempt was started.
-      Default: current time.
-
-   .. py:attribute:: completed_at
-      :type: DateTimeField
-      
-      When the quiz attempt was completed.
-      Null if the quiz is not yet complete.
-
-   .. py:attribute:: score
-      :type: IntegerField
-      
-      The total score achieved.
-      Default: 0.
-
-   .. py:attribute:: total_questions
-      :type: IntegerField
-      
-      The total number of questions in the quiz.
-      Default: 0.
-
-   .. py:method:: is_complete()
-      :return: bool
-      
-      Returns whether the quiz attempt has been completed.
-
-   .. py:method:: calculate_score()
-      :return: int
-      
-      Calculates and updates the score based on correct responses.
-
-   .. py:method:: score_percentage()
-      :return: float
-      
-      Returns the score as a percentage (0-100).
-
-QuizResponse Model
-----------------
-
-.. py:class:: QuizResponse
-
-   Represents a user's response to a single question within a quiz attempt.
-   
-   Tracks which question was asked, which choice was selected, and whether
-   the answer was correct.
-
-   .. py:attribute:: quiz_attempt
-      :type: ForeignKey to QuizAttempt
-      
-      The quiz attempt this response belongs to.
-
-   .. py:attribute:: question
-      :type: ForeignKey to Question
-      
-      The question that was answered.
-
-   .. py:attribute:: selected_choice
-      :type: ForeignKey to Choice
-      
-      The choice that was selected by the user.
-
-   .. py:attribute:: is_correct
-      :type: BooleanField
-      
-      Whether this response was correct.
-      Default: False.
-
-   .. py:attribute:: response_time
-      :type: DateTimeField
-      
-      When this question was answered.
-      Auto-set when the response is created.
-
-   .. py:method:: save(*args, **kwargs)
-      
-      Override of the save method to automatically set is_correct
-      based on whether the selected choice is correct.
+For a detailed description of each model and its fields, see the model documentation above. For a full database schema, see below.
 
 Database Schema
 --------------

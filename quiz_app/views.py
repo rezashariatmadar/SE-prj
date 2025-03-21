@@ -8,19 +8,21 @@ and return appropriate responses for the quiz application.
 import random
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.db.models import Count, Avg, Max, Min
 from django.http import JsonResponse
+from django.urls import reverse_lazy, reverse
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
 import base64
+from django.contrib import messages
 
-from .models import Category, Question, Choice, QuizAttempt, QuizResponse
-from .forms import QuizSelectionForm
+from .models import Category, Question, Choice, QuizAttempt, QuizResponse, UserProfile
+from .forms import QuizSelectionForm, UserRegistrationForm
 
 
 class IndexView(TemplateView):
@@ -318,3 +320,68 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             context['best_category'] = category_perf.index[0] if not category_perf.empty else None
             
         return context 
+
+
+class UserProfileView(LoginRequiredMixin, UpdateView):
+    """
+    View to display and update user profile information.
+    
+    This view handles both displaying the user's profile and updating it
+    when the form is submitted. Requires the user to be logged in.
+    """
+    model = UserProfile
+    template_name = 'quiz_app/user_profile.html'
+    fields = ['bio', 'avatar', 'favorite_category', 'date_of_birth']
+    success_url = reverse_lazy('quiz:profile')
+    
+    def get_object(self, queryset=None):
+        """Return the current user's profile."""
+        return self.request.user.profile
+    
+    def get_context_data(self, **kwargs):
+        """Add additional context data for the profile template."""
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        
+        # Get quiz statistics
+        completed_quizzes = QuizAttempt.objects.filter(
+            user=user,
+            completed_at__isnull=False
+        ).select_related('category')
+        
+        context.update({
+            'completed_quizzes': completed_quizzes,
+            'quiz_count': completed_quizzes.count(),
+            'recent_quizzes': completed_quizzes[:5],  # Last 5 quizzes
+        })
+        
+        return context
+
+
+class RegisterView(CreateView):
+    """
+    View for user registration.
+    
+    This view handles the registration of new users, including form validation
+    and user creation. On successful registration, it automatically creates a 
+    UserProfile for the new user and redirects to the login page.
+    """
+    template_name = 'registration/register.html'
+    form_class = UserRegistrationForm
+    success_url = reverse_lazy('login')
+    
+    def form_valid(self, form):
+        # Create the user
+        response = super().form_valid(form)
+        user = self.object
+        
+        # Create UserProfile for the new user
+        UserProfile.objects.create(user=user)
+        
+        # Add success message
+        messages.success(
+            self.request, 
+            "Your account has been created successfully! You can now log in."
+        )
+        
+        return response 

@@ -64,7 +64,7 @@
 
 
 \title{Quiz Game}
-\date{Mar 20, 2025}
+\date{Mar 21, 2025}
 \release{1.0.0}
 \author{Your Name}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -1502,434 +1502,54 @@ relationships between different entities.
 
 \subsection{Entity Relationship Diagram}
 \label{\detokenize{models:entity-relationship-diagram}}
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{_static/erd_diagram}.png}\hspace*{\fill}}
+\sphinxAtStartPar
+The following diagram illustrates the relationships between the different models in the Quiz Game application:
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=1.000\linewidth]{{erd_diagram_matplotlib}.png}\hspace*{\fill}}
+
+
+\subsubsection{Entity Relationship Description}
+\label{\detokenize{models:entity-relationship-description}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{User to UserProfile}: One\sphinxhyphen{}to\sphinxhyphen{}one relationship. Each User has exactly one UserProfile.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{User to QuizAttempt}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A User can have multiple QuizAttempts.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Category to Question}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A Category contains multiple Questions.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Category to QuizAttempt}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A Category can have multiple QuizAttempts.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Category to UserProfile}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A Category can be the favorite of multiple UserProfiles.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Question to Choice}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A Question has multiple Choices.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Question to QuizResponse}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A Question can have multiple QuizResponses.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{QuizAttempt to QuizResponse}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A QuizAttempt contains multiple QuizResponses.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Choice to QuizResponse}: One\sphinxhyphen{}to\sphinxhyphen{}many relationship. A Choice can be selected in multiple QuizResponses.
+
+\end{itemize}
 
 \sphinxAtStartPar
-The diagram above illustrates the relationships between the primary entities in the system.
-
-
-\subsection{Category Model}
-\label{\detokenize{models:category-model}}\index{Category (built\sphinxhyphen{}in class)@\spxentry{Category}\spxextra{built\sphinxhyphen{}in class}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Category}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{Category}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Represents a topic or subject area for quizzes.
-
-\sphinxAtStartPar
-Categories organize questions into logical groups, allowing users to select
-quizzes by topics that interest them.
-\index{name (Category attribute)@\spxentry{name}\spxextra{Category attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Category.name}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }CharField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The name of the category (e.g., “Science”, “History”, “Sports”).
-Must be unique.
-
-\end{fulllineitems}
-
-\index{description (Category attribute)@\spxentry{description}\spxextra{Category attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Category.description}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{description}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }TextField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-A detailed description of the category.
-Optional field.
-
-\end{fulllineitems}
-
-\index{icon (Category attribute)@\spxentry{icon}\spxextra{Category attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Category.icon}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{icon}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }CharField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-CSS class for the category icon (e.g., ‘fa\sphinxhyphen{}science’, ‘fa\sphinxhyphen{}history’).
-Used for visual representation in the UI.
-
-\end{fulllineitems}
-
-\index{created\_at (Category attribute)@\spxentry{created\_at}\spxextra{Category attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Category.created_at}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{created\_at}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }DateTimeField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-When the category was created.
-Automatically set when a new category is created.
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{Question Model}
-\label{\detokenize{models:question-model}}\index{Question (built\sphinxhyphen{}in class)@\spxentry{Question}\spxextra{built\sphinxhyphen{}in class}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Question}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{Question}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Represents a quiz question.
-
-\sphinxAtStartPar
-Each question belongs to a category and has multiple choice answers,
-with one choice marked as correct.
-\index{category (Question attribute)@\spxentry{category}\spxextra{Question attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Question.category}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{category}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }ForeignKey to Category}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The category this question belongs to.
-
-\end{fulllineitems}
-
-\index{text (Question attribute)@\spxentry{text}\spxextra{Question attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Question.text}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{text}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }TextField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The actual question text.
-
-\end{fulllineitems}
-
-\index{explanation (Question attribute)@\spxentry{explanation}\spxextra{Question attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Question.explanation}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{explanation}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }TextField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Explanation of the correct answer, shown after answering.
-Optional field.
-
-\end{fulllineitems}
-
-\index{difficulty (Question attribute)@\spxentry{difficulty}\spxextra{Question attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Question.difficulty}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{difficulty}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }CharField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The difficulty level of the question.
-Choices: ‘easy’, ‘medium’, ‘hard’.
-Default: ‘medium’.
-
-\end{fulllineitems}
-
-\index{created\_at (Question attribute)@\spxentry{created\_at}\spxextra{Question attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Question.created_at}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{created\_at}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }DateTimeField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-When the question was created.
-
-\end{fulllineitems}
-
-\index{updated\_at (Question attribute)@\spxentry{updated\_at}\spxextra{Question attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Question.updated_at}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{updated\_at}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }DateTimeField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-When the question was last updated.
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{Choice Model}
-\label{\detokenize{models:choice-model}}\index{Choice (built\sphinxhyphen{}in class)@\spxentry{Choice}\spxextra{built\sphinxhyphen{}in class}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Choice}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{Choice}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Represents a possible answer for a quiz question.
-
-\sphinxAtStartPar
-Each Choice is linked to a Question, and one Choice per Question
-should be marked as correct.
-\index{question (Choice attribute)@\spxentry{question}\spxextra{Choice attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Choice.question}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{question}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }ForeignKey to Question}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The question this choice belongs to.
-
-\end{fulllineitems}
-
-\index{text (Choice attribute)@\spxentry{text}\spxextra{Choice attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Choice.text}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{text}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }CharField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The text of this answer choice.
-
-\end{fulllineitems}
-
-\index{is\_correct (Choice attribute)@\spxentry{is\_correct}\spxextra{Choice attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Choice.is_correct}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{is\_correct}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }BooleanField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Whether this choice is the correct answer.
-Default: False.
-
-\end{fulllineitems}
-
-\index{save() (Choice method)@\spxentry{save()}\spxextra{Choice method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Choice.save}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{save}}}{\sphinxparam{\DUrole{o}{*}\DUrole{n}{args}}\sphinxparamcomma \sphinxparam{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Override of the save method to ensure only one choice
-per question is marked as correct.
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{QuizAttempt Model}
-\label{\detokenize{models:quizattempt-model}}\index{QuizAttempt (built\sphinxhyphen{}in class)@\spxentry{QuizAttempt}\spxextra{built\sphinxhyphen{}in class}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizAttempt}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{QuizAttempt}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Represents a user’s attempt at a quiz.
-
-\sphinxAtStartPar
-Records metadata about the quiz attempt, including when it was started,
-completed, which category was selected, and the overall score.
-\index{user (QuizAttempt attribute)@\spxentry{user}\spxextra{QuizAttempt attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizAttempt.user}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{user}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }ForeignKey to User}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The user who took the quiz.
-Can be null for anonymous users.
-
-\end{fulllineitems}
-
-\index{category (QuizAttempt attribute)@\spxentry{category}\spxextra{QuizAttempt attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizAttempt.category}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{category}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }ForeignKey to Category}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The category of questions in this quiz.
-
-\end{fulllineitems}
-
-\index{started\_at (QuizAttempt attribute)@\spxentry{started\_at}\spxextra{QuizAttempt attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizAttempt.started_at}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{started\_at}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }DateTimeField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-When the quiz attempt was started.
-Default: current time.
-
-\end{fulllineitems}
-
-\index{completed\_at (QuizAttempt attribute)@\spxentry{completed\_at}\spxextra{QuizAttempt attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizAttempt.completed_at}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{completed\_at}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }DateTimeField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-When the quiz attempt was completed.
-Null if the quiz is not yet complete.
-
-\end{fulllineitems}
-
-\index{score (QuizAttempt attribute)@\spxentry{score}\spxextra{QuizAttempt attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizAttempt.score}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{score}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }IntegerField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The total score achieved.
-Default: 0.
-
-\end{fulllineitems}
-
-\index{total\_questions (QuizAttempt attribute)@\spxentry{total\_questions}\spxextra{QuizAttempt attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizAttempt.total_questions}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{total\_questions}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }IntegerField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The total number of questions in the quiz.
-Default: 0.
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsection{QuizResponse Model}
-\label{\detokenize{models:quizresponse-model}}\index{QuizResponse (built\sphinxhyphen{}in class)@\spxentry{QuizResponse}\spxextra{built\sphinxhyphen{}in class}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizResponse}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{QuizResponse}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Represents a user’s response to a single question within a quiz attempt.
-
-\sphinxAtStartPar
-Tracks which question was asked, which choice was selected, and whether
-the answer was correct.
-\index{quiz\_attempt (QuizResponse attribute)@\spxentry{quiz\_attempt}\spxextra{QuizResponse attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizResponse.quiz_attempt}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{quiz\_attempt}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }ForeignKey to QuizAttempt}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The quiz attempt this response belongs to.
-
-\end{fulllineitems}
-
-\index{question (QuizResponse attribute)@\spxentry{question}\spxextra{QuizResponse attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizResponse.question}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{question}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }ForeignKey to Question}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The question that was answered.
-
-\end{fulllineitems}
-
-\index{selected\_choice (QuizResponse attribute)@\spxentry{selected\_choice}\spxextra{QuizResponse attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizResponse.selected_choice}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{selected\_choice}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }ForeignKey to Choice}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-The choice that was selected by the user.
-
-\end{fulllineitems}
-
-\index{is\_correct (QuizResponse attribute)@\spxentry{is\_correct}\spxextra{QuizResponse attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizResponse.is_correct}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{is\_correct}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }BooleanField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-Whether this response was correct.
-Default: False.
-
-\end{fulllineitems}
-
-\index{response\_time (QuizResponse attribute)@\spxentry{response\_time}\spxextra{QuizResponse attribute}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizResponse.response_time}}
-\pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{response\_time}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }DateTimeField}}}
-\pysigstopsignatures
-\sphinxAtStartPar
-When this question was answered.
-Auto\sphinxhyphen{}set when the response is created.
-
-\end{fulllineitems}
-
-\index{save() (QuizResponse method)@\spxentry{save()}\spxextra{QuizResponse method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:QuizResponse.save}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{save}}}{\sphinxparam{\DUrole{o}{*}\DUrole{n}{args}}\sphinxparamcomma \sphinxparam{\DUrole{o}{**}\DUrole{n}{kwargs}}}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Override of the save method to automatically set is\_correct
-based on whether the selected choice is correct.
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
+For a detailed description of each model and its fields, see the model documentation above. For a full database schema, see below.
 
 
 \subsection{Database Schema}

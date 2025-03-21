@@ -7,11 +7,14 @@ This module defines the database models used in the quiz application:
 - Choice: Possible answers for a question
 - QuizAttempt: Record of a user's quiz attempt
 - QuizResponse: Individual answers within a quiz attempt
+- UserProfile: Extended user information
 """
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Category(models.Model):
@@ -270,4 +273,78 @@ class QuizResponse(models.Model):
         """
         # Determine if the selected choice is correct
         self.is_correct = self.selected_choice.is_correct
-        super().save(*args, **kwargs) 
+        super().save(*args, **kwargs)
+
+
+class UserProfile(models.Model):
+    """
+    Extends the built-in User model with additional profile information.
+    
+    This model is connected to the User model with a one-to-one relationship
+    and is automatically created/updated when the User model is saved.
+    """
+    user = models.OneToOneField(
+        User, 
+        on_delete=models.CASCADE,
+        related_name='profile',
+        help_text="The user this profile belongs to"
+    )
+    bio = models.TextField(
+        blank=True,
+        help_text="Short biography or description"
+    )
+    avatar = models.ImageField(
+        upload_to='avatars/',
+        blank=True,
+        null=True,
+        help_text="Profile picture"
+    )
+    favorite_category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="User's favorite quiz category"
+    )
+    date_of_birth = models.DateField(
+        null=True,
+        blank=True,
+        help_text="User's date of birth"
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text="When the profile was created"
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        help_text="When the profile was last updated"
+    )
+    
+    def __str__(self):
+        """String representation of the user profile."""
+        return f"{self.user.username}'s Profile"
+    
+    def total_quizzes_taken(self):
+        """Return the total number of quizzes completed by the user."""
+        return self.user.quizattempt_set.filter(completed_at__isnull=False).count()
+    
+    def average_score(self):
+        """Return the user's average score across all quizzes."""
+        completed_quizzes = self.user.quizattempt_set.filter(completed_at__isnull=False)
+        if completed_quizzes.exists():
+            total_score = sum(quiz.score_percentage() for quiz in completed_quizzes)
+            return total_score / completed_quizzes.count()
+        return 0
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """Create a UserProfile instance when a User is created."""
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    """Update the UserProfile when the User is updated."""
+    instance.profile.save() 

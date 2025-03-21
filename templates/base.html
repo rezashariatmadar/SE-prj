@@ -149,15 +149,38 @@
                 </ul>
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                    <span class="nav-item nav-link">
-                        <i class="fas fa-user me-1"></i> {{ user.username }}
-                    </span>
-                    <a class="nav-link" href="{% url 'logout' %}">
-                        <i class="fas fa-sign-out-alt me-1"></i> Logout
-                    </a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-1"></i> {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'quiz:profile' %}">
+                                    <i class="fas fa-id-card me-1"></i> My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'quiz:user_stats' %}">
+                                    <i class="fas fa-chart-bar me-1"></i> My Stats
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                     {% else %}
                     <a class="nav-link" href="{% url 'login' %}">
                         <i class="fas fa-sign-in-alt me-1"></i> Login
+                    </a>
+                    <a class="nav-link" href="{% url 'register' %}">
+                        <i class="fas fa-user-plus me-1"></i> Register
                     </a>
                     {% endif %}
                 </div>

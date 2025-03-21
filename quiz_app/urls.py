@@ -28,4 +28,7 @@ urlpatterns = [
     
     # User statistics dashboard
     path('stats/', views.UserStatsView.as_view(), name='user_stats'),
+    
+    # User profile page
+    path('profile/', views.UserProfileView.as_view(), name='profile'),
 ] 
