@@ -188,6 +188,10 @@ class QuizAttempt(models.Model):
         default=0,
         help_text="The total number of questions in the quiz"
     )
+    time_limit = models.IntegerField(
+        default=0,
+        help_text="Time limit for the quiz in seconds (0 means no limit)"
+    )
     
     class Meta:
         ordering = ['-started_at']
@@ -226,6 +230,23 @@ class QuizAttempt(models.Model):
         if self.total_questions == 0:
             return 0
         return (self.score / self.total_questions) * 100
+    
+    def time_remaining(self):
+        """
+        Calculates the remaining time for the quiz in seconds.
+        
+        Returns:
+            int: Seconds remaining, or 0 if the time limit has been exceeded
+        """
+        if self.time_limit == 0:
+            return 0  # No time limit
+            
+        if self.is_complete():
+            return 0  # Quiz is already complete
+            
+        elapsed_seconds = (timezone.now() - self.started_at).total_seconds()
+        remaining_seconds = max(0, self.time_limit - int(elapsed_seconds))
+        return remaining_seconds
 
 
 class QuizResponse(models.Model):

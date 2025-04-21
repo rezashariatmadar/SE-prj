@@ -75,12 +75,14 @@ class QuizStartView(View):
         if form.is_valid():
             category = form.cleaned_data['category']
             num_questions = form.cleaned_data['num_questions']
+            time_limit = form.cleaned_data['time_limit']
             
             # Create a new quiz attempt
             quiz_attempt = QuizAttempt(
                 user=request.user if request.user.is_authenticated else None,
                 category=category,
-                total_questions=num_questions
+                total_questions=num_questions,
+                time_limit=time_limit
             )
             quiz_attempt.save()
             
@@ -126,6 +128,23 @@ class QuestionView(View):
         quiz_attempt_id = request.session.get('quiz_attempt_id')
         quiz_attempt = get_object_or_404(QuizAttempt, id=quiz_attempt_id)
         
+        # Check if time limit has expired
+        time_remaining = quiz_attempt.time_remaining()
+        if quiz_attempt.time_limit > 0 and time_remaining <= 0 and not quiz_attempt.is_complete():
+            # Time's up - complete the quiz
+            quiz_attempt.completed_at = timezone.now()
+            quiz_attempt.calculate_score()
+            quiz_attempt.save()
+            
+            # Clear session data
+            for key in ['quiz_questions', 'current_question_index', 'quiz_attempt_id']:
+                if key in request.session:
+                    del request.session[key]
+            
+            # Add a message
+            messages.warning(request, "Time's up! Your quiz has been submitted.")
+            return redirect('quiz:results', quiz_id=quiz_attempt.id)
+        
         # Check if we've reached the end of the quiz
         question_ids = request.session.get('quiz_questions', [])
         if current_index >= len(question_ids):
@@ -154,6 +173,8 @@ class QuestionView(View):
             'question_number': current_index + 1,
             'total_questions': len(question_ids),
             'progress_percentage': ((current_index) / len(question_ids)) * 100,
+            'time_limit': quiz_attempt.time_limit,
+            'time_remaining': time_remaining,
         }
         
         return render(request, self.template_name, context)

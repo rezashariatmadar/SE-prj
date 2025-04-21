@@ -83,6 +83,21 @@ class QuizSelectionForm(forms.Form):
         help_text="Choose how many questions you want (5-20)"
     )
     
+    time_limit = forms.ChoiceField(
+        choices=[
+            (0, 'No Time Limit'),
+            (60, '1 Minute'),
+            (120, '2 Minutes'),
+            (300, '5 Minutes'),
+            (600, '10 Minutes'),
+            (900, '15 Minutes'),
+            (1800, '30 Minutes'),
+        ],
+        initial=0,
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        help_text="Choose a time limit for your quiz (optional)"
+    )
+    
     def __init__(self, *args, **kwargs):
         """Initialize the form with only categories that have questions."""
         super().__init__(*args, **kwargs)
@@ -124,4 +139,11 @@ class QuizSelectionForm(forms.Form):
                     f"Please select a lower number."
                 )
         
-        return num_questions 
+        return num_questions
+        
+    def clean_time_limit(self):
+        """
+        Convert time_limit to an integer.
+        """
+        time_limit = self.cleaned_data.get('time_limit')
+        return int(time_limit) 

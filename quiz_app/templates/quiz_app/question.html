@@ -19,6 +19,22 @@
         </div>
     </div>
 
+    {% if time_limit > 0 %}
+    <!-- Timer display -->
+    <div class="row mb-4">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-body p-2 text-center">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <i class="fas fa-clock me-2"></i>
+                        <h5 class="mb-0">Time Remaining: <span id="timer" data-seconds-left="{{ time_remaining }}">{{ time_remaining }}</span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <!-- Question card -->
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -32,7 +48,7 @@
                 <div class="card-body">
                     <h4 class="mb-4">{{ question.text }}</h4>
                     
-                    <form method="post">
+                    <form method="post" id="questionForm">
                         {% csrf_token %}
                         <div class="choices-container">
                             {% for choice in choices %}
@@ -72,6 +88,45 @@
             // Highlight the selected label
             $(this).next('.choice-label').addClass('active');
         });
+        
+        {% if time_limit > 0 %}
+        // Timer functionality
+        var timerElement = document.getElementById('timer');
+        var secondsLeft = parseInt(timerElement.getAttribute('data-seconds-left'));
+        
+        function formatTime(seconds) {
+            var minutes = Math.floor(seconds / 60);
+            var remainingSeconds = seconds % 60;
+            return minutes + ":" + (remainingSeconds < 10 ? "0" : "") + remainingSeconds;
+        }
+        
+        function updateTimer() {
+            if (secondsLeft <= 0) {
+                clearInterval(timerInterval);
+                // Auto-submit the form
+                document.getElementById('questionForm').submit();
+                return;
+            }
+            
+            timerElement.textContent = formatTime(secondsLeft);
+            
+            // Change color when time is running low
+            if (secondsLeft <= 30) {
+                timerElement.classList.add('text-danger');
+                if (secondsLeft <= 10) {
+                    timerElement.classList.add('fw-bold');
+                }
+            }
+            
+            secondsLeft -= 1;
+        }
+        
+        // Format the initial display
+        timerElement.textContent = formatTime(secondsLeft);
+        
+        // Start the timer
+        var timerInterval = setInterval(updateTimer, 1000);
+        {% endif %}
     });
 </script>
 {% endblock %} 

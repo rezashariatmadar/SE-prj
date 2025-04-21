@@ -56,6 +56,18 @@
                             {% endif %}
                             <small class="form-text text-muted">{{ form.num_questions.help_text }}</small>
                         </div>
+                        <div class="form-group mb-3">
+                            <label for="{{ form.time_limit.id_for_label }}">
+                                <i class="fas fa-clock me-2"></i>{{ form.time_limit.label|default:"Time Limit" }}
+                            </label>
+                            {{ form.time_limit }}
+                            {% if form.time_limit.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ form.time_limit.errors }}
+                                </div>
+                            {% endif %}
+                            <small class="form-text text-muted">{{ form.time_limit.help_text }}</small>
+                        </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="fas fa-play me-2"></i>Start Quiz

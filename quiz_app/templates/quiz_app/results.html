@@ -54,6 +54,39 @@
                             <i class="fas fa-folder me-1"></i> {{ quiz_attempt.category.name }}
                         </small>
                     </div>
+                    {% if quiz_attempt.time_limit > 0 %}
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i> Time Limit: 
+                                {% if quiz_attempt.time_limit == 60 %}
+                                    1 minute
+                                {% elif quiz_attempt.time_limit == 120 %}
+                                    2 minutes
+                                {% elif quiz_attempt.time_limit == 300 %}
+                                    5 minutes
+                                {% elif quiz_attempt.time_limit == 600 %}
+                                    10 minutes
+                                {% elif quiz_attempt.time_limit == 900 %}
+                                    15 minutes
+                                {% elif quiz_attempt.time_limit == 1800 %}
+                                    30 minutes
+                                {% else %}
+                                    {{ quiz_attempt.time_limit }} seconds
+                                {% endif %}
+                            </small>
+                        </div>
+                        <div>
+                            <small class="text-muted">
+                                <i class="fas fa-stopwatch me-1"></i> Time Used: 
+                                {% with time_diff=quiz_attempt.completed_at|timesince:quiz_attempt.started_at %}
+                                    {{ time_diff }}
+                                {% endwith %}
+                            </small>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             
@@ -127,6 +160,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="category" value="{{ quiz_attempt.category.id }}">
                     <input type="hidden" name="num_questions" value="{{ quiz_attempt.total_questions }}">
+                    <input type="hidden" name="time_limit" value="{{ quiz_attempt.time_limit }}">
                 </form>
             </div>
         </div>
