@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 
 class DiagramsView(TemplateView):
     """View for displaying the project diagrams."""
-    template_name = 'diagrams.html'
+    template_name = 'docs/diagrams.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

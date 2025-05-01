@@ -297,50 +297,139 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             }
             df = pd.DataFrame(data)
             
+            # Set the style for all charts
+            sns.set_style("whitegrid")
+            plt.rcParams.update({
+                'font.size': 12,
+                'axes.labelsize': 14,
+                'axes.titlesize': 16,
+                'xtick.labelsize': 12,
+                'ytick.labelsize': 12,
+                'legend.fontsize': 12,
+                'figure.titlesize': 18
+            })
+            
             # 1. Performance over time chart
-            plt.figure(figsize=(10, 5))
-            sns.lineplot(data=df, x='date', y='score_percentage', hue='category', marker='o')
-            plt.title('Quiz Performance Over Time')
-            plt.xlabel('Date')
-            plt.ylabel('Score (%)')
+            plt.figure(figsize=(12, 6))
+            
+            # Sort by date
+            df = df.sort_values('date')
+            
+            # Create line plot
+            ax = sns.lineplot(data=df, x='date', y='score_percentage', hue='category', marker='o', linewidth=2.5)
+            
+            # Improve plot styling
+            plt.title('Quiz Performance Over Time', fontweight='bold', pad=20)
+            plt.xlabel('Date', fontweight='bold')
+            plt.ylabel('Score (%)', fontweight='bold')
             plt.ylim(0, 100)
-            plt.xticks(rotation=45)
+            
+            # Format x-axis dates nicely
+            from matplotlib.dates import DateFormatter
+            date_form = DateFormatter("%Y-%m-%d")
+            ax.xaxis.set_major_formatter(date_form)
+            
+            # Rotate and align the tick labels
+            plt.xticks(rotation=45, ha='right')
+            
+            # Add grid lines for better readability
+            plt.grid(True, alpha=0.3)
+            
+            # Add legend with a title
+            plt.legend(title='Category', title_fontsize=12, loc='upper left', bbox_to_anchor=(1, 1))
+            
+            # Tight layout to prevent cutting off labels
             plt.tight_layout()
             
+            # Save to buffer
             buffer = BytesIO()
-            plt.savefig(buffer, format='png', bbox_inches='tight')
+            plt.savefig(buffer, format='png', bbox_inches='tight', dpi=100)
             buffer.seek(0)
             time_chart = base64.b64encode(buffer.getvalue()).decode('utf-8')
             buffer.close()
+            plt.close()
             
             # 2. Performance by category chart
-            plt.figure(figsize=(8, 5))
-            category_perf = df.groupby('category')['score_percentage'].mean().sort_values(ascending=False)
-            sns.barplot(x=category_perf.index, y=category_perf.values)
-            plt.title('Average Performance by Category')
-            plt.xlabel('Category')
-            plt.ylabel('Average Score (%)')
-            plt.ylim(0, 100)
-            plt.xticks(rotation=45)
-            plt.tight_layout()
+            plt.figure(figsize=(10, 6))
             
+            # Calculate average scores by category
+            if not df.empty:
+                category_perf = df.groupby('category')['score_percentage'].mean().sort_values(ascending=False)
+                
+                # Create bar chart with better styling
+                ax = sns.barplot(x=category_perf.index, y=category_perf.values, palette='viridis')
+                
+                # Add value labels on top of each bar
+                for i, v in enumerate(category_perf.values):
+                    ax.text(i, v + 2, f"{v:.1f}%", ha='center', fontweight='bold')
+                
+                # Improve styling
+                plt.title('Average Performance by Category', fontweight='bold', pad=20)
+                plt.xlabel('Category', fontweight='bold')
+                plt.ylabel('Average Score (%)', fontweight='bold')
+                plt.ylim(0, 105)  # Extended to fit value labels
+                
+                # Ensure x labels are visible
+                plt.xticks(rotation=45, ha='right')
+                
+                # Add a horizontal line for the overall average
+                overall_avg = df['score_percentage'].mean()
+                plt.axhline(y=overall_avg, color='red', linestyle='--', label=f'Overall Avg: {overall_avg:.1f}%')
+                plt.legend()
+                
+                # Add grid lines
+                plt.grid(True, axis='y', alpha=0.3)
+                
+                # Ensure everything fits
+                plt.tight_layout()
+                
+                # Save to buffer
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png', bbox_inches='tight', dpi=100)
+                buffer.seek(0)
+                category_chart = base64.b64encode(buffer.getvalue()).decode('utf-8')
+                buffer.close()
+                plt.close()
+                
+                context['category_chart'] = category_chart
+            
+            # 3. Question distribution chart (new)
+            plt.figure(figsize=(8, 6))
+            
+            # Count quizzes by total questions
+            question_counts = df['total_questions'].value_counts().sort_index()
+            
+            # Create pie chart
+            plt.pie(question_counts, labels=[f"{count} questions" for count in question_counts.index], 
+                    autopct='%1.1f%%', startangle=90, shadow=True, 
+                    wedgeprops={'linewidth': 1, 'edgecolor': 'white'},
+                    textprops={'fontsize': 12, 'fontweight': 'bold'})
+            
+            plt.title('Quiz Length Distribution', fontweight='bold', pad=20)
+            plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
+            
+            # Save to buffer
             buffer = BytesIO()
-            plt.savefig(buffer, format='png', bbox_inches='tight')
+            plt.savefig(buffer, format='png', bbox_inches='tight', dpi=100)
             buffer.seek(0)
-            category_chart = base64.b64encode(buffer.getvalue()).decode('utf-8')
+            question_dist_chart = base64.b64encode(buffer.getvalue()).decode('utf-8')
             buffer.close()
+            plt.close()
             
             # Add charts to context
             context['time_chart'] = time_chart
-            context['category_chart'] = category_chart
+            context['question_dist_chart'] = question_dist_chart
             
             # Add summary statistics
             context['total_quizzes'] = len(quiz_attempts)
             context['avg_score'] = df['score_percentage'].mean()
             context['categories_attempted'] = df['category'].nunique()
             context['best_category'] = category_perf.index[0] if not category_perf.empty else None
+            context['highest_score'] = df['score_percentage'].max()
+            context['lowest_score'] = df['score_percentage'].min()
+            context['perfect_score_count'] = len(df[df['score_percentage'] == 100])
             
-        return context 
+        return context
 
 
 class UserProfileView(LoginRequiredMixin, UpdateView):

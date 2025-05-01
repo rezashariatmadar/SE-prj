@@ -3,6 +3,10 @@
 
 {% block title %}Question - Quiz Game{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/quiz-enhancer.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
     <!-- Progress bar -->
@@ -75,6 +79,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{% static 'js/quiz-enhancer.js' %}"></script>
 <script>
     $(document).ready(function() {
         // Add animation when the page loads

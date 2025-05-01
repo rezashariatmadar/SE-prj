@@ -198,119 +198,169 @@ class Command(BaseCommand):
                     {
                         'text': 'Which country has the most natural lakes?',
                         'difficulty': 'hard',
-                        'explanation': 'Canada has more lakes than any other country, with over 2 million lakes covering about 9% of its territory.',
+                        'explanation': 'Canada has more natural lakes than any other country, with over 2 million lakes.',
                         'choices': [
-                            {'text': 'United States', 'is_correct': False},
                             {'text': 'Russia', 'is_correct': False},
-                            {'text': 'Finland', 'is_correct': False},
+                            {'text': 'United States', 'is_correct': False},
                             {'text': 'Canada', 'is_correct': True},
+                            {'text': 'Finland', 'is_correct': False},
                         ]
                     },
                 ]
             },
             {
                 'name': 'Technology',
-                'description': 'Challenge yourself with questions about computers, software, gadgets, and the digital world.',
+                'description': 'Test your knowledge of computers, programming, and modern technology.',
                 'icon': 'fa-laptop-code',
                 'questions': [
                     {
-                        'text': 'Who founded Microsoft?',
+                        'text': 'What does HTML stand for?',
                         'difficulty': 'easy',
-                        'explanation': 'Microsoft was founded by Bill Gates and Paul Allen in 1975.',
+                        'explanation': 'HTML stands for HyperText Markup Language, the standard language for creating web pages.',
                         'choices': [
-                            {'text': 'Steve Jobs and Steve Wozniak', 'is_correct': False},
-                            {'text': 'Mark Zuckerberg', 'is_correct': False},
-                            {'text': 'Bill Gates and Paul Allen', 'is_correct': True},
-                            {'text': 'Larry Page and Sergey Brin', 'is_correct': False},
+                            {'text': 'HyperText Markup Language', 'is_correct': True},
+                            {'text': 'High Tech Modern Language', 'is_correct': False},
+                            {'text': 'Hyper Transfer Markup Language', 'is_correct': False},
+                            {'text': 'Home Tool Markup Language', 'is_correct': False},
                         ]
                     },
                     {
-                        'text': 'What does "HTTP" stand for?',
+                        'text': 'Which programming language is known for its use in data science and machine learning?',
                         'difficulty': 'easy',
-                        'explanation': 'HTTP stands for Hypertext Transfer Protocol, the foundation of data communication on the World Wide Web.',
-                        'choices': [
-                            {'text': 'Hypertext Transfer Protocol', 'is_correct': True},
-                            {'text': 'Hypertext Technical Processing', 'is_correct': False},
-                            {'text': 'High Transfer Text Protocol', 'is_correct': False},
-                            {'text': 'Hypertext Terminal Process', 'is_correct': False},
-                        ]
-                    },
-                    {
-                        'text': 'Which programming language was created by Guido van Rossum?',
-                        'difficulty': 'medium',
-                        'explanation': 'Python was created by Guido van Rossum and first released in 1991.',
+                        'explanation': 'Python is widely used in data science and machine learning due to its extensive libraries and frameworks.',
                         'choices': [
                             {'text': 'Java', 'is_correct': False},
                             {'text': 'Python', 'is_correct': True},
                             {'text': 'C++', 'is_correct': False},
-                            {'text': 'Ruby', 'is_correct': False},
+                            {'text': 'JavaScript', 'is_correct': False},
                         ]
                     },
                     {
-                        'text': 'What is the name of the technology that allows devices to connect to the internet without using cables?',
+                        'text': 'What is the main purpose of a database?',
                         'difficulty': 'medium',
-                        'explanation': 'Wi-Fi (Wireless Fidelity) is a wireless networking technology that allows devices to connect to the internet without cables.',
+                        'explanation': 'A database is designed to store, organize, and retrieve data efficiently.',
                         'choices': [
-                            {'text': 'Bluetooth', 'is_correct': False},
-                            {'text': 'Ethernet', 'is_correct': False},
-                            {'text': 'Wi-Fi', 'is_correct': True},
-                            {'text': 'NFC', 'is_correct': False},
+                            {'text': 'To store and organize data', 'is_correct': True},
+                            {'text': 'To create user interfaces', 'is_correct': False},
+                            {'text': 'To process images', 'is_correct': False},
+                            {'text': 'To send emails', 'is_correct': False},
                         ]
                     },
                     {
-                        'text': 'What does the acronym "RAID" stand for in computing?',
-                        'difficulty': 'hard',
-                        'explanation': 'RAID stands for Redundant Array of Independent Disks, a data storage virtualization technology.',
+                        'text': 'What is the purpose of a firewall in computer security?',
+                        'difficulty': 'medium',
+                        'explanation': 'A firewall monitors and controls incoming and outgoing network traffic based on predetermined security rules.',
                         'choices': [
-                            {'text': 'Random Access Internet Drive', 'is_correct': False},
-                            {'text': 'Redundant Array of Independent Disks', 'is_correct': True},
-                            {'text': 'Remote Access Input Device', 'is_correct': False},
-                            {'text': 'Runtime Application Integration Design', 'is_correct': False},
+                            {'text': 'To block unauthorized access', 'is_correct': True},
+                            {'text': 'To speed up internet connection', 'is_correct': False},
+                            {'text': 'To store backup files', 'is_correct': False},
+                            {'text': 'To clean computer viruses', 'is_correct': False},
+                        ]
+                    },
+                    {
+                        'text': 'What is the difference between HTTP and HTTPS?',
+                        'difficulty': 'hard',
+                        'explanation': 'HTTPS is the secure version of HTTP, using SSL/TLS encryption to protect data transmission.',
+                        'choices': [
+                            {'text': 'HTTPS uses encryption for secure communication', 'is_correct': True},
+                            {'text': 'HTTPS is faster than HTTP', 'is_correct': False},
+                            {'text': 'HTTP is more secure than HTTPS', 'is_correct': False},
+                            {'text': 'HTTPS is used only for video streaming', 'is_correct': False},
                         ]
                     },
                 ]
             },
+            {
+                'name': 'Literature',
+                'description': 'Test your knowledge of books, authors, and literary works.',
+                'icon': 'fa-book',
+                'questions': [
+                    {
+                        'text': 'Who wrote "Romeo and Juliet"?',
+                        'difficulty': 'easy',
+                        'explanation': 'William Shakespeare wrote the famous tragedy "Romeo and Juliet" in the late 16th century.',
+                        'choices': [
+                            {'text': 'Charles Dickens', 'is_correct': False},
+                            {'text': 'William Shakespeare', 'is_correct': True},
+                            {'text': 'Jane Austen', 'is_correct': False},
+                            {'text': 'Mark Twain', 'is_correct': False},
+                        ]
+                    },
+                    {
+                        'text': 'Which novel begins with the line "It was the best of times, it was the worst of times"?',
+                        'difficulty': 'easy',
+                        'explanation': 'This famous opening line is from Charles Dickens\' "A Tale of Two Cities".',
+                        'choices': [
+                            {'text': 'Great Expectations', 'is_correct': False},
+                            {'text': 'A Tale of Two Cities', 'is_correct': True},
+                            {'text': 'Oliver Twist', 'is_correct': False},
+                            {'text': 'David Copperfield', 'is_correct': False},
+                        ]
+                    },
+                    {
+                        'text': 'Who wrote "Pride and Prejudice"?',
+                        'difficulty': 'medium',
+                        'explanation': 'Jane Austen wrote "Pride and Prejudice", one of the most famous romance novels in English literature.',
+                        'choices': [
+                            {'text': 'Emily Brontë', 'is_correct': False},
+                            {'text': 'Jane Austen', 'is_correct': True},
+                            {'text': 'Charlotte Brontë', 'is_correct': False},
+                            {'text': 'Mary Shelley', 'is_correct': False},
+                        ]
+                    },
+                    {
+                        'text': 'Which author created the character Sherlock Holmes?',
+                        'difficulty': 'medium',
+                        'explanation': 'Sir Arthur Conan Doyle created the famous detective Sherlock Holmes.',
+                        'choices': [
+                            {'text': 'Agatha Christie', 'is_correct': False},
+                            {'text': 'Sir Arthur Conan Doyle', 'is_correct': True},
+                            {'text': 'Edgar Allan Poe', 'is_correct': False},
+                            {'text': 'Raymond Chandler', 'is_correct': False},
+                        ]
+                    },
+                    {
+                        'text': 'What is the name of the fictional land in "The Lord of the Rings"?',
+                        'difficulty': 'hard',
+                        'explanation': 'Middle-earth is the fictional setting of J.R.R. Tolkien\'s "The Lord of the Rings" and other works.',
+                        'choices': [
+                            {'text': 'Narnia', 'is_correct': False},
+                            {'text': 'Westeros', 'is_correct': False},
+                            {'text': 'Middle-earth', 'is_correct': True},
+                            {'text': 'Hogwarts', 'is_correct': False},
+                        ]
+                    },
+                ]
+            }
         ]
         
-        try:
-            with transaction.atomic():
-                # Clear existing data to avoid duplicates
-                self.stdout.write('Clearing existing quiz data...')
-                Choice.objects.all().delete()
-                Question.objects.all().delete()
-                Category.objects.all().delete()
+        with transaction.atomic():
+            # Clear existing data
+            Category.objects.all().delete()
+            Question.objects.all().delete()
+            Choice.objects.all().delete()
+            
+            # Create categories and questions
+            for category_data in categories:
+                category = Category.objects.create(
+                    name=category_data['name'],
+                    description=category_data['description'],
+                    icon=category_data['icon']
+                )
                 
-                # Create new categories and questions
-                for category_data in categories:
-                    self.stdout.write(f"Creating category: {category_data['name']}")
-                    
-                    category = Category.objects.create(
-                        name=category_data['name'],
-                        description=category_data['description'],
-                        icon=category_data['icon']
+                for question_data in category_data['questions']:
+                    question = Question.objects.create(
+                        text=question_data['text'],
+                        difficulty=question_data['difficulty'],
+                        explanation=question_data['explanation'],
+                        category=category
                     )
                     
-                    for question_data in category_data['questions']:
-                        self.stdout.write(f"  - Adding question: {question_data['text'][:50]}...")
-                        
-                        question = Question.objects.create(
-                            category=category,
-                            text=question_data['text'],
-                            explanation=question_data['explanation'],
-                            difficulty=question_data['difficulty']
+                    for choice_data in question_data['choices']:
+                        Choice.objects.create(
+                            text=choice_data['text'],
+                            is_correct=choice_data['is_correct'],
+                            question=question
                         )
-                        
-                        for choice_data in question_data['choices']:
-                            Choice.objects.create(
-                                question=question,
-                                text=choice_data['text'],
-                                is_correct=choice_data['is_correct']
-                            )
             
-            self.stdout.write(self.style.SUCCESS('Successfully loaded sample quiz data!'))
-            self.stdout.write(f'Created {Category.objects.count()} categories')
-            self.stdout.write(f'Created {Question.objects.count()} questions')
-            self.stdout.write(f'Created {Choice.objects.count()} choices')
-            
-        except Exception as e:
-            self.stdout.write(self.style.ERROR(f'Error loading sample data: {str(e)}')) 
+            self.stdout.write(self.style.SUCCESS('Successfully loaded sample quiz data!')) 

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Project Diagrams{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Project Diagrams</h1>
+    
+    <div class="row">
+        {% for category in diagram_categories %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas {{ category.icon }} me-2"></i>
+                        {{ category.name }}
+                    </h5>
+                    <p class="card-text">
+                        <small class="text-muted">{{ category.count }} diagram{{ category.count|pluralize }}</small>
+                    </p>
+                    <a href="#{{ category.id }}" class="btn btn-outline-primary btn-sm">
+                        View Diagrams
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="mt-5">
+        <h2 class="mb-4">Data Flow Diagrams</h2>
+        <div id="dfd-diagrams" class="diagram-section">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Level 0 DFD</h5>
+                    <img src="{% static 'docs/diagrams/dfd_level0.png' %}" class="img-fluid" alt="Level 0 DFD">
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Level 1 DFD</h5>
+                    <img src="{% static 'docs/diagrams/dfd_level1.png' %}" class="img-fluid" alt="Level 1 DFD">
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Level 2 DFD</h5>
+                    <img src="{% static 'docs/diagrams/dfd_level2.png' %}" class="img-fluid" alt="Level 2 DFD">
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="mb-4">Use Case Diagram</h2>
+        <div id="use-case" class="diagram-section">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <img src="{% static 'docs/diagrams/use_case_diagram.png' %}" class="img-fluid" alt="Use Case Diagram">
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="mb-4">Sequence Diagram</h2>
+        <div id="sequence" class="diagram-section">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <img src="{% static 'docs/diagrams/sequence_diagram.png' %}" class="img-fluid" alt="Sequence Diagram">
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="mb-4">Component Diagram</h2>
+        <div id="component" class="diagram-section">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <img src="{% static 'docs/diagrams/component_diagram.png' %}" class="img-fluid" alt="Component Diagram">
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="mb-4">Project Planning</h2>
+        <div id="project-planning" class="diagram-section">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Gantt Chart</h5>
+                    <img src="{% static 'docs/diagrams/gantt_chart.png' %}" class="img-fluid" alt="Gantt Chart">
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">PERT Chart</h5>
+                    <img src="{% static 'docs/diagrams/pert_chart.png' %}" class="img-fluid" alt="PERT Chart">
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Three-Point Estimation</h5>
+                    <img src="{% static 'docs/diagrams/three_point_estimation.png' %}" class="img-fluid" alt="Three-Point Estimation">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.diagram-section {
+    margin-bottom: 3rem;
+}
+.card {
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %} 

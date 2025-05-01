@@ -1,0 +1,329 @@
+/**
+ * Quiz Enhancer Styles
+ * Modern and interactive styles for the quiz-taking experience
+ */
+
+/* Question Transitions */
+.question-transition {
+    transition: all 0.3s ease-in-out;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.question-exit {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Answer Choices */
+.choice-label {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    border: 2px solid #e9ecef;
+    transform: scale(1);
+}
+
+.choice-label:hover {
+    border-color: #007bff;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.choice-label.selected {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.15);
+}
+
+/* Ripple effect when selecting an answer */
+.choice-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0, 123, 255, 0.3);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Shine effect on hover */
+.choice-hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: shine 1.5s ease-out;
+}
+
+@keyframes shine {
+    to {
+        left: 100%;
+    }
+}
+
+/* Question progress indicator */
+.question-progress {
+    position: relative;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #e9ecef;
+    margin: 1.5rem 0;
+}
+
+.progress-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-step {
+    position: absolute;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #adb5bd;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.progress-step.completed {
+    background-color: #007bff;
+}
+
+.progress-step.current {
+    background-color: #007bff;
+    transform: scale(1.5);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}
+
+/* Timer Styling */
+.quiz-timer-container {
+    position: relative;
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.timer-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(to right, #28a745, #7AD151);
+    transition: width 1s linear;
+}
+
+.timer-bar.timer-warning {
+    background: linear-gradient(to right, #ffc107, #FFD93D);
+}
+
+.timer-bar.timer-critical {
+    background: linear-gradient(to right, #dc3545, #FF6B6B);
+}
+
+.quiz-timer {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #495057;
+}
+
+/* Timer pulse animation when time is running out */
+.timer-pulse {
+    animation: pulse 1s infinite;
+    color: #dc3545;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Submit button effects */
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(0, 123, 255, 0.2);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.submit-btn:active::after {
+    animation: rippleButton 1s ease-out;
+}
+
+@keyframes rippleButton {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(100, 100);
+        opacity: 0;
+    }
+}
+
+/* Question Card */
+.question-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.question-card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.question-header {
+    position: relative;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.question-number {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    margin-right: 12px;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #212529;
+    line-height: 1.6;
+}
+
+.choices-container {
+    padding: 1.5rem;
+}
+
+/* Keyboard shortcuts hint */
+.keyboard-hint {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    color: #6c757d;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 24px;
+    opacity: 0.7;
+}
+
+.choice-label:hover .keyboard-hint {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Additional animations */
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slideInFromBottom 0.3s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .keyboard-hint {
+        display: none;
+    }
+    
+    .question-text {
+        font-size: 1.1rem;
+    }
+    
+    .question-card {
+        margin-left: -15px;
+        margin-right: -15px;
+        border-radius: 0;
+    }
+} 
