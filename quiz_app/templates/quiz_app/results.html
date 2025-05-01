@@ -3,6 +3,11 @@
 
 {% block title %}Quiz Results | Quiz Game{% endblock %}
 
+{% block extra_css %}
+<!-- Add results page specific styles -->
+<link rel="stylesheet" href="{% static 'css/quiz-results.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
     <div class="row mb-5">
@@ -15,38 +20,85 @@
     <div class="row mb-5">
         <div class="col-md-8 offset-md-2">
             <!-- Score summary card -->
-            <div class="card shadow mb-4">
+            <div class="card results-card mb-4">
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title mb-0">Your Score</h3>
                 </div>
-                <div class="card-body text-center py-4">
-                    <div class="display-1 mb-3 {% if quiz_attempt.score_percentage >= 70 %}text-success{% elif quiz_attempt.score_percentage >= 40 %}text-warning{% else %}text-danger{% endif %}">
-                        {{ quiz_attempt.score }} / {{ quiz_attempt.total_questions }}
+                <div class="card-body score-container py-4">
+                    {% if quiz_attempt.score_percentage >= 80 %}
+                        <div class="achievement-badge">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="score-circle {% if quiz_attempt.score_percentage >= 70 %}good{% elif quiz_attempt.score_percentage >= 40 %}average{% else %}poor{% endif %}">
+                        <span class="score-number" data-score="{{ quiz_attempt.score }}" data-total="{{ quiz_attempt.total_questions }}">
+                            {{ quiz_attempt.score }} / {{ quiz_attempt.total_questions }}
+                        </span>
                     </div>
-                    <div class="progress mb-3" style="height: 20px;">
+                    
+                    <div class="progress mb-3">
                         <div class="progress-bar {% if quiz_attempt.score_percentage >= 70 %}bg-success{% elif quiz_attempt.score_percentage >= 40 %}bg-warning{% else %}bg-danger{% endif %}" 
                              role="progressbar" 
                              style="width: {{ quiz_attempt.score_percentage }}%;" 
                              aria-valuenow="{{ quiz_attempt.score_percentage }}" 
                              aria-valuemin="0" 
                              aria-valuemax="100">
-                            {{ quiz_attempt.score_percentage|floatformat:1 }}%
                         </div>
                     </div>
-                    <p class="lead mb-0">
+                    <div class="score-percentage mb-3" data-percentage="{{ quiz_attempt.score_percentage }}">
+                        <span class="badge {% if quiz_attempt.score_percentage >= 70 %}bg-success{% elif quiz_attempt.score_percentage >= 40 %}bg-warning{% else %}bg-danger{% endif %} p-2">
+                            {{ quiz_attempt.score_percentage|floatformat:1 }}%
+                        </span>
+                    </div>
+                    
+                    <p class="score-message">
                         {% if quiz_attempt.score_percentage >= 80 %}
-                            Excellent! You did a great job!
+                            <i class="fas fa-medal text-warning me-2"></i>Excellent! You did a great job!
                         {% elif quiz_attempt.score_percentage >= 60 %}
-                            Good work! You've got a solid understanding.
+                            <i class="fas fa-thumbs-up text-success me-2"></i>Good work! You've got a solid understanding.
                         {% elif quiz_attempt.score_percentage >= 40 %}
-                            Not bad! There's room for improvement.
+                            <i class="fas fa-lightbulb text-warning me-2"></i>Not bad! There's room for improvement.
                         {% else %}
-                            Keep studying! You'll do better next time.
+                            <i class="fas fa-book-open text-info me-2"></i>Keep studying! You'll do better next time.
                         {% endif %}
                     </p>
+                    
+                    <!-- Social Sharing -->
+                    <div class="social-share">
+                        <button class="share-btn twitter-share" data-platform="twitter" data-score="{{ quiz_attempt.score }}" data-total="{{ quiz_attempt.total_questions }}" data-category="{{ quiz_attempt.category.name }}">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="share-btn facebook-share" data-platform="facebook" data-score="{{ quiz_attempt.score }}" data-total="{{ quiz_attempt.total_questions }}" data-category="{{ quiz_attempt.category.name }}">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="share-btn linkedin-share" data-platform="linkedin" data-score="{{ quiz_attempt.score }}" data-total="{{ quiz_attempt.total_questions }}" data-category="{{ quiz_attempt.category.name }}">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Quiz Stats -->
+                    <div class="stats-panel">
+                        <div class="stat-item">
+                            <div class="stat-value">{{ quiz_attempt.score_percentage|floatformat:0 }}%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ quiz_attempt.category.name|truncatechars:10 }}</div>
+                            <div class="stat-label">Category</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">
+                                {% with time_diff=quiz_attempt.completed_at|timesince:quiz_attempt.started_at %}
+                                    {{ time_diff|truncatechars:8 }}
+                                {% endwith %}
+                            </div>
+                            <div class="stat-label">Time Used</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">
                             <i class="fas fa-calendar me-1"></i> {{ quiz_attempt.completed_at|date:"F j, Y, g:i a" }}
                         </small>
@@ -54,45 +106,12 @@
                             <i class="fas fa-folder me-1"></i> {{ quiz_attempt.category.name }}
                         </small>
                     </div>
-                    {% if quiz_attempt.time_limit > 0 %}
-                    <hr>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <small class="text-muted">
-                                <i class="fas fa-clock me-1"></i> Time Limit: 
-                                {% if quiz_attempt.time_limit == 60 %}
-                                    1 minute
-                                {% elif quiz_attempt.time_limit == 120 %}
-                                    2 minutes
-                                {% elif quiz_attempt.time_limit == 300 %}
-                                    5 minutes
-                                {% elif quiz_attempt.time_limit == 600 %}
-                                    10 minutes
-                                {% elif quiz_attempt.time_limit == 900 %}
-                                    15 minutes
-                                {% elif quiz_attempt.time_limit == 1800 %}
-                                    30 minutes
-                                {% else %}
-                                    {{ quiz_attempt.time_limit }} seconds
-                                {% endif %}
-                            </small>
-                        </div>
-                        <div>
-                            <small class="text-muted">
-                                <i class="fas fa-stopwatch me-1"></i> Time Used: 
-                                {% with time_diff=quiz_attempt.completed_at|timesince:quiz_attempt.started_at %}
-                                    {{ time_diff }}
-                                {% endwith %}
-                            </small>
-                        </div>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
             
             <!-- Performance Chart -->
             {% if performance_chart %}
-            <div class="card shadow mb-4">
+            <div class="card results-card mb-4">
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title mb-0">Performance by Difficulty</h3>
                 </div>
@@ -106,39 +125,53 @@
             
             <!-- Answer Review -->
             {% if responses %}
-            <div class="card shadow">
+            <div class="card results-card">
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title mb-0">Question Review</h3>
                 </div>
                 <div class="card-body p-0">
-                    <div class="list-group list-group-flush">
+                    <div class="list-group list-group-flush question-review">
                         {% for response in responses %}
-                        <div class="list-group-item p-3 {% if response.is_correct %}correct-answer{% else %}incorrect-answer{% endif %}">
-                            <h5 class="mb-3">{{ forloop.counter }}. {{ response.question.text }}</h5>
+                        <div class="list-group-item question-item {% if response.is_correct %}correct-answer{% else %}incorrect-answer{% endif %}">
+                            <div class="question-header">
+                                <span class="question-number">{{ forloop.counter }}</span>
+                                <span class="question-text">{{ response.question.text }}</span>
+                                <span class="toggle-icon">
+                                    <i class="fas fa-chevron-down"></i>
+                                </span>
+                            </div>
                             
-                            <div class="mb-3">
-                                <strong>Your answer:</strong> 
-                                <span>{{ response.selected_choice.text }}</span>
-                                {% if response.is_correct %}
-                                <i class="fas fa-check-circle text-success ms-2"></i>
-                                {% else %}
-                                <i class="fas fa-times-circle text-danger ms-2"></i>
+                            <div class="question-content">
+                                <!-- Selected Answer -->
+                                <div class="answer-option {% if response.is_correct %}correct-option{% else %}incorrect-option{% endif %} selected-answer">
+                                    <span class="answer-marker">
+                                        {% if response.is_correct %}
+                                        <i class="fas fa-check"></i>
+                                        {% else %}
+                                        <i class="fas fa-times"></i>
+                                        {% endif %}
+                                    </span>
+                                    <strong>Your answer:</strong> 
+                                    <span>{{ response.selected_choice.text }}</span>
+                                </div>
+                                
+                                <!-- Correct Answer (if user was wrong) -->
+                                {% if not response.is_correct %}
+                                <div class="answer-option correct-option">
+                                    <span class="answer-marker"><i class="fas fa-check"></i></span>
+                                    <strong>Correct answer:</strong> 
+                                    <span>{{ response.question.correct_choice.text }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                <!-- Explanation -->
+                                {% if response.question.explanation %}
+                                <div class="explanation-box">
+                                    <strong>Explanation:</strong>
+                                    <p class="mb-0">{{ response.question.explanation }}</p>
+                                </div>
                                 {% endif %}
                             </div>
-                            
-                            {% if not response.is_correct %}
-                            <div class="mb-3">
-                                <strong>Correct answer:</strong> 
-                                <span>{{ response.question.correct_choice.text }}</span>
-                            </div>
-                            {% endif %}
-                            
-                            {% if response.question.explanation %}
-                            <div class="mt-3 explanation-box p-2 border-start border-info border-3 bg-light">
-                                <strong>Explanation:</strong>
-                                <p class="mb-0">{{ response.question.explanation }}</p>
-                            </div>
-                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -147,7 +180,7 @@
             {% endif %}
             
             <!-- Action Buttons -->
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+            <div class="action-buttons mt-4">
                 <a href="{% url 'quiz:index' %}" class="btn btn-primary btn-lg">
                     <i class="fas fa-home me-2"></i>Back to Home
                 </a>
@@ -166,4 +199,30 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Add results page specific JavaScript -->
+<script src="{% static 'js/quiz-results.js' %}"></script>
+<script>
+    // Add score fill animation
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const scoreCircle = document.querySelector('.score-circle');
+            const percentage = {{ quiz_attempt.score_percentage }};
+            if (scoreCircle) {
+                scoreCircle.style.setProperty('--score-height', percentage + '%');
+                
+                // Set the before pseudo-element height
+                const beforeElement = scoreCircle.querySelector('::before');
+                if (beforeElement) {
+                    beforeElement.style.height = percentage + '%';
+                } else {
+                    // If we can't use ::before directly
+                    scoreCircle.style.setProperty('--score-fill', percentage + '%');
+                }
+            }
+        }, 500);
+    });
+</script>
 {% endblock %} 
