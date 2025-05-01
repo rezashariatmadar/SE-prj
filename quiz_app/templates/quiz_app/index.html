@@ -4,7 +4,9 @@
 {% block title %}Quiz Game - Home{% endblock %}
 
 {% block content %}
+<!-- Main container with vertical padding -->
 <div class="container py-5">
+    <!-- Header section with title and subtitle -->
     <div class="row">
         <div class="col-md-8 offset-md-2 text-center mb-5">
             <h1 class="display-4">Welcome to Quiz Game</h1>
@@ -12,6 +14,7 @@
         </div>
     </div>
 
+    <!-- Form error alert - shown when form validation fails -->
     {% if form_errors %}
     <div class="row mb-4">
         <div class="col-md-6 offset-md-3">
@@ -23,6 +26,7 @@
     </div>
     {% endif %}
 
+    <!-- Quiz setup form card -->
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card shadow">
@@ -30,8 +34,10 @@
                     <h3 class="card-title mb-0">Start a New Quiz</h3>
                 </div>
                 <div class="card-body">
+                    <!-- Form for starting a new quiz -->
                     <form method="post" action="{% url 'quiz:start' %}" id="quiz-form">
                         {% csrf_token %}
+                        <!-- Category selection dropdown -->
                         <div class="form-group mb-3">
                             <label for="{{ form.category.id_for_label }}">
                                 <i class="fas fa-folder me-2"></i>{{ form.category.label|default:"Category" }}
@@ -44,6 +50,7 @@
                             {% endif %}
                             <small class="form-text text-muted">{{ form.category.help_text }}</small>
                         </div>
+                        <!-- Number of questions input -->
                         <div class="form-group mb-3">
                             <label for="{{ form.num_questions.id_for_label }}">
                                 <i class="fas fa-question-circle me-2"></i>{{ form.num_questions.label|default:"Number of Questions" }}
@@ -56,6 +63,7 @@
                             {% endif %}
                             <small class="form-text text-muted">{{ form.num_questions.help_text }}</small>
                         </div>
+                        <!-- Time limit selection -->
                         <div class="form-group mb-3">
                             <label for="{{ form.time_limit.id_for_label }}">
                                 <i class="fas fa-clock me-2"></i>{{ form.time_limit.label|default:"Time Limit" }}
@@ -68,11 +76,13 @@
                             {% endif %}
                             <small class="form-text text-muted">{{ form.time_limit.help_text }}</small>
                         </div>
+                        <!-- Submit button (full width) -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="fas fa-play me-2"></i>Start Quiz
                             </button>
                         </div>
+                        <!-- Non-field errors (general form errors) -->
                         {% if form.non_field_errors %}
                             <div class="alert alert-danger mt-3">
                                 {{ form.non_field_errors }}
@@ -84,20 +94,24 @@
         </div>
     </div>
 
+    <!-- Available categories grid -->
     {% if categories %}
     <div class="row mt-5">
         <div class="col-12">
             <h2 class="text-center mb-4">Available Categories</h2>
         </div>
+        <!-- Loop through each available category -->
         {% for category in categories %}
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm hover-card">
                 <div class="card-body text-center">
+                    <!-- Category icon -->
                     <div class="category-icon mb-3">
                         <i class="fas {{ category.icon|default:'fa-book' }} fa-3x text-primary"></i>
                     </div>
                     <h3 class="card-title">{{ category.name }}</h3>
                     <p class="card-text text-muted">{{ category.description|truncatewords:15 }}</p>
+                    <!-- Question count badge -->
                     <div class="mt-3">
                         <span class="badge bg-info">{{ category.num_questions }} Questions</span>
                     </div>
@@ -112,9 +126,9 @@
 
 {% block extra_js %}
 <script>
-    // Initialize any interactive elements
+    // Initialize any interactive elements when document loads
     $(document).ready(function() {
-        // Add some animation to the hover cards
+        // Add hover animation effects to category cards
         $('.hover-card').hover(
             function() {
                 $(this).addClass('shadow');
@@ -126,22 +140,22 @@
             }
         );
         
-        // Validate form on submission
+        // Client-side form validation before submission
         $("#quiz-form").on('submit', function(e) {
             var category = $("#{{ form.category.id_for_label }}").val();
             var numQuestions = $("#{{ form.num_questions.id_for_label }}").val();
             var isValid = true;
             
-            // Reset error messages
+            // Clear any existing error messages
             $(".text-danger").remove();
             
-            // Validate category
+            // Validate that a category is selected
             if (!category) {
                 $("#{{ form.category.id_for_label }}").after('<div class="text-danger mt-1">Please select a category</div>');
                 isValid = false;
             }
             
-            // Validate number of questions
+            // Validate that number of questions is between 5-20
             if (!numQuestions) {
                 $("#{{ form.num_questions.id_for_label }}").after('<div class="text-danger mt-1">Please enter the number of questions</div>');
                 isValid = false;

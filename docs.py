@@ -3,6 +3,8 @@
 Documentation workflow automation script
 
 This script provides a simple CLI to run the documentation automation workflow.
+It automates the generation of documentation in various formats, manages documentation
+dependencies, and provides tools for opening and viewing the generated documentation.
 """
 
 import os
@@ -12,7 +14,13 @@ import argparse
 from pathlib import Path
 
 def setup_environment():
-    """Set up the Python environment."""
+    """
+    Set up the Python environment.
+    
+    This function attempts to activate the virtual environment if it exists
+    and is not already activated. This ensures that the script runs with
+    the correct Python interpreter and has access to all required packages.
+    """
     # Get the absolute path to the Django project root
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
@@ -36,14 +44,28 @@ def setup_environment():
 
 
 def validate_project():
-    """Validate that we're in a Django project root."""
+    """
+    Validate that we're in a Django project root.
+    
+    This ensures the script is being run from the correct directory by
+    checking for the presence of manage.py, which is a standard file
+    in Django projects.
+    """
     if not os.path.exists('manage.py'):
         print("Error: manage.py not found. Please run this script from your Django project root.")
         sys.exit(1)
 
 
 def run_autodoc(args):
-    """Run the autodoc command with given arguments."""
+    """
+    Run the autodoc command with given arguments.
+    
+    This function executes the Django management command 'autodoc'
+    with the provided arguments to generate documentation from the codebase.
+    
+    Args:
+        args: An object containing command line arguments for the autodoc command.
+    """
     cmd = ['python', 'manage.py', 'autodoc']
     
     if args.apps:
@@ -69,10 +91,19 @@ def run_autodoc(args):
 
 
 def open_docs(format_type):
-    """Open the generated documentation."""
+    """
+    Open the generated documentation.
+    
+    This function locates and opens the generated documentation in the
+    specified format using the appropriate system application.
+    
+    Args:
+        format_type: The format of documentation to open ('html', 'docx', or 'pdf').
+    """
     docs_dir = os.path.join(os.getcwd(), 'docs', '_build')
     
     if format_type == 'html':
+        # Open HTML documentation in the default web browser
         index_path = os.path.join(docs_dir, 'html', 'index.html')
         if os.path.exists(index_path):
             if sys.platform == 'win32':
@@ -84,6 +115,7 @@ def open_docs(format_type):
             print(f"Error: HTML documentation not found at {index_path}")
     
     elif format_type == 'docx':
+        # Open Word documentation in the default application
         docx_dir = os.path.join(docs_dir, 'docx')
         if os.path.exists(docx_dir):
             docx_files = [f for f in os.listdir(docx_dir) if f.endswith('.docx')]
@@ -99,6 +131,7 @@ def open_docs(format_type):
             print(f"Error: Word documentation not found at {docx_dir}")
     
     elif format_type == 'pdf':
+        # Open PDF documentation in the default PDF viewer
         pdf_dir = os.path.join(docs_dir, 'pdf')
         if os.path.exists(pdf_dir):
             pdf_files = [f for f in os.listdir(pdf_dir) if f.endswith('.pdf')]
@@ -115,11 +148,19 @@ def open_docs(format_type):
 
 
 def show_installed_packages():
-    """Show installed packages related to documentation."""
+    """
+    Show installed packages related to documentation.
+    
+    This function lists all installed Python packages that are related to
+    documentation generation, helping users verify that the required
+    dependencies are installed.
+    """
     try:
+        # Run pip list to get all installed packages
         result = subprocess.run(['pip', 'list'], capture_output=True, text=True, check=True)
         packages = result.stdout.splitlines()
         
+        # Filter for documentation-related packages
         doc_related = [
             p for p in packages 
             if any(name in p.lower() for name in ['sphinx', 'doc', 'rst', 'markdown', 'pandoc'])
@@ -136,15 +177,23 @@ def show_installed_packages():
 
 
 def install_dependencies():
-    """Install required dependencies."""
+    """
+    Install required dependencies.
+    
+    This function installs all the Python packages required for generating
+    documentation in various formats. It ensures that all necessary tools
+    are available for the documentation workflow.
+    """
+    # List of required packages with version constraints
     packages = [
-        'sphinx>=7.0.0',
-        'sphinx-rtd-theme>=1.3.0',
-        'docxbuilder>=1.2.0',
-        'markdown>=3.5.0'
+        'sphinx>=7.0.0',         # Documentation generator
+        'sphinx-rtd-theme>=1.3.0', # Read the Docs theme for Sphinx
+        'docxbuilder>=1.2.0',    # Extension for building Word documents
+        'markdown>=3.5.0'        # Markdown parser
     ]
     
     try:
+        # Install each package using pip
         for package in packages:
             print(f"Installing {package}...")
             subprocess.run(['pip', 'install', package], check=True)
@@ -154,12 +203,19 @@ def install_dependencies():
 
 
 def main():
-    """Main function to parse arguments and run the appropriate command."""
+    """
+    Main function to parse arguments and run the appropriate command.
+    
+    This function sets up the command-line interface for the documentation
+    workflow tool, parses the arguments, and calls the appropriate functions
+    based on the user's commands.
+    """
     parser = argparse.ArgumentParser(description='Documentation workflow automation')
     
     subparsers = parser.add_subparsers(dest='command', help='Command to run')
     
     # 'generate' command
+    # Used to generate documentation from the codebase
     generate_parser = subparsers.add_parser('generate', help='Generate documentation')
     generate_parser.add_argument('--apps', nargs='+', help='App names to document')
     generate_parser.add_argument(
@@ -185,6 +241,7 @@ def main():
     )
     
     # 'open' command
+    # Used to open generated documentation
     open_parser = subparsers.add_parser('open', help='Open generated documentation')
     open_parser.add_argument(
         'format', 
@@ -195,18 +252,23 @@ def main():
     )
     
     # 'install' command
+    # Used to install documentation dependencies
     install_parser = subparsers.add_parser('install', help='Install documentation dependencies')
     
     # 'info' command
-    info_parser = subparsers.add_parser('info', help='Show information about installed documentation tools')
+    # Used to display information about the documentation setup
+    info_parser = subparsers.add_parser('info', help='Show documentation-related information')
     
+    # Parse the arguments
     args = parser.parse_args()
     
-    # Set up environment
-    setup_environment()
+    # Validate that we're in a Django project
     validate_project()
     
-    # Handle commands
+    # Set up the environment
+    setup_environment()
+    
+    # Execute the appropriate command
     if args.command == 'generate':
         run_autodoc(args)
     elif args.command == 'open':

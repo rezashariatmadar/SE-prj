@@ -4,23 +4,23 @@ A web-based quiz application built with Django that allows users to take quizzes
 
 ## Features
 
-- Multiple quiz categories
-- User authentication and registration
-- Score tracking and results
-- Admin interface for quiz management
-- Automated question generation
-- Responsive design with Bootstrap 4
-- Comprehensive documentation automation
+- **Multiple quiz categories**: Create and organize questions by topics
+- **User authentication**: Register, login, and track progress
+- **Score tracking**: Save and display quiz results and statistics
+- **Admin interface**: Comprehensive management for quizzes and users
+- **Automated question generation**: Tools for creating content
+- **Responsive design**: Mobile-friendly interface with Bootstrap 4
+- **Documentation automation**: Built-in tools for generating documentation
 
 ## Installation
 
-1. Clone the repository
+1. **Clone the repository**
 ```bash
 git clone <repository-url>
 cd <repository-name>
 ```
 
-2. Create and activate virtual environment
+2. **Create and activate virtual environment**
 ```bash
 python -m venv .venv
 # Windows
@@ -29,41 +29,42 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-3. Install dependencies
+3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Apply migrations
+4. **Apply migrations**
 ```bash
 python manage.py migrate
 ```
 
-5. Create superuser (optional)
+5. **Create superuser** (optional)
 ```bash
 python manage.py createsuperuser
 ```
 
-6. Run development server
+6. **Run development server**
 ```bash
 python manage.py runserver
 ```
 
 ## Usage
 
-1. Access the application at `http://localhost:8000`
-2. Register a new account or login
-3. Browse available quiz categories
-4. Select a quiz and answer questions
-5. View your results and track progress
+1. **Access the application** at `http://localhost:8000`
+2. **Register a new account** or login with existing credentials
+3. **Browse available quiz categories** from the homepage
+4. **Select a quiz** and customize number of questions and time limit
+5. **Answer questions** within the allocated time
+6. **View your results** and track progress in your profile
 
 ## Admin Interface
 
 Access the admin interface at `http://localhost:8000/admin` to:
-- Manage quiz categories
-- Add/edit questions
-- View user results
-- Manage user accounts
+- **Manage quiz categories**: Create, edit, and delete categories
+- **Add/edit questions**: Create questions with multiple choice answers
+- **View user results**: Monitor quiz attempts and scores
+- **Manage user accounts**: Add, edit, or deactivate users
 
 ## Populating Questions
 
@@ -105,13 +106,27 @@ For more details, see the [Documentation Tools](docs/documentation_tools.rst) an
 
 ## Technology Stack
 
-- Django
-- SQLite
-- Bootstrap 4
-- django-crispy-forms
-- JavaScript
-- Sphinx (documentation generation)
-- pandas & matplotlib (data analysis)
+- **Backend**: Django web framework
+- **Database**: SQLite (production deployments can use PostgreSQL)
+- **Frontend**: Bootstrap 4, HTML5, CSS3, JavaScript
+- **Forms**: django-crispy-forms for improved form rendering
+- **Development tools**: django-debug-toolbar, django-extensions
+- **Documentation**: Sphinx, docxbuilder
+- **Data visualization**: pandas, matplotlib, seaborn
+
+## Project Structure
+
+- **quiz_project/**: Main Django project settings
+- **quiz_app/**: Core application code
+  - **models.py**: Database models
+  - **views.py**: View controllers
+  - **forms.py**: Form definitions
+  - **admin.py**: Admin interface customization
+  - **templates/**: HTML templates
+  - **tests/**: Automated tests
+- **scripts/**: Utility scripts
+- **docs/**: Documentation files
+- **templates/**: Project-wide templates
 
 ## Contributing
 
