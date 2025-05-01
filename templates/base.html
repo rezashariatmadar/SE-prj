@@ -146,6 +146,11 @@
                         </a>
                     </li>
                     {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'docs:diagrams' %}">
+                            <i class="fas fa-project-diagram me-1"></i> System Diagrams
+                        </a>
+                    </li>
                 </ul>
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}

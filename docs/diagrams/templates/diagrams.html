@@ -1,0 +1,455 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz Application - Project Diagrams{% endblock %}
+
+{% block extra_css %}
+<!-- Add diagram specific styles -->
+<link rel="stylesheet" href="/docs/diagrams/static/css/diagram-styles.css">
+<style>
+    .diagram-nav {
+        position: sticky;
+        top: 20px;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .diagram-nav-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .diagram-nav-item {
+        margin-bottom: 0.5rem;
+    }
+    
+    .diagram-nav-link {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: #495057;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+    
+    .diagram-nav-link:hover {
+        background-color: #e9ecef;
+        color: #007bff;
+    }
+    
+    .diagram-nav-link.active {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    .diagram-section {
+        scroll-margin-top: 2rem;
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .diagram-section:last-child {
+        border-bottom: none;
+    }
+    
+    .diagram-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .diagram-header i {
+        font-size: 1.5rem;
+        margin-right: 0.75rem;
+        color: #007bff;
+    }
+    
+    .diagram-description {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #007bff;
+    }
+    
+    .key-elements {
+        background-color: #e8f4f8;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+    
+    .section-title {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 50px;
+        height: 3px;
+        background-color: #007bff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Sidebar navigation -->
+        <div class="col-lg-3">
+            <div class="diagram-nav">
+                <h5 class="mb-3">Diagram Categories</h5>
+                <ul class="diagram-nav-list" id="diagramNavList">
+                    <li class="diagram-nav-item">
+                        <a href="#dfd-diagrams" class="diagram-nav-link" data-diagram="dfd">
+                            <i class="fas fa-project-diagram me-2"></i> Data Flow Diagrams
+                        </a>
+                    </li>
+                    <li class="diagram-nav-item">
+                        <a href="#use-case" class="diagram-nav-link" data-diagram="usecase">
+                            <i class="fas fa-users me-2"></i> Use Case Diagram
+                        </a>
+                    </li>
+                    <li class="diagram-nav-item">
+                        <a href="#sequence" class="diagram-nav-link" data-diagram="sequence">
+                            <i class="fas fa-exchange-alt me-2"></i> Sequence Diagram
+                        </a>
+                    </li>
+                    <li class="diagram-nav-item">
+                        <a href="#component" class="diagram-nav-link" data-diagram="component">
+                            <i class="fas fa-puzzle-piece me-2"></i> Component Diagram
+                        </a>
+                    </li>
+                    <li class="diagram-nav-item">
+                        <a href="#project-planning" class="diagram-nav-link" data-diagram="planning">
+                            <i class="fas fa-tasks me-2"></i> Project Planning
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="mt-4">
+                    <h6 class="mb-2">Actions</h6>
+                    <button id="downloadAllBtn" class="btn btn-sm btn-outline-primary w-100 mb-2">
+                        <i class="fas fa-download me-2"></i> Download All Diagrams
+                    </button>
+                    <button id="generateBtn" class="btn btn-sm btn-outline-success w-100">
+                        <i class="fas fa-sync me-2"></i> Regenerate Diagrams
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="col-lg-9">
+            <h1 class="display-4 mb-4">Quiz Application - Project Diagrams</h1>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                These diagrams provide visual representations of the system design, architecture, and project planning.
+                Click on any diagram to view it in full screen mode.
+            </div>
+            
+            <!-- Data Flow Diagrams -->
+            <section id="dfd-diagrams" class="diagram-section diagram-dfd">
+                <h2 class="section-title">Data Flow Diagrams</h2>
+                
+                <div class="diagram-description">
+                    <p>Data Flow Diagrams (DFDs) illustrate how data moves through the Quiz application. We provide three levels of DFDs to show increasing levels of detail.</p>
+                </div>
+                
+                <h3>Level 0 DFD (Context Diagram)</h3>
+                <p>The context diagram shows the system as a single process interacting with external entities.</p>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/dfd_level0.png" alt="Level 0 DFD: Context Diagram" data-description="Shows the Quiz System as a single process interacting with Users, Administrators, and the Database">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>The Quiz System is represented as a single process</li>
+                        <li>External entities include Users, Administrators, and the Database</li>
+                        <li>Data flows show the high-level interactions between entities</li>
+                    </ul>
+                </div>
+                
+                <h3>Level 1 DFD</h3>
+                <p>The Level 1 DFD breaks down the system into its major processes and data stores.</p>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/dfd_level1.png" alt="Level 1 DFD: Major Processes" data-description="Shows major processes including User Authentication, Quiz Selection, Quiz Taking, Result Analysis, and Admin Dashboard">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Major processes: User Authentication, Quiz Selection, Quiz Taking, Result Analysis, Admin Dashboard</li>
+                        <li>Data stores: User Database, Question Database, Results Database</li>
+                        <li>Data flows showing how information moves between processes and data stores</li>
+                    </ul>
+                </div>
+                
+                <h3>Level 2 DFD (Quiz Taking Process)</h3>
+                <p>The Level 2 DFD provides a detailed view of the Quiz Taking process.</p>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/dfd_level2.png" alt="Level 2 DFD: Quiz Taking Process Detail" data-description="Shows detailed sub-processes of Quiz Taking including Question Retrieval, Answer Submission, Progress Tracking, and Score Calculation">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Detailed sub-processes: Question Retrieval, Answer Submission, Progress Tracking, Score Calculation</li>
+                        <li>Data stores accessed during quiz taking</li>
+                        <li>Detailed data flows showing the complete quiz-taking workflow</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Use Case Diagram -->
+            <section id="use-case" class="diagram-section diagram-usecase">
+                <h2 class="section-title">Use Case Diagram</h2>
+                
+                <div class="diagram-description">
+                    <p>The Use Case Diagram illustrates the interactions between users and the system functionality.</p>
+                </div>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/use_case_diagram.png" alt="Use Case Diagram" data-description="Illustrates all user interactions with the system including Anonymous User, Registered User, and Administrator actions">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Actor types: Anonymous User, Registered User, and Administrator</li>
+                        <li>Primary use cases for each actor type</li>
+                        <li>Include and extend relationships between use cases</li>
+                        <li>System boundary defining the scope of the application</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Sequence Diagram -->
+            <section id="sequence" class="diagram-section diagram-sequence">
+                <h2 class="section-title">Sequence Diagram</h2>
+                
+                <div class="diagram-description">
+                    <p>The Sequence Diagram shows the time-ordered interactions for the quiz-taking process.</p>
+                </div>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/sequence_diagram.png" alt="Sequence Diagram: Quiz Taking Process" data-description="Shows the time-ordered message flow between components during the quiz-taking process">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Participants: User, Browser UI, Quiz Controller, Question Model, Database</li>
+                        <li>Message sequence showing the complete quiz-taking flow</li>
+                        <li>Return messages indicating responses between components</li>
+                        <li>Activation bars showing when each component is active</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Component Diagram -->
+            <section id="component" class="diagram-section diagram-component">
+                <h2 class="section-title">Component Diagram</h2>
+                
+                <div class="diagram-description">
+                    <p>The Component Diagram illustrates the high-level architecture of the application.</p>
+                </div>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/component_diagram.png" alt="Component Diagram" data-description="Displays the system architecture with different layers and component dependencies">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Architectural layers: Presentation, Controller, Service, and Data Storage</li>
+                        <li>Components within each layer</li>
+                        <li>Interfaces provided by components</li>
+                        <li>Dependencies between components</li>
+                        <li>Database connections</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Project Planning -->
+            <section id="project-planning" class="diagram-section diagram-planning">
+                <h2 class="section-title">Project Planning</h2>
+                
+                <div class="diagram-description">
+                    <p>The project planning diagrams provide insights into the project schedule, task dependencies, and time estimation.</p>
+                </div>
+                
+                <h3>Three-Point Estimation</h3>
+                <p>The Three-Point Estimation table shows optimistic, most likely, and pessimistic time estimates for each project task.</p>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/three_point_estimation.png" alt="Three-Point Estimation Table" data-description="Displays task estimates using optimistic, most likely, and pessimistic durations">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Task breakdown with IDs</li>
+                        <li>Three-point estimates (Optimistic, Most Likely, Pessimistic)</li>
+                        <li>Expected duration calculation</li>
+                        <li>Standard deviation and variance values</li>
+                        <li>Critical path identification</li>
+                    </ul>
+                </div>
+                
+                <h3>PERT Chart</h3>
+                <p>The PERT (Program Evaluation and Review Technique) chart shows task dependencies and the critical path.</p>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/pert_chart.png" alt="PERT Chart" data-description="Shows task dependencies and the critical path through the project">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Nodes representing project tasks</li>
+                        <li>Edges showing dependencies between tasks</li>
+                        <li>Critical path highlighted in red</li>
+                        <li>Early start/finish and late start/finish times for each task</li>
+                        <li>Slack time calculation</li>
+                    </ul>
+                </div>
+                
+                <h3>Gantt Chart</h3>
+                <p>The Gantt chart provides a timeline view of the project schedule.</p>
+                
+                <div class="diagram-container">
+                    <img src="/docs/diagrams/output/gantt_chart.png" alt="Gantt Chart" data-description="Timeline visualization of project tasks and their durations">
+                </div>
+                
+                <div class="key-elements">
+                    <h5>Key Elements:</h5>
+                    <ul>
+                        <li>Horizontal bars representing task durations</li>
+                        <li>Task dependencies shown as arrows</li>
+                        <li>Critical path tasks highlighted</li>
+                        <li>Three-point estimation uncertainty ranges</li>
+                        <li>Timeline with day markers</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Generating Instructions -->
+            <section id="generating" class="diagram-section">
+                <h2 class="section-title">Generating the Diagrams</h2>
+                
+                <div class="diagram-description">
+                    <p>All diagrams were generated programmatically using Python with the following libraries:</p>
+                    <ul>
+                        <li>Matplotlib</li>
+                        <li>NetworkX</li>
+                        <li>NumPy</li>
+                        <li>Pandas</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <i class="fas fa-code me-2"></i> Code to Generate Diagrams
+                    </div>
+                    <div class="card-body">
+                        <pre class="bg-light p-3 rounded"><code>python docs/diagrams/generate_all_diagrams.py</code></pre>
+                        <p class="mb-0 mt-3">This command will generate all diagrams and save them to the <code>docs/diagrams/output/</code> directory.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Add diagram specific JavaScript -->
+<script src="/docs/diagrams/static/js/diagram-viewer.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle navigation highlighting
+        const navLinks = document.querySelectorAll('.diagram-nav-link');
+        const sections = document.querySelectorAll('.diagram-section');
+        
+        // Highlight active section on scroll
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Update active class
+                navLinks.forEach(innerLink => {
+                    innerLink.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Download all diagrams button
+        document.getElementById('downloadAllBtn').addEventListener('click', function() {
+            alert('This would download a zip file with all diagrams in high resolution.');
+            // Actual implementation would create a zip file with all diagrams
+        });
+        
+        // Regenerate diagrams button
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            if (confirm('This will regenerate all diagrams. Continue?')) {
+                // Show loading state
+                this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Generating...';
+                this.disabled = true;
+                
+                // Simulate process (in a real implementation, this would call the Python script)
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check me-2"></i> Generated!';
+                    
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-sync me-2"></i> Regenerate Diagrams';
+                        this.disabled = false;
+                    }, 2000);
+                }, 3000);
+            }
+        });
+    });
+</script>
+{% endblock %} 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     # Local apps
     'quiz_app',                       # Our quiz application
+    'docs',                           # Documentation app with diagrams
 ]
 
 # Middleware classes - components that process requests/responses
