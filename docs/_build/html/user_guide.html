@@ -1,21 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Guide &mdash; Quiz Game Documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8d563738"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -67,6 +67,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#user-statistics">User Statistics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#accessing-statistics">Accessing Statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-statistics">Available Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#analytics-features">Analytics Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-analytics-for-learning">Using Analytics for Learning</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#account-management">Account Management</a><ul>
@@ -93,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
@@ -262,6 +264,68 @@ from taking quizzes to viewing statistics and managing your account.</p>
 </ol>
 <a class="reference internal image-reference" href="_images/stats_screenshot.png"><img alt="Statistics Screenshot" class="align-center" src="_images/stats_screenshot.png" style="width: 600px;" />
 </a>
+</section>
+<section id="analytics-features">
+<h3>Analytics Features<a class="headerlink" href="#analytics-features" title="Link to this heading"></a></h3>
+<p>The analytics dashboard provides advanced visualizations to help you understand your performance:</p>
+<ol class="arabic">
+<li><p><strong>Performance Over Time Chart</strong>:</p>
+<ul class="simple">
+<li><p>Interactive line chart showing your scores across time</p></li>
+<li><p>Multiple categories displayed with different colors</p></li>
+<li><p>Hover over points to see exact scores and dates</p></li>
+<li><p>Identify trends and improvements in your quiz performance</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/performance_time.png"><img alt="Performance Over Time Chart" class="align-center" src="_images/performance_time.png" style="width: 500px;" />
+</a>
+</li>
+<li><p><strong>Category Performance Chart</strong>:</p>
+<ul class="simple">
+<li><p>Bar chart comparing your average scores across different categories</p></li>
+<li><p>Overall average shown as a horizontal line for reference</p></li>
+<li><p>Categories sorted from highest to lowest performance</p></li>
+<li><p>Quickly identify your strongest and weakest subjects</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/performance_category.png"><img alt="Category Performance Chart" class="align-center" src="_images/performance_category.png" style="width: 500px;" />
+</a>
+</li>
+<li><p><strong>Quiz Length Distribution</strong>:</p>
+<ul class="simple">
+<li><p>Pie chart showing the distribution of quiz lengths you’ve attempted</p></li>
+<li><p>See what proportion of your quizzes were short, medium, or long</p></li>
+<li><p>Helps in planning your study sessions</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/quiz_distribution.png"><img alt="Quiz Length Distribution" class="align-center" src="_images/quiz_distribution.png" style="width: 400px;" />
+</a>
+</li>
+<li><p><strong>Results Analysis</strong>:</p>
+<ul class="simple">
+<li><p>After completing a quiz, see how you performed across different difficulty levels</p></li>
+<li><p>Identify which types of questions you need to focus on</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/difficulty_performance.png"><img alt="Performance by Difficulty" class="align-center" src="_images/difficulty_performance.png" style="width: 500px;" />
+</a>
+</li>
+<li><p><strong>Comprehensive Dashboard</strong>:</p>
+<ul class="simple">
+<li><p>All your statistics in one convenient view</p></li>
+<li><p>Multiple visualizations to give you a complete picture of your progress</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/dashboard_summary.png"><img alt="Analytics Dashboard" class="align-center" src="_images/dashboard_summary.png" style="width: 600px;" />
+</a>
+</li>
+</ol>
+</section>
+<section id="using-analytics-for-learning">
+<h3>Using Analytics for Learning<a class="headerlink" href="#using-analytics-for-learning" title="Link to this heading"></a></h3>
+<p>Here are some ways to leverage the analytics features:</p>
+<ul class="simple">
+<li><p><strong>Identify knowledge gaps</strong>: Look for categories with consistently lower scores</p></li>
+<li><p><strong>Track improvement</strong>: Monitor your performance over time to validate your learning</p></li>
+<li><p><strong>Set goals</strong>: Challenge yourself to improve scores in specific categories</p></li>
+<li><p><strong>Study efficiently</strong>: Focus your efforts on the areas that need the most improvement</p></li>
+<li><p><strong>Share progress</strong>: Download or print your analytics charts to share with teachers or study partners</p></li>
+</ul>
 </section>
 </section>
 <section id="account-management">

@@ -1,210 +1,89 @@
-Analytics and Data Visualization
-==============================
+Analytics and Visualization
+=========================
 
-This section documents the analytics and data visualization capabilities of the
-Quiz Game application, including the data processing pipeline, visualization techniques,
-and the insights provided to users.
+Last updated: 2025-05-08
 
-Analytics Pipeline
-----------------
+Overview
+--------
 
-The Quiz Game application implements a data analytics pipeline that transforms
-raw quiz data into meaningful visualizations and statistics:
+The Quiz Application includes comprehensive analytics and visualization features that help users
+track their performance over time and get insights into their quiz-taking habits.
 
-1. **Data Collection**
-   
-   * User interactions and responses are recorded in the database
-   * Each question answer is stored with metadata (time, correctness)
-   * Quiz attempts track overall performance
+Analytics Features
+-----------------
 
-2. **Data Processing**
-   
-   * Raw data is retrieved from the database
-   * Pandas DataFrames are created for efficient manipulation
-   * Aggregation, grouping, and statistical calculations are performed
+User Statistics Dashboard
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. **Visualization Generation**
-   
-   * Charts and graphs are created using matplotlib and seaborn
-   * Visualizations are encoded as base64 strings for embedding
-   * Results are presented in the user interface
+The User Statistics Dashboard provides a comprehensive view of a user's quiz performance:
 
-4. **Insight Delivery**
-   
-   * Visualizations are displayed to users
-   * Summary statistics provide quick performance assessment
-   * Recommendations may be offered based on results
+* **Performance Over Time**: Line chart showing quiz scores over time, grouped by category
+* **Performance by Category**: Bar chart showing average scores for each category
+* **Quiz Length Distribution**: Pie chart showing the distribution of quiz lengths
+* **Summary Statistics**: Key metrics including overall average, best category, and perfect scores
 
-Data Processing with Pandas
---------------------------
+Visualizations
+-------------
 
-The application leverages pandas for efficient data manipulation:
+The analytics system uses the following Python data science libraries:
 
-.. code-block:: python
+* **pandas**: For data manipulation and analysis
+* **matplotlib**: For creating static visualizations
+* **seaborn**: For enhanced matplotlib visualizations with better default styling
 
-   # Example: Creating a DataFrame from quiz responses
-   data = {
-       'question': [r.question.text for r in responses],
-       'is_correct': [r.is_correct for r in responses],
-       'difficulty': [r.question.difficulty for r in responses]
-   }
-   df = pd.DataFrame(data)
-   
-   # Aggregating performance by difficulty
-   difficulty_performance = df.groupby('difficulty')['is_correct'].mean() * 100
+Implementation
+-------------
 
-Key pandas operations used:
+The analytics system is implemented through the ``UserStatsView`` class, which:
 
-* **DataFrame creation** from dictionaries or QuerySets
-* **Groupby operations** for aggregating by category or difficulty
-* **Time-series analysis** for performance trends
-* **Statistical functions** (mean, median, count, etc.)
-* **Data transformation** for visualization preparation
+* Collects quiz attempt data for the logged-in user
+* Transforms the data into pandas DataFrames
+* Generates visualizations using matplotlib and seaborn
+* Calculates summary statistics
+* Passes the charts and statistics to the template for display
 
-Visualization Techniques
-----------------------
-
-The application employs several types of visualizations:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 40 40
-   
-   * - Visualization Type
-     - Purpose
-     - Implementation
-   * - Bar Charts
-     - Compare performance across categories or difficulty levels
-     - ``sns.barplot(x=category, y=performance)``
-   * - Line Charts
-     - Show performance trends over time
-     - ``sns.lineplot(data=df, x='date', y='score', hue='category')``
-   * - Pie Charts
-     - Display proportion of correct/incorrect answers
-     - ``plt.pie([correct, incorrect], labels=['Correct', 'Incorrect'])``
-   * - Heatmaps
-     - Visualize performance across multiple dimensions
-     - ``sns.heatmap(performance_matrix)``
-
-Example: Performance by Difficulty Chart
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Code Example
+~~~~~~~~~~~
 
 .. code-block:: python
 
-   # Generate performance by difficulty chart
-   plt.figure(figsize=(8, 4))
-   sns.barplot(x=difficulty_performance.index, y=difficulty_performance.values)
-   plt.title('Performance by Question Difficulty')
-   plt.xlabel('Difficulty Level')
-   plt.ylabel('Correct Answers (%)')
-   plt.ylim(0, 100)
-   
-   # Save chart as base64 string for embedding
-   buffer = BytesIO()
-   plt.savefig(buffer, format='png', bbox_inches='tight')
-   buffer.seek(0)
-   chart = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    def get_context_data(self, **kwargs):
+        # Get quiz attempts
+        quiz_attempts = QuizAttempt.objects.filter(
+            user=self.request.user,
+            completed_at__isnull=False
+        ).select_related('category')
+        
+        # Create DataFrame
+        data = {
+            'date': [],
+            'category': [],
+            'score_percentage': []
+        }
+        # Add data to the dictionary
+        
+        # Generate visualizations...
 
-Results Visualizations
---------------------
+Data Sources
+-----------
 
-After completing a quiz, users see the following visualizations:
+The analytics feature uses data from the following models:
 
-1. **Score Summary**
-   
-   * Visual representation of correct vs. incorrect answers
-   * Progress bar showing percentage score
-   * Color-coded feedback based on performance
+* **QuizAttempt**: For quiz metadata and scores
+* **QuizResponse**: For detailed response data
+* **Category**: For category information
+* **User**: For user identification
 
-2. **Performance by Difficulty**
-   
-   * Bar chart showing percentage of correct answers by difficulty level
-   * Helps users identify strengths and weaknesses
+Future Enhancements
+------------------
 
-3. **Answer Review**
-   
-   * Color-coded list of questions and responses
-   * Correct answers highlighted
-   * Explanations provided for educational value
+Planned enhancements to the analytics system include:
 
-User Statistics Visualizations
-----------------------------
+1. Predictive analytics to recommend areas for improvement
+2. Comparative statistics against other users
+3. Downloadable reports in PDF format
+4. Advanced filtering and time-range selection
+5. Custom chart creation
 
-Authenticated users can access additional visualizations in their stats dashboard:
 
-1. **Performance Over Time**
-   
-   * Line chart tracking score percentages across multiple quizzes
-   * Color-coded by category
-   * Shows learning progress and improvement
-
-2. **Performance by Category**
-   
-   * Bar chart comparing average scores across different categories
-   * Sorted from highest to lowest performance
-   * Identifies strengths and areas for improvement
-
-3. **Summary Statistics**
-   
-   * Total quizzes completed
-   * Average score percentage
-   * Number of categories attempted
-   * Best performing category
-
-Visualization Best Practices
---------------------------
-
-The application follows these data visualization best practices:
-
-1. **Color Usage**
-   
-   * Consistent color schemes across the application
-   * Color-blind friendly palettes
-   * Semantic colors (green for correct, red for incorrect)
-
-2. **Chart Composition**
-   
-   * Clear titles and axis labels
-   * Appropriate scales and ranges
-   * Legend when multiple data series are present
-
-3. **Responsiveness**
-   
-   * Charts adapt to different screen sizes
-   * Mobile-friendly visualization formats
-   * Fallback for browsers without JavaScript
-
-4. **Performance Optimization**
-   
-   * Server-side rendering for complex visualizations
-   * Efficient data transformation with pandas
-   * Appropriate image compression for base64 encoding
-
-Extending the Analytics
----------------------
-
-The analytics system can be extended in several ways:
-
-1. **Additional Visualizations**
-   
-   * Box plots for score distributions
-   * Radar charts for multi-dimensional performance
-   * Network graphs for related categories
-
-2. **Advanced Analytics**
-   
-   * Predictive modeling for question difficulty
-   * Personalized recommendations
-   * Learning path optimization
-
-3. **Real-time Analytics**
-   
-   * Live updating dashboards
-   * Performance comparisons with other users
-   * Trending categories and questions
-
-4. **Export Capabilities**
-   
-   * PDF reports of performance
-   * CSV data export for external analysis
-   * Integration with learning management systems 
+''

@@ -1,21 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to Quiz Game Documentation &mdash; Quiz Game Documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8d563738"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
@@ -160,14 +160,13 @@ immediate feedback, tracks user performance, and generates visualizations of qui
 <li class="toctree-l2"><a class="reference internal" href="forms.html#conclusion">Conclusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#analytics-pipeline">Analytics Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#data-processing-with-pandas">Data Processing with Pandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#visualization-techniques">Visualization Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#results-visualizations">Results Visualizations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#user-statistics-visualizations">User Statistics Visualizations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#visualization-best-practices">Visualization Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#extending-the-analytics">Extending the Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#analytics-features">Analytics Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#visualizations">Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#data-sources">Data Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#future-enhancements">Future Enhancements</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a><ul>
@@ -198,9 +197,13 @@ immediate feedback, tracks user performance, and generates visualizations of qui
 </li>
 </ul>
 </div>
-</section>
-<section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Key Features</dt><dd><p>quiz_app_models
+quiz_app_views
+quiz_app_forms</p>
+</dd>
+</dl>
+<hr class="docutils" />
 <ul class="simple">
 <li><p>Multiple quiz categories</p></li>
 <li><p>Randomized questions</p></li>

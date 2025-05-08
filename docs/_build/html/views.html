@@ -1,21 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Views &mdash; Quiz Game Documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8d563738"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -101,7 +101,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
@@ -145,7 +145,7 @@ Views handle the HTTP requests, perform business logic, and return appropriate r
 <h2>Index View<a class="headerlink" href="#index-view" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="IndexView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IndexView</span></span><a class="headerlink" href="#IndexView" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IndexView</span></span><a class="headerlink" href="#IndexView" title="Link to this definition"></a></dt>
 <dd><p>View for the home page of the quiz application.</p>
 <p>This class-based view displays a welcome message and available quiz categories.
 It inherits from Django’s TemplateView.</p>
@@ -162,7 +162,7 @@ It inherits from Django’s TemplateView.</p>
 <h2>Category List View<a class="headerlink" href="#category-list-view" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="CategoryListView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CategoryListView</span></span><a class="headerlink" href="#CategoryListView" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CategoryListView</span></span><a class="headerlink" href="#CategoryListView" title="Link to this definition"></a></dt>
 <dd><p>View to display all available quiz categories.</p>
 <p>This class-based view inherits from Django’s ListView and displays
 a list of all categories that have at least one question.</p>
@@ -191,7 +191,7 @@ a list of all categories that have at least one question.</p>
 <h2>Quiz Start View<a class="headerlink" href="#quiz-start-view" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="QuizStartView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuizStartView</span></span><a class="headerlink" href="#QuizStartView" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuizStartView</span></span><a class="headerlink" href="#QuizStartView" title="Link to this definition"></a></dt>
 <dd><p>View to handle the start of a new quiz.</p>
 <p>This class-based view creates a new QuizAttempt and redirects to the first question.
 It handles the form submission from the quiz selection page.</p>
@@ -202,7 +202,7 @@ It handles the form submission from the quiz selection page.</p>
 <h2>Question View<a class="headerlink" href="#question-view" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="QuestionView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuestionView</span></span><a class="headerlink" href="#QuestionView" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">QuestionView</span></span><a class="headerlink" href="#QuestionView" title="Link to this definition"></a></dt>
 <dd><p>View to display a quiz question and process the answer.</p>
 <p>This class-based view handles both displaying questions and processing answers.</p>
 <dl class="py attribute">
@@ -218,7 +218,7 @@ It handles the form submission from the quiz selection page.</p>
 <h2>Results View<a class="headerlink" href="#results-view" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ResultsView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResultsView</span></span><a class="headerlink" href="#ResultsView" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResultsView</span></span><a class="headerlink" href="#ResultsView" title="Link to this definition"></a></dt>
 <dd><p>View to display the results of a completed quiz.</p>
 <p>This class-based view inherits from Django’s DetailView and shows
 the score, performance charts, and answer review for a completed quiz.</p>
@@ -253,7 +253,7 @@ the score, performance charts, and answer review for a completed quiz.</p>
 <h2>User Stats View<a class="headerlink" href="#user-stats-view" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="UserStatsView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UserStatsView</span></span><a class="headerlink" href="#UserStatsView" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UserStatsView</span></span><a class="headerlink" href="#UserStatsView" title="Link to this definition"></a></dt>
 <dd><p>View to display statistics and analytics for a user’s quiz history.</p>
 <p>This class-based view requires authentication and shows visualizations
 of the user’s performance across different categories and over time.</p>

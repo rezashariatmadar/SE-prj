@@ -1,0 +1,2811 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tests &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tests">
+<h1>Tests<a class="headerlink" href="#tests" title="Link to this heading"></a></h1>
+<p>Last updated: 2025-05-08</p>
+<p>Preamble</p>
+<hr class="docutils" />
+<p>Pandoc (Haskell)</p>
+<hr class="docutils" />
+<p>This test suite requires pandoc 1.16:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">subprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">Popen</span><span class="p">,</span> <span class="n">PIPE</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;pandoc&quot;</span><span class="p">,</span> <span class="s2">&quot;-v&quot;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="sa">b</span><span class="s2">&quot;pandoc 1.16&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()[</span><span class="mi">0</span><span class="p">]:</span>
+
+<span class="go">...     raise RuntimeError(&quot;pandoc 1.16 not found&quot;)</span>
+</pre></div>
+</div>
+<p>Imports</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandoc.types</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandoc</span>
+</pre></div>
+</div>
+<p>Pandoc Test Suite</p>
+<hr class="docutils" />
+<p>Source: <a class="reference external" href="http://pandoc.org/README.html">Pandoc’s User Guide</a></p>
+<p>Paragraphs</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... a paragraph</span>
+
+<span class="go">...</span>
+
+<span class="go">... another paragraph</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;a&#39;), Space(), Str(u&#39;paragraph&#39;)]), Para([St</span>
+
+<span class="go">r(u&#39;another&#39;), Space(), Str(u&#39;paragraph&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;a paragraph  </span><span class="se">\n</span><span class="s2">another paragraph&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;a&#39;), Space(), Str(u&#39;paragraph&#39;), LineBreak(</span>
+
+<span class="go">), Str(u&#39;another&#39;), Space(), Str(u&#39;paragraph&#39;)])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">escaped_line_breaks</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... a paragraph\</span>
+
+<span class="go">... another paragraph</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;a&#39;), Space(), Str(u&#39;paragraph&#39;), LineBreak(</span>
+
+<span class="go">), Str(u&#39;another&#39;), Space(), Str(u&#39;paragraph&#39;)])])</span>
+</pre></div>
+</div>
+<p>Headers</p>
+<hr class="docutils" />
+<p>Setext-style headers</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... A level-one header</span>
+
+<span class="go">... ==================</span>
+
+<span class="go">...</span>
+
+<span class="go">... A level-two header</span>
+
+<span class="go">... ------------------</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(1, (u&#39;a-level-one-header&#39;, [], []), [Str(u&#39;A&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;level-one&#39;), Space(), Str(u&#39;header&#39;)]), Header(2, (u&#39;a-level-</span>
+
+<span class="go">two-header&#39;, [], []), [Str(u&#39;A&#39;), Space(), Str(u&#39;level-two&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;header&#39;)])])</span>
+</pre></div>
+</div>
+<p>ATX-style headers</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... ## A level-two header</span>
+
+<span class="go">...</span>
+
+<span class="go">... ### A level-three header ###</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(2, (u&#39;a-level-two-header&#39;, [], []), [Str(u&#39;A&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;level-two&#39;), Space(), Str(u&#39;header&#39;)]), Header(3, (u&#39;a-level-</span>
+
+<span class="go">three-header&#39;, [], []), [Str(u&#39;A&#39;), Space(), Str(u&#39;level-three&#39;), Space(), S</span>
+
+<span class="go">tr(u&#39;header&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;# A level-one header with a [link](/url) and *emphasis*&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(1, (u&#39;a-level-one-header-with-a-link-and-emphasi</span>
+
+<span class="go">s&#39;, [], []), [Str(u&#39;A&#39;), Space(), Str(u&#39;level-one&#39;), Space(), Str(u&#39;header&#39;)</span>
+
+<span class="go">, Space(), Str(u&#39;with&#39;), Space(), Str(u&#39;a&#39;), Space(), Link((u&#39;&#39;, [], []), [S</span>
+
+<span class="go">tr(u&#39;link&#39;)], (u&#39;/url&#39;, u&#39;&#39;)), Space(), Str(u&#39;and&#39;), Space(), Emph([Str(u&#39;em</span>
+
+<span class="go">phasis&#39;)])])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">blank_before_header</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... I like several of their flavors of ice cream:</span>
+
+<span class="go">... #22, for example, and #5.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;I&#39;), Space(), Str(u&#39;like&#39;), Space(), Str(u&#39;</span>
+
+<span class="go">several&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;their&#39;), Space(), Str(u&#39;flavo</span>
+
+<span class="go">rs&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;ice&#39;), Space(), Str(u&#39;cream:&#39;), So</span>
+
+<span class="go">ftBreak(), Str(u&#39;#22,&#39;), Space(), Str(u&#39;for&#39;), Space(), Str(u&#39;example,&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;and&#39;), Space(), Str(u&#39;#5.&#39;)])])</span>
+</pre></div>
+</div>
+<p>Header identifiers</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">header_attributes</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... # My header {#foo}</span>
+
+<span class="go">...</span>
+
+<span class="go">... ## My header ##    {#foo}</span>
+
+<span class="go">...</span>
+
+<span class="go">... My other header   {#foo}</span>
+
+<span class="go">... ---------------</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(1, (u&#39;foo&#39;, [], []), [Str(u&#39;My&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;header&#39;)]), Header(2, (u&#39;foo&#39;, [], []), [Str(u&#39;My&#39;), Space(), Str(u&#39;header&#39;</span>
+
+<span class="go">)]), Header(2, (u&#39;foo&#39;, [], []), [Str(u&#39;My&#39;), Space(), Str(u&#39;other&#39;), Space(</span>
+
+<span class="go">), Str(u&#39;header&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;# My header {-}&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(1, (u&#39;my-header&#39;, [u&#39;unnumbered&#39;], []), [Str(u&#39;M</span>
+
+<span class="go">y&#39;), Space(), Str(u&#39;header&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;# My header {.unnumbered}&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(1, (u&#39;my-header&#39;, [u&#39;unnumbered&#39;], []), [Str(u&#39;M</span>
+
+<span class="go">y&#39;), Space(), Str(u&#39;header&#39;)])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">auto_identifiers</span></code></p>
+<hr class="docutils" />
+<p>This extension does not work for the JSON output format.</p>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">implicit_header_references</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... # Header Identifiers</span>
+
+<span class="go">...</span>
+
+<span class="go">... [header identifiers](#header-identifiers),</span>
+
+<span class="go">... [header identifiers],</span>
+
+<span class="go">... [header identifiers][],</span>
+
+<span class="go">... [the section on header identifiers][header identifiers]</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(1, (u&#39;header-identifiers&#39;, [], []), [Str(u&#39;Heade</span>
+
+<span class="go">r&#39;), Space(), Str(u&#39;Identifiers&#39;)]), Para([Link((u&#39;&#39;, [], []), [Str(u&#39;header</span>
+
+<span class="go">&#39;), Space(), Str(u&#39;identifiers&#39;)], (u&#39;#header-identifiers&#39;, u&#39;&#39;)), Str(u&#39;,&#39;)</span>
+
+<span class="go">, SoftBreak(), Link((u&#39;&#39;, [], []), [Str(u&#39;header&#39;), Space(), Str(u&#39;identifie</span>
+
+<span class="go">rs&#39;)], (u&#39;#header-identifiers&#39;, u&#39;&#39;)), Str(u&#39;,&#39;), SoftBreak(), Link((u&#39;&#39;, []</span>
+
+<span class="go">, []), [Str(u&#39;header&#39;), Space(), Str(u&#39;identifiers&#39;)], (u&#39;#header-identifier</span>
+
+<span class="go">s&#39;, u&#39;&#39;)), Str(u&#39;,&#39;), SoftBreak(), Link((u&#39;&#39;, [], []), [Str(u&#39;the&#39;), Space()</span>
+
+<span class="go">, Str(u&#39;section&#39;), Space(), Str(u&#39;on&#39;), Space(), Str(u&#39;header&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;identifiers&#39;)], (u&#39;#header-identifiers&#39;, u&#39;&#39;))])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... # Foo</span>
+
+<span class="go">...</span>
+
+<span class="go">... [foo]: bar</span>
+
+<span class="go">...</span>
+
+<span class="go">... See [foo]</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Header(1, (u&#39;foo&#39;, [], []), [Str(u&#39;Foo&#39;)]), Para([Str(u</span>
+
+<span class="go">&#39;See&#39;), Space(), Link((u&#39;&#39;, [], []), [Str(u&#39;foo&#39;)], (u&#39;bar&#39;, u&#39;&#39;))])])</span>
+</pre></div>
+</div>
+<p>Block quotations</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... &gt; This is a block quote. This</span>
+
+<span class="go">... &gt; paragraph has two lines.</span>
+
+<span class="go">... &gt;</span>
+
+<span class="go">... &gt; 1. This is a list inside a block quote.</span>
+
+<span class="go">... &gt; 2. Second item.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BlockQuote([Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;a&#39;), Space(), Str(u&#39;block&#39;), Space(), Str(u&#39;quote.&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;This&#39;), SoftBreak(), Str(u&#39;paragraph&#39;), Space(), Str(u&#39;has&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;two&#39;), Space(), Str(u&#39;lines.&#39;)]), OrderedList((1, Decimal(), Period()</span>
+
+<span class="go">), [[Plain([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u&#39;a&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;list&#39;), Space(), Str(u&#39;inside&#39;), Space(), Str(u&#39;a&#39;), Space(), Str(u&#39;bl</span>
+
+<span class="go">ock&#39;), Space(), Str(u&#39;quote.&#39;)])], [Plain([Str(u&#39;Second&#39;), Space(), Str(u&#39;it</span>
+
+<span class="go">em.&#39;)])]])])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... &gt; This is a block quote. This</span>
+
+<span class="go">... paragraph has two lines.</span>
+
+<span class="go">...</span>
+
+<span class="go">... &gt; 1. This is a list inside a block quote.</span>
+
+<span class="go">... 2. Second item.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BlockQuote([Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;a&#39;), Space(), Str(u&#39;block&#39;), Space(), Str(u&#39;quote.&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;This&#39;), SoftBreak(), Str(u&#39;paragraph&#39;), Space(), Str(u&#39;has&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;two&#39;), Space(), Str(u&#39;lines.&#39;)])]), BlockQuote([OrderedList((1, Decim</span>
+
+<span class="go">al(), Period()), [[Plain([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u&#39;</span>
+
+<span class="go">a&#39;), Space(), Str(u&#39;list&#39;), Space(), Str(u&#39;inside&#39;), Space(), Str(u&#39;a&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;block&#39;), Space(), Str(u&#39;quote.&#39;)])], [Plain([Str(u&#39;Second&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;item.&#39;)])]])])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... &gt; This is a block quote.</span>
+
+<span class="go">... &gt;</span>
+
+<span class="go">... &gt; &gt; A block quote within a block quote.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BlockQuote([Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;a&#39;), Space(), Str(u&#39;block&#39;), Space(), Str(u&#39;quote.&#39;)]), BlockQu</span>
+
+<span class="go">ote([Para([Str(u&#39;A&#39;), Space(), Str(u&#39;block&#39;), Space(), Str(u&#39;quote&#39;), Space(</span>
+
+<span class="go">), Str(u&#39;within&#39;), Space(), Str(u&#39;a&#39;), Space(), Str(u&#39;block&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;quote.&#39;)])])])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&gt;     code&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [BlockQuote([CodeBlock((u&#39;&#39;, [], []), u&#39;code&#39;)])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">blank_before_blockquote</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... &gt; This is a block quote.</span>
+
+<span class="go">... &gt;&gt; Nested.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BlockQuote([Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;a&#39;), Space(), Str(u&#39;block&#39;), Space(), Str(u&#39;quote.&#39;), SoftBreak</span>
+
+<span class="go">(), Str(u&#39;&gt;&#39;), Space(), Str(u&#39;Nested.&#39;)])])])</span>
+</pre></div>
+</div>
+<p>Verbatim (code) blocks</p>
+<hr class="docutils" />
+<p>Indented code blocks</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">...     if (a &gt; 3) {</span>
+
+<span class="go">...     moveShip(5 * gravity, DOWN);</span>
+
+<span class="go">...     }</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [CodeBlock((u&#39;&#39;, [], []), u&#39;if (a &gt; 3) {\nmoveShip(5 * g</span>
+
+<span class="go">ravity, DOWN);\n}&#39;)])</span>
+</pre></div>
+</div>
+<p>Fenced code blocks</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">fenced_code_blocks</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ~~~~~~~</span>
+
+<span class="go">... if (a &gt; 3) {</span>
+
+<span class="go">... moveShip(5 * gravity, DOWN);</span>
+
+<span class="go">... }</span>
+
+<span class="go">... ~~~~~~~</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [CodeBlock((u&#39;&#39;, [], []), u&#39;if (a &gt; 3) {\nmoveShip(5 * g</span>
+
+<span class="go">ravity, DOWN);\n}&#39;)])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ~~~~~~~~~~~~~~~~</span>
+
+<span class="go">... ~~~~~~~~~~</span>
+
+<span class="go">... code including tildes</span>
+
+<span class="go">... ~~~~~~~~~~</span>
+
+<span class="go">... ~~~~~~~~~~~~~~~~</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [CodeBlock((u&#39;&#39;, [], []), u&#39;~~~~~~~~~~\ncode including t</span>
+
+<span class="go">ildes\n~~~~~~~~~~&#39;)])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">backtick_code_blocks</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... ```````</span>
+
+<span class="go">... if (a &gt; 3) {</span>
+
+<span class="go">... moveShip(5 * gravity, DOWN);</span>
+
+<span class="go">... }</span>
+
+<span class="go">... ```````</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [CodeBlock((u&#39;&#39;, [], []), u&#39;if (a &gt; 3) {\nmoveShip(5 * g</span>
+
+<span class="go">ravity, DOWN);\n}&#39;)])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">fenced_code_attributes</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ~~~~ {#mycode .haskell .numberLines startFrom=&quot;100&quot;}</span>
+
+<span class="go">... qsort []</span>
+
+<span class="go">... = []</span>
+
+<span class="go">... qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++</span>
+
+<span class="go">... qsort (filter (&gt;= x) xs)</span>
+
+<span class="go">... ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [CodeBlock((u&#39;mycode&#39;, [u&#39;haskell&#39;, u&#39;numberLines&#39;], [(u</span>
+
+<span class="go">&#39;startFrom&#39;, u&#39;100&#39;)]), u&#39;qsort []\n= []\nqsort (x:xs) = qsort (filter (&lt; x)</span>
+
+<span class="go"> xs) ++ [x] ++\nqsort (filter (&gt;= x) xs)&#39;)])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ```haskell</span>
+
+<span class="go">... qsort [] = []</span>
+
+<span class="go">... ```</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [CodeBlock((u&#39;&#39;, [u&#39;haskell&#39;], []), u&#39;qsort [] = []&#39;)])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... ``` {.haskell}</span>
+
+<span class="go">... qsort [] = []</span>
+
+<span class="go">... ```</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [CodeBlock((u&#39;&#39;, [u&#39;haskell&#39;], []), u&#39;qsort [] = []&#39;)])</span>
+</pre></div>
+</div>
+<p>Line blocks</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">line_blocks</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... | The limerick packs laughs anatomical</span>
+
+<span class="go">... | In space that is quite economical.</span>
+
+<span class="go">... |    But the good ones I&#39;ve seen</span>
+
+<span class="go">... |    So seldom are clean</span>
+
+<span class="go">... | And the clean ones so seldom are comical</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;The&#39;), Space(), Str(u&#39;limerick&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;packs&#39;), Space(), Str(u&#39;laughs&#39;), Space(), Str(u&#39;anatomical&#39;), LineBre</span>
+
+<span class="go">ak(), Str(u&#39;In&#39;), Space(), Str(u&#39;space&#39;), Space(), Str(u&#39;that&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;is&#39;), Space(), Str(u&#39;quite&#39;), Space(), Str(u&#39;economical.&#39;), LineBreak(),</span>
+
+<span class="go"> Str(u&#39;\xa0\xa0\xa0But&#39;), Space(), Str(u&#39;the&#39;), Space(), Str(u&#39;good&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;ones&#39;), Space(), Str(u&quot;I&#39;ve&quot;), Space(), Str(u&#39;seen&#39;), LineBreak(),</span>
+
+<span class="go"> Str(u&#39;\xa0\xa0\xa0So&#39;), Space(), Str(u&#39;seldom&#39;), Space(), Str(u&#39;are&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;clean&#39;), LineBreak(), Str(u&#39;And&#39;), Space(), Str(u&#39;the&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;clean&#39;), Space(), Str(u&#39;ones&#39;), Space(), Str(u&#39;so&#39;), Space(), Str(u&#39;s</span>
+
+<span class="go">eldom&#39;), Space(), Str(u&#39;are&#39;), Space(), Str(u&#39;comical&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... | 200 Main St.</span>
+
+<span class="go">... | Berkeley, CA 94718</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;200&#39;), Space(), Str(u&#39;Main&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;St.&#39;), LineBreak(), Str(u&#39;Berkeley,&#39;), Space(), Str(u&#39;CA&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;94718&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... | The Right Honorable Most Venerable and Righteous Samuel L.</span>
+
+<span class="go">...   Constable, Jr.</span>
+
+<span class="go">... | 200 Main St.</span>
+
+<span class="go">... | Berkeley, CA 94718</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;The&#39;), Space(), Str(u&#39;Right&#39;), Space(), Str</span>
+
+<span class="go">(u&#39;Honorable&#39;), Space(), Str(u&#39;Most&#39;), Space(), Str(u&#39;Venerable&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;and&#39;), Space(), Str(u&#39;Righteous&#39;), Space(), Str(u&#39;Samuel&#39;), Space(), S</span>
+
+<span class="go">tr(u&#39;L.&#39;), Space(), Str(u&#39;Constable,&#39;), Space(), Str(u&#39;Jr.&#39;), LineBreak(), S</span>
+
+<span class="go">tr(u&#39;200&#39;), Space(), Str(u&#39;Main&#39;), Space(), Str(u&#39;St.&#39;), LineBreak(), Str(u&#39;</span>
+
+<span class="go">Berkeley,&#39;), Space(), Str(u&#39;CA&#39;), Space(), Str(u&#39;94718&#39;)])])</span>
+</pre></div>
+</div>
+<p>Lists</p>
+<hr class="docutils" />
+<p>Bullet lists</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... * one</span>
+
+<span class="go">... * two</span>
+
+<span class="go">... * three</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;one&#39;)])], [Plain([Str(u&#39;two&#39;)</span>
+
+<span class="go">])], [Plain([Str(u&#39;three&#39;)])]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... * one</span>
+
+<span class="go">...</span>
+
+<span class="go">... * two</span>
+
+<span class="go">...</span>
+
+<span class="go">... * three</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Para([Str(u&#39;one&#39;)])], [Para([Str(u&#39;two&#39;)])</span>
+
+<span class="go">], [Para([Str(u&#39;three&#39;)])]])])</span>
+
+
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... * here is my first</span>
+
+<span class="go">... list item.</span>
+
+<span class="go">... * and my second.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;here&#39;), Space(), Str(u&#39;is&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;my&#39;), Space(), Str(u&#39;first&#39;), SoftBreak(), Str(u&#39;list&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;item.&#39;)])], [Plain([Str(u&#39;and&#39;), Space(), Str(u&#39;my&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;second.&#39;)])]])])</span>
+
+
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... * here is my first</span>
+
+<span class="go">... list item.</span>
+
+<span class="go">... * and my second.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;here&#39;), Space(), Str(u&#39;is&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;my&#39;), Space(), Str(u&#39;first&#39;), SoftBreak(), Str(u&#39;list&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;item.&#39;)])], [Plain([Str(u&#39;and&#39;), Space(), Str(u&#39;my&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;second.&#39;)])]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">...   * First paragraph.</span>
+
+<span class="go">...</span>
+
+<span class="go">...   Continued.</span>
+
+<span class="go">...</span>
+
+<span class="go">...   * Second paragraph. With a code block, which must be indented</span>
+
+<span class="go">...     eight spaces:</span>
+
+<span class="go">...</span>
+
+<span class="go">...         { code }</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;First&#39;), Space(), Str(u&#39;parag</span>
+
+<span class="go">raph.&#39;)])]]), Para([Str(u&#39;Continued.&#39;)]), BulletList([[Para([Str(u&#39;Second&#39;),</span>
+
+<span class="go"> Space(), Str(u&#39;paragraph.&#39;), Space(), Str(u&#39;With&#39;), Space(), Str(u&#39;a&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;code&#39;), Space(), Str(u&#39;block,&#39;), Space(), Str(u&#39;which&#39;), Space()</span>
+
+<span class="go">, Str(u&#39;must&#39;), Space(), Str(u&#39;be&#39;), Space(), Str(u&#39;indented&#39;), SoftBreak(),</span>
+
+<span class="go"> Str(u&#39;eight&#39;), Space(), Str(u&#39;spaces:&#39;)]), CodeBlock((u&#39;&#39;, [], []), u&#39;{ cod</span>
+
+<span class="go">e }&#39;)]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... * fruits</span>
+
+<span class="go">...     + apples</span>
+
+<span class="go">...         - macintosh</span>
+
+<span class="go">...         - red delicious</span>
+
+<span class="go">...     + pears</span>
+
+<span class="go">...     + peaches</span>
+
+<span class="go">... * vegetables</span>
+
+<span class="go">...     + broccoli</span>
+
+<span class="go">...     + chard</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;fruits&#39;)]), BulletList([[Plai</span>
+
+<span class="go">n([Str(u&#39;apples&#39;)]), BulletList([[Plain([Str(u&#39;macintosh&#39;)])], [Plain([Str(u</span>
+
+<span class="go">&#39;red&#39;), Space(), Str(u&#39;delicious&#39;)])]])], [Plain([Str(u&#39;pears&#39;)])], [Plain([</span>
+
+<span class="go">Str(u&#39;peaches&#39;)])]])], [Plain([Str(u&#39;vegetables&#39;)]), BulletList([[Plain([Str</span>
+
+<span class="go">(u&#39;broccoli&#39;)])], [Plain([Str(u&#39;chard&#39;)])]])]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... + A lazy, lazy, list</span>
+
+<span class="go">... item.</span>
+
+<span class="go">...</span>
+
+<span class="go">... + Another one; this looks</span>
+
+<span class="go">... bad but is legal.</span>
+
+<span class="go">...</span>
+
+<span class="go">...     Second paragraph of second</span>
+
+<span class="go">... list item.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Para([Str(u&#39;A&#39;), Space(), Str(u&#39;lazy,&#39;), S</span>
+
+<span class="go">pace(), Str(u&#39;lazy,&#39;), Space(), Str(u&#39;list&#39;), SoftBreak(), Str(u&#39;item.&#39;)])],</span>
+
+<span class="go"> [Para([Str(u&#39;Another&#39;), Space(), Str(u&#39;one;&#39;), Space(), Str(u&#39;this&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;looks&#39;), SoftBreak(), Str(u&#39;bad&#39;), Space(), Str(u&#39;but&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;is&#39;), Space(), Str(u&#39;legal.&#39;)]), Para([Str(u&#39;Second&#39;), Space(), Str(u&#39;</span>
+
+<span class="go">paragraph&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;second&#39;), SoftBreak(), Str(</span>
+
+<span class="go">u&#39;list&#39;), Space(), Str(u&#39;item.&#39;)])]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... 1.  one</span>
+
+<span class="go">... 2.  two</span>
+
+<span class="go">... 3.  three</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((1, Decimal(), Period()), [[Plain([Str(u&#39;on</span>
+
+<span class="go">e&#39;)])], [Plain([Str(u&#39;two&#39;)])], [Plain([Str(u&#39;three&#39;)])]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... 5.  one</span>
+
+<span class="go">... 7.  two</span>
+
+<span class="go">... 1.  three</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((5, Decimal(), Period()), [[Plain([Str(u&#39;on</span>
+
+<span class="go">e&#39;)])], [Plain([Str(u&#39;two&#39;)])], [Plain([Str(u&#39;three&#39;)])]])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">fancy_lists</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... #. one</span>
+
+<span class="go">... #. two</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((1, DefaultStyle(), DefaultDelim()), [[Plai</span>
+
+<span class="go">n([Str(u&#39;one&#39;)])], [Plain([Str(u&#39;two&#39;)])]])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">start_num</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">...  9)  Ninth</span>
+
+<span class="go">...  10)  Tenth</span>
+
+<span class="go">...  11)  Eleventh</span>
+
+<span class="go">...         i. subone</span>
+
+<span class="go">...        ii. subtwo</span>
+
+<span class="go">...       iii. subthree</span>
+
+<span class="go">...  &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((9, Decimal(), OneParen()), [[Plain([Str(u&#39;</span>
+
+<span class="go">Ninth&#39;)])], [Plain([Str(u&#39;Tenth&#39;)])], [Plain([Str(u&#39;Eleventh&#39;), SoftBreak(),</span>
+
+<span class="go"> Str(u&#39;i.&#39;), Space(), Str(u&#39;subone&#39;)]), OrderedList((2, LowerRoman(), Period</span>
+
+<span class="go">()), [[Plain([Str(u&#39;subtwo&#39;)])], [Plain([Str(u&#39;subthree&#39;)])]])]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... (2) Two</span>
+
+<span class="go">... (5) Three</span>
+
+<span class="go">... 1.  Four</span>
+
+<span class="go">... *   Five</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((2, Decimal(), TwoParens()), [[Plain([Str(u</span>
+
+<span class="go">&#39;Two&#39;)])], [Plain([Str(u&#39;Three&#39;)])]]), OrderedList((1, Decimal(), Period()),</span>
+
+<span class="go"> [[Plain([Str(u&#39;Four&#39;)])]]), BulletList([[Plain([Str(u&#39;Five&#39;)])]])])</span>
+</pre></div>
+</div>
+<p>Definition Lists</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">definition_lists</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... Term 1</span>
+
+<span class="go">...</span>
+
+<span class="go">... :   Definition 1</span>
+
+<span class="go">...</span>
+
+<span class="go">... Term 2 with *inline markup*</span>
+
+<span class="go">...</span>
+
+<span class="go">... :   Definition 2</span>
+
+<span class="go">...</span>
+
+<span class="go">...         { some code, part of Definition 2 }</span>
+
+<span class="go">...</span>
+
+<span class="go">...     Third paragraph of definition 2.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [DefinitionList([([Str(u&#39;Term&#39;), Space(), Str(u&#39;1&#39;)], [[</span>
+
+<span class="go">Para([Str(u&#39;Definition&#39;), Space(), Str(u&#39;1&#39;)])]]), ([Str(u&#39;Term&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;2&#39;), Space(), Str(u&#39;with&#39;), Space(), Emph([Str(u&#39;inline&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;markup&#39;)])], [[Para([Str(u&#39;Definition&#39;), Space(), Str(u&#39;2&#39;)]), CodeBlock</span>
+
+<span class="go">((u&#39;&#39;, [], []), u&#39;{ some code, part of Definition 2 }&#39;), Para([Str(u&#39;Third&#39;)</span>
+
+<span class="go">, Space(), Str(u&#39;paragraph&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;definition</span>
+
+<span class="go">&#39;), Space(), Str(u&#39;2.&#39;)])]])])])</span>
+
+
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... Term 1</span>
+
+<span class="go">...</span>
+
+<span class="go">... :   Definition</span>
+
+<span class="go">... with lazy continuation.</span>
+
+<span class="go">...</span>
+
+<span class="go">...     Second paragraph of the definition.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [DefinitionList([([Str(u&#39;Term&#39;), Space(), Str(u&#39;1&#39;)], [[</span>
+
+<span class="go">Para([Str(u&#39;Definition&#39;), SoftBreak(), Str(u&#39;with&#39;), Space(), Str(u&#39;lazy&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;continuation.&#39;)]), Para([Str(u&#39;Second&#39;), Space(), Str(u&#39;parag</span>
+
+<span class="go">raph&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;the&#39;), Space(), Str(u&#39;definition</span>
+
+<span class="go">.&#39;)])]])])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... Term 1</span>
+
+<span class="go">...   ~ Definition 1</span>
+
+<span class="go">...</span>
+
+<span class="go">... Term 2</span>
+
+<span class="go">...   ~ Definition 2a</span>
+
+<span class="go">...   ~ Definition 2b</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [DefinitionList([([Str(u&#39;Term&#39;), Space(), Str(u&#39;1&#39;)], [[</span>
+
+<span class="go">Plain([Str(u&#39;Definition&#39;), Space(), Str(u&#39;1&#39;)])]]), ([Str(u&#39;Term&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;2&#39;)], [[Plain([Str(u&#39;Definition&#39;), Space(), Str(u&#39;2a&#39;)])], [Plain([St</span>
+
+<span class="go">r(u&#39;Definition&#39;), Space(), Str(u&#39;2b&#39;)])]])])])</span>
+</pre></div>
+</div>
+<p>Numbered Example List</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">example_lists</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... (@)  My first example will be numbered (1).</span>
+
+<span class="go">... (@)  My second example will be numbered (2).</span>
+
+<span class="go">...</span>
+
+<span class="go">... Explanation of examples.</span>
+
+<span class="go">...</span>
+
+<span class="go">... (@)  My third example will be numbered (3).</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((1, Example(), TwoParens()), [[Plain([Str(u</span>
+
+<span class="go">&#39;My&#39;), Space(), Str(u&#39;first&#39;), Space(), Str(u&#39;example&#39;), Space(), Str(u&#39;will</span>
+
+<span class="go">&#39;), Space(), Str(u&#39;be&#39;), Space(), Str(u&#39;numbered&#39;), Space(), Str(u&#39;(1).&#39;)])]</span>
+
+<span class="go">, [Plain([Str(u&#39;My&#39;), Space(), Str(u&#39;second&#39;), Space(), Str(u&#39;example&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;will&#39;), Space(), Str(u&#39;be&#39;), Space(), Str(u&#39;numbered&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;(2).&#39;)])]]), Para([Str(u&#39;Explanation&#39;), Space(), Str(u&#39;of&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;examples.&#39;)]), OrderedList((3, Example(), TwoParens()), [[Plain([Str(</span>
+
+<span class="go">u&#39;My&#39;), Space(), Str(u&#39;third&#39;), Space(), Str(u&#39;example&#39;), Space(), Str(u&#39;wil</span>
+
+<span class="go">l&#39;), Space(), Str(u&#39;be&#39;), Space(), Str(u&#39;numbered&#39;), Space(), Str(u&#39;(3).&#39;)])</span>
+
+<span class="go">]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... (@good)  This is a good example.</span>
+
+<span class="go">...</span>
+
+<span class="go">... As (@good) illustrates, ...</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((1, Example(), TwoParens()), [[Plain([Str(u</span>
+
+<span class="go">&#39;This&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u&#39;a&#39;), Space(), Str(u&#39;good&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;example.&#39;)])]]), Para([Str(u&#39;As&#39;), Space(), Str(u&#39;(1)&#39;), Space()</span>
+
+<span class="go">, Str(u&#39;illustrates,&#39;), Space(), Str(u&#39;...&#39;)])])</span>
+</pre></div>
+</div>
+<p>Compact and loose lists</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... +   First</span>
+
+<span class="go">... +   Second:</span>
+
+<span class="go">...     -   Fee</span>
+
+<span class="go">...     -   Fie</span>
+
+<span class="go">...     -   Foe</span>
+
+<span class="go">...</span>
+
+<span class="go">... +   Third</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;First&#39;)])], [Plain([Str(u&#39;Sec</span>
+
+<span class="go">ond:&#39;)]), BulletList([[Plain([Str(u&#39;Fee&#39;)])], [Plain([Str(u&#39;Fie&#39;)])], [Plain</span>
+
+<span class="go">([Str(u&#39;Foe&#39;)])]])], [Plain([Str(u&#39;Third&#39;)])]])])</span>
+</pre></div>
+</div>
+<p>Ending a List</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... -   item one</span>
+
+<span class="go">... -   item two</span>
+
+<span class="go">...</span>
+
+<span class="go">...     { my code block }</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;item&#39;), Space(), Str(u&#39;one&#39;)]</span>
+
+<span class="go">)], [Para([Str(u&#39;item&#39;), Space(), Str(u&#39;two&#39;)]), Para([Str(u&#39;{&#39;), Space(), S</span>
+
+<span class="go">tr(u&#39;my&#39;), Space(), Str(u&#39;code&#39;), Space(), Str(u&#39;block&#39;), Space(), Str(u&#39;}&#39;)</span>
+
+<span class="go">])]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... -   item one</span>
+
+<span class="go">... -   item two</span>
+
+<span class="go">...</span>
+
+<span class="go">... &lt;!-- end of list --&gt;</span>
+
+<span class="go">...</span>
+
+<span class="go">...     { my code block }</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BulletList([[Plain([Str(u&#39;item&#39;), Space(), Str(u&#39;one&#39;)]</span>
+
+<span class="go">)], [Plain([Str(u&#39;item&#39;), Space(), Str(u&#39;two&#39;)])]]), RawBlock(Format(u&#39;html&#39;</span>
+
+<span class="go">), u&#39;&lt;!-- end of list --&gt;&#39;), CodeBlock((u&#39;&#39;, [], []), u&#39;{ my code block }&#39;)]</span>
+
+<span class="go">)</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... 1.  one</span>
+
+<span class="go">... 2.  two</span>
+
+<span class="go">... 3.  three</span>
+
+<span class="go">...</span>
+
+<span class="go">... &lt;!-- --&gt;</span>
+
+<span class="go">...</span>
+
+<span class="go">... 1.  uno</span>
+
+<span class="go">... 2.  dos</span>
+
+<span class="go">... 3.  tres</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [OrderedList((1, Decimal(), Period()), [[Plain([Str(u&#39;on</span>
+
+<span class="go">e&#39;)])], [Plain([Str(u&#39;two&#39;)])], [Plain([Str(u&#39;three&#39;)])]]), RawBlock(Format(</span>
+
+<span class="go">u&#39;html&#39;), u&#39;&lt;!-- --&gt;&#39;), OrderedList((1, Decimal(), Period()), [[Plain([Str(u</span>
+
+<span class="go">&#39;uno&#39;)])], [Plain([Str(u&#39;dos&#39;)])], [Plain([Str(u&#39;tres&#39;)])]])])</span>
+</pre></div>
+</div>
+<p>Horizontal Rules</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... *  *  *  *</span>
+
+<span class="go">...</span>
+
+<span class="go">... ---------------</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [HorizontalRule(), HorizontalRule()])</span>
+</pre></div>
+</div>
+<p>Tables</p>
+<hr class="docutils" />
+<p>Extension <code class="docutils literal notranslate"><span class="pre">table_captions</span></code></p>
+<hr class="docutils" />
+<p>Extension <code class="docutils literal notranslate"><span class="pre">simple_tables</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">...   Right     Left     Center     Default</span>
+
+<span class="go">... -------     ------ ----------   -------</span>
+
+<span class="go">...      12     12        12            12</span>
+
+<span class="go">...     123     123       123          123</span>
+
+<span class="go">...       1     1          1             1</span>
+
+<span class="go">...</span>
+
+<span class="go">... Table:  Demonstration of simple table syntax.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Table([Str(u&#39;Demonstration&#39;), Space(), Str(u&#39;of&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;simple&#39;), Space(), Str(u&#39;table&#39;), Space(), Str(u&#39;syntax.&#39;)], [Ali</span>
+
+<span class="go">gnRight(), AlignLeft(), AlignCenter(), AlignDefault()], [0.0, 0.0, 0.0, 0.0]</span>
+
+<span class="go">, [[Plain([Str(u&#39;Right&#39;)])], [Plain([Str(u&#39;Left&#39;)])], [Plain([Str(u&#39;Center&#39;)</span>
+
+<span class="go">])], [Plain([Str(u&#39;Default&#39;)])]], [[[Plain([Str(u&#39;12&#39;)])], [Plain([Str(u&#39;12&#39;</span>
+
+<span class="go">)])], [Plain([Str(u&#39;12&#39;)])], [Plain([Str(u&#39;12&#39;)])]], [[Plain([Str(u&#39;123&#39;)])]</span>
+
+<span class="go">, [Plain([Str(u&#39;123&#39;)])], [Plain([Str(u&#39;123&#39;)])], [Plain([Str(u&#39;123&#39;)])]], [</span>
+
+<span class="go">[Plain([Str(u&#39;1&#39;)])], [Plain([Str(u&#39;1&#39;)])], [Plain([Str(u&#39;1&#39;)])], [Plain([St</span>
+
+<span class="go">r(u&#39;1&#39;)])]]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... -------     ------ ----------   -------</span>
+
+<span class="go">...      12     12        12             12</span>
+
+<span class="go">...     123     123       123           123</span>
+
+<span class="go">...       1     1          1              1</span>
+
+<span class="go">... -------     ------ ----------   -------</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Table([], [AlignRight(), AlignLeft(), AlignCenter(), Al</span>
+
+<span class="go">ignRight()], [0.0, 0.0, 0.0, 0.0], [[], [], [], []], [[[Plain([Str(u&#39;12&#39;)])]</span>
+
+<span class="go">, [Plain([Str(u&#39;12&#39;)])], [Plain([Str(u&#39;12&#39;)])], [Plain([Str(u&#39;12&#39;)])]], [[Pl</span>
+
+<span class="go">ain([Str(u&#39;123&#39;)])], [Plain([Str(u&#39;123&#39;)])], [Plain([Str(u&#39;123&#39;)])], [Plain(</span>
+
+<span class="go">[Str(u&#39;123&#39;)])]], [[Plain([Str(u&#39;1&#39;)])], [Plain([Str(u&#39;1&#39;)])], [Plain([Str(u</span>
+
+<span class="go">&#39;1&#39;)])], [Plain([Str(u&#39;1&#39;)])]]])])</span>
+</pre></div>
+</div>
+<p>Extension <code class="docutils literal notranslate"><span class="pre">multiline_tables</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... -------------------------------------------------------------</span>
+
+<span class="go">...  Centered   Default           Right Left</span>
+
+<span class="go">...   Header    Aligned         Aligned Aligned</span>
+
+<span class="go">... ----------- ------- --------------- -------------------------</span>
+
+<span class="go">...    First    row                12.0 Example of a row that</span>
+
+<span class="go">...                                     spans multiple lines.</span>
+
+<span class="go">...</span>
+
+<span class="go">...   Second    row                 5.0 Here&#39;s another one. Note</span>
+
+<span class="go">...                                     the blank line between</span>
+
+<span class="go">...                                     rows.</span>
+
+<span class="go">... -------------------------------------------------------------</span>
+
+<span class="go">...</span>
+
+<span class="go">... Table: Here&#39;s the caption. It, too, may span</span>
+
+<span class="go">... multiple lines.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Table([Str(u&quot;Here&#39;s&quot;), Space(), Str(u&#39;the&#39;), Space(), S</span>
+
+<span class="go">tr(u&#39;caption.&#39;), Space(), Str(u&#39;It,&#39;), Space(), Str(u&#39;too,&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;may&#39;), Space(), Str(u&#39;span&#39;), SoftBreak(), Str(u&#39;multiple&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;lines.&#39;)], [AlignCenter(), AlignDefault(), AlignRight(), AlignLeft()], [0.1</span>
+
+<span class="go">6666666666666666, 0.1111111111111111, 0.2222222222222222, 0.3472222222222222</span>
+
+<span class="go">], [[Plain([Str(u&#39;Centered&#39;), SoftBreak(), Str(u&#39;Header&#39;)])], [Plain([Str(u&#39;</span>
+
+<span class="go">Default&#39;), SoftBreak(), Str(u&#39;Aligned&#39;)])], [Plain([Str(u&#39;Right&#39;), SoftBreak</span>
+
+<span class="go">(), Str(u&#39;Aligned&#39;)])], [Plain([Str(u&#39;Left&#39;), SoftBreak(), Str(u&#39;Aligned&#39;)])</span>
+
+<span class="go">]], [[[Plain([Str(u&#39;First&#39;)])], [Plain([Str(u&#39;row&#39;)])], [Plain([Str(u&#39;12.0&#39;)</span>
+
+<span class="go">])], [Plain([Str(u&#39;Example&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;a&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;row&#39;), Space(), Str(u&#39;that&#39;), SoftBreak(), Str(u&#39;spans&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;multiple&#39;), Space(), Str(u&#39;lines.&#39;)])]], [[Plain([Str(u&#39;Second&#39;)])],</span>
+
+<span class="go">[Plain([Str(u&#39;row&#39;)])], [Plain([Str(u&#39;5.0&#39;)])], [Plain([Str(u&quot;Here&#39;s&quot;), Spac</span>
+
+<span class="go">e(), Str(u&#39;another&#39;), Space(), Str(u&#39;one.&#39;), Space(), Str(u&#39;Note&#39;), SoftBrea</span>
+
+<span class="go">k(), Str(u&#39;the&#39;), Space(), Str(u&#39;blank&#39;), Space(), Str(u&#39;line&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;between&#39;), SoftBreak(), Str(u&#39;rows.&#39;)])]]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ----------- ------- --------------- -------------------------</span>
+
+<span class="go">...    First    row                12.0 Example of a row that</span>
+
+<span class="go">...                                     spans multiple lines.</span>
+
+<span class="go">...</span>
+
+<span class="go">...   Second    row                 5.0 Here&#39;s another one. Note</span>
+
+<span class="go">...                                     the blank line between</span>
+
+<span class="go">...                                     rows.</span>
+
+<span class="go">... ----------- ------- --------------- -------------------------</span>
+
+<span class="go">...</span>
+
+<span class="go">... : Here&#39;s a multiline table without headers.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Table([Str(u&quot;Here&#39;s&quot;), Space(), Str(u&#39;a&#39;), Space(), Str</span>
+
+<span class="go">(u&#39;multiline&#39;), Space(), Str(u&#39;table&#39;), Space(), Str(u&#39;without&#39;), Space(), S</span>
+
+<span class="go">tr(u&#39;headers.&#39;)], [AlignCenter(), AlignLeft(), AlignRight(), AlignLeft()], [</span>
+
+<span class="go">0.16666666666666666, 0.1111111111111111, 0.2222222222222222, 0.3472222222222</span>
+
+<span class="go">222], [[], [], [], []], [[[Plain([Str(u&#39;First&#39;)])], [Plain([Str(u&#39;row&#39;)])],</span>
+
+<span class="go">[Plain([Str(u&#39;12.0&#39;)])], [Plain([Str(u&#39;Example&#39;), Space(), Str(u&#39;of&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;a&#39;), Space(), Str(u&#39;row&#39;), Space(), Str(u&#39;that&#39;), SoftBreak(), Str</span>
+
+<span class="go">(u&#39;spans&#39;), Space(), Str(u&#39;multiple&#39;), Space(), Str(u&#39;lines.&#39;)])]], [[Plain(</span>
+
+<span class="go">[Str(u&#39;Second&#39;)])], [Plain([Str(u&#39;row&#39;)])], [Plain([Str(u&#39;5.0&#39;)])], [Plain([</span>
+
+<span class="go">Str(u&quot;Here&#39;s&quot;), Space(), Str(u&#39;another&#39;), Space(), Str(u&#39;one.&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;Note&#39;), SoftBreak(), Str(u&#39;the&#39;), Space(), Str(u&#39;blank&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;line&#39;), Space(), Str(u&#39;between&#39;), SoftBreak(), Str(u&#39;rows.&#39;)])]]])])</span>
+</pre></div>
+</div>
+<p>Extension: grid_tables</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>... +---------------+---------------+--------------------+
+
+... | Fruit         | Price         | Advantages         |
+
+... +===============+===============+====================+
+
+... | Bananas       | $1.34         | - built-in wrapper |
+
+... |               |               | - bright color     |
+
+... +---------------+---------------+--------------------+
+
+... | Oranges       | $2.10         | - cures scurvy     |
+
+... |               |               | - tasty            |
+
+... +---------------+---------------+--------------------+
+
+... &quot;&quot;&quot;
+
+... # doctest: +PANDOC
+</pre></div>
+</div>
+<p>Extension: pipe_tables</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... | Right | Left | Default | Center |</span>
+
+<span class="go">... |------:|:-----|---------|:------:|</span>
+
+<span class="go">... |   12  |  12  |    12   |    12  |</span>
+
+<span class="go">... |  123  |  123 |   123   |   123  |</span>
+
+<span class="go">... |    1  |    1 |     1   |     1  |</span>
+
+<span class="go">...</span>
+
+<span class="go">...   : Demonstration of pipe table syntax.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Table([Str(u&#39;Demonstration&#39;), Space(), Str(u&#39;of&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;pipe&#39;), Space(), Str(u&#39;table&#39;), Space(), Str(u&#39;syntax.&#39;)], [Align</span>
+
+<span class="go">Right(), AlignLeft(), AlignDefault(), AlignCenter()], [0.0, 0.0, 0.0, 0.0],</span>
+
+<span class="go">[[Plain([Str(u&#39;Right&#39;)])], [Plain([Str(u&#39;Left&#39;)])], [Plain([Str(u&#39;Default&#39;)]</span>
+
+<span class="go">)], [Plain([Str(u&#39;Center&#39;)])]], [[[Plain([Str(u&#39;12&#39;)])], [Plain([Str(u&#39;12&#39;)]</span>
+
+<span class="go">)], [Plain([Str(u&#39;12&#39;)])], [Plain([Str(u&#39;12&#39;)])]], [[Plain([Str(u&#39;123&#39;)])],</span>
+
+<span class="go">[Plain([Str(u&#39;123&#39;)])], [Plain([Str(u&#39;123&#39;)])], [Plain([Str(u&#39;123&#39;)])]], [[P</span>
+
+<span class="go">lain([Str(u&#39;1&#39;)])], [Plain([Str(u&#39;1&#39;)])], [Plain([Str(u&#39;1&#39;)])], [Plain([Str(</span>
+
+<span class="go">u&#39;1&#39;)])]]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... fruit| price</span>
+
+<span class="go">... -----|-----:</span>
+
+<span class="go">... apple|2.05</span>
+
+<span class="go">... pear|1.37</span>
+
+<span class="go">... orange|3.09</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Table([], [AlignDefault(), AlignRight()], [0.0, 0.0], [</span>
+
+<span class="go">[Plain([Str(u&#39;fruit&#39;)])], [Plain([Str(u&#39;price&#39;)])]], [[[Plain([Str(u&#39;apple&#39;)</span>
+
+<span class="go">])], [Plain([Str(u&#39;2.05&#39;)])]], [[Plain([Str(u&#39;pear&#39;)])], [Plain([Str(u&#39;1.37&#39;</span>
+
+<span class="go">)])]], [[Plain([Str(u&#39;orange&#39;)])], [Plain([Str(u&#39;3.09&#39;)])]]])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... | One | Two   |</span>
+
+<span class="go">... |-----+-------|</span>
+
+<span class="go">... | my  | table |</span>
+
+<span class="go">... | is  | nice  |</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Table([], [AlignDefault(), AlignDefault()], [0.0, 0.0],</span>
+
+<span class="go"> [[Plain([Str(u&#39;One&#39;)])], [Plain([Str(u&#39;Two&#39;)])]], [[[Plain([Str(u&#39;my&#39;)])],</span>
+
+<span class="go">[Plain([Str(u&#39;table&#39;)])]], [[Plain([Str(u&#39;is&#39;)])], [Plain([Str(u&#39;nice&#39;)])]]]</span>
+
+<span class="go">)])</span>
+</pre></div>
+</div>
+<p>Metadata blocks</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">pandoc_title_block</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;\</span>
+
+<span class="go">... % title</span>
+
+<span class="go">... % author(s) (separated by semicolons)</span>
+
+<span class="go">... % date</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map([(u&#39;date&#39;, MetaInlines([Str(u&#39;date&#39;)])), (u&#39;title&#39;, MetaInli</span>
+
+<span class="go">nes([Str(u&#39;title&#39;)])), (u&#39;author&#39;, MetaList([MetaInlines([Str(u&#39;author(s)&#39;),</span>
+
+<span class="go"> Space(), Str(u&#39;(separated&#39;), Space(), Str(u&#39;by&#39;), Space(), Str(u&#39;semicolons</span>
+
+<span class="go">)&#39;)])]))])), [])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>\
+
+<span class="go">... %</span>
+
+<span class="go">... % Author</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map([(u&#39;author&#39;, MetaList([MetaInlines([Str(u&#39;Author&#39;)])]))])),</span>
+
+<span class="go">[])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;\</span>
+
+<span class="go">... % My title</span>
+
+<span class="go">... %</span>
+
+<span class="go">... % June 15, 2006</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map([(u&#39;date&#39;, MetaInlines([Str(u&#39;June&#39;), Space(), Str(u&#39;15,&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;2006&#39;)])), (u&#39;title&#39;, MetaInlines([Str(u&#39;My&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;title&#39;)]))])), [])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>\
+
+<span class="go">... % Title</span>
+
+<span class="go">... % Author One; Author Two</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map([(u&#39;title&#39;, MetaInlines([Str(u&#39;Title&#39;)])), (u&#39;author&#39;, MetaL</span>
+
+<span class="go">ist([MetaInlines([Str(u&#39;Author&#39;), Space(), Str(u&#39;One&#39;)]), MetaInlines([Str(u</span>
+
+<span class="go">&#39;Author&#39;), Space(), Str(u&#39;Two&#39;)])]))])), [])</span>
+</pre></div>
+</div>
+<p>Pandoc does not conform to its documentation when title blocks use</p>
+<p>multiple lines with leading space. The corresponding examples have been</p>
+<p>removed.</p>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">yaml_metadata_block</span></code></p>
+<hr class="docutils" />
+<p>The order of key-value pairs in maps are the same than in the json</p>
+<p>representation, but this initial order is not specified by pandoc.</p>
+<p>Hence, the following test is too strict and may fail.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... ---</span>
+
+<span class="go">... title:  &#39;This is the title: it contains a colon&#39;</span>
+
+<span class="go">... author:</span>
+
+<span class="go">... - name: Author One</span>
+
+<span class="go">...   affiliation: University of Somewhere</span>
+
+<span class="go">... - name: Author Two</span>
+
+<span class="go">...   affiliation: University of Nowhere</span>
+
+<span class="go">... tags: [nothing, nothingness]</span>
+
+<span class="go">... abstract: |</span>
+
+<span class="go">...   This is the abstract.</span>
+
+<span class="go">...</span>
+
+<span class="go">...   It consists of two paragraphs.</span>
+
+<span class="go">... ...</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map([(u&#39;abstract&#39;, MetaBlocks([Para([Str(u&#39;This&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;is&#39;), Space(), Str(u&#39;the&#39;), Space(), Str(u&#39;abstract.&#39;)]), Para([Str(u&#39;It&#39;)</span>
+
+<span class="go">, Space(), Str(u&#39;consists&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;two&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;paragraphs.&#39;)])])), (u&#39;title&#39;, MetaInlines([Str(u&#39;This&#39;), Space()</span>
+
+<span class="go">, Str(u&#39;is&#39;), Space(), Str(u&#39;the&#39;), Space(), Str(u&#39;title:&#39;), Space(), Str(u&#39;</span>
+
+<span class="go">it&#39;), Space(), Str(u&#39;contains&#39;), Space(), Str(u&#39;a&#39;), Space(), Str(u&#39;colon&#39;)]</span>
+
+<span class="go">)), (u&#39;tags&#39;, MetaList([MetaInlines([Str(u&#39;nothing&#39;)]), MetaInlines([Str(u&#39;n</span>
+
+<span class="go">othingness&#39;)])])), (u&#39;author&#39;, MetaList([MetaMap(map([(u&#39;affiliation&#39;, MetaI</span>
+
+<span class="go">nlines([Str(u&#39;University&#39;), Space(), Str(u&#39;of&#39;), Space(), Str(u&#39;Somewhere&#39;)]</span>
+
+<span class="go">)), (u&#39;name&#39;, MetaInlines([Str(u&#39;Author&#39;), Space(), Str(u&#39;One&#39;)]))])), MetaM</span>
+
+<span class="go">ap(map([(u&#39;affiliation&#39;, MetaInlines([Str(u&#39;University&#39;), Space(), Str(u&#39;of&#39;</span>
+
+<span class="go">), Space(), Str(u&#39;Nowhere&#39;)])), (u&#39;name&#39;, MetaInlines([Str(u&#39;Author&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;Two&#39;)]))]))]))])), [])</span>
+</pre></div>
+</div>
+<p>Backslash escapes</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">all_symbols_escapable</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... *\*hello\**</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Emph([Str(u&#39;*hello*&#39;)])])])</span>
+</pre></div>
+</div>
+<p>Smart punctuation</p>
+<hr class="docutils" />
+<p>Extension</p>
+<hr class="docutils" />
+<p>Not tested, disabled by default.</p>
+<p>Inline Formatting</p>
+<hr class="docutils" />
+<p>Emphasis</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... This text is _emphasized with underscores_, and this</span>
+
+<span class="go">... is *emphasized with asterisks*.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;This&#39;), Space(), Str(u&#39;text&#39;), Space(), Str</span>
+
+<span class="go">(u&#39;is&#39;), Space(), Emph([Str(u&#39;emphasized&#39;), Space(), Str(u&#39;with&#39;), Space(),</span>
+
+<span class="go">Str(u&#39;underscores&#39;)]), Str(u&#39;,&#39;), Space(), Str(u&#39;and&#39;), Space(), Str(u&#39;this&#39;</span>
+
+<span class="go">), SoftBreak(), Str(u&#39;is&#39;), Space(), Emph([Str(u&#39;emphasized&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;with&#39;), Space(), Str(u&#39;asterisks&#39;)]), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... This is **strong emphasis** and __with underscores__.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Space(), Stron</span>
+
+<span class="go">g([Str(u&#39;strong&#39;), Space(), Str(u&#39;emphasis&#39;)]), Space(), Str(u&#39;and&#39;), Space(</span>
+
+<span class="go">), Strong([Str(u&#39;with&#39;), Space(), Str(u&#39;underscores&#39;)]), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... This is * not emphasized *, and \*neither is this\*.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;*&#39;), Space(), Str(u&#39;not&#39;), Space(), Str(u&#39;emphasized&#39;), Space(), Str(u&#39;*,&#39;)</span>
+
+<span class="go">, Space(), Str(u&#39;and&#39;), Space(), Str(u&#39;*neither&#39;), Space(), Str(u&#39;is&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;this*.&#39;)])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">intraword_underscores</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;feas*ible*, not feas*able*.&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;feas&#39;), Emph([Str(u&#39;ible&#39;)]), Str(u&#39;,&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;not&#39;), Space(), Str(u&#39;feas&#39;), Emph([Str(u&#39;able&#39;)]), Str(u&#39;.&#39;)])</span>
+
+<span class="go">])</span>
+</pre></div>
+</div>
+<p>Strikeout</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">strikeout</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;This ~~is deleted text.~~&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;This&#39;), Space(), Strikeout([Str(u&#39;is&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;deleted&#39;), Space(), Str(u&#39;text.&#39;)])])])</span>
+</pre></div>
+</div>
+<p>Superscripts and Subscripts</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">superscript</span></code>, <code class="docutils literal notranslate"><span class="pre">subscript</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;H~2~O is a liquid.  2^10^ is 1024.&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;H&#39;), Subscript([Str(u&#39;2&#39;)]), Str(u&#39;O&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;is&#39;), Space(), Str(u&#39;a&#39;), Space(), Str(u&#39;liquid.&#39;), Space(), Str</span>
+
+<span class="go">(u&#39;2&#39;), Superscript([Str(u&#39;10&#39;)]), Space(), Str(u&#39;is&#39;), Space(), Str(u&#39;1024.</span>
+
+<span class="go">&#39;)])])</span>
+</pre></div>
+</div>
+<p>Verbatim</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;What is the difference between `&gt;&gt;=` and `&gt;&gt;`?&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;What&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;the&#39;), Space(), Str(u&#39;difference&#39;), Space(), Str(u&#39;between&#39;), Space(), Code</span>
+
+<span class="go">((u&#39;&#39;, [], []), u&#39;&gt;&gt;=&#39;), Space(), Str(u&#39;and&#39;), Space(), Code((u&#39;&#39;, [], []),</span>
+
+<span class="go">u&#39;&gt;&gt;&#39;), Str(u&#39;?&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Here is a literal backtick `` ` ``.&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;Here&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;a&#39;), Space(), Str(u&#39;literal&#39;), Space(), Str(u&#39;backtick&#39;), Space(), Code((u&#39;</span>
+
+<span class="go">&#39;, [], []), u&#39;`&#39;), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;This is a backslash followed by an asterisk: `\*`.&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;a&#39;), Space(), Str(u&#39;backslash&#39;), Space(), Str(u&#39;followed&#39;), Space(), Str(u&#39;</span>
+
+<span class="go">by&#39;), Space(), Str(u&#39;an&#39;), Space(), Str(u&#39;asterisk:&#39;), Space(), Code((u&#39;&#39;, [</span>
+
+<span class="go">], []), u&#39;\\*&#39;), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;`&lt;$&gt;`{.haskell}&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Code((u&#39;&#39;, [u&#39;haskell&#39;], []), u&#39;&lt;$&gt;&#39;)])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">inline_code_attributes</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;`&lt;$&gt;`{.haskell}&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Code((u&#39;&#39;, [u&#39;haskell&#39;], []), u&#39;&lt;$&gt;&#39;)])])</span>
+</pre></div>
+</div>
+<p>Small Caps</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&lt;span style=&#39;font-variant:small-caps;&#39;&gt;Small caps&lt;/span&gt;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([SmallCaps([Str(u&#39;Small&#39;), Space(), Str(u&#39;caps&#39;)])</span>
+
+<span class="go">])])</span>
+</pre></div>
+</div>
+<p>Math</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">tex_math_dollars</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;$a=1$&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Math(InlineMath(), u&#39;a=1&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;$$\int_0^1 f(x)\, dx$$&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Math(DisplayMath(), u&#39;\\int_0^1 f(x)\\, dx&#39;)])])</span>
+</pre></div>
+</div>
+<p>Raw HTML</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">raw_html</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&lt;html&gt;&lt;/html&gt;&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [RawBlock(Format(u&#39;html&#39;), u&#39;&lt;html&gt;&#39;), RawBlock(Format(u</span>
+
+<span class="go">&#39;html&#39;), u&#39;&lt;/html&gt;&#39;)])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">markdown_in_html_blocks</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... &lt;table&gt;</span>
+
+<span class="go">... &lt;tr&gt;</span>
+
+<span class="go">... &lt;td&gt;*one*&lt;/td&gt;</span>
+
+<span class="go">... &lt;td&gt;[a link](http://google.com)&lt;/td&gt;</span>
+
+<span class="go">... &lt;/tr&gt;</span>
+
+<span class="go">... &lt;/table&gt;</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [RawBlock(Format(u&#39;html&#39;), u&#39;&lt;table&gt;&#39;), RawBlock(Format(</span>
+
+<span class="go">u&#39;html&#39;), u&#39;&lt;tr&gt;&#39;), RawBlock(Format(u&#39;html&#39;), u&#39;&lt;td&gt;&#39;), Plain([Emph([Str(u&#39;o</span>
+
+<span class="go">ne&#39;)])]), RawBlock(Format(u&#39;html&#39;), u&#39;&lt;/td&gt;&#39;), RawBlock(Format(u&#39;html&#39;), u&#39;&lt;</span>
+
+<span class="go">td&gt;&#39;), Plain([Link((u&#39;&#39;, [], []), [Str(u&#39;a&#39;), Space(), Str(u&#39;link&#39;)], (u&#39;htt</span>
+
+<span class="go">p://google.com&#39;, u&#39;&#39;))]), RawBlock(Format(u&#39;html&#39;), u&#39;&lt;/td&gt;&#39;), RawBlock(Form</span>
+
+<span class="go">at(u&#39;html&#39;), u&#39;&lt;/tr&gt;&#39;), RawBlock(Format(u&#39;html&#39;), u&#39;&lt;/table&gt;&#39;)])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">native_divs</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Div((u&#39;&#39;, [], []), [])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">native_spans</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&lt;span&gt;&lt;/span&gt;&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Span((u&#39;&#39;, [], []), [])])])</span>
+</pre></div>
+</div>
+<p>Raw TeX</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">raw_tex</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;This result was proved in \cite</span><span class="si">{jones.1967}</span><span class="s2">.&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;This&#39;), Space(), Str(u&#39;result&#39;), Space(), S</span>
+
+<span class="go">tr(u&#39;was&#39;), Space(), Str(u&#39;proved&#39;), Space(), Str(u&#39;in&#39;), Space(), RawInline</span>
+
+<span class="go">(Format(u&#39;tex&#39;), u&#39;\\cite{jones.1967}&#39;), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... \begin{tabular}{|l|l|}\hline</span>
+
+<span class="go">... Age &amp; Frequency \\ \hline</span>
+
+<span class="go">... 18--25  &amp; 15 \\</span>
+
+<span class="go">... 26--35  &amp; 33 \\</span>
+
+<span class="go">... 36--45  &amp; 22 \\ \hline</span>
+
+<span class="go">... \end{tabular}</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [RawBlock(Format(u&#39;latex&#39;), u&#39;\\begin{tabular}{|l|l|}\\h</span>
+
+<span class="go">line\nAge &amp; Frequency \\\\ \\hline\n18--25  &amp; 15 \\\\\n26--35  &amp; 33 \\\\\n36</span>
+
+<span class="go">--45  &amp; 22 \\\\ \\hline\n\\end{tabular}&#39;)])</span>
+</pre></div>
+</div>
+<p>LaTeX macros</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">latex_macros</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... \newcommand{\tuple}[1]{\langle #1 \rangle}</span>
+
+<span class="go">...</span>
+
+<span class="go">... $\tuple{a, b, c}$</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Math(InlineMath(), u&#39;{\\langle a, b, c \\rangle}&#39;</span>
+
+<span class="go">)])])</span>
+</pre></div>
+</div>
+<p>Links</p>
+<hr class="docutils" />
+<p>Automatic Links</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&lt;http://google.com&gt;&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Link((u&#39;&#39;, [], []), [Str(u&#39;http://google.com&#39;)],</span>
+
+<span class="go">(u&#39;http://google.com&#39;, u&#39;&#39;))])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&lt;sam@green.eggs.ham&gt;&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Link((u&#39;&#39;, [], []), [Str(u&#39;sam@green.eggs.ham&#39;)],</span>
+
+<span class="go"> (u&#39;mailto:sam@green.eggs.ham&#39;, u&#39;&#39;))])])</span>
+</pre></div>
+</div>
+<p>Inline links</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... This is an [inline link](/url), and here&#39;s [one with</span>
+
+<span class="go">... a title](http://fsf.org &quot;click here for a good time!</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;This&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;an&#39;), Space(), Link((u&#39;&#39;, [], []), [Str(u&#39;inline&#39;), Space(), Str(u&#39;link&#39;)],</span>
+
+<span class="go"> (u&#39;/url&#39;, u&#39;&#39;)), Str(u&#39;,&#39;), Space(), Str(u&#39;and&#39;), Space(), Str(u&quot;here&#39;s&quot;),</span>
+
+<span class="go">Space(), Str(u&#39;[one&#39;), Space(), Str(u&#39;with&#39;), SoftBreak(), Str(u&#39;a&#39;), Space(</span>
+
+<span class="go">), Str(u&#39;title](http://fsf.org&#39;), Space(), Str(u&#39;&quot;click&#39;), Space(), Str(u&#39;he</span>
+
+<span class="go">re&#39;), Space(), Str(u&#39;for&#39;), Space(), Str(u&#39;a&#39;), Space(), Str(u&#39;good&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;time!&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;[Write me!](mailto:sam@green.eggs.ham)&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Link((u&#39;&#39;, [], []), [Str(u&#39;Write&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;me!&#39;)], (u&#39;mailto:sam@green.eggs.ham&#39;, u&#39;&#39;))])])</span>
+</pre></div>
+</div>
+<p>Reference links</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... [my label 1], [my label 2], [my label 3], [my label 4].</span>
+
+<span class="go">...</span>
+
+<span class="go">... [my label 1]: /foo/bar.html  &quot;My title, optional&quot;</span>
+
+<span class="go">... [my label 2]: /foo</span>
+
+<span class="go">... [my label 3]: http://fsf.org (The free software foundation)</span>
+
+<span class="go">... [my label 4]: /bar#special  &#39;A title in single quotes&#39;</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Link((u&#39;&#39;, [], []), [Str(u&#39;my&#39;), Space(), Str(u&#39;l</span>
+
+<span class="go">abel&#39;), Space(), Str(u&#39;1&#39;)], (u&#39;/foo/bar.html&#39;, u&#39;My title, optional&#39;)), Str</span>
+
+<span class="go">(u&#39;,&#39;), Space(), Link((u&#39;&#39;, [], []), [Str(u&#39;my&#39;), Space(), Str(u&#39;label&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;2&#39;)], (u&#39;/foo&#39;, u&#39;&#39;)), Str(u&#39;,&#39;), Space(), Link((u&#39;&#39;, [], []),</span>
+
+<span class="go">[Str(u&#39;my&#39;), Space(), Str(u&#39;label&#39;), Space(), Str(u&#39;3&#39;)], (u&#39;http://fsf.org&#39;</span>
+
+<span class="go">, u&#39;The free software foundation&#39;)), Str(u&#39;,&#39;), Space(), Link((u&#39;&#39;, [], []),</span>
+
+<span class="go"> [Str(u&#39;my&#39;), Space(), Str(u&#39;label&#39;), Space(), Str(u&#39;4&#39;)], (u&#39;/bar#special&#39;,</span>
+
+<span class="go"> u&#39;A title in single quotes&#39;)), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... [my label 5].</span>
+
+<span class="go">...</span>
+
+<span class="go">... [my label 5]: &lt;http://foo.bar.baz&gt;</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Link((u&#39;&#39;, [], []), [Str(u&#39;my&#39;), Space(), Str(u&#39;l</span>
+
+<span class="go">abel&#39;), Space(), Str(u&#39;5&#39;)], (u&#39;http://foo.bar.baz&#39;, u&#39;&#39;)), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... [my label 3].</span>
+
+<span class="go">...</span>
+
+<span class="go">... [my label 3]: http://fsf.org &quot;The free software foundation&quot;</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Link((u&#39;&#39;, [], []), [Str(u&#39;my&#39;), Space(), Str(u&#39;l</span>
+
+<span class="go">abel&#39;), Space(), Str(u&#39;3&#39;)], (u&#39;http://fsf.org&#39;, u&#39;The free software foundat</span>
+
+<span class="go">ion&#39;)), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... Here is [my link][FOO]</span>
+
+<span class="go">...</span>
+
+<span class="go">... [Foo]: /bar/baz</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;Here&#39;), Space(), Str(u&#39;is&#39;), Space(), Link(</span>
+
+<span class="go">(u&#39;&#39;, [], []), [Str(u&#39;my&#39;), Space(), Str(u&#39;link&#39;)], (u&#39;/bar/baz&#39;, u&#39;&#39;))])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... See [my website][].</span>
+
+<span class="go">...</span>
+
+<span class="go">... [my website]: http://foo.bar.baz</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;See&#39;), Space(), Link((u&#39;&#39;, [], []), [Str(u&#39;</span>
+
+<span class="go">my&#39;), Space(), Str(u&#39;website&#39;)], (u&#39;http://foo.bar.baz&#39;, u&#39;&#39;)), Str(u&#39;.&#39;)])]</span>
+
+<span class="go">)</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... &gt; My block [quote].</span>
+
+<span class="go">... &gt;</span>
+
+<span class="go">... &gt; [quote]: /foo</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [BlockQuote([Para([Str(u&#39;My&#39;), Space(), Str(u&#39;block&#39;), S</span>
+
+<span class="go">pace(), Link((u&#39;&#39;, [], []), [Str(u&#39;quote&#39;)], (u&#39;/foo&#39;, u&#39;&#39;)), Str(u&#39;.&#39;)])])]</span>
+
+<span class="go">)</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">shortcut_reference_links</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... See [my website].</span>
+
+<span class="go">...</span>
+
+<span class="go">... [my website]: http://foo.bar.baz</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;See&#39;), Space(), Link((u&#39;&#39;, [], []), [Str(u&#39;</span>
+
+<span class="go">my&#39;), Space(), Str(u&#39;website&#39;)], (u&#39;http://foo.bar.baz&#39;, u&#39;&#39;)), Str(u&#39;.&#39;)])]</span>
+
+<span class="go">)</span>
+</pre></div>
+</div>
+<p>Internal links</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;See the [Introduction](#introduction).&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;See&#39;), Space(), Str(u&#39;the&#39;), Space(), Link(</span>
+
+<span class="go">(u&#39;&#39;, [], []), [Str(u&#39;Introduction&#39;)], (u&#39;#introduction&#39;, u&#39;&#39;)), Str(u&#39;.&#39;)])</span>
+
+<span class="go">])</span>
+
+
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... See the [Introduction].</span>
+
+<span class="go">...</span>
+
+<span class="go">... [Introduction]: #introduction</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;See&#39;), Space(), Str(u&#39;the&#39;), Space(), Link(</span>
+
+<span class="go">(u&#39;&#39;, [], []), [Str(u&#39;Introduction&#39;)], (u&#39;#introduction&#39;, u&#39;&#39;)), Str(u&#39;.&#39;)])</span>
+
+<span class="go">])</span>
+</pre></div>
+</div>
+<p>Images</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ![la lune](lalune.jpg &quot;Voyage to the moon&quot;)</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Image((u&#39;&#39;, [], []), [Str(u&#39;la&#39;), Space(), Str(u&#39;</span>
+
+<span class="go">lune&#39;)], (u&#39;lalune.jpg&#39;, u&#39;fig:Voyage to the moon&#39;))])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ![movie reel]</span>
+
+<span class="go">...</span>
+
+<span class="go">... [movie reel]: movie.gif</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Image((u&#39;&#39;, [], []), [Str(u&#39;movie&#39;), Space(), Str</span>
+
+<span class="go">(u&#39;reel&#39;)], (u&#39;movie.gif&#39;, u&#39;fig:&#39;))])])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">implicit_figures</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ![This is the caption](/url/of/image.png)</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Image((u&#39;&#39;, [], []), [Str(u&#39;This&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;is&#39;), Space(), Str(u&#39;the&#39;), Space(), Str(u&#39;caption&#39;)], (u&#39;/url/of/image.pn</span>
+
+<span class="go">g&#39;, u&#39;fig:&#39;))])])</span>
+
+
+
+<span class="go">ISSUE HERE.</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">r&quot;&quot;&quot;</span>
+
+<span class="go">... ![This image won&#39;t be a figure](/url/of/image.png)\</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Image((u&#39;&#39;, [], []), [Str(u&#39;This&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;image&#39;), Space(), Str(u&quot;won&#39;t&quot;), Space(), Str(u&#39;be&#39;), Space(), Str(u&#39;a&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;figure&#39;)], (u&#39;/url/of/image.png&#39;, u&#39;&#39;)), Str(u&#39;\xa0&#39;)])])</span>
+</pre></div>
+</div>
+<p>Extension: link_attributes</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... An inline ![image](foo.jpg){#id .class width=30 height=20px}</span>
+
+<span class="go">... and a reference ![image][ref] with attributes.</span>
+
+<span class="go">...</span>
+
+<span class="go">... [ref]: foo.jpg &quot;optional title&quot; {#id .class key=val key2=&quot;val 2&quot;}</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;An&#39;), Space(), Str(u&#39;inline&#39;), Space(), Ima</span>
+
+<span class="go">ge((u&#39;id&#39;, [u&#39;class&#39;], [(u&#39;width&#39;, u&#39;30&#39;), (u&#39;height&#39;, u&#39;20px&#39;)]), [Str(u&#39;im</span>
+
+<span class="go">age&#39;)], (u&#39;foo.jpg&#39;, u&#39;&#39;)), SoftBreak(), Str(u&#39;and&#39;), Space(), Str(u&#39;a&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;reference&#39;), Space(), Image((u&#39;id&#39;, [u&#39;class&#39;], [(u&#39;key&#39;, u&#39;val</span>
+
+<span class="go">&#39;), (u&#39;key2&#39;, u&#39;val 2&#39;)]), [Str(u&#39;image&#39;)], (u&#39;foo.jpg&#39;, u&#39;optional title&#39;))</span>
+
+<span class="go">, Space(), Str(u&#39;with&#39;), Space(), Str(u&#39;attributes.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;![](file.jpg){ width=50% }&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Image((u&#39;&#39;, [], [(u&#39;width&#39;, u&#39;50%&#39;)]), [], (u&#39;fil</span>
+
+<span class="go">e.jpg&#39;, u&#39;fig:&#39;))])])</span>
+</pre></div>
+</div>
+<p>Footnotes</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">footnotes</span></code></p>
+<hr class="docutils" />
+<p>Pandoc’s Markdown allows footnotes, using the following syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... Here is a footnote reference,[^1] and another.[^longnote]</span>
+
+<span class="go">...</span>
+
+<span class="go">... [^1]: Here is the footnote.</span>
+
+<span class="go">...</span>
+
+<span class="go">... [^longnote]: Here&#39;s one with multiple blocks.</span>
+
+<span class="go">...</span>
+
+<span class="go">...     Subsequent paragraphs are indented to show that they</span>
+
+<span class="go">... belong to the previous footnote.</span>
+
+<span class="go">...</span>
+
+<span class="go">...         { some.code }</span>
+
+<span class="go">...</span>
+
+<span class="go">...     The whole paragraph can be indented, or just the first</span>
+
+<span class="go">...     line.  In this way, multi-paragraph footnotes work like</span>
+
+<span class="go">...     multi-paragraph list items.</span>
+
+<span class="go">...</span>
+
+<span class="go">... This paragraph won&#39;t be part of the note, because it</span>
+
+<span class="go">... isn&#39;t indented.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;Here&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;a&#39;), Space(), Str(u&#39;footnote&#39;), Space(), Str(u&#39;reference,&#39;), Note([Para([St</span>
+
+<span class="go">r(u&#39;Here&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u&#39;the&#39;), Space(), Str(u&#39;footno</span>
+
+<span class="go">te.&#39;)])]), Space(), Str(u&#39;and&#39;), Space(), Str(u&#39;another.&#39;), Note([Para([Str(</span>
+
+<span class="go">u&quot;Here&#39;s&quot;), Space(), Str(u&#39;one&#39;), Space(), Str(u&#39;with&#39;), Space(), Str(u&#39;mult</span>
+
+<span class="go">iple&#39;), Space(), Str(u&#39;blocks.&#39;)]), Para([Str(u&#39;Subsequent&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;paragraphs&#39;), Space(), Str(u&#39;are&#39;), Space(), Str(u&#39;indented&#39;), Space(), Str</span>
+
+<span class="go">(u&#39;to&#39;), Space(), Str(u&#39;show&#39;), Space(), Str(u&#39;that&#39;), Space(), Str(u&#39;they&#39;)</span>
+
+<span class="go">, SoftBreak(), Str(u&#39;belong&#39;), Space(), Str(u&#39;to&#39;), Space(), Str(u&#39;the&#39;), Sp</span>
+
+<span class="go">ace(), Str(u&#39;previous&#39;), Space(), Str(u&#39;footnote.&#39;)]), CodeBlock((u&#39;&#39;, [], [</span>
+
+<span class="go">]), u&#39;{ some.code }&#39;), Para([Str(u&#39;The&#39;), Space(), Str(u&#39;whole&#39;), Space(), S</span>
+
+<span class="go">tr(u&#39;paragraph&#39;), Space(), Str(u&#39;can&#39;), Space(), Str(u&#39;be&#39;), Space(), Str(u&#39;</span>
+
+<span class="go">indented,&#39;), Space(), Str(u&#39;or&#39;), Space(), Str(u&#39;just&#39;), Space(), Str(u&#39;the&#39;</span>
+
+<span class="go">), Space(), Str(u&#39;first&#39;), SoftBreak(), Str(u&#39;line.&#39;), Space(), Str(u&#39;In&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;this&#39;), Space(), Str(u&#39;way,&#39;), Space(), Str(u&#39;multi-paragraph</span>
+
+<span class="go">&#39;), Space(), Str(u&#39;footnotes&#39;), Space(), Str(u&#39;work&#39;), Space(), Str(u&#39;like&#39;)</span>
+
+<span class="go">, SoftBreak(), Str(u&#39;multi-paragraph&#39;), Space(), Str(u&#39;list&#39;), Space(), Str(</span>
+
+<span class="go">u&#39;items.&#39;)])])]), Para([Str(u&#39;This&#39;), Space(), Str(u&#39;paragraph&#39;), Space(), S</span>
+
+<span class="go">tr(u&quot;won&#39;t&quot;), Space(), Str(u&#39;be&#39;), Space(), Str(u&#39;part&#39;), Space(), Str(u&#39;of&#39;</span>
+
+<span class="go">), Space(), Str(u&#39;the&#39;), Space(), Str(u&#39;note,&#39;), Space(), Str(u&#39;because&#39;), S</span>
+
+<span class="go">pace(), Str(u&#39;it&#39;), SoftBreak(), Str(u&quot;isn&#39;t&quot;), Space(), Str(u&#39;indented.&#39;)])</span>
+
+<span class="go">])</span>
+</pre></div>
+</div>
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">inline_notes</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="go">... Here is an inline note.^[Inlines notes are easier to write, since</span>
+
+<span class="go">... you don&#39;t have to pick an identifier and move down to type the</span>
+
+<span class="go">... note.]</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;Here&#39;), Space(), Str(u&#39;is&#39;), Space(), Str(u</span>
+
+<span class="go">&#39;an&#39;), Space(), Str(u&#39;inline&#39;), Space(), Str(u&#39;note.&#39;), Note([Para([Str(u&#39;In</span>
+
+<span class="go">lines&#39;), Space(), Str(u&#39;notes&#39;), Space(), Str(u&#39;are&#39;), Space(), Str(u&#39;easier</span>
+
+<span class="go">&#39;), Space(), Str(u&#39;to&#39;), Space(), Str(u&#39;write,&#39;), Space(), Str(u&#39;since&#39;), So</span>
+
+<span class="go">ftBreak(), Str(u&#39;you&#39;), Space(), Str(u&quot;don&#39;t&quot;), Space(), Str(u&#39;have&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;to&#39;), Space(), Str(u&#39;pick&#39;), Space(), Str(u&#39;an&#39;), Space(), Str(u&#39;i</span>
+
+<span class="go">dentifier&#39;), Space(), Str(u&#39;and&#39;), Space(), Str(u&#39;move&#39;), Space(), Str(u&#39;dow</span>
+
+<span class="go">n&#39;), Space(), Str(u&#39;to&#39;), Space(), Str(u&#39;type&#39;), Space(), Str(u&#39;the&#39;), SoftB</span>
+
+<span class="go">reak(), Str(u&#39;note.&#39;)])])])])</span>
+</pre></div>
+</div>
+<p>Citations</p>
+<hr class="docutils" />
+<p>Extension: <code class="docutils literal notranslate"><span class="pre">citations</span></code></p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ---</span>
+
+<span class="go">... references:</span>
+
+<span class="go">... - type: article-journal</span>
+
+<span class="go">...   id: WatsonCrick1953</span>
+
+<span class="go">...   author:</span>
+
+<span class="go">...   - family: Watson</span>
+
+<span class="go">...     given: J. D.</span>
+
+<span class="go">...   - family: Crick</span>
+
+<span class="go">...     given: F. H. C.</span>
+
+<span class="go">...   issued:</span>
+
+<span class="go">...     date-parts:</span>
+
+<span class="go">...     - - 1953</span>
+
+<span class="go">...       - 4</span>
+
+<span class="go">...       - 25</span>
+
+<span class="go">...   title: &#39;Molecular structure of nucleic acids: a structure for deoxyribose</span>
+
+<span class="go">...     nucleic acid&#39;</span>
+
+<span class="go">...   title-short: Molecular structure of nucleic acids</span>
+
+<span class="go">...   container-title: Nature</span>
+
+<span class="go">...   volume: 171</span>
+
+<span class="go">...   issue: 4356</span>
+
+<span class="go">...   page: 737-738</span>
+
+<span class="go">...   DOI: 10.1038/171737a0</span>
+
+<span class="go">...   URL: http://www.nature.com/nature/journal/v171/n4356/abs/171737a0.html</span>
+
+<span class="go">...   language: en-GB</span>
+
+<span class="go">... ---</span>
+
+<span class="go">...</span>
+
+<span class="go">... [@WatsonCrick1953]</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map([(u&#39;references&#39;, MetaList([MetaMap(map([(u&#39;DOI&#39;, MetaInlines</span>
+
+<span class="go">([Str(u&#39;10.1038/171737a0&#39;)])), (u&#39;language&#39;, MetaInlines([Str(u&#39;en-GB&#39;)])),</span>
+
+<span class="go">(u&#39;author&#39;, MetaList([MetaMap(map([(u&#39;given&#39;, MetaInlines([Str(u&#39;J.&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;D.&#39;)])), (u&#39;family&#39;, MetaInlines([Str(u&#39;Watson&#39;)]))])), MetaMap(ma</span>
+
+<span class="go">p([(u&#39;given&#39;, MetaInlines([Str(u&#39;F.&#39;), Space(), Str(u&#39;H.&#39;), Space(), Str(u&#39;C</span>
+
+<span class="go">.&#39;)])), (u&#39;family&#39;, MetaInlines([Str(u&#39;Crick&#39;)]))]))])), (u&#39;URL&#39;, MetaInline</span>
+
+<span class="go">s([Str(u&#39;http://www.nature.com/nature/journal/v171/n4356/abs/171737a0.html&#39;)</span>
+
+<span class="go">])), (u&#39;issued&#39;, MetaMap(map([(u&#39;date-parts&#39;, MetaList([MetaList([MetaString</span>
+
+<span class="go">(u&#39;1953&#39;), MetaString(u&#39;4&#39;), MetaString(u&#39;25&#39;)])]))]))), (u&#39;title&#39;, MetaInli</span>
+
+<span class="go">nes([Str(u&#39;Molecular&#39;), Space(), Str(u&#39;structure&#39;), Space(), Str(u&#39;of&#39;), Spa</span>
+
+<span class="go">ce(), Str(u&#39;nucleic&#39;), Space(), Str(u&#39;acids:&#39;), Space(), Str(u&#39;a&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;structure&#39;), Space(), Str(u&#39;for&#39;), Space(), Str(u&#39;deoxyribose&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;nucleic&#39;), Space(), Str(u&#39;acid&#39;)])), (u&#39;id&#39;, MetaInlines([Str(u&#39;W</span>
+
+<span class="go">atsonCrick1953&#39;)])), (u&#39;volume&#39;, MetaString(u&#39;171&#39;)), (u&#39;issue&#39;, MetaString(</span>
+
+<span class="go">u&#39;4356&#39;)), (u&#39;container-title&#39;, MetaInlines([Str(u&#39;Nature&#39;)])), (u&#39;title-sho</span>
+
+<span class="go">rt&#39;, MetaInlines([Str(u&#39;Molecular&#39;), Space(), Str(u&#39;structure&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;of&#39;), Space(), Str(u&#39;nucleic&#39;), Space(), Str(u&#39;acids&#39;)])), (u&#39;type&#39;, Met</span>
+
+<span class="go">aInlines([Str(u&#39;article-journal&#39;)])), (u&#39;page&#39;, MetaInlines([Str(u&#39;737-738&#39;)</span>
+
+<span class="go">]))]))]))])), [Para([Cite([Citation(u&#39;WatsonCrick1953&#39;, [], [], NormalCitati</span>
+
+<span class="go">on(), 0, 0)], [Str(u&#39;[@WatsonCrick1953]&#39;)])])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... Blah blah [see @doe99, pp. 33-35; also @smith04, chap. 1].</span>
+
+<span class="go">...</span>
+
+<span class="go">... Blah blah [@doe99, pp. 33-35, 38-39 and *passim*].</span>
+
+<span class="go">...</span>
+
+<span class="go">... Blah blah [@smith04; @doe99].</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;Blah&#39;), Space(), Str(u&#39;blah&#39;), Space(), Cit</span>
+
+<span class="go">e([Citation(u&#39;doe99&#39;, [Str(u&#39;see&#39;)], [Str(u&#39;,&#39;), Space(), Str(u&#39;pp.&#39;), Space</span>
+
+<span class="go">(), Str(u&#39;33-35&#39;)], NormalCitation(), 0, 0), Citation(u&#39;smith04&#39;, [Str(u&#39;als</span>
+
+<span class="go">o&#39;)], [Str(u&#39;,&#39;), Space(), Str(u&#39;chap.&#39;), Space(), Str(u&#39;1&#39;)], NormalCitatio</span>
+
+<span class="go">n(), 0, 0)], [Str(u&#39;[see&#39;), Space(), Str(u&#39;@doe99,&#39;), Space(), Str(u&#39;pp.&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;33-35;&#39;), Space(), Str(u&#39;also&#39;), Space(), Str(u&#39;@smith04,&#39;),</span>
+
+<span class="go">Space(), Str(u&#39;chap.&#39;), Space(), Str(u&#39;1]&#39;)]), Str(u&#39;.&#39;)]), Para([Str(u&#39;Blah</span>
+
+<span class="go">&#39;), Space(), Str(u&#39;blah&#39;), Space(), Cite([Citation(u&#39;doe99&#39;, [], [Str(u&#39;,&#39;),</span>
+
+<span class="go"> Space(), Str(u&#39;pp.&#39;), Space(), Str(u&#39;33-35,&#39;), Space(), Str(u&#39;38-39&#39;), Spac</span>
+
+<span class="go">e(), Str(u&#39;and&#39;), Space(), Emph([Str(u&#39;passim&#39;)])], NormalCitation(), 0, 0)]</span>
+
+<span class="go">, [Str(u&#39;[@doe99,&#39;), Space(), Str(u&#39;pp.&#39;), Space(), Str(u&#39;33-35,&#39;), Space(),</span>
+
+<span class="go"> Str(u&#39;38-39&#39;), Space(), Str(u&#39;and&#39;), Space(), Str(u&#39;*passim*]&#39;)]), Str(u&#39;.&#39;</span>
+
+<span class="go">)]), Para([Str(u&#39;Blah&#39;), Space(), Str(u&#39;blah&#39;), Space(), Cite([Citation(u&#39;sm</span>
+
+<span class="go">ith04&#39;, [], [], NormalCitation(), 0, 0), Citation(u&#39;doe99&#39;, [], [], NormalCi</span>
+
+<span class="go">tation(), 0, 0)], [Str(u&#39;[@smith04;&#39;), Space(), Str(u&#39;@doe99]&#39;)]), Str(u&#39;.&#39;)</span>
+
+<span class="go">])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Smith says blah [-@smith04].&quot;</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Str(u&#39;Smith&#39;), Space(), Str(u&#39;says&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;blah&#39;), Space(), Cite([Citation(u&#39;smith04&#39;, [], [], SuppressAuthor(), 0,</span>
+
+<span class="go"> 0)], [Str(u&#39;[-@smith04]&#39;)]), Str(u&#39;.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... @smith04 says blah.</span>
+
+<span class="go">...</span>
+
+<span class="go">... @smith04 [p. 33] says blah.</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map()), [Para([Cite([Citation(u&#39;smith04&#39;, [], [], AuthorInText()</span>
+
+<span class="go">, 0, 0)], [Str(u&#39;@smith04&#39;)]), Space(), Str(u&#39;says&#39;), Space(), Str(u&#39;blah.&#39;)</span>
+
+<span class="go">]), Para([Cite([Citation(u&#39;smith04&#39;, [], [Str(u&#39;p.&#39;), Space(), Str(u&#39;33&#39;)],</span>
+
+<span class="go">AuthorInText(), 0, 0)], [Str(u&#39;@smith04&#39;), Space(), Str(u&#39;[p.&#39;), Space(), St</span>
+
+<span class="go">r(u&#39;33]&#39;)]), Space(), Str(u&#39;says&#39;), Space(), Str(u&#39;blah.&#39;)])])</span>
+
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="go">... ---</span>
+
+<span class="go">... nocite: |</span>
+
+<span class="go">...   @item1, @item2</span>
+
+<span class="go">... ---</span>
+
+<span class="go">...</span>
+
+<span class="go">... @item3</span>
+
+<span class="go">... &quot;&quot;&quot;</span>
+
+<span class="go">...</span>
+
+<span class="go">Pandoc(Meta(map([(u&#39;nocite&#39;, MetaBlocks([Para([Cite([Citation(u&#39;item1&#39;, [],</span>
+
+<span class="go">[], AuthorInText(), 0, 0)], [Str(u&#39;@item1&#39;)]), Str(u&#39;,&#39;), Space(), Cite([Cit</span>
+
+<span class="go">ation(u&#39;item2&#39;, [], [], AuthorInText(), 0, 0)], [Str(u&#39;@item2&#39;)])])]))])), [</span>
+
+<span class="go">Para([Cite([Citation(u&#39;item3&#39;, [], [], AuthorInText(), 0, 0)], [Str(u&#39;@item3</span>
+
+<span class="go">&#39;)])])])</span>
+</pre></div>
+</div>
+<p>‘’</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

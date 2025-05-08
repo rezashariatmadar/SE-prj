@@ -1,0 +1,885 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Models &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quiz_app_models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="models">
+<h1>Models<a class="headerlink" href="#models" title="Link to this heading"></a></h1>
+<p>Last updated: 2025-05-08</p>
+<p>This document describes all models in the quiz_app application.</p>
+<section id="category">
+<h2>Category<a class="headerlink" href="#category" title="Link to this heading"></a></h2>
+<p>Represents a quiz category or topic.</p>
+<p>Categories are used to organize questions into logical groups,
+allowing users to select quizzes by topic of interest.</p>
+<section id="fields">
+<h3>Fields<a class="headerlink" href="#fields" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>question</dt><dd><p>Type: ForeignKey
+Description: No description available</p>
+</dd>
+<dt>quizattempt</dt><dd><p>Type: ForeignKey
+Description: No description available</p>
+</dd>
+<dt>userprofile</dt><dd><p>Type: ForeignKey
+Description: No description available</p>
+</dd>
+<dt>id</dt><dd><p>Type: BigAutoField
+Description:</p>
+</dd>
+<dt>name</dt><dd><p>Type: CharField
+Description: The name of the quiz category</p>
+</dd>
+<dt>description</dt><dd><p>Type: TextField
+Description: A detailed description of the category</p>
+</dd>
+<dt>icon</dt><dd><p>Type: CharField
+Description: CSS class for the category icon (e.g., ‘fa-science’)</p>
+</dd>
+<dt>created_at</dt><dd><p>Type: DateTimeField
+Description: When the category was created</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>adelete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>arefresh_from_db</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>asave</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>clean</dt><dd><p>Hook for doing any extra model-wide validation after clean() has been</p>
+</dd>
+</dl>
+<p>called on every field by self.clean_fields. Any ValidationError raised
+by this method will not be associated with a particular field; it will
+have a special-case association with the field defined by NON_FIELD_ERRORS.</p>
+<dl class="simple">
+<dt>clean_fields</dt><dd><p>Clean all fields and raise a ValidationError containing a dict</p>
+</dd>
+</dl>
+<p>of all validation errors if any occur.</p>
+<dl class="simple">
+<dt>date_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>delete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>full_clean</dt><dd><p>Call clean_fields(), clean(), validate_unique(), and</p>
+</dd>
+</dl>
+<p>validate_constraints() on the model. Raise a ValidationError for any
+errors that occur.</p>
+<dl class="simple">
+<dt>get_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_deferred_fields</dt><dd><p>Return a set containing names of deferred fields for this instance.</p>
+</dd>
+<dt>get_next_by_created_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_previous_by_created_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>prepare_database_save</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>question_count</dt><dd><p>Returns the number of questions in this category.</p>
+</dd>
+<dt>refresh_from_db</dt><dd><p>Reload field values from the database.</p>
+</dd>
+</dl>
+<p>By default, the reloading happens from the database this instance was
+loaded from, or by the read router if this instance wasn’t loaded from
+any database. The using parameter will override the default.</p>
+<p>Fields can be used to specify which fields to reload. The fields
+should be an iterable of field attnames. If fields is None, then
+all non-deferred fields are reloaded.</p>
+<p>When accessing deferred fields of an instance, the deferred loading
+of the field will call this method.</p>
+<dl class="simple">
+<dt>save</dt><dd><p>Save the current instance. Override this in a subclass if you want to</p>
+</dd>
+</dl>
+<p>control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+<dl class="simple">
+<dt>save_base</dt><dd><p>Handle the parts of saving which should be done only once per save,</p>
+</dd>
+</dl>
+<p>yet need to be done in raw saves, too. This includes some sanity
+checks and signal sending.</p>
+<p>The ‘raw’ argument is telling save_base not to save any parent
+models and not to do any changes to the values before save. This
+is used by fixture loading.</p>
+<dl class="simple">
+<dt>serializable_value</dt><dd><p>Return the value of the field name for this instance. If the field is</p>
+</dd>
+</dl>
+<p>a foreign key, return the id value instead of the object. If there’s
+no Field object with this name on the model, return the model
+attribute’s value.</p>
+<p>Used to serialize a field’s value (in the serializer, or form output,
+for example). Normally, you would just access the attribute directly
+and not use this method.</p>
+<dl class="simple">
+<dt>unique_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_unique</dt><dd><p>Check unique constraints on the model and raise ValidationError if any</p>
+</dd>
+</dl>
+<p>failed.</p>
+</section>
+</section>
+<section id="question">
+<h2>Question<a class="headerlink" href="#question" title="Link to this heading"></a></h2>
+<p>Represents a quiz question.</p>
+<p>Each question belongs to a category and has multiple choice answers.
+One of the choices must be marked as correct.</p>
+<section id="id1">
+<h3>Fields<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>choice</dt><dd><p>Type: ForeignKey
+Description: No description available</p>
+</dd>
+<dt>quizresponse</dt><dd><p>Type: ForeignKey
+Description: No description available</p>
+</dd>
+<dt>id</dt><dd><p>Type: BigAutoField
+Description:</p>
+</dd>
+<dt>category</dt><dd><p>Type: ForeignKey
+Description: The category this question belongs to</p>
+</dd>
+<dt>text</dt><dd><p>Type: TextField
+Description: The question text</p>
+</dd>
+<dt>explanation</dt><dd><p>Type: TextField
+Description: Explanation of the correct answer (shown after answering)</p>
+</dd>
+<dt>difficulty</dt><dd><p>Type: CharField
+Description: The difficulty level of this question</p>
+</dd>
+<dt>created_at</dt><dd><p>Type: DateTimeField
+Description: When the question was created</p>
+</dd>
+<dt>updated_at</dt><dd><p>Type: DateTimeField
+Description: When the question was last updated</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Methods<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>adelete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>arefresh_from_db</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>asave</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>clean</dt><dd><p>Hook for doing any extra model-wide validation after clean() has been</p>
+</dd>
+</dl>
+<p>called on every field by self.clean_fields. Any ValidationError raised
+by this method will not be associated with a particular field; it will
+have a special-case association with the field defined by NON_FIELD_ERRORS.</p>
+<dl class="simple">
+<dt>clean_fields</dt><dd><p>Clean all fields and raise a ValidationError containing a dict</p>
+</dd>
+</dl>
+<p>of all validation errors if any occur.</p>
+<dl class="simple">
+<dt>correct_choice</dt><dd><p>Returns the correct choice for this question.</p>
+</dd>
+<dt>date_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>delete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>full_clean</dt><dd><p>Call clean_fields(), clean(), validate_unique(), and</p>
+</dd>
+</dl>
+<p>validate_constraints() on the model. Raise a ValidationError for any
+errors that occur.</p>
+<dl class="simple">
+<dt>get_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_deferred_fields</dt><dd><p>Return a set containing names of deferred fields for this instance.</p>
+</dd>
+<dt>get_difficulty_display</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_next_by_created_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_next_by_updated_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_previous_by_created_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_previous_by_updated_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>prepare_database_save</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>refresh_from_db</dt><dd><p>Reload field values from the database.</p>
+</dd>
+</dl>
+<p>By default, the reloading happens from the database this instance was
+loaded from, or by the read router if this instance wasn’t loaded from
+any database. The using parameter will override the default.</p>
+<p>Fields can be used to specify which fields to reload. The fields
+should be an iterable of field attnames. If fields is None, then
+all non-deferred fields are reloaded.</p>
+<p>When accessing deferred fields of an instance, the deferred loading
+of the field will call this method.</p>
+<dl class="simple">
+<dt>save</dt><dd><p>Save the current instance. Override this in a subclass if you want to</p>
+</dd>
+</dl>
+<p>control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+<dl class="simple">
+<dt>save_base</dt><dd><p>Handle the parts of saving which should be done only once per save,</p>
+</dd>
+</dl>
+<p>yet need to be done in raw saves, too. This includes some sanity
+checks and signal sending.</p>
+<p>The ‘raw’ argument is telling save_base not to save any parent
+models and not to do any changes to the values before save. This
+is used by fixture loading.</p>
+<dl class="simple">
+<dt>serializable_value</dt><dd><p>Return the value of the field name for this instance. If the field is</p>
+</dd>
+</dl>
+<p>a foreign key, return the id value instead of the object. If there’s
+no Field object with this name on the model, return the model
+attribute’s value.</p>
+<p>Used to serialize a field’s value (in the serializer, or form output,
+for example). Normally, you would just access the attribute directly
+and not use this method.</p>
+<dl class="simple">
+<dt>unique_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_unique</dt><dd><p>Check unique constraints on the model and raise ValidationError if any</p>
+</dd>
+</dl>
+<p>failed.</p>
+</section>
+</section>
+<section id="choice">
+<h2>Choice<a class="headerlink" href="#choice" title="Link to this heading"></a></h2>
+<p>Represents a possible answer for a quiz question.</p>
+<p>Each Choice is linked to a Question, and one Choice per Question
+should be marked as correct (is_correct=True).</p>
+<section id="id3">
+<h3>Fields<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>quizresponse</dt><dd><p>Type: ForeignKey
+Description: No description available</p>
+</dd>
+<dt>id</dt><dd><p>Type: BigAutoField
+Description:</p>
+</dd>
+<dt>question</dt><dd><p>Type: ForeignKey
+Description: The question this choice belongs to</p>
+</dd>
+<dt>text</dt><dd><p>Type: CharField
+Description: The text of this answer choice</p>
+</dd>
+<dt>is_correct</dt><dd><p>Type: BooleanField
+Description: Whether this choice is the correct answer</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Methods<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>adelete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>arefresh_from_db</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>asave</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>clean</dt><dd><p>Hook for doing any extra model-wide validation after clean() has been</p>
+</dd>
+</dl>
+<p>called on every field by self.clean_fields. Any ValidationError raised
+by this method will not be associated with a particular field; it will
+have a special-case association with the field defined by NON_FIELD_ERRORS.</p>
+<dl class="simple">
+<dt>clean_fields</dt><dd><p>Clean all fields and raise a ValidationError containing a dict</p>
+</dd>
+</dl>
+<p>of all validation errors if any occur.</p>
+<dl class="simple">
+<dt>date_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>delete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>full_clean</dt><dd><p>Call clean_fields(), clean(), validate_unique(), and</p>
+</dd>
+</dl>
+<p>validate_constraints() on the model. Raise a ValidationError for any
+errors that occur.</p>
+<dl class="simple">
+<dt>get_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_deferred_fields</dt><dd><p>Return a set containing names of deferred fields for this instance.</p>
+</dd>
+<dt>prepare_database_save</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>refresh_from_db</dt><dd><p>Reload field values from the database.</p>
+</dd>
+</dl>
+<p>By default, the reloading happens from the database this instance was
+loaded from, or by the read router if this instance wasn’t loaded from
+any database. The using parameter will override the default.</p>
+<p>Fields can be used to specify which fields to reload. The fields
+should be an iterable of field attnames. If fields is None, then
+all non-deferred fields are reloaded.</p>
+<p>When accessing deferred fields of an instance, the deferred loading
+of the field will call this method.</p>
+<dl class="simple">
+<dt>save</dt><dd><p>Override save method to ensure only one choice per question is marked correct.</p>
+</dd>
+<dt>save_base</dt><dd><p>Handle the parts of saving which should be done only once per save,</p>
+</dd>
+</dl>
+<p>yet need to be done in raw saves, too. This includes some sanity
+checks and signal sending.</p>
+<p>The ‘raw’ argument is telling save_base not to save any parent
+models and not to do any changes to the values before save. This
+is used by fixture loading.</p>
+<dl class="simple">
+<dt>serializable_value</dt><dd><p>Return the value of the field name for this instance. If the field is</p>
+</dd>
+</dl>
+<p>a foreign key, return the id value instead of the object. If there’s
+no Field object with this name on the model, return the model
+attribute’s value.</p>
+<p>Used to serialize a field’s value (in the serializer, or form output,
+for example). Normally, you would just access the attribute directly
+and not use this method.</p>
+<dl class="simple">
+<dt>unique_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_unique</dt><dd><p>Check unique constraints on the model and raise ValidationError if any</p>
+</dd>
+</dl>
+<p>failed.</p>
+</section>
+</section>
+<section id="quizattempt">
+<h2>QuizAttempt<a class="headerlink" href="#quizattempt" title="Link to this heading"></a></h2>
+<p>Represents a user’s attempt at a quiz.</p>
+<p>Records metadata about the quiz attempt, including when it was started,
+completed, which category was selected, and the overall score.</p>
+<section id="id5">
+<h3>Fields<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>quizresponse</dt><dd><p>Type: ForeignKey
+Description: No description available</p>
+</dd>
+<dt>id</dt><dd><p>Type: BigAutoField
+Description:</p>
+</dd>
+<dt>user</dt><dd><p>Type: ForeignKey
+Description: The user who took the quiz (null for anonymous users)</p>
+</dd>
+<dt>category</dt><dd><p>Type: ForeignKey
+Description: The category of questions in this quiz</p>
+</dd>
+<dt>started_at</dt><dd><p>Type: DateTimeField
+Description: When the quiz attempt was started</p>
+</dd>
+<dt>completed_at</dt><dd><p>Type: DateTimeField
+Description: When the quiz attempt was completed</p>
+</dd>
+<dt>score</dt><dd><p>Type: IntegerField
+Description: The total score achieved</p>
+</dd>
+<dt>total_questions</dt><dd><p>Type: IntegerField
+Description: The total number of questions in the quiz</p>
+</dd>
+<dt>time_limit</dt><dd><p>Type: IntegerField
+Description: Time limit for the quiz in seconds (0 means no limit)</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Methods<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>adelete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>arefresh_from_db</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>asave</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>calculate_score</dt><dd><p>Calculates and updates the score based on correct responses.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>int: The calculated score</p>
+</div></blockquote>
+<dl class="simple">
+<dt>clean</dt><dd><p>Hook for doing any extra model-wide validation after clean() has been</p>
+</dd>
+</dl>
+<p>called on every field by self.clean_fields. Any ValidationError raised
+by this method will not be associated with a particular field; it will
+have a special-case association with the field defined by NON_FIELD_ERRORS.</p>
+<dl class="simple">
+<dt>clean_fields</dt><dd><p>Clean all fields and raise a ValidationError containing a dict</p>
+</dd>
+</dl>
+<p>of all validation errors if any occur.</p>
+<dl class="simple">
+<dt>date_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>delete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>full_clean</dt><dd><p>Call clean_fields(), clean(), validate_unique(), and</p>
+</dd>
+</dl>
+<p>validate_constraints() on the model. Raise a ValidationError for any
+errors that occur.</p>
+<dl class="simple">
+<dt>get_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_deferred_fields</dt><dd><p>Return a set containing names of deferred fields for this instance.</p>
+</dd>
+<dt>get_next_by_started_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_previous_by_started_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>is_complete</dt><dd><p>Returns whether the quiz attempt has been completed.</p>
+</dd>
+<dt>prepare_database_save</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>refresh_from_db</dt><dd><p>Reload field values from the database.</p>
+</dd>
+</dl>
+<p>By default, the reloading happens from the database this instance was
+loaded from, or by the read router if this instance wasn’t loaded from
+any database. The using parameter will override the default.</p>
+<p>Fields can be used to specify which fields to reload. The fields
+should be an iterable of field attnames. If fields is None, then
+all non-deferred fields are reloaded.</p>
+<p>When accessing deferred fields of an instance, the deferred loading
+of the field will call this method.</p>
+<dl class="simple">
+<dt>save</dt><dd><p>Save the current instance. Override this in a subclass if you want to</p>
+</dd>
+</dl>
+<p>control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+<dl class="simple">
+<dt>save_base</dt><dd><p>Handle the parts of saving which should be done only once per save,</p>
+</dd>
+</dl>
+<p>yet need to be done in raw saves, too. This includes some sanity
+checks and signal sending.</p>
+<p>The ‘raw’ argument is telling save_base not to save any parent
+models and not to do any changes to the values before save. This
+is used by fixture loading.</p>
+<dl class="simple">
+<dt>score_percentage</dt><dd><p>Returns the score as a percentage.</p>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h3>Returns<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>float: Percentage score (0-100)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>serializable_value</dt><dd><p>Return the value of the field name for this instance. If the field is</p>
+</dd>
+</dl>
+<p>a foreign key, return the id value instead of the object. If there’s
+no Field object with this name on the model, return the model
+attribute’s value.</p>
+<p>Used to serialize a field’s value (in the serializer, or form output,
+for example). Normally, you would just access the attribute directly
+and not use this method.</p>
+<dl class="simple">
+<dt>time_remaining</dt><dd><p>Calculates the remaining time for the quiz in seconds.</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>int: Seconds remaining, or 0 if the time limit has been exceeded</p>
+</div></blockquote>
+<dl class="simple">
+<dt>unique_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_unique</dt><dd><p>Check unique constraints on the model and raise ValidationError if any</p>
+</dd>
+</dl>
+<p>failed.</p>
+</section>
+</section>
+<section id="quizresponse">
+<h2>QuizResponse<a class="headerlink" href="#quizresponse" title="Link to this heading"></a></h2>
+<p>Represents a user’s response to a single question within a quiz attempt.</p>
+<p>Tracks which question was asked, which choice was selected, and whether
+the answer was correct.</p>
+<section id="id9">
+<h3>Fields<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>id</dt><dd><p>Type: BigAutoField
+Description:</p>
+</dd>
+<dt>quiz_attempt</dt><dd><p>Type: ForeignKey
+Description: The quiz attempt this response belongs to</p>
+</dd>
+<dt>question</dt><dd><p>Type: ForeignKey
+Description: The question that was answered</p>
+</dd>
+<dt>selected_choice</dt><dd><p>Type: ForeignKey
+Description: The choice that was selected</p>
+</dd>
+<dt>is_correct</dt><dd><p>Type: BooleanField
+Description: Whether this response was correct</p>
+</dd>
+<dt>response_time</dt><dd><p>Type: DateTimeField
+Description: When this question was answered</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Methods<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>adelete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>arefresh_from_db</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>asave</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>clean</dt><dd><p>Hook for doing any extra model-wide validation after clean() has been</p>
+</dd>
+</dl>
+<p>called on every field by self.clean_fields. Any ValidationError raised
+by this method will not be associated with a particular field; it will
+have a special-case association with the field defined by NON_FIELD_ERRORS.</p>
+<dl class="simple">
+<dt>clean_fields</dt><dd><p>Clean all fields and raise a ValidationError containing a dict</p>
+</dd>
+</dl>
+<p>of all validation errors if any occur.</p>
+<dl class="simple">
+<dt>date_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>delete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>full_clean</dt><dd><p>Call clean_fields(), clean(), validate_unique(), and</p>
+</dd>
+</dl>
+<p>validate_constraints() on the model. Raise a ValidationError for any
+errors that occur.</p>
+<dl class="simple">
+<dt>get_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_deferred_fields</dt><dd><p>Return a set containing names of deferred fields for this instance.</p>
+</dd>
+<dt>get_next_by_response_time</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_previous_by_response_time</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>prepare_database_save</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>refresh_from_db</dt><dd><p>Reload field values from the database.</p>
+</dd>
+</dl>
+<p>By default, the reloading happens from the database this instance was
+loaded from, or by the read router if this instance wasn’t loaded from
+any database. The using parameter will override the default.</p>
+<p>Fields can be used to specify which fields to reload. The fields
+should be an iterable of field attnames. If fields is None, then
+all non-deferred fields are reloaded.</p>
+<p>When accessing deferred fields of an instance, the deferred loading
+of the field will call this method.</p>
+<dl class="simple">
+<dt>save</dt><dd><p>Override save method to automatically set is_correct based on the selected choice.</p>
+</dd>
+<dt>save_base</dt><dd><p>Handle the parts of saving which should be done only once per save,</p>
+</dd>
+</dl>
+<p>yet need to be done in raw saves, too. This includes some sanity
+checks and signal sending.</p>
+<p>The ‘raw’ argument is telling save_base not to save any parent
+models and not to do any changes to the values before save. This
+is used by fixture loading.</p>
+<dl class="simple">
+<dt>serializable_value</dt><dd><p>Return the value of the field name for this instance. If the field is</p>
+</dd>
+</dl>
+<p>a foreign key, return the id value instead of the object. If there’s
+no Field object with this name on the model, return the model
+attribute’s value.</p>
+<p>Used to serialize a field’s value (in the serializer, or form output,
+for example). Normally, you would just access the attribute directly
+and not use this method.</p>
+<dl class="simple">
+<dt>unique_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_unique</dt><dd><p>Check unique constraints on the model and raise ValidationError if any</p>
+</dd>
+</dl>
+<p>failed.</p>
+</section>
+</section>
+<section id="userprofile">
+<h2>UserProfile<a class="headerlink" href="#userprofile" title="Link to this heading"></a></h2>
+<p>Extends the built-in User model with additional profile information.</p>
+<p>This model is connected to the User model with a one-to-one relationship
+and is automatically created/updated when the User model is saved.</p>
+<section id="id11">
+<h3>Fields<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>id</dt><dd><p>Type: BigAutoField
+Description:</p>
+</dd>
+<dt>user</dt><dd><p>Type: OneToOneField
+Description: The user this profile belongs to</p>
+</dd>
+<dt>bio</dt><dd><p>Type: TextField
+Description: Short biography or description</p>
+</dd>
+<dt>avatar</dt><dd><p>Type: FileField
+Description: Profile picture</p>
+</dd>
+<dt>favorite_category</dt><dd><p>Type: ForeignKey
+Description: User’s favorite quiz category</p>
+</dd>
+<dt>date_of_birth</dt><dd><p>Type: DateField
+Description: User’s date of birth</p>
+</dd>
+<dt>created_at</dt><dd><p>Type: DateTimeField
+Description: When the profile was created</p>
+</dd>
+<dt>updated_at</dt><dd><p>Type: DateTimeField
+Description: When the profile was last updated</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h3>Methods<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>adelete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>arefresh_from_db</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>asave</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>average_score</dt><dd><p>Return the user’s average score across all quizzes.</p>
+</dd>
+<dt>clean</dt><dd><p>Hook for doing any extra model-wide validation after clean() has been</p>
+</dd>
+</dl>
+<p>called on every field by self.clean_fields. Any ValidationError raised
+by this method will not be associated with a particular field; it will
+have a special-case association with the field defined by NON_FIELD_ERRORS.</p>
+<dl class="simple">
+<dt>clean_fields</dt><dd><p>Clean all fields and raise a ValidationError containing a dict</p>
+</dd>
+</dl>
+<p>of all validation errors if any occur.</p>
+<dl class="simple">
+<dt>date_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>delete</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>full_clean</dt><dd><p>Call clean_fields(), clean(), validate_unique(), and</p>
+</dd>
+</dl>
+<p>validate_constraints() on the model. Raise a ValidationError for any
+errors that occur.</p>
+<dl class="simple">
+<dt>get_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_deferred_fields</dt><dd><p>Return a set containing names of deferred fields for this instance.</p>
+</dd>
+<dt>get_next_by_created_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_next_by_updated_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_previous_by_created_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>get_previous_by_updated_at</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>prepare_database_save</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>refresh_from_db</dt><dd><p>Reload field values from the database.</p>
+</dd>
+</dl>
+<p>By default, the reloading happens from the database this instance was
+loaded from, or by the read router if this instance wasn’t loaded from
+any database. The using parameter will override the default.</p>
+<p>Fields can be used to specify which fields to reload. The fields
+should be an iterable of field attnames. If fields is None, then
+all non-deferred fields are reloaded.</p>
+<p>When accessing deferred fields of an instance, the deferred loading
+of the field will call this method.</p>
+<dl class="simple">
+<dt>save</dt><dd><p>Save the current instance. Override this in a subclass if you want to</p>
+</dd>
+</dl>
+<p>control the saving process.</p>
+<p>The ‘force_insert’ and ‘force_update’ parameters can be used to insist
+that the “save” must be an SQL insert or update (or equivalent for
+non-SQL backends), respectively. Normally, they should not be set.</p>
+<dl class="simple">
+<dt>save_base</dt><dd><p>Handle the parts of saving which should be done only once per save,</p>
+</dd>
+</dl>
+<p>yet need to be done in raw saves, too. This includes some sanity
+checks and signal sending.</p>
+<p>The ‘raw’ argument is telling save_base not to save any parent
+models and not to do any changes to the values before save. This
+is used by fixture loading.</p>
+<dl class="simple">
+<dt>serializable_value</dt><dd><p>Return the value of the field name for this instance. If the field is</p>
+</dd>
+</dl>
+<p>a foreign key, return the id value instead of the object. If there’s
+no Field object with this name on the model, return the model
+attribute’s value.</p>
+<p>Used to serialize a field’s value (in the serializer, or form output,
+for example). Normally, you would just access the attribute directly
+and not use this method.</p>
+<dl class="simple">
+<dt>total_quizzes_taken</dt><dd><p>Return the total number of quizzes completed by the user.</p>
+</dd>
+<dt>unique_error_message</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_constraints</dt><dd><p>No documentation available.</p>
+</dd>
+<dt>validate_unique</dt><dd><p>Check unique constraints on the model and raise ValidationError if any</p>
+</dd>
+</dl>
+<p>failed.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

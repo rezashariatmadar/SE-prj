@@ -1,26 +1,26 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Improvements and Fixes &mdash; Quiz Game Documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8d563738"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Documentation Automation Tools" href="documentation_tools.html" />
-    <link rel="prev" title="Analytics and Data Visualization" href="analytics.html" /> 
+    <link rel="prev" title="Analytics and Visualization" href="analytics.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,7 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Improvements and Fixes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#form-validation-improvements">Form Validation Improvements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#quiz-selection-form">Quiz Selection Form</a></li>
@@ -279,20 +279,99 @@ they want in their quiz. Recent improvements include:</p>
 <section id="future-improvements">
 <h2>Future Improvements<a class="headerlink" href="#future-improvements" title="Link to this heading"></a></h2>
 <p>While significant improvements have been made to the form validation process, there are still areas that could be enhanced in future iterations:</p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p><strong>Advanced Category Selection</strong>
 - Add the ability to select multiple categories for a quiz
 - Implement a search functionality for categories when there are many options</p></li>
 <li><p><strong>Quiz Difficulty Selection</strong>
 - Allow users to select the difficulty level of questions
 - Implement a balanced question selection algorithm based on difficulty</p></li>
-<li><p><strong>User Experience Enhancements</strong>
-- Add tooltips and hints for form fields
-- Implement real-time validation as users type or change values
-- Enhance form accessibility for users with disabilities</p></li>
-<li><p><strong>Mobile Responsiveness</strong>
-- Improve form layout and validation messages on small screens
-- Enhance touch interactions for mobile users</p></li>
+<li><p><strong>Analytics Enhancements</strong>
+- Implement predictive analytics to suggest areas for improvement
+- Add comparative statistics against other users (leaderboards)
+- Create downloadable reports in PDF format
+- Add advanced filtering options for analytics data
+- Implement real-time analytics updates
+- Add more visualization types (radar charts, heat maps)
+- Create a dashboard customization feature</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AdvancedAnalyticsView</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">TemplateView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Advanced analytics view with more complex visualizations</span>
+<span class="sd">    and data processing capabilities.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;quiz_app/advanced_analytics.html&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span>
+
+        <span class="c1"># Get date range from request parameters or use defaults</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;start_date&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">end_date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;end_date&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Get category filter from request parameters</span>
+        <span class="n">category_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Filter quiz attempts based on parameters</span>
+        <span class="n">quiz_attempts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_quiz_attempts</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">category_filter</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">quiz_attempts</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="c1"># Generate various analytics charts...</span>
+            <span class="n">context</span><span class="p">[</span><span class="s1">&#39;visualizations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_visualizations</span><span class="p">(</span><span class="n">quiz_attempts</span><span class="p">)</span>
+
+            <span class="c1"># Add predictive analytics</span>
+            <span class="n">context</span><span class="p">[</span><span class="s1">&#39;predictions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_predictions</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">quiz_attempts</span><span class="p">)</span>
+
+            <span class="c1"># Add comparative statistics</span>
+            <span class="n">context</span><span class="p">[</span><span class="s1">&#39;comparisons&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_comparisons</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">quiz_attempts</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">context</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_quiz_attempts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="c1"># Implementation of advanced filtering</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_visualizations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quiz_attempts</span><span class="p">):</span>
+        <span class="c1"># Implementation of advanced visualizations</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_predictions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">quiz_attempts</span><span class="p">):</span>
+        <span class="c1"># Implementation of predictive analytics</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_comparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">quiz_attempts</span><span class="p">):</span>
+        <span class="c1"># Implementation of user comparisons</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Performance Optimization</strong>
+- Optimize database queries for faster analytics processing
+- Implement caching for frequently accessed analytics data
+- Enhance the efficiency of data visualization generation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of optimized query using select_related and annotation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_optimized_quiz_data</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">QuizAttempt</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+        <span class="n">completed_at__isnull</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;user&#39;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span>
+        <span class="s1">&#39;quizresponse_set__question&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;quizresponse_set__selected_choice&#39;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">correct_count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s1">&#39;quizresponse&#39;</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">Q</span><span class="p">(</span><span class="n">quizresponse__is_correct</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+        <span class="n">response_time_avg</span><span class="o">=</span><span class="n">Avg</span><span class="p">(</span>
+            <span class="n">ExpressionWrapper</span><span class="p">(</span>
+                <span class="n">F</span><span class="p">(</span><span class="s1">&#39;quizresponse__response_time&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="s1">&#39;started_at&#39;</span><span class="p">),</span>
+                <span class="n">output_field</span><span class="o">=</span><span class="n">DurationField</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-completed_at&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
 </ol>
 </section>
 <section id="conclusion">
@@ -309,7 +388,7 @@ that provides a seamless experience for quiz takers.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="analytics.html" class="btn btn-neutral float-left" title="Analytics and Data Visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="analytics.html" class="btn btn-neutral float-left" title="Analytics and Visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="documentation_tools.html" class="btn btn-neutral float-right" title="Documentation Automation Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

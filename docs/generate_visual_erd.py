@@ -56,6 +56,13 @@ def create_erd():
         # Create node label with model name and fields
         label = f"{{{model_name}|{field_str}}}"
         dot.node(model_name, label)
+
+    # Add Analytics as a virtual entity
+    analytics_node = "Analytics"
+    analytics_fields = "performance_time\\ncategory_performance\\nquestion_distribution\\nsummary_statistics"
+    analytics_label = f"{{{analytics_node}|{analytics_fields}}}"
+    dot.attr('node', shape='record', style='filled', fillcolor='#FFC0CB')  # Light pink
+    dot.node(analytics_node, analytics_label)
     
     # Add edges for relationships
     edges = [
@@ -88,6 +95,12 @@ def create_erd():
             dot.edge(source_name, target_name, label=f"{source_label}:{target_label}", dir='both', arrowtail='none', arrowhead='none')
         elif rel_type == 'one-to-many':
             dot.edge(source_name, target_name, label=f"{source_label}:{target_label}", dir='forward')
+
+    # Add Analytics virtual relationships (dashed lines)
+    dot.attr('edge', style='dashed')
+    dot.edge("QuizAttempt", analytics_node, label="data source", dir='forward')
+    dot.edge("QuizResponse", analytics_node, label="data source", dir='forward')
+    dot.edge("User", analytics_node, label="views", dir='forward')
     
     # Create directory if it doesn't exist
     os.makedirs('docs/_static', exist_ok=True)

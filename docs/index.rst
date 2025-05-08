@@ -37,6 +37,9 @@ immediate feedback, tracks user performance, and generates visualizations of qui
    references
 
 Key Features
+   quiz_app_models
+   quiz_app_views
+   quiz_app_forms
 -----------
 
 * Multiple quiz categories

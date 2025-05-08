@@ -7,6 +7,7 @@ A web-based quiz application built with Django that allows users to take quizzes
 - **Multiple quiz categories**: Create and organize questions by topics
 - **User authentication**: Register, login, and track progress
 - **Score tracking**: Save and display quiz results and statistics
+- **Advanced analytics**: Visual charts and statistics showing performance trends, category strengths, and quiz patterns
 - **Admin interface**: Comprehensive management for quizzes and users
 - **Automated question generation**: Tools for creating content
 - **Responsive design**: Mobile-friendly interface with Bootstrap 4
@@ -65,6 +66,22 @@ Access the admin interface at `http://localhost:8000/admin` to:
 - **Add/edit questions**: Create questions with multiple choice answers
 - **View user results**: Monitor quiz attempts and scores
 - **Manage user accounts**: Add, edit, or deactivate users
+
+## Analytics and Visualization
+
+The application includes comprehensive analytics features:
+
+- **Performance Over Time**: Line charts showing quiz score progression across categories
+- **Category Performance**: Bar charts displaying strengths and weaknesses by topic
+- **Quiz Length Distribution**: Pie charts showing patterns in quiz length selection
+- **Summary Statistics**: Key metrics including average scores, best categories, and perfect score counts
+
+Users can access their analytics dashboard through:
+- The user menu dropdown
+- Their profile page
+- The results page after completing a quiz
+
+The analytics system uses pandas, matplotlib, and seaborn to generate visualizations from the user's quiz history data.
 
 ## Populating Questions
 

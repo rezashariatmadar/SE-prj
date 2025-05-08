@@ -273,11 +273,31 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
     
     Requires authentication. Shows visualizations of the user's performance
     across different categories and over time.
+    
+    Analytics Features:
+    - Performance Over Time: Line chart tracking progress across different categories
+    - Category Performance: Bar chart showing strengths and weaknesses by topic
+    - Quiz Length Distribution: Pie chart showing quiz length patterns
+    - Summary Statistics: Key metrics on quiz performance
+    
+    Implementation Notes:
+    - Uses pandas for data organization and analysis
+    - Uses matplotlib and seaborn for visualization creation
+    - All charts are encoded as base64 for embedding in HTML
     """
     template_name = 'quiz_app/user_stats.html'
     
     def get_context_data(self, **kwargs):
-        """Add user statistics to the context."""
+        """
+        Add user statistics to the context.
+        
+        This method:
+        1. Retrieves the user's completed quiz attempts
+        2. Processes the data using pandas DataFrame
+        3. Generates three distinct visualization charts
+        4. Calculates summary statistics
+        5. Adds all data to the template context
+        """
         context = super().get_context_data(**kwargs)
         user = self.request.user
         
@@ -289,6 +309,7 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
         
         if quiz_attempts.exists():
             # Create a DataFrame for analysis
+            # This converts database records into a format suitable for data science processing
             data = {
                 'date': [attempt.completed_at for attempt in quiz_attempts],
                 'category': [attempt.category.name for attempt in quiz_attempts],
@@ -297,7 +318,7 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             }
             df = pd.DataFrame(data)
             
-            # Set the style for all charts
+            # Set the style for all charts - makes the charts visually consistent and attractive
             sns.set_style("whitegrid")
             plt.rcParams.update({
                 'font.size': 12,
@@ -310,12 +331,13 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             })
             
             # 1. Performance over time chart
+            # This chart shows how scores change over time, helping users track their learning progress
             plt.figure(figsize=(12, 6))
             
-            # Sort by date
+            # Sort by date to ensure correct chronological order in the chart
             df = df.sort_values('date')
             
-            # Create line plot
+            # Create line plot - each line represents a different category
             ax = sns.lineplot(data=df, x='date', y='score_percentage', hue='category', marker='o', linewidth=2.5)
             
             # Improve plot styling
@@ -329,19 +351,20 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             date_form = DateFormatter("%Y-%m-%d")
             ax.xaxis.set_major_formatter(date_form)
             
-            # Rotate and align the tick labels
+            # Rotate and align the tick labels for better readability
             plt.xticks(rotation=45, ha='right')
             
             # Add grid lines for better readability
             plt.grid(True, alpha=0.3)
             
-            # Add legend with a title
+            # Add legend with a title - explains what each line color represents
             plt.legend(title='Category', title_fontsize=12, loc='upper left', bbox_to_anchor=(1, 1))
             
             # Tight layout to prevent cutting off labels
             plt.tight_layout()
             
-            # Save to buffer
+            # Save to buffer and encode as base64 for embedding in HTML
+            # This allows the chart to be displayed without saving it as a separate file
             buffer = BytesIO()
             plt.savefig(buffer, format='png', bbox_inches='tight', dpi=100)
             buffer.seek(0)
@@ -350,16 +373,17 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             plt.close()
             
             # 2. Performance by category chart
+            # This bar chart helps users identify their strengths and weaknesses across topics
             plt.figure(figsize=(10, 6))
             
-            # Calculate average scores by category
+            # Calculate average scores by category and sort from highest to lowest
             if not df.empty:
                 category_perf = df.groupby('category')['score_percentage'].mean().sort_values(ascending=False)
                 
                 # Create bar chart with better styling
                 ax = sns.barplot(x=category_perf.index, y=category_perf.values, palette='viridis')
                 
-                # Add value labels on top of each bar
+                # Add value labels on top of each bar for precise score information
                 for i, v in enumerate(category_perf.values):
                     ax.text(i, v + 2, f"{v:.1f}%", ha='center', fontweight='bold')
                 
@@ -372,18 +396,18 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
                 # Ensure x labels are visible
                 plt.xticks(rotation=45, ha='right')
                 
-                # Add a horizontal line for the overall average
+                # Add a horizontal line for the overall average as a reference point
                 overall_avg = df['score_percentage'].mean()
                 plt.axhline(y=overall_avg, color='red', linestyle='--', label=f'Overall Avg: {overall_avg:.1f}%')
                 plt.legend()
                 
-                # Add grid lines
+                # Add grid lines for better readability
                 plt.grid(True, axis='y', alpha=0.3)
                 
                 # Ensure everything fits
                 plt.tight_layout()
                 
-                # Save to buffer
+                # Save to buffer and encode as base64 for HTML embedding
                 buffer = BytesIO()
                 plt.savefig(buffer, format='png', bbox_inches='tight', dpi=100)
                 buffer.seek(0)
@@ -393,13 +417,14 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
                 
                 context['category_chart'] = category_chart
             
-            # 3. Question distribution chart (new)
+            # 3. Question distribution chart (pie chart)
+            # This chart shows what quiz lengths the user tends to select
             plt.figure(figsize=(8, 6))
             
             # Count quizzes by total questions
             question_counts = df['total_questions'].value_counts().sort_index()
             
-            # Create pie chart
+            # Create pie chart with percentage labels
             plt.pie(question_counts, labels=[f"{count} questions" for count in question_counts.index], 
                     autopct='%1.1f%%', startangle=90, shadow=True, 
                     wedgeprops={'linewidth': 1, 'edgecolor': 'white'},
@@ -408,7 +433,7 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             plt.title('Quiz Length Distribution', fontweight='bold', pad=20)
             plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
             
-            # Save to buffer
+            # Save to buffer and encode for HTML embedding
             buffer = BytesIO()
             plt.savefig(buffer, format='png', bbox_inches='tight', dpi=100)
             buffer.seek(0)
@@ -416,11 +441,11 @@ class UserStatsView(LoginRequiredMixin, TemplateView):
             buffer.close()
             plt.close()
             
-            # Add charts to context
+            # Add charts to context for use in the template
             context['time_chart'] = time_chart
             context['question_dist_chart'] = question_dist_chart
             
-            # Add summary statistics
+            # Add summary statistics - these provide an overall picture of performance
             context['total_quizzes'] = len(quiz_attempts)
             context['avg_score'] = df['score_percentage'].mean()
             context['categories_attempted'] = df['category'].nunique()

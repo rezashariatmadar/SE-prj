@@ -151,6 +151,77 @@ The statistics dashboard includes:
    :align: center
    :width: 600px
 
+Analytics Features
+~~~~~~~~~~~~~~~~
+
+The analytics dashboard provides advanced visualizations to help you understand your performance:
+
+1. **Performance Over Time Chart**:
+   
+   * Interactive line chart showing your scores across time
+   * Multiple categories displayed with different colors
+   * Hover over points to see exact scores and dates
+   * Identify trends and improvements in your quiz performance
+
+   .. image:: _static/analytics_examples/performance_time.png
+      :alt: Performance Over Time Chart
+      :align: center
+      :width: 500px
+
+2. **Category Performance Chart**:
+   
+   * Bar chart comparing your average scores across different categories
+   * Overall average shown as a horizontal line for reference
+   * Categories sorted from highest to lowest performance
+   * Quickly identify your strongest and weakest subjects
+
+   .. image:: _static/analytics_examples/performance_category.png
+      :alt: Category Performance Chart
+      :align: center
+      :width: 500px
+
+3. **Quiz Length Distribution**:
+   
+   * Pie chart showing the distribution of quiz lengths you've attempted
+   * See what proportion of your quizzes were short, medium, or long
+   * Helps in planning your study sessions
+
+   .. image:: _static/analytics_examples/quiz_distribution.png
+      :alt: Quiz Length Distribution
+      :align: center
+      :width: 400px
+
+4. **Results Analysis**:
+   
+   * After completing a quiz, see how you performed across different difficulty levels
+   * Identify which types of questions you need to focus on
+
+   .. image:: _static/analytics_examples/difficulty_performance.png
+      :alt: Performance by Difficulty
+      :align: center
+      :width: 500px
+
+5. **Comprehensive Dashboard**:
+
+   * All your statistics in one convenient view
+   * Multiple visualizations to give you a complete picture of your progress
+
+   .. image:: _static/analytics_examples/dashboard_summary.png
+      :alt: Analytics Dashboard
+      :align: center
+      :width: 600px
+
+Using Analytics for Learning
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here are some ways to leverage the analytics features:
+
+* **Identify knowledge gaps**: Look for categories with consistently lower scores
+* **Track improvement**: Monitor your performance over time to validate your learning
+* **Set goals**: Challenge yourself to improve scores in specific categories
+* **Study efficiently**: Focus your efforts on the areas that need the most improvement
+* **Share progress**: Download or print your analytics charts to share with teachers or study partners
+
 Account Management
 -----------------
 

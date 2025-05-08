@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Views &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Views</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quiz_app_views.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="views">
+<h1>Views<a class="headerlink" href="#views" title="Link to this heading"></a></h1>
+<p>Last updated: 2025-05-08</p>
+<p>This document describes all views in the quiz_app application.</p>
+<section id="categorylistview">
+<h2>CategoryListView<a class="headerlink" href="#categorylistview" title="Link to this heading"></a></h2>
+<p>View to display all available quiz categories.</p>
+<section id="template">
+<h3>Template<a class="headerlink" href="#template" title="Link to this heading"></a></h3>
+<p>quiz_app/category_list.html</p>
+</section>
+</section>
+<section id="createview">
+<h2>CreateView<a class="headerlink" href="#createview" title="Link to this heading"></a></h2>
+<p>View for creating a new object, with a response rendered by a template.</p>
+<section id="id1">
+<h3>Template<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+</section>
+<section id="detailview">
+<h2>DetailView<a class="headerlink" href="#detailview" title="Link to this heading"></a></h2>
+<p>Render a “detail” view of an object.</p>
+<p>By default this is a model instance looked up from <cite>self.queryset</cite>, but the
+view will support display of <em>any</em> object by overriding <cite>self.get_object()</cite>.</p>
+<section id="id2">
+<h3>Template<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+</section>
+<section id="indexview">
+<h2>IndexView<a class="headerlink" href="#indexview" title="Link to this heading"></a></h2>
+<p>View for the home page of the quiz application.</p>
+<p>Displays a welcome message and available quiz categories.</p>
+<section id="id3">
+<h3>Template<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>quiz_app/index.html</p>
+</section>
+</section>
+<section id="listview">
+<h2>ListView<a class="headerlink" href="#listview" title="Link to this heading"></a></h2>
+<p>Render some list of objects, set by <cite>self.model</cite> or <cite>self.queryset</cite>.
+<cite>self.queryset</cite> can actually be any iterable of items, not just a queryset.</p>
+<section id="id4">
+<h3>Template<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+</section>
+<section id="questionview">
+<h2>QuestionView<a class="headerlink" href="#questionview" title="Link to this heading"></a></h2>
+<p>View to display a quiz question and process the answer.</p>
+<section id="id5">
+<h3>Template<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>quiz_app/question.html</p>
+</section>
+</section>
+<section id="quizstartview">
+<h2>QuizStartView<a class="headerlink" href="#quizstartview" title="Link to this heading"></a></h2>
+<p>View to handle the start of a new quiz.</p>
+<p>Creates a new QuizAttempt and redirects to the first question.</p>
+</section>
+<section id="registerview">
+<h2>RegisterView<a class="headerlink" href="#registerview" title="Link to this heading"></a></h2>
+<p>View for user registration.</p>
+<p>This view handles the registration of new users, including form validation
+and user creation. On successful registration, it automatically creates a
+UserProfile for the new user and redirects to the login page.</p>
+<section id="id6">
+<h3>Template<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>registration/register.html</p>
+</section>
+</section>
+<section id="resultsview">
+<h2>ResultsView<a class="headerlink" href="#resultsview" title="Link to this heading"></a></h2>
+<p>View to display the results of a completed quiz.</p>
+<section id="id7">
+<h3>Template<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>quiz_app/results.html</p>
+</section>
+</section>
+<section id="templateview">
+<h2>TemplateView<a class="headerlink" href="#templateview" title="Link to this heading"></a></h2>
+<p>Render a template. Pass keyword arguments from the URLconf to the context.</p>
+<section id="id8">
+<h3>Template<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+</section>
+<section id="updateview">
+<h2>UpdateView<a class="headerlink" href="#updateview" title="Link to this heading"></a></h2>
+<p>View for updating an object, with a response rendered by a template.</p>
+<section id="id9">
+<h3>Template<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+</section>
+<section id="userprofileview">
+<h2>UserProfileView<a class="headerlink" href="#userprofileview" title="Link to this heading"></a></h2>
+<p>View to display and update user profile information.</p>
+<p>This view handles both displaying the user’s profile and updating it
+when the form is submitted. Requires the user to be logged in.</p>
+<section id="id10">
+<h3>Template<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>quiz_app/user_profile.html</p>
+</section>
+</section>
+<section id="userstatsview">
+<h2>UserStatsView<a class="headerlink" href="#userstatsview" title="Link to this heading"></a></h2>
+<p>View to display statistics and analytics for a user’s quiz history.</p>
+<p>Requires authentication. Shows visualizations of the user’s performance
+across different categories and over time.</p>
+<p>Analytics Features:
+- Performance Over Time: Line chart tracking progress across different categories
+- Category Performance: Bar chart showing strengths and weaknesses by topic
+- Quiz Length Distribution: Pie chart showing quiz length patterns
+- Summary Statistics: Key metrics on quiz performance</p>
+<p>Implementation Notes:
+- Uses pandas for data organization and analysis
+- Uses matplotlib and seaborn for visualization creation
+- All charts are encoded as base64 for embedding in HTML</p>
+<section id="id11">
+<h3>Template<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p>quiz_app/user_stats.html</p>
+</section>
+</section>
+<section id="view">
+<h2>View<a class="headerlink" href="#view" title="Link to this heading"></a></h2>
+<p>Intentionally simple parent class for all views. Only implements
+dispatch-by-method and simple sanity checking.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

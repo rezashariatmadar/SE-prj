@@ -1,0 +1,1212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Documentation &mdash; Quiz Game Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Quiz Game
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Data Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="improvements.html">Improvements and Fixes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_tools.html">Documentation Automation Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation_workflow.html">Documentation Workflow Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quiz Game</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Project Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/project_documentation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="project-documentation">
+<h1>Project Documentation<a class="headerlink" href="#project-documentation" title="Link to this heading"></a></h1>
+<p>Last updated: 2025-05-08</p>
+<p>Quiz Application - Comprehensive Project Documentation</p>
+<hr class="docutils" />
+<p>Table of Contents</p>
+<hr class="docutils" />
+<ol class="arabic">
+<li><p><a class="reference external" href="#project-overview">Project Overview</a></p></li>
+<li><p><a class="reference external" href="#system-architecture">System Architecture</a></p></li>
+<li><p><a class="reference external" href="#data-flow-diagrams">Data Flow Diagrams</a></p>
+<ul class="simple">
+<li><p><a class="reference external" href="#dfd-level-0-context-diagram">DFD Level 0 (Context Diagram)</a></p></li>
+<li><p><a class="reference external" href="#dfd-level-1">DFD Level 1</a></p></li>
+<li><p><a class="reference external" href="#dfd-level-2">DFD Level 2</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#use-cases">Use Cases</a></p></li>
+<li><p><a class="reference external" href="#software-development-lifecycle">Software Development Lifecycle</a></p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">`</span></a>Project Timeline and</p>
+<p>Estimation &lt;#project-timeline-and-estimation&gt;`__</p>
+</li>
+<li><p><a class="reference external" href="#testing-strategy">Testing Strategy</a></p></li>
+<li><p><a class="reference external" href="#deployment-plan">Deployment Plan</a></p></li>
+<li><p><a class="reference external" href="#maintenance-and-support">Maintenance and Support</a></p></li>
+<li><p><a class="reference external" href="#risk-assessment-and-mitigation">Risk Assessment and Mitigation</a></p></li>
+<li><p><a class="reference external" href="#glossary">Glossary</a></p></li>
+</ol>
+<p>Project Overview</p>
+<hr class="docutils" />
+<p>The Quiz Application is a web-based platform built with Django that</p>
+<p>allows users to take quizzes across various categories. The system</p>
+<p>provides user authentication, tracks quiz attempts and scores, and</p>
+<p>offers comprehensive analytics for users to monitor their progress.</p>
+<p>Administrators can manage quiz categories, questions, and user accounts</p>
+<p>through an intuitive admin interface.</p>
+<p>Key Features</p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Multiple quiz categories</p></li>
+<li><p>User authentication and registration</p></li>
+<li><p>Personalized user profiles</p></li>
+<li><p>Quiz timer with customizable time limits</p></li>
+<li><p>Score tracking and results visualization</p></li>
+<li><p>Admin interface for quiz management</p></li>
+<li><p>Automated question generation</p></li>
+<li><p>Responsive design with Bootstrap 4</p></li>
+<li><p>Comprehensive documentation automation</p></li>
+<li><p>Data analytics and performance metrics</p></li>
+</ul>
+<p>Technology Stack</p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><strong>Backend</strong>: Django 4.2</p></li>
+<li><p><strong>Database</strong>: SQLite (development), PostgreSQL (production)</p></li>
+<li><p><strong>Frontend</strong>: HTML5, CSS3, JavaScript, Bootstrap 4</p></li>
+<li><p><strong>Documentation</strong>: Sphinx, docxbuilder, pypandoc</p></li>
+<li><p><strong>Data Visualization</strong>: Pandas, Matplotlib, Seaborn</p></li>
+<li><p><strong>Authentication</strong>: Django built-in auth system</p></li>
+<li><p><strong>Testing</strong>: Django TestCase, pytest</p></li>
+<li><p><strong>Deployment</strong>: Docker, Gunicorn, Nginx</p></li>
+</ul>
+<p>System Architecture</p>
+<hr class="docutils" />
+<p>The Quiz Application follows a standard Django MVT (Model-View-Template)</p>
+<p>architecture:</p>
+<ol class="arabic">
+<li><p><strong>Models</strong>: Define the database schema and relationships between</p>
+<p>entities.</p>
+</li>
+<li><p><strong>Views</strong>: Handle HTTP requests, process business logic, and prepare</p>
+<p>data for templates.</p>
+</li>
+<li><p><strong>Templates</strong>: Define the presentation layer using HTML with Django</p>
+<p>Template Language.</p>
+</li>
+</ol>
+<p>The system is organized into the following components:</p>
+<ul>
+<li><p><strong>User Management</strong>: Handles user registration, authentication, and</p>
+<p>profile management.</p>
+</li>
+<li><p><strong>Quiz Engine</strong>: Manages quiz categories, questions, and scoring</p>
+<p>logic.</p>
+</li>
+<li><p><strong>Quiz Administration</strong>: Provides interfaces for content</p>
+<p>administrators to manage quizzes.</p>
+</li>
+<li><p><strong>Analytics &amp; Reporting</strong>: Generates visualizations and insights about</p>
+<p>user performance.</p>
+</li>
+<li><p><strong>Documentation System</strong>: Automates the generation of comprehensive</p>
+<p>documentation.</p>
+</li>
+</ul>
+<p>Data Flow Diagrams</p>
+<hr class="docutils" />
+<p>DFD Level 0 (Context Diagram)</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                  ┌─────────────────┐
+
+                  │                 │
+
+                  │                 │
+
+┌──────────┐      │                 │      ┌───────────┐
+
+│          │      │                 │      │           │
+
+│   User   ├──────►  Quiz System    ◄──────┤   Admin   │
+
+│          │      │                 │      │           │
+
+└──────────┘      │                 │      └───────────┘
+
+                  │                 │
+
+                  │                 │
+
+                  └─────────────────┘
+</pre></div>
+</div>
+<p>This context diagram shows the main external entities (User and Admin)</p>
+<p>interacting with the Quiz System.</p>
+<p>DFD Level 1</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                    ┌───────────────────┐
+
+                    │  Authentication   │
+
+                    │      System       │
+
+                    └─────────┬─────────┘
+
+                              │
+
+                              ▼
+
+┌──────────┐        ┌─────────────────┐        ┌──────────────┐
+
+│          │        │                 │        │              │
+
+│   User   ├────────►  Quiz Manager   ├────────►   Database   │
+
+│          │        │                 │        │              │
+
+└──────────┘        └─────────┬───────┘        └──────────────┘
+
+                              │
+
+                              ▼
+
+                    ┌─────────────────┐        ┌──────────────┐
+
+                    │                 │        │              │
+
+                    │  Analytics &amp;    ├────────►    Admin     │
+
+                    │   Reporting     │        │              │
+
+                    └─────────────────┘        └──────────────┘
+</pre></div>
+</div>
+<p>Level 1 DFD shows the main processes within the system: 1.</p>
+<p>Authentication System 2. Quiz Manager 3. Analytics &amp; Reporting 4.</p>
+<p>Database</p>
+<p>DFD Level 2</p>
+<hr class="docutils" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>User Management Subsystem:
+
+┌──────────┐     ┌────────────────┐     ┌─────────────────┐
+
+│          │     │                │     │                 │
+
+│   User   ├─────► Registration &amp; ├─────►  User Profile   │
+
+│          │     │    Login       │     │   Management    │
+
+└──────────┘     └────────────────┘     └─────────────────┘
+
+
+
+
+
+Quiz Management Subsystem:
+
+┌──────────┐     ┌────────────────┐     ┌─────────────────┐     ┌───────────────┐
+
+│          │     │                │     │                 │     │               │
+
+│   User   ├─────►  Category      ├─────►  Question       ├─────►  Response     │
+
+│          │     │  Selection     │     │  Processing     │     │  Evaluation   │
+
+└──────────┘     └────────────────┘     └─────────────────┘     └───────┬───────┘
+
+                                                                         │
+
+                                                                         ▼
+
+                                                               ┌───────────────────┐
+
+                                                               │                   │
+
+                                                               │  Results Display  │
+
+                                                               │                   │
+
+                                                               └───────────────────┘
+
+
+
+
+
+Admin Subsystem:
+
+┌──────────┐     ┌────────────────┐     ┌─────────────────┐
+
+│          │     │                │     │                 │
+
+│   Admin  ├─────► Category &amp; Q   ├─────►  User           │
+
+│          │     │  Management    │     │  Management     │
+
+└──────────┘     └────────────────┘     └─────────────────┘
+
+
+
+
+
+Analytics Subsystem:
+
+┌──────────┐     ┌────────────────┐     ┌─────────────────┐
+
+│          │     │                │     │                 │
+
+│   User   ├─────► Performance    ├─────►  Data           │
+
+│          │     │  Statistics    │     │  Visualization  │
+
+└──────────┘     └────────────────┘     └─────────────────┘
+</pre></div>
+</div>
+<p>Level 2 DFD breaks down each major process into subprocesses: 1. User</p>
+<p>Management Subsystem 2. Quiz Management Subsystem 3. Admin Subsystem 4.</p>
+<p>Analytics Subsystem</p>
+<p>Use Cases</p>
+<hr class="docutils" />
+<p>UC-01: User Registration</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>Primary Actor</strong>: Unregistered User</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Precondition</strong>: User is not logged in</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Main Flow</strong>: 1. User navigates to registration page 2. User</div>
+</div>
+<blockquote>
+<div><p>completes registration form with username, email, and password 3.</p>
+<p>System validates the form input 4. System creates a new user account</p>
+<ol class="arabic simple" start="5">
+<li><p>System creates a user profile 6. System displays success message 7.</p></li>
+</ol>
+<p>User is redirected to login page</p>
+</div></blockquote>
+<p><strong>Alternative Flow</strong>: - If validation fails, system displays error</p>
+<p>messages and user remains on registration page - If username/email</p>
+<p>already exists, system notifies user</p>
+<p>UC-02: Login</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>Primary Actor</strong>: Registered User</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Precondition</strong>: User has an account and is not logged in</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Main Flow</strong>: 1. User navigates to login page 2. User enters</div>
+</div>
+<blockquote>
+<div><p>username/email and password 3. System validates credentials 4. System</p>
+<p>creates a session for the user 5. User is redirected to homepage</p>
+</div></blockquote>
+<p><strong>Alternative Flow</strong>: - If validation fails, system displays error</p>
+<p>message and user remains on login page</p>
+<p>UC-03: Select and Take Quiz</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>Primary Actor</strong>: User (authenticated or anonymous)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Precondition</strong>: User is on homepage</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Main Flow</strong>: 1. User browses available quiz categories 2. User</div>
+</div>
+<blockquote>
+<div><p>selects a category 3. User chooses number of questions 4. User selects</p>
+<p>an optional time limit for the quiz 5. System generates a random set</p>
+<p>of questions from the selected category 6. System starts a timer if a</p>
+<p>time limit was selected 7. User answers questions one by one 8. System</p>
+<p>records user responses 9. System evaluates answers and calculates</p>
+<p>score 10. System displays results to user</p>
+</div></blockquote>
+<p><strong>Alternative Flow</strong>: - If user is authenticated, quiz results are saved</p>
+<p>to their history - If user is not authenticated, results are displayed</p>
+<p>but not saved - If time limit expires before all questions are answered,</p>
+<p>the quiz is automatically submitted with only the answered questions</p>
+<p>UC-04: View Performance Statistics</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>Primary Actor</strong>: Authenticated User</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Precondition</strong>: User is logged in and has completed at least one</div>
+</div>
+<blockquote>
+<div><p>quiz</p>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><strong>Main Flow</strong>: 1. User navigates to statistics page 2. System</div>
+</div>
+<blockquote>
+<div><p>retrieves user’s quiz history 3. System generates performance metrics</p>
+<p>and visualizations 4. System displays statistics to user</p>
+</div></blockquote>
+<p>UC-05: Manage User Profile</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>Primary Actor</strong>: Authenticated User</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Precondition</strong>: User is logged in</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Main Flow</strong>: 1. User navigates to profile page 2. User views current</div>
+</div>
+<blockquote>
+<div><p>profile information 3. User updates profile details (bio, avatar,</p>
+<p>favorite category, date of birth) 4. System validates and saves</p>
+<p>changes 5. System displays success message</p>
+</div></blockquote>
+<p>UC-06: Manage Quizzes (Admin)</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>Primary Actor</strong>: Administrator</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Precondition</strong>: Admin is logged in and has staff privileges</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Main Flow</strong>: 1. Admin navigates to admin interface 2. Admin selects</div>
+</div>
+<blockquote>
+<div><p>quiz management section 3. Admin creates/edits/deletes categories or</p>
+<p>questions 4. System validates and saves changes 5. Changes are</p>
+<p>immediately reflected in the application</p>
+</div></blockquote>
+<p>UC-07: View System Analytics (Admin)</p>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><strong>Primary Actor</strong>: Administrator</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Precondition</strong>: Admin is logged in and has staff privileges</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Main Flow</strong>: 1. Admin navigates to analytics dashboard 2. System</div>
+</div>
+<blockquote>
+<div><p>generates system-wide statistics 3. System displays user</p>
+<p>participation, popular categories, and performance metrics</p>
+</div></blockquote>
+<p>Software Development Lifecycle</p>
+<hr class="docutils" />
+<p>Our project follows a 7-step software development lifecycle:</p>
+<ol class="arabic simple">
+<li><p>Planning</p></li>
+</ol>
+<hr class="docutils" />
+<ul>
+<li><p><strong>Activities</strong>: Requirement gathering, feasibility study, project</p>
+<p>scope definition, resource allocation</p>
+</li>
+<li><p><strong>Deliverables</strong>: Project proposal, requirements document, risk</p>
+<p>assessment, project plan</p>
+</li>
+<li><p><strong>Stakeholders</strong>: Project manager, business analyst, client</p>
+<p>representatives</p>
+</li>
+<li><p><strong>Duration</strong>: 2 weeks</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Analysis</p></li>
+</ol>
+<hr class="docutils" />
+<ul>
+<li><p><strong>Activities</strong>: Detailed requirements analysis, use case modeling,</p>
+<p>data flow mapping</p>
+</li>
+<li><p><strong>Deliverables</strong>: Functional and non-functional requirements, DFDs,</p>
+<p>use case diagrams</p>
+</li>
+<li><p><strong>Stakeholders</strong>: System analysts, domain experts, end-users</p></li>
+<li><p><strong>Duration</strong>: 3 weeks</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Design</p></li>
+</ol>
+<hr class="docutils" />
+<ul>
+<li><p><strong>Activities</strong>: System architecture design, database schema design,</p>
+<p>UI/UX design</p>
+</li>
+<li><p><strong>Deliverables</strong>: Technical specifications, database schema,</p>
+<p>wireframes/mockups</p>
+</li>
+<li><p><strong>Stakeholders</strong>: Solution architects, database designers, UI/UX</p>
+<p>designers</p>
+</li>
+<li><p><strong>Duration</strong>: 4 weeks</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Implementation</p></li>
+</ol>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><strong>Activities</strong>: Code development, database implementation, integration</p></li>
+<li><p><strong>Deliverables</strong>: Source code, unit tests, documentation</p></li>
+<li><p><strong>Stakeholders</strong>: Developers, technical leads</p></li>
+<li><p><strong>Duration</strong>: 6 weeks</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Testing</p></li>
+</ol>
+<hr class="docutils" />
+<ul>
+<li><p><strong>Activities</strong>: Unit testing, integration testing, system testing,</p>
+<p>user acceptance testing</p>
+</li>
+<li><p><strong>Deliverables</strong>: Test plans, test cases, test reports, defect logs</p></li>
+<li><p><strong>Stakeholders</strong>: QA engineers, testers, end-users</p></li>
+<li><p><strong>Duration</strong>: 3 weeks</p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>Deployment</p></li>
+</ol>
+<hr class="docutils" />
+<ul>
+<li><p><strong>Activities</strong>: Environment setup, installation, data migration, user</p>
+<p>training</p>
+</li>
+<li><p><strong>Deliverables</strong>: Deployment plan, installation guide, training</p>
+<p>materials</p>
+</li>
+<li><p><strong>Stakeholders</strong>: DevOps engineers, system administrators, end-users</p></li>
+<li><p><strong>Duration</strong>: 1 week</p></li>
+</ul>
+<ol class="arabic simple" start="7">
+<li><p>Maintenance and Support</p></li>
+</ol>
+<hr class="docutils" />
+<ul>
+<li><p><strong>Activities</strong>: Bug fixing, performance monitoring, feature</p>
+<p>enhancements</p>
+</li>
+<li><p><strong>Deliverables</strong>: Updated documentation, patch releases, support</p>
+<p>tickets</p>
+</li>
+<li><p><strong>Stakeholders</strong>: Support team, developers, end-users</p></li>
+<li><p><strong>Duration</strong>: Ongoing</p></li>
+</ul>
+<p>Project Timeline and Estimation</p>
+<hr class="docutils" />
+<p>Timeline Overview</p>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><strong>Project Start Date</strong>: January 1, 2024</p></li>
+<li><p><strong>Expected Completion Date</strong>: April 30, 2024</p></li>
+<li><p><strong>Total Duration</strong>: 17 weeks</p></li>
+</ul>
+<p>Detailed Timeline</p>
+<hr class="docutils" />
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Phase   | Start Date     | End Date    | Duration    | Resources    |</div>
+</div>
+<p>+=========+================+=============+=============+==============+</p>
+<div class="line-block">
+<div class="line">P       | Jan 1, 2024    | Jan 14,     | 2 weeks     | PM, BA,      |</div>
+</div>
+<div class="line-block">
+<div class="line">lanning |                | 2024        |             | Client       |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">A       | Jan 15, 2024   | Feb 4, 2024 | 3 weeks     | Analysts,    |</div>
+</div>
+<div class="line-block">
+<div class="line">nalysis |                |             |             | Domain       |</div>
+</div>
+<div class="line-block">
+<div class="line">|                |             |             | Experts      |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Design  | Feb 5, 2024    | Mar 3, 2024 | 4 weeks     | Architects,  |</div>
+</div>
+<div class="line-block">
+<div class="line">|                |             |             | UI/UX        |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Impleme | Mar 4, 2024    | Apr 14,     | 6 weeks     | Developers   |</div>
+</div>
+<div class="line-block">
+<div class="line">ntation |                | 2024        |             | (3)          |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Testing | Mar 25, 2024   | Apr 14,     | 3 weeks     | QA Engineers |</div>
+</div>
+<div class="line-block">
+<div class="line">|                | 2024        |             | (2)          |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Dep     | Apr 15, 2024   | Apr 21,     | 1 week      | DevOps,      |</div>
+</div>
+<div class="line-block">
+<div class="line">loyment |                | 2024        |             | SysAdmin     |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Main    | Apr 22, 2024   | Ongoing     | Ongoing     | Support Team |</div>
+</div>
+<div class="line-block">
+<div class="line">tenance |                |             |             |              |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<p>Note: Testing begins during the implementation phase (overlapping</p>
+<p>schedule).</p>
+<p>Resource Allocation</p>
+<hr class="docutils" />
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">R   | Number of          | Allocated      | Rate         | Total     |</div>
+</div>
+<div class="line-block">
+<div class="line">ole | Resources          | Hours          | ($/hour)     | Cost      |</div>
+</div>
+<p>+=====+====================+================+==============+===========+</p>
+<div class="line-block">
+<div class="line">P   | 1                  | 200            | $85          | $17,000   |</div>
+</div>
+<div class="line-block">
+<div class="line">roj |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">ect |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">M   |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">ana |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">ger |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Bu  | 1                  | 150            | $70          | $10,500   |</div>
+</div>
+<div class="line-block">
+<div class="line">sin |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">ess |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">A   |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">nal |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">yst |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Sys | 2                  | 240            | $75          | $36,000   |</div>
+</div>
+<div class="line-block">
+<div class="line">tem |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">A   |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">nal |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">yst |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">So  | 1                  | 160            | $90          | $14,400   |</div>
+</div>
+<div class="line-block">
+<div class="line">ftw |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">are |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">Arc |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">hit |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">ect |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">UI  | 1                  | 120            | $65          | $7,800    |</div>
+</div>
+<div class="line-block">
+<div class="line">/UX |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">De  |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">sig |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">ner |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Fr  | 2                  | 480            | $70          | $67,200   |</div>
+</div>
+<div class="line-block">
+<div class="line">ont |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">end |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">Dev |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">elo |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">per |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">B   | 2                  | 480            | $80          | $76,800   |</div>
+</div>
+<div class="line-block">
+<div class="line">ack |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">end |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">Dev |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">elo |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">per |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">QA  | 2                  | 240            | $65          | $31,200   |</div>
+</div>
+<div class="line-block">
+<div class="line">En  |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">gin |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">eer |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Dev | 1                  | 80             | $85          | $6,800    |</div>
+</div>
+<div class="line-block">
+<div class="line">Ops |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">En  |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">gin |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">eer |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Tec | 1                  | 100            | $60          | $6,000    |</div>
+</div>
+<div class="line-block">
+<div class="line">hni |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">cal |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">Wri |                    |                |              |           |</div>
+</div>
+<div class="line-block">
+<div class="line">ter |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><strong>T | **14</strong>             | <strong>2,250</strong>      | <strong>-</strong>        | <a href="#id3"><span class="problematic" id="id4">**</span></a>$       |</div>
+</div>
+<div class="line-block">
+<div class="line">ota |                    |                |              | 273,700** |</div>
+</div>
+<div class="line-block">
+<div class="line">l** |                    |                |              |           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<p>Additional Costs</p>
+<hr class="docutils" />
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Item</p></td>
+<td><p>Cost</p></td>
+</tr>
+</tbody>
+</table>
+<p>Software Licenses      $5,000</p>
+<p>Infrastructure/Hosting $3,600</p>
+<p>Training               $2,500</p>
+<p>Contingency (15%)      $42,720</p>
+<p><strong>Total Additional</strong>   <strong>$53,820</strong></p>
+<p>Priority Response Time   Resolution Time Example</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Critical</p></td>
+<td><p>1 hour</p></td>
+<td><p>4 hours</p></td>
+<td><p>System down</p></td>
+</tr>
+<tr class="row-even"><td><p>High</p></td>
+<td><p>4 hours</p></td>
+<td><p>1 business day</p></td>
+<td><p>Major feature unavailable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Medium</p></td>
+<td><p>8 hours</p></td>
+<td><p>3 business days</p></td>
+<td><p>Minor feature issue</p></td>
+</tr>
+<tr class="row-even"><td><p>Low</p></td>
+<td><p>2 business days</p></td>
+<td><p>7 business days</p></td>
+<td><p>Cosmetic issue</p></td>
+</tr>
+</tbody>
+</table>
+<p>Maintenance Activities</p>
+<hr class="docutils" />
+<ol class="arabic simple">
+<li><p><strong>Preventive Maintenance</strong></p>
+<ul class="simple">
+<li><p>Regular security updates</p></li>
+<li><p>Performance optimization</p></li>
+<li><p>Database maintenance</p></li>
+</ul>
+</li>
+<li><p><strong>Adaptive Maintenance</strong></p>
+<ul class="simple">
+<li><p>Browser compatibility updates</p></li>
+<li><p>Third-party library updates</p></li>
+<li><p>Operating system compatibility</p></li>
+</ul>
+</li>
+<li><p><strong>Perfective Maintenance</strong></p>
+<ul class="simple">
+<li><p>Feature enhancements</p></li>
+<li><p>User experience improvements</p></li>
+<li><p>Performance optimizations</p></li>
+</ul>
+</li>
+<li><p><strong>Corrective Maintenance</strong></p>
+<ul class="simple">
+<li><p>Bug fixes</p></li>
+<li><p>Error corrections</p></li>
+<li><p>Security vulnerability patching</p></li>
+</ul>
+</li>
+</ol>
+<p>Risk Assessment and Mitigation</p>
+<hr class="docutils" />
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Risk   | Probability     | Impact    | Mitigation Strategy           |</div>
+</div>
+<p>+========+=================+===========+===============================+</p>
+<div class="line-block">
+<div class="line">Sc     | Medium          | High      | - Buffer time in schedule-    |</div>
+</div>
+<div class="line-block">
+<div class="line">hedule |                 |           | Regular progress tracking-    |</div>
+</div>
+<div class="line-block">
+<div class="line">delays |                 |           | Agile methodology to adapt    |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Scope  | High            | Medium    | - Detailed requirements       |</div>
+</div>
+<div class="line-block">
+<div class="line">creep  |                 |           | documentation- Change control |</div>
+</div>
+<div class="line-block">
+<div class="line">|                 |           | process- Regular stakeholder  |</div>
+</div>
+<div class="line-block">
+<div class="line">|                 |           | reviews                       |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Tec    | Medium          | Medium    | - Experienced development     |</div>
+</div>
+<div class="line-block">
+<div class="line">hnical |                 |           | team- Technical spike         |</div>
+</div>
+<div class="line-block">
+<div class="line">chal   |                 |           | solutions- Early prototyping  |</div>
+</div>
+<div class="line-block">
+<div class="line">lenges |                 |           | of complex features           |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Re     | Low             | High      | - Cross-training team         |</div>
+</div>
+<div class="line-block">
+<div class="line">source |                 |           | members- Documented           |</div>
+</div>
+<div class="line-block">
+<div class="line">const  |                 |           | processes- Contingency budget |</div>
+</div>
+<div class="line-block">
+<div class="line">raints |                 |           |                               |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Se     | Low             | Very High | - Regular security audits-    |</div>
+</div>
+<div class="line-block">
+<div class="line">curity |                 |           | Automated security scanning-  |</div>
+</div>
+<div class="line-block">
+<div class="line">vul    |                 |           | Security-focused code reviews |</div>
+</div>
+<div class="line-block">
+<div class="line">nerabi |                 |           |                               |</div>
+</div>
+<div class="line-block">
+<div class="line">lities |                 |           |                               |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">User   | Medium          | High      | - Early user involvement-     |</div>
+</div>
+<div class="line-block">
+<div class="line">ad     |                 |           | Usability testing-            |</div>
+</div>
+<div class="line-block">
+<div class="line">option |                 |           | Comprehensive training        |</div>
+</div>
+<div class="line-block">
+<div class="line">issues |                 |           | materials                     |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">In     | Low             | High      | - Redundant systems- Regular  |</div>
+</div>
+<div class="line-block">
+<div class="line">frastr |                 |           | backups- Disaster recovery    |</div>
+</div>
+<div class="line-block">
+<div class="line">ucture |                 |           | plan                          |</div>
+</div>
+<div class="line-block">
+<div class="line">fa     |                 |           |                               |</div>
+</div>
+<div class="line-block">
+<div class="line">ilures |                 |           |                               |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<p>Glossary</p>
+<hr class="docutils" />
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Term                  | Definition                                    |</div>
+</div>
+<p>+=======================+===============================================+</p>
+<div class="line-block">
+<div class="line">Category              | A grouping of related quiz questions under a  |</div>
+</div>
+<div class="line-block">
+<div class="line">| common topic                                  |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Choice                | A possible answer option for a quiz question  |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">DFD                   | Data Flow Diagram - visual representation of  |</div>
+</div>
+<div class="line-block">
+<div class="line">| data flow through a system                    |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">MVT                   | Model-View-Template - Django’s architectural  |</div>
+</div>
+<div class="line-block">
+<div class="line">| pattern                                       |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Question              | An individual quiz question with multiple     |</div>
+</div>
+<div class="line-block">
+<div class="line">| choice answers                                |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">Quiz Attempt          | A single instance of a user taking a specific |</div>
+</div>
+<div class="line-block">
+<div class="line">| quiz                                          |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">QuizResponse          | A user’s answer to a specific question within |</div>
+</div>
+<div class="line-block">
+<div class="line">| a quiz attempt                                |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">SLA                   | Service Level Agreement - defines support     |</div>
+</div>
+<div class="line-block">
+<div class="line">| response and resolution times                 |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">UAT                   | User Acceptance Testing - validation testing  |</div>
+</div>
+<div class="line-block">
+<div class="line">| performed by actual users                     |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">UserProfile           | Extended information about a user beyond      |</div>
+</div>
+<div class="line-block">
+<div class="line">| basic authentication data                     |</div>
+</div>
+<table class="docutils align-default">
+<tbody>
+</tbody>
+</table>
+<p>‘’</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Your Name.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

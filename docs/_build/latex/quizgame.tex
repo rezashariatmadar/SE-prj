@@ -64,7 +64,7 @@
 
 
 \title{Quiz Game}
-\date{Mar 21, 2025}
+\date{May 08, 2025}
 \release{1.0.0}
 \author{Your Name}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -85,7 +85,7 @@
 \phantomsection\label{\detokenize{index::doc}}
 
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=300\sphinxpxdimen]{{_static/quiz_game_logo}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=300\sphinxpxdimen]{{quiz_game_logo}.png}\hspace*{\fill}}
 
 
 \chapter{Overview}
@@ -312,7 +312,7 @@ To begin using Quiz Game, see the {\hyperref[\detokenize{installation::doc}]{\sp
 
 \sphinxAtStartPar
 For developers interested in understanding the application architecture or contributing
-to the project, see the {\hyperref[\detokenize{architecture::doc}]{\sphinxcrossref{\DUrole{doc}{System Architecture}}}} and \DUrole{xref,std,std-doc}{development} sections.
+to the project, see the {\hyperref[\detokenize{architecture::doc}]{\sphinxcrossref{\DUrole{doc}{System Architecture}}}} and \DUrole{xref}{\DUrole{std}{\DUrole{std-doc}{development}}} sections.
 
 \sphinxstepscope
 
@@ -649,7 +649,7 @@ If deployed: \sphinxurl{https://your-quiz-game-domain.com/}
 \sphinxAtStartPar
 The homepage displays a welcome message and available quiz categories.
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{_static/homepage_screenshot}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{homepage_screenshot}.png}\hspace*{\fill}}
 
 
 \subsubsection{Navigation}
@@ -700,7 +700,7 @@ Click the “Start Quiz” button
 
 \end{enumerate}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=500\sphinxpxdimen]{{_static/start_quiz_screenshot}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=500\sphinxpxdimen]{{start_quiz_screenshot}.png}\hspace*{\fill}}
 
 
 \subsubsection{Answering Questions}
@@ -728,7 +728,7 @@ Click “Next Question” to proceed
 You cannot go back to previous questions once submitted.
 \end{sphinxadmonition}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{_static/question_screenshot}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{question_screenshot}.png}\hspace*{\fill}}
 
 \sphinxAtStartPar
 \sphinxstylestrong{Navigation Keys}:
@@ -787,7 +787,7 @@ After completing a quiz, you’ll see your results:
 
 \end{enumerate}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{_static/results_screenshot}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{results_screenshot}.png}\hspace*{\fill}}
 
 
 \subsubsection{Performance Analysis}
@@ -898,7 +898,144 @@ Your best\sphinxhyphen{}performing category
 
 \end{enumerate}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{_static/stats_screenshot}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{stats_screenshot}.png}\hspace*{\fill}}
+
+
+\subsubsection{Analytics Features}
+\label{\detokenize{user_guide:analytics-features}}
+\sphinxAtStartPar
+The analytics dashboard provides advanced visualizations to help you understand your performance:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Performance Over Time Chart}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Interactive line chart showing your scores across time
+
+\item {} 
+\sphinxAtStartPar
+Multiple categories displayed with different colors
+
+\item {} 
+\sphinxAtStartPar
+Hover over points to see exact scores and dates
+
+\item {} 
+\sphinxAtStartPar
+Identify trends and improvements in your quiz performance
+
+\end{itemize}
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=500\sphinxpxdimen]{{performance_time}.png}\hspace*{\fill}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Category Performance Chart}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Bar chart comparing your average scores across different categories
+
+\item {} 
+\sphinxAtStartPar
+Overall average shown as a horizontal line for reference
+
+\item {} 
+\sphinxAtStartPar
+Categories sorted from highest to lowest performance
+
+\item {} 
+\sphinxAtStartPar
+Quickly identify your strongest and weakest subjects
+
+\end{itemize}
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=500\sphinxpxdimen]{{performance_category}.png}\hspace*{\fill}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Quiz Length Distribution}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Pie chart showing the distribution of quiz lengths you’ve attempted
+
+\item {} 
+\sphinxAtStartPar
+See what proportion of your quizzes were short, medium, or long
+
+\item {} 
+\sphinxAtStartPar
+Helps in planning your study sessions
+
+\end{itemize}
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=400\sphinxpxdimen]{{quiz_distribution}.png}\hspace*{\fill}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Results Analysis}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+After completing a quiz, see how you performed across different difficulty levels
+
+\item {} 
+\sphinxAtStartPar
+Identify which types of questions you need to focus on
+
+\end{itemize}
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=500\sphinxpxdimen]{{difficulty_performance}.png}\hspace*{\fill}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Comprehensive Dashboard}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+All your statistics in one convenient view
+
+\item {} 
+\sphinxAtStartPar
+Multiple visualizations to give you a complete picture of your progress
+
+\end{itemize}
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{dashboard_summary}.png}\hspace*{\fill}}
+
+\end{enumerate}
+
+
+\subsubsection{Using Analytics for Learning}
+\label{\detokenize{user_guide:using-analytics-for-learning}}
+\sphinxAtStartPar
+Here are some ways to leverage the analytics features:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Identify knowledge gaps}: Look for categories with consistently lower scores
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Track improvement}: Monitor your performance over time to validate your learning
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Set goals}: Challenge yourself to improve scores in specific categories
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Study efficiently}: Focus your efforts on the areas that need the most improvement
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Share progress}: Download or print your analytics charts to share with teachers or study partners
+
+\end{itemize}
 
 
 \subsection{Account Management}
@@ -1139,7 +1276,7 @@ of the Model\sphinxhyphen{}View\sphinxhyphen{}Controller (MVC) pattern:
 
 \end{itemize}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{_static/architecture_diagram}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{architecture_diagram}.png}\hspace*{\fill}}
 
 
 \subsection{Component Structure}
@@ -1508,6 +1645,14 @@ The following diagram illustrates the relationships between the different models
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=1.000\linewidth]{{erd_diagram_matplotlib}.png}\hspace*{\fill}}
 
 
+\subsection{Updated Entity Relationship Diagram}
+\label{\detokenize{models:updated-entity-relationship-diagram}}
+\sphinxAtStartPar
+Below is an improved version of the Entity Relationship Diagram showing all models and their relationships:
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=1.000\linewidth]{{updated_erd_diagram}.png}\hspace*{\fill}}
+
+
 \subsubsection{Entity Relationship Description}
 \label{\detokenize{models:entity-relationship-description}}\begin{itemize}
 \item {} 
@@ -1687,7 +1832,7 @@ Views handle the HTTP requests, perform business logic, and return appropriate r
 
 \subsection{View Flow Diagram}
 \label{\detokenize{views:view-flow-diagram}}
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{_static/view_flow_diagram}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{view_flow_diagram}.png}\hspace*{\fill}}
 
 \sphinxAtStartPar
 The diagram above illustrates the flow between different views in the application.
@@ -1699,7 +1844,8 @@ The diagram above illustrates the flow between different views in the applicatio
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:IndexView}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{IndexView}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{IndexView}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 View for the home page of the quiz application.
@@ -1712,7 +1858,8 @@ It inherits from Django’s TemplateView.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:IndexView.template_name}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Path to the template used for rendering: ‘quiz\_app/index.html’
@@ -1730,7 +1877,8 @@ Path to the template used for rendering: ‘quiz\_app/index.html’
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:CategoryListView}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{CategoryListView}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{CategoryListView}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 View to display all available quiz categories.
@@ -1743,7 +1891,8 @@ a list of all categories that have at least one question.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:CategoryListView.model}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{model}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }Model}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{model}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }Model}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 The model to list: Category
@@ -1755,7 +1904,8 @@ The model to list: Category
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:CategoryListView.template_name}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Path to the template: ‘quiz\_app/category\_list.html’
@@ -1767,7 +1917,8 @@ Path to the template: ‘quiz\_app/category\_list.html’
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:CategoryListView.context_object_name}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{context\_object\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{context\_object\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Name of the context variable: ‘categories’
@@ -1785,7 +1936,8 @@ Name of the context variable: ‘categories’
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:QuizStartView}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{QuizStartView}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{QuizStartView}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 View to handle the start of a new quiz.
@@ -1804,7 +1956,8 @@ It handles the form submission from the quiz selection page.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:QuestionView}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{QuestionView}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{QuestionView}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 View to display a quiz question and process the answer.
@@ -1816,7 +1969,8 @@ This class\sphinxhyphen{}based view handles both displaying questions and proces
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:QuestionView.template_name}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Path to the template: ‘quiz\_app/question.html’
@@ -1834,7 +1988,8 @@ Path to the template: ‘quiz\_app/question.html’
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:ResultsView}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{ResultsView}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{ResultsView}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 View to display the results of a completed quiz.
@@ -1847,7 +2002,8 @@ the score, performance charts, and answer review for a completed quiz.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:ResultsView.model}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{model}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }Model}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{model}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }Model}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 The model to display: QuizAttempt
@@ -1859,7 +2015,8 @@ The model to display: QuizAttempt
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:ResultsView.template_name}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Path to the template: ‘quiz\_app/results.html’
@@ -1871,7 +2028,8 @@ Path to the template: ‘quiz\_app/results.html’
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:ResultsView.context_object_name}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{context\_object\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{context\_object\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Name of the context variable: ‘quiz\_attempt’
@@ -1883,7 +2041,8 @@ Name of the context variable: ‘quiz\_attempt’
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:ResultsView.pk_url_kwarg}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{pk\_url\_kwarg}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{pk\_url\_kwarg}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Name of the URL keyword argument: ‘quiz\_id’
@@ -1901,7 +2060,8 @@ Name of the URL keyword argument: ‘quiz\_id’
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:UserStatsView}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{UserStatsView}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{\DUrole{k}{class}\DUrole{w}{ }}}\sphinxbfcode{\sphinxupquote{UserStatsView}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 View to display statistics and analytics for a user’s quiz history.
@@ -1914,7 +2074,8 @@ of the user’s performance across different categories and over time.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{views:UserStatsView.template_name}}
 \pysigstartsignatures
-\pysigline{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
+\pysigline
+{\sphinxbfcode{\sphinxupquote{template\_name}}\sphinxbfcode{\sphinxupquote{\DUrole{p}{:}\DUrole{w}{ }\sphinxhref{https://docs.python.org/3/library/stdtypes.html\#str}{str}}}}
 \pysigstopsignatures
 \sphinxAtStartPar
 Path to the template: ‘quiz\_app/user\_stats.html’
@@ -2369,513 +2530,170 @@ The \sphinxcode{\sphinxupquote{QuizSelectionForm}} plays a vital role in the Qui
 \sphinxstepscope
 
 
-\section{Analytics and Data Visualization}
-\label{\detokenize{analytics:analytics-and-data-visualization}}\label{\detokenize{analytics::doc}}
+\section{Analytics and Visualization}
+\label{\detokenize{analytics:analytics-and-visualization}}\label{\detokenize{analytics::doc}}
 \sphinxAtStartPar
-This section documents the analytics and data visualization capabilities of the
-Quiz Game application, including the data processing pipeline, visualization techniques,
-and the insights provided to users.
+Last updated: 2025\sphinxhyphen{}05\sphinxhyphen{}08
 
 
-\subsection{Analytics Pipeline}
-\label{\detokenize{analytics:analytics-pipeline}}
+\subsection{Overview}
+\label{\detokenize{analytics:overview}}
 \sphinxAtStartPar
-The Quiz Game application implements a data analytics pipeline that transforms
-raw quiz data into meaningful visualizations and statistics:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
+The Quiz Application includes comprehensive analytics and visualization features that help users
+track their performance over time and get insights into their quiz\sphinxhyphen{}taking habits.
+
+
+\subsection{Analytics Features}
+\label{\detokenize{analytics:analytics-features}}
+
+\subsubsection{User Statistics Dashboard}
+\label{\detokenize{analytics:user-statistics-dashboard}}
 \sphinxAtStartPar
-\sphinxstylestrong{Data Collection}
+The User Statistics Dashboard provides a comprehensive view of a user’s quiz performance:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-User interactions and responses are recorded in the database
+\sphinxstylestrong{Performance Over Time}: Line chart showing quiz scores over time, grouped by category
 
 \item {} 
 \sphinxAtStartPar
-Each question answer is stored with metadata (time, correctness)
+\sphinxstylestrong{Performance by Category}: Bar chart showing average scores for each category
 
 \item {} 
 \sphinxAtStartPar
-Quiz attempts track overall performance
+\sphinxstylestrong{Quiz Length Distribution}: Pie chart showing the distribution of quiz lengths
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Summary Statistics}: Key metrics including overall average, best category, and perfect scores
 
 \end{itemize}
 
-\item {} 
+
+\subsection{Visualizations}
+\label{\detokenize{analytics:visualizations}}
 \sphinxAtStartPar
-\sphinxstylestrong{Data Processing}
+The analytics system uses the following Python data science libraries:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-Raw data is retrieved from the database
+\sphinxstylestrong{pandas}: For data manipulation and analysis
 
 \item {} 
 \sphinxAtStartPar
-Pandas DataFrames are created for efficient manipulation
+\sphinxstylestrong{matplotlib}: For creating static visualizations
 
 \item {} 
 \sphinxAtStartPar
-Aggregation, grouping, and statistical calculations are performed
+\sphinxstylestrong{seaborn}: For enhanced matplotlib visualizations with better default styling
 
 \end{itemize}
 
-\item {} 
+
+\subsection{Implementation}
+\label{\detokenize{analytics:implementation}}
 \sphinxAtStartPar
-\sphinxstylestrong{Visualization Generation}
+The analytics system is implemented through the \sphinxcode{\sphinxupquote{UserStatsView}} class, which:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-Charts and graphs are created using matplotlib and seaborn
+Collects quiz attempt data for the logged\sphinxhyphen{}in user
 
 \item {} 
 \sphinxAtStartPar
-Visualizations are encoded as base64 strings for embedding
+Transforms the data into pandas DataFrames
 
 \item {} 
 \sphinxAtStartPar
-Results are presented in the user interface
+Generates visualizations using matplotlib and seaborn
+
+\item {} 
+\sphinxAtStartPar
+Calculates summary statistics
+
+\item {} 
+\sphinxAtStartPar
+Passes the charts and statistics to the template for display
 
 \end{itemize}
 
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Insight Delivery}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Visualizations are displayed to users
 
-\item {} 
-\sphinxAtStartPar
-Summary statistics provide quick performance assessment
-
-\item {} 
-\sphinxAtStartPar
-Recommendations may be offered based on results
-
-\end{itemize}
-
-\end{enumerate}
-
-
-\subsection{Data Processing with Pandas}
-\label{\detokenize{analytics:data-processing-with-pandas}}
-\sphinxAtStartPar
-The application leverages pandas for efficient data manipulation:
-
+\subsubsection{Code Example}
+\label{\detokenize{analytics:code-example}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{} Example: Creating a DataFrame from quiz responses}
-\PYG{n}{data} \PYG{o}{=} \PYG{p}{\PYGZob{}}
-    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{question}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{n}{r}\PYG{o}{.}\PYG{n}{question}\PYG{o}{.}\PYG{n}{text} \PYG{k}{for} \PYG{n}{r} \PYG{o+ow}{in} \PYG{n}{responses}\PYG{p}{]}\PYG{p}{,}
-    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is\PYGZus{}correct}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{n}{r}\PYG{o}{.}\PYG{n}{is\PYGZus{}correct} \PYG{k}{for} \PYG{n}{r} \PYG{o+ow}{in} \PYG{n}{responses}\PYG{p}{]}\PYG{p}{,}
-    \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{difficulty}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{n}{r}\PYG{o}{.}\PYG{n}{question}\PYG{o}{.}\PYG{n}{difficulty} \PYG{k}{for} \PYG{n}{r} \PYG{o+ow}{in} \PYG{n}{responses}\PYG{p}{]}
-\PYG{p}{\PYGZcb{}}
-\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}context\PYGZus{}data}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}\PYG{p}{:}
+    \PYG{c+c1}{\PYGZsh{} Get quiz attempts}
+    \PYG{n}{quiz\PYGZus{}attempts} \PYG{o}{=} \PYG{n}{QuizAttempt}\PYG{o}{.}\PYG{n}{objects}\PYG{o}{.}\PYG{n}{filter}\PYG{p}{(}
+        \PYG{n}{user}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{request}\PYG{o}{.}\PYG{n}{user}\PYG{p}{,}
+        \PYG{n}{completed\PYGZus{}at\PYGZus{}\PYGZus{}isnull}\PYG{o}{=}\PYG{k+kc}{False}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{select\PYGZus{}related}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{category}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 
-\PYG{c+c1}{\PYGZsh{} Aggregating performance by difficulty}
-\PYG{n}{difficulty\PYGZus{}performance} \PYG{o}{=} \PYG{n}{df}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{difficulty}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{is\PYGZus{}correct}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)} \PYG{o}{*} \PYG{l+m+mi}{100}
-\end{sphinxVerbatim}
+    \PYG{c+c1}{\PYGZsh{} Create DataFrame}
+    \PYG{n}{data} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{date}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}\PYG{p}{,}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{category}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}\PYG{p}{,}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{score\PYGZus{}percentage}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{[}\PYG{p}{]}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{c+c1}{\PYGZsh{} Add data to the dictionary}
 
-\sphinxAtStartPar
-Key pandas operations used:
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{DataFrame creation} from dictionaries or QuerySets
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Groupby operations} for aggregating by category or difficulty
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Time\sphinxhyphen{}series analysis} for performance trends
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Statistical functions} (mean, median, count, etc.)
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Data transformation} for visualization preparation
-
-\end{itemize}
-
-
-\subsection{Visualization Techniques}
-\label{\detokenize{analytics:visualization-techniques}}
-\sphinxAtStartPar
-The application employs several types of visualizations:
-
-
-\begin{savenotes}\sphinxattablestart
-\sphinxthistablewithglobalstyle
-\centering
-\begin{tabular}[t]{\X{20}{100}\X{40}{100}\X{40}{100}}
-\sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Visualization Type
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Purpose
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Implementation
-\\
-\sphinxmidrule
-\sphinxtableatstartofbodyhook
-\sphinxAtStartPar
-Bar Charts
-&
-\sphinxAtStartPar
-Compare performance across categories or difficulty levels
-&
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{sns.barplot(x=category, y=performance)}}
-\\
-\sphinxhline
-\sphinxAtStartPar
-Line Charts
-&
-\sphinxAtStartPar
-Show performance trends over time
-&
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{sns.lineplot(data=df, x=\textquotesingle{}date\textquotesingle{}, y=\textquotesingle{}score\textquotesingle{}, hue=\textquotesingle{}category\textquotesingle{})}}
-\\
-\sphinxhline
-\sphinxAtStartPar
-Pie Charts
-&
-\sphinxAtStartPar
-Display proportion of correct/incorrect answers
-&
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{plt.pie({[}correct, incorrect{]}, labels={[}\textquotesingle{}Correct\textquotesingle{}, \textquotesingle{}Incorrect\textquotesingle{}{]})}}
-\\
-\sphinxhline
-\sphinxAtStartPar
-Heatmaps
-&
-\sphinxAtStartPar
-Visualize performance across multiple dimensions
-&
-\sphinxAtStartPar
-\sphinxcode{\sphinxupquote{sns.heatmap(performance\_matrix)}}
-\\
-\sphinxbottomrule
-\end{tabular}
-\sphinxtableafterendhook\par
-\sphinxattableend\end{savenotes}
-
-
-\subsubsection{Example: Performance by Difficulty Chart}
-\label{\detokenize{analytics:example-performance-by-difficulty-chart}}
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{} Generate performance by difficulty chart}
-\PYG{n}{plt}\PYG{o}{.}\PYG{n}{figure}\PYG{p}{(}\PYG{n}{figsize}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{)}
-\PYG{n}{sns}\PYG{o}{.}\PYG{n}{barplot}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{difficulty\PYGZus{}performance}\PYG{o}{.}\PYG{n}{index}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n}{difficulty\PYGZus{}performance}\PYG{o}{.}\PYG{n}{values}\PYG{p}{)}
-\PYG{n}{plt}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Performance by Question Difficulty}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{plt}\PYG{o}{.}\PYG{n}{xlabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Difficulty Level}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Correct Answers (}\PYG{l+s+s1}{\PYGZpc{}}\PYG{l+s+s1}{)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylim}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{)}
-
-\PYG{c+c1}{\PYGZsh{} Save chart as base64 string for embedding}
-\PYG{n}{buffer} \PYG{o}{=} \PYG{n}{BytesIO}\PYG{p}{(}\PYG{p}{)}
-\PYG{n}{plt}\PYG{o}{.}\PYG{n}{savefig}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,} \PYG{n+nb}{format}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{png}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{bbox\PYGZus{}inches}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{n}{buffer}\PYG{o}{.}\PYG{n}{seek}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
-\PYG{n}{chart} \PYG{o}{=} \PYG{n}{base64}\PYG{o}{.}\PYG{n}{b64encode}\PYG{p}{(}\PYG{n}{buffer}\PYG{o}{.}\PYG{n}{getvalue}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{utf\PYGZhy{}8}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} Generate visualizations...}
 \end{sphinxVerbatim}
 
 
-\subsection{Results Visualizations}
-\label{\detokenize{analytics:results-visualizations}}
+\subsection{Data Sources}
+\label{\detokenize{analytics:data-sources}}
 \sphinxAtStartPar
-After completing a quiz, users see the following visualizations:
+The analytics feature uses data from the following models:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{QuizAttempt}: For quiz metadata and scores
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{QuizResponse}: For detailed response data
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Category}: For category information
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{User}: For user identification
+
+\end{itemize}
+
+
+\subsection{Future Enhancements}
+\label{\detokenize{analytics:future-enhancements}}
+\sphinxAtStartPar
+Planned enhancements to the analytics system include:
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Score Summary}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Visual representation of correct vs. incorrect answers
+Predictive analytics to recommend areas for improvement
 
 \item {} 
 \sphinxAtStartPar
-Progress bar showing percentage score
+Comparative statistics against other users
 
 \item {} 
 \sphinxAtStartPar
-Color\sphinxhyphen{}coded feedback based on performance
-
-\end{itemize}
+Downloadable reports in PDF format
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Performance by Difficulty}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Bar chart showing percentage of correct answers by difficulty level
+Advanced filtering and time\sphinxhyphen{}range selection
 
 \item {} 
 \sphinxAtStartPar
-Helps users identify strengths and weaknesses
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Answer Review}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Color\sphinxhyphen{}coded list of questions and responses
-
-\item {} 
-\sphinxAtStartPar
-Correct answers highlighted
-
-\item {} 
-\sphinxAtStartPar
-Explanations provided for educational value
-
-\end{itemize}
+Custom chart creation
 
 \end{enumerate}
 
-
-\subsection{User Statistics Visualizations}
-\label{\detokenize{analytics:user-statistics-visualizations}}
 \sphinxAtStartPar
-Authenticated users can access additional visualizations in their stats dashboard:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Performance Over Time}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Line chart tracking score percentages across multiple quizzes
-
-\item {} 
-\sphinxAtStartPar
-Color\sphinxhyphen{}coded by category
-
-\item {} 
-\sphinxAtStartPar
-Shows learning progress and improvement
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Performance by Category}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Bar chart comparing average scores across different categories
-
-\item {} 
-\sphinxAtStartPar
-Sorted from highest to lowest performance
-
-\item {} 
-\sphinxAtStartPar
-Identifies strengths and areas for improvement
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Summary Statistics}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Total quizzes completed
-
-\item {} 
-\sphinxAtStartPar
-Average score percentage
-
-\item {} 
-\sphinxAtStartPar
-Number of categories attempted
-
-\item {} 
-\sphinxAtStartPar
-Best performing category
-
-\end{itemize}
-
-\end{enumerate}
-
-
-\subsection{Visualization Best Practices}
-\label{\detokenize{analytics:visualization-best-practices}}
-\sphinxAtStartPar
-The application follows these data visualization best practices:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Color Usage}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Consistent color schemes across the application
-
-\item {} 
-\sphinxAtStartPar
-Color\sphinxhyphen{}blind friendly palettes
-
-\item {} 
-\sphinxAtStartPar
-Semantic colors (green for correct, red for incorrect)
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Chart Composition}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Clear titles and axis labels
-
-\item {} 
-\sphinxAtStartPar
-Appropriate scales and ranges
-
-\item {} 
-\sphinxAtStartPar
-Legend when multiple data series are present
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Responsiveness}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Charts adapt to different screen sizes
-
-\item {} 
-\sphinxAtStartPar
-Mobile\sphinxhyphen{}friendly visualization formats
-
-\item {} 
-\sphinxAtStartPar
-Fallback for browsers without JavaScript
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Performance Optimization}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Server\sphinxhyphen{}side rendering for complex visualizations
-
-\item {} 
-\sphinxAtStartPar
-Efficient data transformation with pandas
-
-\item {} 
-\sphinxAtStartPar
-Appropriate image compression for base64 encoding
-
-\end{itemize}
-
-\end{enumerate}
-
-
-\subsection{Extending the Analytics}
-\label{\detokenize{analytics:extending-the-analytics}}
-\sphinxAtStartPar
-The analytics system can be extended in several ways:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Additional Visualizations}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Box plots for score distributions
-
-\item {} 
-\sphinxAtStartPar
-Radar charts for multi\sphinxhyphen{}dimensional performance
-
-\item {} 
-\sphinxAtStartPar
-Network graphs for related categories
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Advanced Analytics}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Predictive modeling for question difficulty
-
-\item {} 
-\sphinxAtStartPar
-Personalized recommendations
-
-\item {} 
-\sphinxAtStartPar
-Learning path optimization
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Real\sphinxhyphen{}time Analytics}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-Live updating dashboards
-
-\item {} 
-\sphinxAtStartPar
-Performance comparisons with other users
-
-\item {} 
-\sphinxAtStartPar
-Trending categories and questions
-
-\end{itemize}
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{Export Capabilities}
-\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-PDF reports of performance
-
-\item {} 
-\sphinxAtStartPar
-CSV data export for external analysis
-
-\item {} 
-\sphinxAtStartPar
-Integration with learning management systems
-
-\end{itemize}
-
-\end{enumerate}
+‘’
 
 \sphinxstepscope
 
@@ -3177,16 +2995,95 @@ While significant improvements have been made to the form validation process, th
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{User Experience Enhancements}
-\sphinxhyphen{} Add tooltips and hints for form fields
-\sphinxhyphen{} Implement real\sphinxhyphen{}time validation as users type or change values
-\sphinxhyphen{} Enhance form accessibility for users with disabilities
+\sphinxstylestrong{Analytics Enhancements}
+\sphinxhyphen{} Implement predictive analytics to suggest areas for improvement
+\sphinxhyphen{} Add comparative statistics against other users (leaderboards)
+\sphinxhyphen{} Create downloadable reports in PDF format
+\sphinxhyphen{} Add advanced filtering options for analytics data
+\sphinxhyphen{} Implement real\sphinxhyphen{}time analytics updates
+\sphinxhyphen{} Add more visualization types (radar charts, heat maps)
+\sphinxhyphen{} Create a dashboard customization feature
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{AdvancedAnalyticsView}\PYG{p}{(}\PYG{n}{LoginRequiredMixin}\PYG{p}{,} \PYG{n}{TemplateView}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Advanced analytics view with more complex visualizations}
+\PYG{l+s+sd}{    and data processing capabilities.}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{template\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{quiz\PYGZus{}app/advanced\PYGZus{}analytics.html}\PYG{l+s+s1}{\PYGZsq{}}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}context\PYGZus{}data}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n}{context} \PYG{o}{=} \PYG{n+nb}{super}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{get\PYGZus{}context\PYGZus{}data}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}
+        \PYG{n}{user} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{request}\PYG{o}{.}\PYG{n}{user}
+
+        \PYG{c+c1}{\PYGZsh{} Get date range from request parameters or use defaults}
+        \PYG{n}{start\PYGZus{}date} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{request}\PYG{o}{.}\PYG{n}{GET}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{start\PYGZus{}date}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{k+kc}{None}\PYG{p}{)}
+        \PYG{n}{end\PYGZus{}date} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{request}\PYG{o}{.}\PYG{n}{GET}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{end\PYGZus{}date}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{k+kc}{None}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Get category filter from request parameters}
+        \PYG{n}{category\PYGZus{}filter} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{request}\PYG{o}{.}\PYG{n}{GET}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{category}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{k+kc}{None}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Filter quiz attempts based on parameters}
+        \PYG{n}{quiz\PYGZus{}attempts} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{filter\PYGZus{}quiz\PYGZus{}attempts}\PYG{p}{(}\PYG{n}{user}\PYG{p}{,} \PYG{n}{start\PYGZus{}date}\PYG{p}{,} \PYG{n}{end\PYGZus{}date}\PYG{p}{,} \PYG{n}{category\PYGZus{}filter}\PYG{p}{)}
+
+        \PYG{k}{if} \PYG{n}{quiz\PYGZus{}attempts}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} Generate various analytics charts...}
+            \PYG{n}{context}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{visualizations}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{generate\PYGZus{}visualizations}\PYG{p}{(}\PYG{n}{quiz\PYGZus{}attempts}\PYG{p}{)}
+
+            \PYG{c+c1}{\PYGZsh{} Add predictive analytics}
+            \PYG{n}{context}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{predictions}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{generate\PYGZus{}predictions}\PYG{p}{(}\PYG{n}{user}\PYG{p}{,} \PYG{n}{quiz\PYGZus{}attempts}\PYG{p}{)}
+
+            \PYG{c+c1}{\PYGZsh{} Add comparative statistics}
+            \PYG{n}{context}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{comparisons}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{generate\PYGZus{}comparisons}\PYG{p}{(}\PYG{n}{user}\PYG{p}{,} \PYG{n}{quiz\PYGZus{}attempts}\PYG{p}{)}
+
+        \PYG{k}{return} \PYG{n}{context}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{filter\PYGZus{}quiz\PYGZus{}attempts}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{user}\PYG{p}{,} \PYG{n}{start\PYGZus{}date}\PYG{p}{,} \PYG{n}{end\PYGZus{}date}\PYG{p}{,} \PYG{n}{category}\PYG{p}{)}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} Implementation of advanced filtering}
+        \PYG{k}{pass}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{generate\PYGZus{}visualizations}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{quiz\PYGZus{}attempts}\PYG{p}{)}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} Implementation of advanced visualizations}
+        \PYG{k}{pass}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{generate\PYGZus{}predictions}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{user}\PYG{p}{,} \PYG{n}{quiz\PYGZus{}attempts}\PYG{p}{)}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} Implementation of predictive analytics}
+        \PYG{k}{pass}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{generate\PYGZus{}comparisons}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{user}\PYG{p}{,} \PYG{n}{quiz\PYGZus{}attempts}\PYG{p}{)}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} Implementation of user comparisons}
+        \PYG{k}{pass}
+\end{sphinxVerbatim}
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Mobile Responsiveness}
-\sphinxhyphen{} Improve form layout and validation messages on small screens
-\sphinxhyphen{} Enhance touch interactions for mobile users
+\sphinxstylestrong{Performance Optimization}
+\sphinxhyphen{} Optimize database queries for faster analytics processing
+\sphinxhyphen{} Implement caching for frequently accessed analytics data
+\sphinxhyphen{} Enhance the efficiency of data visualization generation
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Example of optimized query using select\PYGZus{}related and annotation}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{get\PYGZus{}optimized\PYGZus{}quiz\PYGZus{}data}\PYG{p}{(}\PYG{n}{user}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{return} \PYG{n}{QuizAttempt}\PYG{o}{.}\PYG{n}{objects}\PYG{o}{.}\PYG{n}{filter}\PYG{p}{(}
+        \PYG{n}{user}\PYG{o}{=}\PYG{n}{user}\PYG{p}{,}
+        \PYG{n}{completed\PYGZus{}at\PYGZus{}\PYGZus{}isnull}\PYG{o}{=}\PYG{k+kc}{False}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{select\PYGZus{}related}\PYG{p}{(}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{category}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{user}\PYG{l+s+s1}{\PYGZsq{}}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{prefetch\PYGZus{}related}\PYG{p}{(}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{quizresponse\PYGZus{}set\PYGZus{}\PYGZus{}question}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+        \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{quizresponse\PYGZus{}set\PYGZus{}\PYGZus{}selected\PYGZus{}choice}\PYG{l+s+s1}{\PYGZsq{}}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{annotate}\PYG{p}{(}
+        \PYG{n}{correct\PYGZus{}count}\PYG{o}{=}\PYG{n}{Count}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{quizresponse}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{filter}\PYG{o}{=}\PYG{n}{Q}\PYG{p}{(}\PYG{n}{quizresponse\PYGZus{}\PYGZus{}is\PYGZus{}correct}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}
+        \PYG{n}{response\PYGZus{}time\PYGZus{}avg}\PYG{o}{=}\PYG{n}{Avg}\PYG{p}{(}
+            \PYG{n}{ExpressionWrapper}\PYG{p}{(}
+                \PYG{n}{F}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{quizresponse\PYGZus{}\PYGZus{}response\PYGZus{}time}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{F}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{started\PYGZus{}at}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+                \PYG{n}{output\PYGZus{}field}\PYG{o}{=}\PYG{n}{DurationField}\PYG{p}{(}\PYG{p}{)}
+            \PYG{p}{)}
+        \PYG{p}{)}
+    \PYG{p}{)}\PYG{o}{.}\PYG{n}{order\PYGZus{}by}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZhy{}completed\PYGZus{}at}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
 
 \end{enumerate}
 
@@ -3751,10 +3648,19 @@ Ensure you have a LaTeX distribution installed and the \sphinxcode{\sphinxupquot
 Ensure you run the script from the project root directory where \sphinxcode{\sphinxupquote{manage.py}} is located.
 
 \end{enumerate}
+\begin{description}
+\sphinxlineitem{Key Features}
+\sphinxAtStartPar
+quiz\_app\_models
+quiz\_app\_views
+quiz\_app\_forms
+
+\end{description}
 
 
-\chapter{Key Features}
-\label{\detokenize{index:key-features}}\begin{itemize}
+\bigskip\hrule\bigskip
+
+\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 Multiple quiz categories
@@ -3811,15 +3717,15 @@ Mobile\sphinxhyphen{}friendly responsive design
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{genindex}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{genindex}}}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{modindex}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{modindex}}}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{search}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{search}}}
 
 \end{itemize}
 

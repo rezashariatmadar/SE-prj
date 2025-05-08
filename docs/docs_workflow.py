@@ -15,7 +15,23 @@ import sys
 import argparse
 import subprocess
 import re
+import pandas as pd
 from datetime import datetime
+
+# Add code to ensure pandoc is available
+try:
+    import pypandoc
+    try:
+        # Try to use existing pandoc
+        pypandoc.get_pandoc_version()
+        print("Using existing Pandoc installation.")
+    except OSError:
+        # If pandoc is not found, download it
+        print("Pandoc not found. Attempting to download...")
+        pypandoc.download_pandoc()
+        print("Pandoc has been downloaded successfully.")
+except ImportError:
+    print("Warning: pypandoc not installed. Markdown conversion will be skipped.")
 
 def run_command(command):
     """Execute a shell command and return output."""
@@ -180,6 +196,108 @@ This document contains documentation extracted from comments in the source code.
     
     return 0, f"Extracted documentation from {len(doc_sections)} files", ""
 
+def generate_analytics_docs():
+    """Generate documentation for the analytics features."""
+    print("Generating analytics documentation...")
+    
+    # Create analytics.rst file
+    analytics_file = "docs/analytics.rst"
+    with open(analytics_file, 'w', encoding='utf-8') as f:
+        f.write(f"""Analytics and Visualization
+=========================
+
+Last updated: {datetime.now().strftime('%Y-%m-%d')}
+
+Overview
+--------
+
+The Quiz Application includes comprehensive analytics and visualization features that help users
+track their performance over time and get insights into their quiz-taking habits.
+
+Analytics Features
+-----------------
+
+User Statistics Dashboard
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The User Statistics Dashboard provides a comprehensive view of a user's quiz performance:
+
+* **Performance Over Time**: Line chart showing quiz scores over time, grouped by category
+* **Performance by Category**: Bar chart showing average scores for each category
+* **Quiz Length Distribution**: Pie chart showing the distribution of quiz lengths
+* **Summary Statistics**: Key metrics including overall average, best category, and perfect scores
+
+Visualizations
+-------------
+
+The analytics system uses the following Python data science libraries:
+
+* **pandas**: For data manipulation and analysis
+* **matplotlib**: For creating static visualizations
+* **seaborn**: For enhanced matplotlib visualizations with better default styling
+
+Implementation
+-------------
+
+The analytics system is implemented through the ``UserStatsView`` class, which:
+
+* Collects quiz attempt data for the logged-in user
+* Transforms the data into pandas DataFrames
+* Generates visualizations using matplotlib and seaborn
+* Calculates summary statistics
+* Passes the charts and statistics to the template for display
+
+Code Example
+~~~~~~~~~~~
+
+.. code-block:: python
+
+    def get_context_data(self, **kwargs):
+        # Get quiz attempts
+        quiz_attempts = QuizAttempt.objects.filter(
+            user=self.request.user,
+            completed_at__isnull=False
+        ).select_related('category')
+        
+        # Create DataFrame
+        data = {{
+            'date': [],
+            'category': [],
+            'score_percentage': []
+        }}
+        # Add data to the dictionary
+        
+        # Generate visualizations...
+
+Data Sources
+-----------
+
+The analytics feature uses data from the following models:
+
+* **QuizAttempt**: For quiz metadata and scores
+* **QuizResponse**: For detailed response data
+* **Category**: For category information
+* **User**: For user identification
+
+Future Enhancements
+------------------
+
+Planned enhancements to the analytics system include:
+
+1. Predictive analytics to recommend areas for improvement
+2. Comparative statistics against other users
+3. Downloadable reports in PDF format
+4. Advanced filtering and time-range selection
+5. Custom chart creation
+""")
+    
+    # Add to index
+    code, stdout, stderr = run_command("python manage.py manage_docs update --file analytics --content ''")
+    if code != 0:
+        print("  Warning: Could not update index.rst for analytics.rst")
+    
+    return 0, "Generated analytics documentation", ""
+
 def build_docs():
     """Build documentation in various formats."""
     print("Building documentation...")
@@ -228,6 +346,7 @@ def main():
     parser.add_argument('--skip-generation', action='store_true', help='Skip docstring generation step')
     parser.add_argument('--skip-md-conversion', action='store_true', help='Skip Markdown conversion step')
     parser.add_argument('--skip-comments', action='store_true', help='Skip extracting code comments')
+    parser.add_argument('--skip-analytics', action='store_true', help='Skip analytics documentation')
     parser.add_argument('--skip-build', action='store_true', help='Skip documentation building step')
     parser.add_argument('--output-format', choices=['html', 'latex', 'pdf', 'word', 'all'], default='all',
                        help='Output format(s) to generate')
@@ -253,23 +372,31 @@ def main():
             else:
                 print(f"Documentation generation for {app} completed successfully")
     
-    # Convert Markdown to RST
+    # Convert Markdown files to RST
     if not args.skip_md_conversion:
         code, stdout, stderr = convert_markdown_to_rst()
         if code != 0:
             print(f"Warning: Markdown conversion had issues:\n{stderr}")
         else:
-            print(f"Markdown conversion completed: {stdout}")
+            print(f"Markdown conversion completed successfully: {stdout}")
     
     # Extract code comments
     if not args.skip_comments:
         code, stdout, stderr = extract_code_comments()
         if code != 0:
-            print(f"Warning: Comment extraction had issues:\n{stderr}")
+            print(f"Warning: Code comments extraction had issues:\n{stderr}")
         else:
-            print(f"Comment extraction completed: {stdout}")
+            print(f"Code comments extraction completed successfully: {stdout}")
+
+    # Generate analytics documentation
+    if not args.skip_analytics:
+        code, stdout, stderr = generate_analytics_docs()
+        if code != 0:
+            print(f"Warning: Analytics documentation generation had issues:\n{stderr}")
+        else:
+            print(f"Analytics documentation generation completed successfully: {stdout}")
     
-    # Build documentation
+    # Build documentation in various formats
     if not args.skip_build:
         results = build_docs()
         for format_name, code, stderr in results:
@@ -277,9 +404,9 @@ def main():
                 continue
                 
             if code != 0:
-                print(f"Warning: {format_name} build had issues:\n{stderr}")
+                print(f"Warning: {format_name} documentation build had issues:\n{stderr}")
             else:
-                print(f"{format_name} build completed successfully")
+                print(f"{format_name} documentation build completed successfully")
     
     print(f"Documentation workflow completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("\nDocumentation available at:")

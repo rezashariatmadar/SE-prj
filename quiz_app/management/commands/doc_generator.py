@@ -74,7 +74,16 @@ This document describes all forms in the {app_name} application.
         
         for name, form in forms:
             if name.endswith('Form'):
-                content += self._generate_form_doc(form)
+                try:
+                    content += self._generate_form_doc(form)
+                except Exception as e:
+                    content += f"""
+{name}
+{'-' * len(name)}
+
+Could not document this form: {str(e)}
+
+"""
         
         return content
 
@@ -95,10 +104,37 @@ Fields
 """
         
         for field in fields:
-            content += f"""
+            try:
+                # Check field type to handle relationship fields differently
+                if hasattr(field, 'get_internal_type'):
+                    field_type = field.get_internal_type()
+                    help_text = field.help_text if hasattr(field, 'help_text') else 'No description available'
+                elif hasattr(field, 'related_model'):
+                    # Handle relationship fields
+                    if hasattr(field, 'field'):
+                        # ManyToManyRel
+                        field_type = f"Relationship (Many-to-Many) to {field.related_model.__name__}"
+                    elif hasattr(field, 'remote_field'):
+                        # ManyToOneRel (reverse ForeignKey)
+                        field_type = f"Relationship (Reverse Foreign Key) to {field.related_model.__name__}"
+                    else:
+                        field_type = f"Relationship to {field.related_model.__name__}"
+                    help_text = 'Relationship field - see model documentation'
+                else:
+                    field_type = field.__class__.__name__
+                    help_text = 'No description available'
+
+                content += f"""
 {field.name}
-    Type: {field.get_internal_type()}
-    Description: {field.help_text or 'No description available'}
+    Type: {field_type}
+    Description: {help_text}
+"""
+            except Exception as e:
+                # Fail gracefully if we can't document a field
+                content += f"""
+{field.name if hasattr(field, 'name') else 'Unknown field'}
+    Type: Unknown
+    Description: Could not document this field - {str(e)}
 """
         
         # Add methods
@@ -151,7 +187,6 @@ Template
     def _generate_form_doc(self, form) -> str:
         """Generate documentation for a single form."""
         docstring = inspect.getdoc(form) or ''
-        fields = form.fields
         
         content = f"""
 {form.__name__}
@@ -159,17 +194,87 @@ Template
 
 {self._format_docstring(docstring)}
 
+"""
+        
+        # Try to get fields - this might fail for form classes that don't have
+        # fields defined as class attributes (they might be defined in __init__)
+        try:
+            # For Django form instances, fields are instance attributes
+            if hasattr(form, 'fields'):
+                # Direct access to fields (form instance)
+                fields = form.fields
+                content += """
 Fields
 ~~~~~~
 
 """
-        
-        for name, field in fields.items():
-            content += f"""
+                for name, field in fields.items():
+                    help_text = field.help_text if hasattr(field, 'help_text') else 'No description available'
+                    required = field.required if hasattr(field, 'required') else 'Unknown'
+                    content += f"""
 {name}
     Type: {field.__class__.__name__}
-    Required: {field.required}
-    Description: {field.help_text or 'No description available'}
+    Required: {required}
+    Description: {help_text}
+"""
+            # For form classes (not instances), try to create an instance
+            elif hasattr(form, 'declared_fields'):
+                fields = form.declared_fields
+                content += """
+Fields
+~~~~~~
+
+"""
+                for name, field in fields.items():
+                    help_text = field.help_text if hasattr(field, 'help_text') else 'No description available'
+                    required = field.required if hasattr(field, 'required') else 'Unknown'
+                    content += f"""
+{name}
+    Type: {field.__class__.__name__}
+    Required: {required}
+    Description: {help_text}
+"""
+            # Try to create an instance if it's a class
+            elif inspect.isclass(form) and hasattr(form, '__init__'):
+                try:
+                    # Try to create an instance - this might fail if form requires parameters
+                    instance = form()
+                    if hasattr(instance, 'fields'):
+                        fields = instance.fields
+                        content += """
+Fields
+~~~~~~
+
+"""
+                        for name, field in fields.items():
+                            help_text = field.help_text if hasattr(field, 'help_text') else 'No description available'
+                            required = field.required if hasattr(field, 'required') else 'Unknown'
+                            content += f"""
+{name}
+    Type: {field.__class__.__name__}
+    Required: {required}
+    Description: {help_text}
+"""
+                except Exception:
+                    content += """
+Fields
+~~~~~~
+
+Could not instantiate form to get field information. Fields might be defined in __init__ or require parameters.
+"""
+            else:
+                content += """
+Fields
+~~~~~~
+
+Could not determine fields for this form.
+"""
+        except Exception as e:
+            content += f"""
+Fields
+~~~~~~
+
+Error retrieving fields: {str(e)}
 """
         
         return content

@@ -1,7 +1,7 @@
 Code Comments Documentation
 ========================
 
-Last updated: 2025-03-21
+Last updated: 2025-05-08
 
 This document contains documentation extracted from comments in the source code.
 
@@ -55,6 +55,11 @@ Forms for the Quiz application.
 This module defines the forms used in the quiz application for user input,
 including quiz selection and customization.
 
+Form for user registration with extended fields.
+    
+    This form extends Django's UserCreationForm to include additional fields
+    like email, first name, and last name for a more complete user profile.
+
 Form for selecting a quiz category and number of questions.
     
     This form allows users to choose which category of questions they want
@@ -65,6 +70,8 @@ Initialize the form with only categories that have questions.
 Validate the form data.
 
 Validate that the number of questions doesn't exceed available questions.
+
+Convert time_limit to an integer.
 
 
 quiz_app\models.py
@@ -126,6 +133,11 @@ Returns the score as a percentage.
         Returns:
             float: Percentage score (0-100)
 
+Calculates the remaining time for the quiz in seconds.
+        
+        Returns:
+            int: Seconds remaining, or 0 if the time limit has been exceeded
+
 Represents a user's response to a single question within a quiz attempt.
     
     Tracks which question was asked, which choice was selected, and whether
@@ -149,105 +161,6 @@ Return the user's average score across all quizzes.
 Create a UserProfile instance when a User is created.
 
 Update the UserProfile when the User is updated.
-
-
-quiz_app\tests.py
------------------
-
-Tests for the Quiz application.
-
-This module contains tests for the models, views, and forms of the quiz application.
-Tests are organized into test classes for each component of the application.
-
-Tests for the Category model.
-
-Set up test data.
-
-Test that a category can be created and retrieved.
-
-Test that question_count returns 0 when there are no questions.
-
-Test that question_count returns the correct count when there are questions.
-
-Tests for the Question model.
-
-Set up test data.
-
-Test that a question can be created and retrieved.
-
-Test that correct_choice returns the right choice.
-
-Test the string representation of a question.
-
-Tests for the Choice model.
-
-Set up test data.
-
-Test that a choice can be created and retrieved.
-
-Test that only one choice can be marked as correct for a question.
-
-Tests for the QuizAttempt model.
-
-Set up test data.
-
-Test that a quiz attempt can be created and retrieved.
-
-Test is_complete method.
-
-Test calculate_score method.
-
-Test score_percentage method.
-
-Tests for the QuizResponse model.
-
-Set up test data.
-
-Test creating a correct response.
-
-Test creating an incorrect response.
-
-Tests for the IndexView.
-
-Set up test data.
-
-Test that the index view returns a successful response.
-
-Tests for the CategoryListView.
-
-Set up test data.
-
-Test that the category list view returns a successful response.
-
-Tests for the QuizStartView.
-
-Set up test data.
-
-Test starting a quiz.
-
-Tests for the QuestionView.
-
-Set up test data.
-
-Test retrieving a question.
-
-Test submitting an answer.
-
-Test completing all questions in a quiz.
-
-Tests for the ResultsView.
-
-Set up test data.
-
-Test viewing quiz results.
-
-Tests for the UserStatsView.
-
-Set up test data.
-
-Test that authenticated users can view their stats.
-
-Test that unauthenticated users are redirected to login.
 
 
 quiz_app\urls.py
@@ -297,8 +210,26 @@ View to display statistics and analytics for a user's quiz history.
     
     Requires authentication. Shows visualizations of the user's performance
     across different categories and over time.
+    
+    Analytics Features:
+    - Performance Over Time: Line chart tracking progress across different categories
+    - Category Performance: Bar chart showing strengths and weaknesses by topic
+    - Quiz Length Distribution: Pie chart showing quiz length patterns
+    - Summary Statistics: Key metrics on quiz performance
+    
+    Implementation Notes:
+    - Uses pandas for data organization and analysis
+    - Uses matplotlib and seaborn for visualization creation
+    - All charts are encoded as base64 for embedding in HTML
 
 Add user statistics to the context.
+        
+        This method:
+        1. Retrieves the user's completed quiz attempts
+        2. Processes the data using pandas DataFrame
+        3. Generates three distinct visualization charts
+        4. Calculates summary statistics
+        5. Adds all data to the template context
 
 View to display and update user profile information.
     
@@ -309,6 +240,12 @@ Return the current user's profile.
 
 Add additional context data for the profile template.
 
+View for user registration.
+    
+    This view handles the registration of new users, including form validation
+    and user creation. On successful registration, it automatically creates a 
+    UserProfile for the new user and redirects to the login page.
+
 
 quiz_app\__init__.py
 --------------------
@@ -316,6 +253,42 @@ quiz_app\__init__.py
 Quiz App Package initialization.
 
 This file marks the directory as a Python package for the quiz application.
+It allows the quiz app to be imported as a module in the Django project.
+
+This package implements the core functionality of the quiz application, including:
+- Database models for categories, questions, user responses, and profiles
+- Views for displaying quizzes and handling user interactions
+- Forms for data input and validation
+- Admin interfaces for content management
+- URL routing specific to quiz functionality
+
+
+quiz_app\management\commands\add_more_questions.py
+--------------------------------------------------
+
+Management command to add more questions to existing categories.
+
+This command adds a specified number of questions to each existing category
+without removing the existing questions.
+
+Command to add more questions to existing categories.
+
+Add command arguments.
+
+Execute the command.
+
+Generate questions for a specific category.
+
+Generate question text from a template.
+
+Generate choices for a question.
+
+Generate answers using local knowledge base.
+        
+        This function contains hard-coded responses for common questions
+        and generates sensible answers for others based on patterns.
+
+Get question templates based on category.
 
 
 quiz_app\management\commands\autodoc.py
@@ -469,6 +442,11 @@ Last updated: {current_date}
 
 This document describes all forms in the {app_name} application.
 
+{name}
+{'-' * len(name)}
+
+Could not document this form: {str(e)}
+
 Generate documentation for a single model.
 
 {model.__name__}
@@ -480,8 +458,12 @@ Fields
 ~~~~~~
 
 {field.name}
-    Type: {field.get_internal_type()}
-    Description: {field.help_text or 'No description available'}
+    Type: {field_type}
+    Description: {help_text}
+
+{field.name if hasattr(field, 'name') else 'Unknown field'}
+    Type: Unknown
+    Description: Could not document this field - {str(e)}
 
 Methods
 ~~~~~~~
@@ -516,8 +498,39 @@ Fields
 
 {name}
     Type: {field.__class__.__name__}
-    Required: {field.required}
-    Description: {field.help_text or 'No description available'}
+    Required: {required}
+    Description: {help_text}
+
+Fields
+~~~~~~
+
+{name}
+    Type: {field.__class__.__name__}
+    Required: {required}
+    Description: {help_text}
+
+Fields
+~~~~~~
+
+{name}
+    Type: {field.__class__.__name__}
+    Required: {required}
+    Description: {help_text}
+
+Fields
+~~~~~~
+
+Could not instantiate form to get field information. Fields might be defined in __init__ or require parameters.
+
+Fields
+~~~~~~
+
+Could not determine fields for this form.
+
+Fields
+~~~~~~
+
+Error retrieving fields: {str(e)}
 
 Format docstring for RST output.
 
@@ -638,6 +651,31 @@ Validate RST file content and return list of issues.
 Validate Python docstring content.
 
 
+quiz_app\management\commands\fix_placeholder_questions.py
+---------------------------------------------------------
+
+Management command to replace placeholder answers with real answers.
+
+This command identifies questions with placeholder answers and replaces them with 
+real answers using an integrated AI service.
+
+Command to fix placeholder questions with real answers.
+
+Add command arguments.
+
+Execute the command.
+
+Get answers from an external AI API service.
+        
+        Uses a simplified version without API credentials since this is a demo.
+        In a real implementation, you would use your actual API credentials.
+
+Generate answers using local knowledge base.
+        
+        This function contains hard-coded responses for common questions
+        and generates sensible answers for others based on patterns.
+
+
 quiz_app\management\commands\load_sample_data.py
 ------------------------------------------------
 
@@ -699,47 +737,56 @@ Generate choices for a question, with randomized correct answer position.
 Get question templates for a specific category.
 
 
+quiz_app\static\css\quiz-enhancer.css
+-------------------------------------
+
+* Quiz Enhancer Styles
+ * Modern and interactive styles for the quiz-taking experience
+
+
+quiz_app\static\css\quiz-results.css
+------------------------------------
+
+* Quiz Results Styling
+ * Modern and interactive styles for the quiz results page
+
+
 quiz_app\tests\test_forms.py
 ----------------------------
 
-Tests for Quiz App forms.
+Tests for the forms in the Quiz application.
 
-This module contains tests for the forms used in the quiz application:
-- QuizSelectionForm
-
-Tests for the QuizSelectionForm.
+Tests for the forms of the Quiz application.
 
 Set up test data.
 
-Test the form with valid data across the allowed range (5-20 questions).
+Test that a valid QuizSelectionForm is valid.
 
-Test the form with blank data.
+Test that a QuizSelectionForm with an invalid category is invalid.
 
-Test the form with an invalid category.
+Test that a QuizSelectionForm with an invalid number of questions is invalid.
 
-Test the form with an invalid number of questions.
+Test that a valid UserRegistrationForm is valid.
 
-Test that the form only includes categories with questions.
+Test that a UserRegistrationForm with non-matching passwords is invalid.
+
+Test that a UserRegistrationForm with a taken username is invalid.
 
 
 quiz_app\tests\test_integration.py
 ----------------------------------
 
-Integration tests for the Quiz App.
+Integration tests for the Quiz application.
 
-This module contains tests that verify the end-to-end functionality
-of the quiz application by simulating user interactions through the
-entire quiz flow.
+This module contains tests that test the entire flow of the application.
 
-Integration tests for the quiz flow.
+Tests for the end-to-end flow of the Quiz application.
 
 Set up test data.
 
-Test the complete quiz flow for an anonymous user.
+Test the quiz flow for an anonymous user.
 
-Test the complete quiz flow for an authenticated user.
-
-Test multiple quiz attempts for the same user.
+Test the full quiz flow for an authenticated user, including registration and profile.
 
 
 quiz_app\tests\test_models.py
@@ -807,6 +854,24 @@ Test creating an incorrect response.
 Test the string representation of a response.
 
 
+quiz_app\tests\test_timer.py
+----------------------------
+
+Tests for the quiz timer functionality.
+
+Test cases for the quiz timer feature.
+
+Set up test data.
+
+Test that a quiz can be created with a time limit.
+
+Test the time_remaining method of the QuizAttempt model.
+
+Test that a quiz is automatically completed when the time limit expires.
+
+Test that the timer is displayed in the template when a time limit is set.
+
+
 quiz_app\tests\test_views.py
 ----------------------------
 
@@ -819,6 +884,32 @@ This module contains tests for the views used in the quiz application:
 - QuestionView
 - ResultsView
 - UserStatsView
+
+Create a user without triggering signals.
+
+Tests for the views of the Quiz application.
+
+Set up test data.
+
+Test the index view.
+
+Test the category list view.
+
+Test the quiz start view.
+
+Test the GET request to the question view.
+
+Test completing a quiz and viewing results.
+
+Test the user stats view.
+
+Test the user profile view.
+
+Test the login view.
+
+Test the logout view.
+
+Test the register view.
 
 Tests for the IndexView.
 
