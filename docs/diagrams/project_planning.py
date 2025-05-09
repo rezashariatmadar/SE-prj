@@ -280,9 +280,16 @@ def generate_pert_chart(tasks, project_duration):
     
     # Add nodes
     for task in tasks:
-        G.add_node(task['id'], label=f"{task['id']}: {task['name']}\nDuration: {task['expected']} days", 
-                  time=task['expected'], es=task['ES'], ef=task['EF'], 
-                  ls=task['LS'], lf=task['LF'], slack=task['slack'],
+        # Store the full name without abbreviation
+        G.add_node(task['id'], 
+                  # Remove the abbreviated ID from the label
+                  full_name=task['name'],
+                  duration=task['expected'],
+                  es=task['ES'], 
+                  ef=task['EF'], 
+                  ls=task['LS'], 
+                  lf=task['LF'], 
+                  slack=task['slack'],
                   critical=task['critical'])
     
     # Add edges
@@ -290,53 +297,121 @@ def generate_pert_chart(tasks, project_duration):
         for pred in task['predecessors']:
             G.add_edge(pred, task['id'])
     
-    # Create the figure
-    fig, ax = plt.subplots(figsize=(12, 8))
+    # Create the figure with more space at the bottom for the info boxes
+    fig, ax = plt.subplots(figsize=(16, 14))
     
-    # Set the layout
-    pos = nx.spring_layout(G, k=0.15, iterations=50)
+    # Set the layout - MODIFIED PARAMETERS for better node distribution
+    # Increased k (repulsive force) to spread nodes out more
+    # Increased iterations for better convergence
+    pos = nx.spring_layout(G, k=0.3, iterations=100, seed=42)
+    
+    # Adjust position to leave space at the bottom for the info table
+    # Move all nodes upward to create space at the bottom of the chart
+    for node in pos:
+        x, y = pos[node]
+        # Compress the y-range to upper 70% of the plot
+        pos[node] = (x, 0.15 + (y * 0.7))
     
     # Draw nodes
     critical_nodes = [n for n, attr in G.nodes(data=True) if attr['critical']]
     normal_nodes = [n for n in G.nodes() if n not in critical_nodes]
     
-    # Draw edges
-    nx.draw_networkx_edges(G, pos, ax=ax, edge_color='black', arrowsize=15)
+    # Draw edges with connectionstyle to reach only to the perimeter of the circles
+    for edge in G.edges():
+        source, target = edge
+        start_pos, end_pos = pos[source], pos[target]
+        # Use connectionstyle 'arc3' to make a straight line that stops at the perimeter
+        ax.annotate("", xy=end_pos, xytext=start_pos,
+                   arrowprops=dict(arrowstyle='->', color='black', 
+                                  linewidth=1.5, shrinkA=15, shrinkB=15))
     
-    # Draw regular nodes
+    # Draw regular nodes - INCREASED SIZE
     nx.draw_networkx_nodes(G, pos, ax=ax, nodelist=normal_nodes, 
-                          node_color=NODE_COLOR, node_size=2000, alpha=0.9)
+                          node_color=NODE_COLOR, node_size=3000, alpha=0.9)
     
-    # Draw critical path nodes
+    # Draw critical path nodes - INCREASED SIZE
     nx.draw_networkx_nodes(G, pos, ax=ax, nodelist=critical_nodes, 
-                          node_color=CRITICAL_COLOR, node_size=2000, alpha=0.9)
+                          node_color=CRITICAL_COLOR, node_size=3000, alpha=0.9)
     
-    # Draw node labels
-    node_labels = {node: data['label'] for node, data in G.nodes(data=True)}
-    nx.draw_networkx_labels(G, pos, labels=node_labels, font_size=8, font_color='black')
+    # Add task ID labels inside each node
+    for node, (x, y) in pos.items():
+        ax.text(x, y, node, ha='center', va='center', fontsize=12, 
+               color='white', fontweight='bold')
     
-    # Add ES, EF, LS, LF to each node
+    # Add full task names closer to each node - position closer to the node edge
     for node, (x, y) in pos.items():
         node_data = G.nodes[node]
-        label = (f"ES: {node_data['es']:.1f}  EF: {node_data['ef']:.1f}\n"
-                f"LS: {node_data['ls']:.1f}  LF: {node_data['lf']:.1f}\n"
-                f"Slack: {node_data['slack']:.1f}")
-        ax.text(x, y-0.15, label, ha='center', va='center', fontsize=7, 
-               bbox=dict(facecolor='white', alpha=0.7, boxstyle='round,pad=0.2', edgecolor='none'))
+        full_name = node_data['full_name']
+        duration = node_data['duration']
+        # Position the text above the node but closer than before
+        label = f"{node}: {full_name}\nDuration: {duration} days"
+        ax.text(x, y+0.06, label, ha='center', va='center', fontsize=9, 
+               bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.2', 
+                         edgecolor='gray'), fontweight='bold')
     
-    # Add legend
+    # Create a table at the bottom of the chart with all the task information
+    table_data = []
+    sorted_tasks = sorted(tasks, key=lambda t: t['id'])  # Sort by task ID
+    
+    # Create table headers
+    columns = ['Task ID', 'Earliest Start', 'Earliest Finish', 'Latest Start', 'Latest Finish', 'Slack']
+    
+    # Create the table data
+    for task in sorted_tasks:
+        table_data.append([
+            task['id'],
+            f"{task['ES']:.1f}",
+            f"{task['EF']:.1f}",
+            f"{task['LS']:.1f}",
+            f"{task['LF']:.1f}",
+            f"{task['slack']:.1f}"
+        ])
+    
+    # Create a table at the bottom of the chart
+    # Position the table at the bottom of the chart, centered horizontally
+    table = ax.table(
+        cellText=table_data,
+        colLabels=columns,
+        cellLoc='center',
+        loc='bottom',
+        bbox=[0.1, -0.3, 0.8, 0.2]  # [left, bottom, width, height]
+    )
+    
+    # Style the table
+    table.auto_set_font_size(False)
+    table.set_fontsize(9)
+    
+    # Style header row
+    for i, key in enumerate(columns):
+        cell = table[(0, i)]
+        cell.set_text_props(weight='bold', color='white')
+        cell.set_facecolor('#1976D2')  # Blue header
+    
+    # Style critical path tasks
+    for i, task in enumerate(sorted_tasks):
+        if task.get('critical', False):
+            for j in range(len(columns)):
+                cell = table[(i+1, j)]
+                cell.set_facecolor('#FFECB3')  # Light amber highlight
+    
+    # Add a title to the table
+    ax.text(0.5, -0.05, "Task Schedule Information", 
+            ha='center', va='center', fontsize=12, fontweight='bold', 
+            transform=ax.transAxes)
+    
+    # Add legend - IMPROVED POSITIONING
     critical_patch = patches.Patch(color=CRITICAL_COLOR, label='Critical Path')
     normal_patch = patches.Patch(color=NODE_COLOR, label='Normal Task')
-    ax.legend(handles=[critical_patch, normal_patch], loc='upper right')
+    ax.legend(handles=[critical_patch, normal_patch], loc='upper right', fontsize=12)
     
-    # Add title
-    ax.set_title(f"PERT Chart - Project Duration: {project_duration:.1f} days", fontsize=14, pad=20)
+    # Add title - INCREASED FONT SIZE
+    ax.set_title(f"PERT Chart - Project Duration: {project_duration:.1f} days", fontsize=16, pad=20)
     
     # Turn off axis
     ax.axis('off')
     
-    # Save the figure
-    plt.tight_layout()
+    # Save the figure - ADDED BETTER PADDING
+    plt.tight_layout(pad=2.0)
     plt.savefig('docs/diagrams/output/pert_chart.png', dpi=300, bbox_inches='tight')
     plt.close()
     

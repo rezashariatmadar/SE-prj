@@ -346,9 +346,36 @@ dependencies shown as arrows - Critical path tasks highlighted -
 Three-point estimation uncertainty ranges - Timeline with day markers
 
 
+Understanding the Diagrams
+-------------------------
+
+Data Flow Diagrams (DFD)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Data Flow Diagrams visualize how information moves through the Quiz Application system. By mapping data flows between external entities, processes, and data stores, DFDs help identify system boundaries and information exchange patterns. Our multi-level approach progressively reveals more detailed interactions, from the high-level context (Level 0) to detailed sub-processes (Level 2).
+
+Use Case Diagram
+~~~~~~~~~~~~~~~
+
+The Use Case Diagram illustrates user interactions with the system from a functional perspective. By depicting various actors (user types) and their relationships with system functions, this diagram clarifies user requirements and system capabilities. The diagram helps stakeholders understand what the system does from an external viewpoint without concerning implementation details.
+
+Sequence Diagram
+~~~~~~~~~~~~~~~
+
+Sequence Diagrams show time-ordered interactions between objects in the Quiz Application. By visualizing the message exchange sequence between components, these diagrams demonstrate the dynamic behavior and collaboration patterns within the system. The lifelines and activation bars illustrate when components are active during specific operations.
+
+Component Diagram
+~~~~~~~~~~~~~~~~
+
+The Component Diagram provides a high-level architectural view of the Quiz Application. By showing the organization and dependencies between major software components, this diagram helps developers understand system structure. The interfaces between components represent the contracts that enable different parts of the application to work together cohesively.
+
+Project Planning Diagrams
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Project planning diagrams (Three-Point Estimation, PERT Chart, and Gantt Chart) visualize the project timeline, task dependencies, and resource allocation. Using three-point estimation, these diagrams account for uncertainty in task durations. The critical path highlights the sequence of tasks that determine the project's minimum completion time, helping project managers allocate resources efficiently.
+
 
 Generating the Diagrams
-
 -----------------------
 
 
@@ -381,7 +408,7 @@ Conclusion
 
 These diagrams provide a comprehensive visual representation of the Quiz
 
-Application’s design, architecture, and project plan. They serve as
+Application's design, architecture, and project plan. They serve as
 
 valuable documentation for developers, stakeholders, and future
 

@@ -511,7 +511,8 @@ class RegisterView(CreateView):
         user = self.object
         
         # Create UserProfile for the new user
-        UserProfile.objects.create(user=user)
+        # Use get_or_create to prevent duplicate profile creation
+        UserProfile.objects.get_or_create(user=user)
         
         # Add success message
         messages.success(

@@ -28,6 +28,7 @@ immediate feedback, tracks user performance, and generates visualizations of qui
    improvements
    documentation_tools
    documentation_workflow
+   project_diagrams
    admin_guide
    api
    development
